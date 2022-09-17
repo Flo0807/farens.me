@@ -7,10 +7,6 @@ config :website, WebsiteWeb.Endpoint,
   secret_key_base: "f8nxJCsOkGLCvoFAz5VfaHumeEZOKW/G0GyM7O9mqmTqssLzLuyXKp/c8JwVbMF4",
   server: false
 
-# In test we don't send emails.
-config :website, Website.Mailer,
-  adapter: Swoosh.Adapters.Test
-
 # Print only warnings and errors during test
 config :logger, level: :warn
 
