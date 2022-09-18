@@ -45,7 +45,11 @@ defmodule Website.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:petal_components, "~> 0.17"},
+      {:earmark, "~> 1.4.27"},
+      {:yaml_elixir, "~> 2.0.2"},
+      {:timex, "~> 3.7.9"}
     ]
   end
 
