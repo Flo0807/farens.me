@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -9,7 +9,16 @@
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
-  <body>
-    <%= @inner_content %>
+  <body class="flex h-full flex-col bg-black z-0">
+    <div class="fixed inset-0 flex justify-center sm:px-8 lg:px-16">
+      <div class="flex w-full max-w-7xl">
+        <div class="w-full ring-1 bg-zinc-900 ring-zinc-300/20">
+        </div>
+      </div>
+    </div>
+
+    <div class="z-10 h-full">
+      <%= @inner_content %>
+    </div>
   </body>
 </html>
