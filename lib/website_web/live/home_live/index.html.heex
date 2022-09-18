@@ -1,3 +1,91 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<div class="flex justify-center sm:px-8 lg:px-24 my-16"> 
+  <div class="max-w-7xl w-full px-16 flex flex-col">
+    <div class="flex flex-col space-y-6 max-w-2xl">
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
+        Florian Arens
+      </h1>
+
+      <p class="text-base text-zinc-400 leading-loose">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+      </p>
+
+      <div class="flex space-x-4">
+        <.link to="https://github.com/Flo0807" target="_blank" class="group">
+          <.github_icon class="h-6 text-zinc-400 group-hover:text-cyan-400" />
+        </.link>
+
+        <.link to="https://linkedin.com/in/florian-arens/" target="_blank" class="group">
+          <.linkedin_icon class="h-6 text-zinc-400 group-hover:text-cyan-400" />
+        </.link>
+      </div>
+    </div>
+    
+    <div class="grid lg:grid-cols-2 lg:gap-16 mt-12">
+      <div>
+        <div class="flex flex-col space-y-8">
+          <p class="text-xl font-semibold tracking-tight text-zinc-100 underline">
+            Random articles:
+          </p>
+
+          <%= for article <- @articles do %>
+            <.article_card article={article} />
+          <% end %>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-8 justify-self-end w-full xl:w-3/4 mt-12 lg:mt-0">
+        <.cv_container label="Work">
+          <:icon>
+            <Heroicons.Solid.briefcase class="h-6 text-zinc-400" />
+          </:icon>
+
+          <.cv_item
+            logo="/images/sourceboat.jpg"
+            title="Sourceboat GmbH & Co. KG"
+            description="Software Developer (Internship)"
+            from="Aug 2022"
+            to="Present"
+          />
+
+          <.cv_item
+            logo="/images/hsflensburg.jpg"
+            title="Flensburg University of Applied Science"
+            description="Student Assistant in two research projects"
+            from="Jul 2021"
+            to="Jul 2022"
+          />
+
+          <.cv_item
+            logo="/images/hsflensburg.jpg"
+            title="Flensburg University of Applied Science"
+            description="Tutor Algorithms and Data Structures"
+            from="Oct 2021"
+            to="Dec 2021"
+          />
+          
+          <.cv_item
+            logo="/images/hsflensburg.jpg"
+            title="Flensburg University of Applied Science"
+            description="Tutor Usability Testing and Engineering"
+            from="Oct 2021"
+            to="Dec 2021"
+          />
+        </.cv_container>
+
+        <.cv_container label="Education">
+          <:icon>
+            <Heroicons.Solid.academic_cap class="h-6 text-zinc-400" />
+          </:icon>
+
+          <.cv_item
+            logo="/images/hsflensburg.jpg"
+            title="Flensburg University of Applied Science"
+            description="Applied Computer Science, B. Sc."
+            from="Sep 2019"
+            to="Present"
+          />
+        </.cv_container>
+      </div>
+    </div>
+  </div>
+</div>
