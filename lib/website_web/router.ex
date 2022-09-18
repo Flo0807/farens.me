@@ -19,6 +19,10 @@ defmodule WebsiteWeb.Router do
       pipe_through :browser
 
       live "/", HomeLive.Index, :index
+      live "/about", AboutLive.Index, :index
+      live "/blog", BlogLive.Index, :index
+      live "/blog/:id", BlogLive.Show, :show
+      live "/projects", ProjectsLive.Index, :index
     end
   end
 
