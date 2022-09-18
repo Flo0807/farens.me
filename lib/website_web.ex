@@ -45,7 +45,8 @@ defmodule WebsiteWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {WebsiteWeb.LayoutView, "live.html"}
+        layout: {WebsiteWeb.LayoutView, "live.html"},
+        container: {:tr, class: "h-full"}
 
       unquote(view_helpers())
     end
@@ -94,6 +95,10 @@ defmodule WebsiteWeb do
 
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
+
+      import WebsiteWeb.Helpers
+
+      use PetalComponents
 
       import WebsiteWeb.ErrorHelpers
       import WebsiteWeb.Gettext
