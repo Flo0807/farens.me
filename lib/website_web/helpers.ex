@@ -62,7 +62,7 @@ defmodule WebsiteWeb.Helpers do
               <ul class="flex space-x-4 font-medium">
                 <%= for %{to: to, label: label} <- header_links() do %>
                   <li>
-                    <.link to={to} label={label} link_type="live_redirect" />
+                    <.link to={to} label={label} link_type="live_redirect" class={if active?(@url, to), do: "text-cyan-400", else: ""}/>
                   </li>
                 <% end %>
               </ul>
