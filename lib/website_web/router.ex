@@ -14,10 +14,10 @@ defmodule WebsiteWeb.Router do
     plug :accepts, ["json"]
   end
 
-  live_session :default do
-    scope "/", WebsiteWeb do
-      pipe_through :browser
+  scope "/", WebsiteWeb do
+    pipe_through :browser
 
+    live_session :default, on_mount: WebsiteWeb.InitAssigns do
       live "/", HomeLive.Index, :index
       live "/about", AboutLive.Index, :index
       live "/blog", BlogLive.Index, :index
