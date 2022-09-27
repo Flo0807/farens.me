@@ -16,11 +16,11 @@ defmodule WebsiteWeb.Helpers do
           </.link>
           <nav class="text-zinc-100 bg-zinc-800 px-6 rounded-full ring-1 ring-zinc-700/80">
             <ul class="flex space-x-6 font-medium">
-    
+
               <%= for %{to: to, label: label} <- header_links() do %>
                 <li class={"relative px-3 py-2" <> " " <> if active?(@url, to), do: "text-cyan-400", else: "hover:text-cyan-400" } >
                   <.link to={to} label={label} link_type="live_redirect" />
-    
+
                   <%= if active?(@url, to) do %>
                     <span class="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-400/0 via-cyan-400/80 to-cyan-400/0"></span>
                   <% end %>
@@ -132,7 +132,7 @@ defmodule WebsiteWeb.Helpers do
         <p class="text-sm text-zinc-500 w-2/4 pl-4 border-l-4 border-zinc-700/50">
           <%= Map.get(@article, :date) |> Utils.date_to_string() %>
         </p>
-    
+
         <div class="flex flex-col space-y-2">
           <p class="text-zinc-100 font-medium">
             <%= Map.get(@article, :title) %>
@@ -158,7 +158,7 @@ defmodule WebsiteWeb.Helpers do
               <p class="text-sm text-zinc-500 w-2/4 pl-4 md:pl-10 border-l-4 border-zinc-700/50 md:border-0 md:ml-0">
                 <%= Map.get(article, :date) |> Utils.date_to_string() %>
               </p>
-    
+
               <.link to={"/blog/" <> Map.get(article, :slug)} link_type="live_redirect"  class="flex flex-col space-y-2 group">
                 <p class="text-zinc-100 font-medium">
                   <%= Map.get(article, :title) %>
