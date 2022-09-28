@@ -36,9 +36,9 @@ defmodule Website.MixProject do
       {:phoenix, "~> 1.6.12"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.17.5"},
+      {:phoenix_live_view, "~> 0.18.0"},
       {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.6"},
+      {:phoenix_live_dashboard, "~> 0.7"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
@@ -46,10 +46,11 @@ defmodule Website.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:petal_components, "~> 0.17"},
+      {:petal_components, "~> 0.18.3"},
       {:earmark, "~> 1.4.27"},
       {:yaml_elixir, "~> 2.0.2"},
-      {:timex, "~> 3.7.9"}
+      {:timex, "~> 3.7.9"},
+      {:heroicons, "~> 0.5.0"}
     ]
   end
 

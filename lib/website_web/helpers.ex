@@ -11,7 +11,7 @@ defmodule WebsiteWeb.Helpers do
     ~H"""
     <header class="flex justify-center sm:px-8 lg:px-16">
       <div class="max-w-7xl w-full flex items-center justify-between px-16 pt-6">
-        <.link to="/" link_type="live_redirect" class="group">
+        <.link navigate="/" class="group">
           <img
             class="inline-block h-8 rounded-full ring-2 ring-white group-hover:ring-cyan-400"
             src="/images/me.jpg"
@@ -25,8 +25,9 @@ defmodule WebsiteWeb.Helpers do
                 "relative px-3 py-2" <>
                   " " <> if active?(@url, to), do: "text-cyan-400", else: "hover:text-cyan-400"
               }>
-                <.link to={to} label={label} link_type="live_redirect" />
-
+                <.link navigate={to}>
+                  <%= label %>
+                </.link>
                 <%= if active?(@url, to) do %>
                   <span class="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-400/0 via-cyan-400/80 to-cyan-400/0">
                   </span>
@@ -69,12 +70,9 @@ defmodule WebsiteWeb.Helpers do
             <ul class="flex space-x-4 font-medium">
               <%= for %{to: to, label: label} <- header_links() do %>
                 <li>
-                  <.link
-                    to={to}
-                    label={label}
-                    link_type="live_redirect"
-                    class={if active?(@url, to), do: "text-cyan-400", else: ""}
-                  />
+                  <.link navigate={to} class={if active?(@url, to), do: "text-cyan-400", else: ""}>
+                    <%= label %>
+                  </.link>
                 </li>
               <% end %>
             </ul>
@@ -141,8 +139,7 @@ defmodule WebsiteWeb.Helpers do
   def article_card(assigns) do
     ~H"""
     <.link
-      to={"/blog/" <> Map.get(@article, :slug)}
-      link_type="live_redirect"
+      navigate={"/blog/" <> Map.get(@article, :slug)}
       class="flex flex-col space-y-4 p-5 rounded-xl bg-zinc-800/30 group"
     >
       <p class="text-sm text-zinc-500 w-2/4 pl-4 border-l-4 border-zinc-700/50">
@@ -158,7 +155,7 @@ defmodule WebsiteWeb.Helpers do
         </p>
         <div class="text-zinc-100 group-hover:text-cyan-400 flex items-center pt-4">
           <p>Read article</p>
-          <Heroicons.Solid.arrow_right class="w-4 h-4 ml-2" />
+          <Heroicons.arrow_right solid class="w-4 h-4 ml-2" />
         </div>
       </div>
     </.link>
@@ -180,8 +177,7 @@ defmodule WebsiteWeb.Helpers do
             </p>
 
             <.link
-              to={"/blog/" <> Map.get(article, :slug)}
-              link_type="live_redirect"
+              navigate={"/blog/" <> Map.get(article, :slug)}
               class="flex flex-col space-y-2 group"
             >
               <p class="text-zinc-100 font-medium">
@@ -192,7 +188,7 @@ defmodule WebsiteWeb.Helpers do
               </p>
               <div class="flex items-center pt-4 text-zinc-100 group-hover:text-cyan-400">
                 <p>Read article</p>
-                <Heroicons.Solid.arrow_right class="w-4 h-4 ml-2" />
+                <Heroicons.arrow_right solid class="w-4 h-4 ml-2" />
               </div>
             </.link>
           </div>
@@ -205,7 +201,7 @@ defmodule WebsiteWeb.Helpers do
   def project_card(assigns) do
     ~H"""
     <.link
-      to={@link}
+      href={@link}
       target="_blank"
       class="flex flex-col w-full md:w-max space-y-3 p-5 rounded-xl bg-zinc-800/30 group"
     >
@@ -216,7 +212,7 @@ defmodule WebsiteWeb.Helpers do
         <%= @description %>
       </p>
       <div class="flex space-x-2 items-center text-zinc-100 pt-3">
-        <Heroicons.Solid.link class="w-5 h-5 group-hover:text-cyan-400" />
+        <Heroicons.link solid class="w-5 h-5 group-hover:text-cyan-400" />
         <p class="group-hover:text-cyan-400">
           <%= @link_label %>
         </p>
@@ -280,7 +276,7 @@ defmodule WebsiteWeb.Helpers do
   def theme_switch_light(assigns) do
     ~H"""
     <div class="h-8 w-8 rounded-full ring-2 ring-zinc-500/80 hover:ring-yellow-300 bg-zinc-800 flex items-center justify-center group cursor-pointer">
-      <Heroicons.Solid.sun class="h-6 w-6 text-zinc-100 group-hover:text-yellow-300" />
+      <Heroicons.sun solid class="h-6 w-6 text-zinc-100 group-hover:text-yellow-300" />
     </div>
     """
   end

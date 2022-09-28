@@ -1,5 +1,5 @@
 defmodule WebsiteWeb.InitAssigns do
-  import Phoenix.LiveView
+  import Phoenix.{Component, LiveView}
 
   def on_mount(:default, _params, _session, socket) do
     socket =
