@@ -48,7 +48,7 @@ defmodule Website.MixProject do
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:petal_components, "~> 0.18.3"},
       {:earmark, "~> 1.4.27"},
-      {:yaml_elixir, "~> 2.0.2"},
+      {:yaml_elixir, "~> 2.9.0"},
       {:timex, "~> 3.7.9"},
       {:heroicons, "~> 0.5.0"}
     ]
