@@ -7,6 +7,8 @@ defmodule WebsiteWeb.Helpers do
   def merge_class(%{class: class}, default), do: class <> " " <> default
   def merge_class(_, default), do: default
 
+  attr :url, :string, required: true, doc: "The current url."
+
   def header(assigns) do
     ~H"""
     <header class="flex justify-center sm:px-8 lg:px-16">
@@ -57,13 +59,12 @@ defmodule WebsiteWeb.Helpers do
     path == to
   end
 
-  def footer(assigns) do
-    assigns =
-      assigns
-      |> assign(:class, merge_class(assigns, "flex justify-center sm:px-8 lg:px-16"))
+  attr :class, :string, default: "", doc: "Additional classes to be added to the footer."
+  attr :url, :string, required: true, doc: "The current url."
 
+  def footer(assigns) do
     ~H"""
-    <footer class={@class}>
+    <footer class={"flex justify-center sm:px-8 lg:px-16 #{@class}"}>
       <div class="max-w-7xl w-full border-t border-zinc-300/20 pt-8 pb-16">
         <div class="flex flex-col items-center space-y-2 md:space-y-0 md:flex-row sm:justify-between px-16">
           <nav class="text-zinc-100">
@@ -85,6 +86,11 @@ defmodule WebsiteWeb.Helpers do
     </footer>
     """
   end
+
+  attr :logo, :string, required: true, doc: "The logo src."
+  attr :description_items, :list, required: true, doc: "The description items."
+  attr :from, :string, required: true, doc: "The starting time."
+  attr :to, :string, required: true, doc: "The end time."
 
   def cv_item(assigns) do
     description_items = String.split(assigns.description, "\\n")
@@ -122,6 +128,11 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
+  attr :label, :string, required: true, doc: "The label to be displayed."
+
+  slot :icon, doc: "The icon."
+  slot :inner_block
+
   def cv_container(assigns) do
     ~H"""
     <div class="flex flex-col space-y-3 px-6 py-4 ring-1 rounded-xl ring-zinc-800">
@@ -135,6 +146,8 @@ defmodule WebsiteWeb.Helpers do
     </div>
     """
   end
+
+  attr :article, :map, required: true, doc: "The article."
 
   def article_card(assigns) do
     ~H"""
@@ -161,6 +174,8 @@ defmodule WebsiteWeb.Helpers do
     </.link>
     """
   end
+
+  attr :articles, :list, required: true, doc: "A list of articles."
 
   def article_timeline(assigns) do
     ~H"""
@@ -198,6 +213,11 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
+  attr :link, :string, required: true, doc: "The link to the project."
+  attr :title, :string, required: true, doc: "The title of the project."
+  attr :description, :string, required: true, doc: "The description of the project."
+  attr :link_label, :string, required: true, doc: "The link label for the url."
+
   def project_card(assigns) do
     ~H"""
     <.link
@@ -221,15 +241,13 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  def github_icon(assigns) do
-    assigns =
-      assigns
-      |> assign(:class, merge_class(assigns, "icon icon-tabler icon-tabler-brand-github"))
+  attr :class, :string, default: "", doc: "Additional classes to be added to the icon."
 
+  def github_icon(assigns) do
     ~H"""
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class={@class}
+      class={"icon icon-tabler icon-tabler-brand-github #{@class}"}
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -245,15 +263,13 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  def linkedin_icon(assigns) do
-    assigns =
-      assigns
-      |> assign(:class, merge_class(assigns, "icon icon-tabler icon-tabler-brand-linkedin"))
+  attr :class, :string, default: "", doc: "Additional classes to be added to the icon."
 
+  def linkedin_icon(assigns) do
     ~H"""
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class={@class}
+      class={"icon icon-tabler icon-tabler-brand-linkedin #{@class}"}
       width="24"
       height="24"
       viewBox="0 0 24 24"
