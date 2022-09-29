@@ -88,6 +88,7 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
+  attr :title, :string, required: true, doc: "The title."
   attr :logo, :string, required: true, doc: "The logo src."
   attr :description, :string, required: true, doc: "The description."
   attr :from, :string, required: true, doc: "The starting time."
