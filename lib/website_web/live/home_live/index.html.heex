@@ -28,7 +28,7 @@
           </p>
 
           <%= for article <- @articles do %>
-            <.article_card article={article} />
+            <.article_card socket={@socket} article={article} />
           <% end %>
         </div>
       </div>

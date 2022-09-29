@@ -3,6 +3,7 @@ defmodule WebsiteWeb.Helpers do
   use PetalComponents
 
   alias Website.Utils
+  alias WebsiteWeb.Router.Helpers, as: Routes
 
   def merge_class(%{class: class}, default), do: class <> " " <> default
   def merge_class(_, default), do: default
@@ -147,12 +148,13 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
+  attr :socket, :map, required: true, doc: "The socket."
   attr :article, :map, required: true, doc: "The article."
 
   def article_card(assigns) do
     ~H"""
     <.link
-      navigate={"/blog/" <> Map.get(@article, :slug)}
+      navigate={Routes.blog_show_path(@socket, :show, Map.get(@article, :slug))}
       class="flex flex-col space-y-4 p-5 rounded-xl bg-zinc-800/30 group"
     >
       <p class="text-sm text-zinc-500 w-2/4 pl-4 border-l-4 border-zinc-700/50">
@@ -175,6 +177,7 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
+  attr :socket, :map, required: true, doc: "The socket."
   attr :articles, :list, required: true, doc: "A list of articles."
 
   def article_timeline(assigns) do
@@ -192,7 +195,7 @@ defmodule WebsiteWeb.Helpers do
             </p>
 
             <.link
-              navigate={"/blog/" <> Map.get(article, :slug)}
+              navigate={Routes.blog_show_path(@socket, :show, Map.get(article, :slug))}
               class="flex flex-col space-y-2 group"
             >
               <p class="text-zinc-100 font-medium">
