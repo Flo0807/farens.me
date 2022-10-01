@@ -20,25 +20,6 @@ defmodule WebsiteWeb.Components.ColorSchemeSwitch do
     """
   end
 
-  def color_scheme_switch_light(assigns) do
-    ~H"""
-    <button
-      id={Ecto.UUID.generate()}
-      phx-hook="ColorSchemeHook"
-      class="h-8 w-8 rounded-full ring-2 ring-zinc-500/80 hover:ring-yellow-300 bg-zinc-800 flex items-center justify-center group cursor-pointer"
-    >
-      <Heroicons.sun
-        solid
-        class="h-6 w-6 text-zinc-100 group-hover:text-yellow-300 color-scheme-light-icon"
-      />
-      <Heroicons.moon
-        solid
-        class="h-6 w-6 text-zinc-100 group-hover:text-yellow-300 color-scheme-dark-icon"
-      />
-    </button>
-    """
-  end
-
   def color_scheme_switch_js(assigns) do
     ~H"""
     <script>
