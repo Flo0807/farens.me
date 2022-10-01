@@ -5,6 +5,8 @@ defmodule WebsiteWeb.Helpers do
   alias Website.Utils
   alias WebsiteWeb.Router.Helpers, as: Routes
 
+  import WebsiteWeb.Components.ColorSchemeSwitch
+
   def merge_class(%{class: class}, default), do: class <> " " <> default
   def merge_class(_, default), do: default
 
@@ -14,32 +16,32 @@ defmodule WebsiteWeb.Helpers do
     ~H"""
     <header class="flex justify-center sm:px-8 lg:px-16">
       <div class="max-w-7xl w-full flex items-center justify-between px-16 pt-6">
-        <.link navigate="/" class="group">
+        <.link navigate="/" class="group shadow-lg shadow-zinc-800/5">
           <img
             class="inline-block h-8 rounded-full ring-2 ring-white group-hover:ring-cyan-400"
             src="/images/me.jpg"
             alt="logo"
           />
         </.link>
-        <nav class="text-zinc-100 bg-zinc-800 px-6 rounded-full ring-1 ring-zinc-700/80">
+        <nav class="text-zinc-800 dark:text-zinc-100 bg-white/90 dark:bg-zinc-800 px-6 rounded-full ring-1 ring-zinc-900/5 dark:ring-white/10 shadow-lg shadow-zinc-800/5">
           <ul class="flex space-x-6 font-medium">
             <%= for %{to: to, label: label} <- header_links() do %>
               <li class={
                 "relative px-3 py-2" <>
-                  " " <> if active?(@url, to), do: "text-cyan-400", else: "hover:text-cyan-400"
+                  " " <> if active?(@url, to), do: "text-cyan-500 dark:text-cyan-400", else: "hover:text-cyan-500 hover:dark:text-cyan-400"
               }>
                 <.link navigate={to}>
                   <%= label %>
                 </.link>
                 <%= if active?(@url, to) do %>
-                  <span class="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-400/0 via-cyan-400/80 to-cyan-400/0">
+                  <span class="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-400/0 via-cyan-500/80 to-cyan-500/0 dark:via-cyan-400/80 dark:to-cyan-400/0">
                   </span>
                 <% end %>
               </li>
             <% end %>
           </ul>
         </nav>
-        <.theme_switch_light />
+        <.color_scheme_switch />
       </div>
     </header>
     """
@@ -66,20 +68,23 @@ defmodule WebsiteWeb.Helpers do
   def footer(assigns) do
     ~H"""
     <footer class={"flex justify-center sm:px-8 lg:px-16 #{@class}"}>
-      <div class="max-w-7xl w-full border-t border-zinc-300/20 pt-8 pb-16">
+      <div class="max-w-7xl w-full border-t border-zinc-300 dark:border-zinc-700 pt-8 pb-16">
         <div class="flex flex-col items-center space-y-2 md:space-y-0 md:flex-row sm:justify-between px-16">
-          <nav class="text-zinc-100">
+          <nav class="text-zinc-800 dark:text-zinc-100">
             <ul class="flex space-x-4 font-medium">
               <%= for %{to: to, label: label} <- header_links() do %>
                 <li>
-                  <.link navigate={to} class={if active?(@url, to), do: "text-cyan-400", else: ""}>
+                  <.link
+                    navigate={to}
+                    class={if active?(@url, to), do: "text-cyan-500 dark:text-cyan-400", else: ""}
+                  >
                     <%= label %>
                   </.link>
                 </li>
               <% end %>
             </ul>
           </nav>
-          <p class="text-zinc-600">
+          <p class="text-zinc-400 dark:text-zinc-500">
             © 2022 Florian Arens. All rights reserved.
           </p>
         </div>
@@ -105,18 +110,18 @@ defmodule WebsiteWeb.Helpers do
     <div class="flex space-x-6 pt-2">
       <img class="inline-block h-8 rounded-full ring-2 ring-zinc-100 mt-2" src={@logo} alt="logo" />
       <div class="flex flex-col space-y-1 w-full">
-        <p class="text-zinc-100 font-medium text-md">
+        <p class="text-zinc-800 dark:text-zinc-100 font-medium text-md">
           <%= @title %>
         </p>
         <div class="flex space-x-4">
-          <div class="text-zinc-400 w-3/4 text-sm flex flex-col space-y-2">
+          <div class="text-zinc-600 dark:text-zinc-400 w-3/4 text-sm flex flex-col space-y-2">
             <%= for item <- @description_items do %>
               <p>
                 <%= item %>
               </p>
             <% end %>
           </div>
-          <div class="flex flex-col text-zinc-400 self-end text-xs">
+          <div class="flex flex-col text-zinc-600 dark:text-zinc-400 self-end text-xs">
             <p>
               <%= @from <> " -" %>
             </p>
@@ -137,10 +142,10 @@ defmodule WebsiteWeb.Helpers do
 
   def cv_container(assigns) do
     ~H"""
-    <div class="flex flex-col space-y-3 px-6 py-4 ring-1 rounded-xl ring-zinc-800">
+    <div class="flex flex-col space-y-3 px-6 py-4 ring-1 rounded-xl ring-zinc-200 dark:ring-zinc-800">
       <div class="flex space-x-4 text-md items-center font-medium">
         <%= render_slot(@icon) %>
-        <p class="text-zinc-100">
+        <p class="text-zinc-800 dark:text-zinc-100">
           <%= @label %>
         </p>
       </div>
@@ -156,20 +161,20 @@ defmodule WebsiteWeb.Helpers do
     ~H"""
     <.link
       navigate={Routes.blog_show_path(@socket, :show, Map.get(@article, :slug))}
-      class="flex flex-col space-y-4 p-5 rounded-xl bg-zinc-800/30 group"
+      class="flex flex-col space-y-4 p-5 rounded-xl bg-zinc-200/30 dark:bg-zinc-800/30 group"
     >
       <p class="text-sm text-zinc-500 w-2/4 pl-4 border-l-4 border-zinc-700/50">
         <%= Map.get(@article, :date) |> Utils.date_to_string() %>
       </p>
 
       <div class="flex flex-col space-y-2">
-        <p class="text-zinc-100 font-medium">
+        <p class="text-zinc-800 dark:text-zinc-100 font-medium">
           <%= Map.get(@article, :title) %>
         </p>
-        <p class="text-zinc-400">
+        <p class="text-zinc-600 dark:text-zinc-400">
           <%= Map.get(@article, :summary) %>
         </p>
-        <div class="text-zinc-100 group-hover:text-cyan-400 flex items-center pt-4">
+        <div class="text-zinc-800 dark:text-zinc-100 group-hover:text-cyan-500 group-hover:dark:text-cyan-400 flex items-center pt-4">
           <p>Read article</p>
           <Heroicons.arrow_right solid class="w-4 h-4 ml-2" />
         </div>
@@ -183,7 +188,7 @@ defmodule WebsiteWeb.Helpers do
 
   def article_timeline(assigns) do
     ~H"""
-    <div class="border-0 md:border-l md:border-zinc-700/50">
+    <div class="border-0 md:border-l md:border-zinc-300 dark:md:border-zinc-700/50">
       <div class="flex flex-col space-y-14">
         <%= for article <- @articles do %>
           <div
@@ -199,13 +204,13 @@ defmodule WebsiteWeb.Helpers do
               navigate={Routes.blog_show_path(@socket, :show, Map.get(article, :slug))}
               class="flex flex-col space-y-2 group"
             >
-              <p class="text-zinc-100 font-medium">
+              <p class="text-zinc-800 dark:text-zinc-100 font-medium">
                 <%= Map.get(article, :title) %>
               </p>
-              <p class="text-zinc-400">
+              <p class="text-zinc-600 dark:text-zinc-400">
                 <%= Map.get(article, :summary) %>
               </p>
-              <div class="flex items-center pt-4 text-zinc-100 group-hover:text-cyan-400">
+              <div class="flex items-center pt-4 text-zinc-800 dark:text-zinc-100 group-hover:text-cyan-500 group-hover:dark:text-cyan-400">
                 <p>Read article</p>
                 <Heroicons.arrow_right solid class="w-4 h-4 ml-2" />
               </div>
@@ -227,17 +232,20 @@ defmodule WebsiteWeb.Helpers do
     <.link
       href={@link}
       target="_blank"
-      class="flex flex-col w-full md:w-max space-y-3 p-5 rounded-xl bg-zinc-800/30 group"
+      class="flex flex-col w-full md:w-max space-y-3 p-5 rounded-xl bg-zinc-200/30 dark:bg-zinc-800/30 group"
     >
-      <p class="text-zinc-100 font-medium">
+      <p class="text-zinc-800 dark:text-zinc-100 font-medium">
         <%= @title %>
       </p>
-      <p class="text-zinc-400">
+      <p class="text-zinc-600 dark:text-zinc-400">
         <%= @description %>
       </p>
-      <div class="flex space-x-2 items-center text-zinc-100 pt-3">
-        <Heroicons.link solid class="w-5 h-5 group-hover:text-cyan-400" />
-        <p class="group-hover:text-cyan-400">
+      <div class="flex space-x-2 items-center text-zinc-800 dark:text-zinc-100 pt-3">
+        <Heroicons.link
+          solid
+          class="w-5 h-5 group-hover:text-cyan-500 group-hover:dark:text-cyan-400"
+        />
+        <p class="group-hover:text-cyan-500 group-hover:dark:text-cyan-400">
           <%= @link_label %>
         </p>
       </div>

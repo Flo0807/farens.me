@@ -1,6 +1,9 @@
 <div class="flex justify-center sm:px-8 lg:px-24 my-16">
   <div class="max-w-7xl w-full px-12 md:px-36 lg:px-44 xl:px-72 flex flex-col space-y-8">
-    <.link navigate="/blog" class="flex space-x-2 text-zinc-400 hover:text-cyan-400">
+    <.link
+      navigate="/blog"
+      class="flex space-x-2 text-zinc-800 dark:text-zinc-100 hover:text-cyan-500 hover:dark:text-cyan-400"
+    >
       <Heroicons.arrow_left solid class="w-6 h-6" />
       <p class="font-semibold">Back</p>
     </.link>
@@ -10,11 +13,11 @@
         <%= Map.get(@article, :date) |> Utils.date_to_string() %>
       </p>
 
-      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-100 mt-8">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 mt-8">
         <%= @article.title %>
       </h1>
 
-      <article class="text-zinc-400 mt-8 prose lg:prose-lg prose-invert">
+      <article class="text-zinc-600 dark:text-zinc-400 mt-8 prose lg:prose-lg dark:prose-invert">
         <%= raw(@article.body) %>
       </article>
     </div>

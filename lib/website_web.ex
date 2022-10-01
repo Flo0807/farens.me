@@ -102,7 +102,12 @@ defmodule WebsiteWeb do
 
       import WebsiteWeb.ErrorHelpers
       import WebsiteWeb.Gettext
+
       alias WebsiteWeb.Router.Helpers, as: Routes
+
+      import WebsiteWeb.Components.{
+        ColorSchemeSwitch
+      }
     end
   end
 
