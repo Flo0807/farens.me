@@ -1,6 +1,5 @@
 defmodule WebsiteWeb.Helpers do
   use Phoenix.{Component, HTML}
-  use PetalComponents
 
   alias Website.Utils
   alias WebsiteWeb.Router.Helpers, as: Routes
@@ -14,36 +13,87 @@ defmodule WebsiteWeb.Helpers do
 
   def header(assigns) do
     ~H"""
-    <header class="flex justify-center sm:px-8 lg:px-16">
-      <div class="max-w-7xl w-full flex items-center justify-between px-16 pt-6">
-        <.link navigate="/" class="group shadow-lg shadow-zinc-800/5">
-          <img
-            class="inline-block h-8 rounded-full ring-2 ring-white group-hover:ring-cyan-400"
-            src="/images/me.jpg"
-            alt="logo"
-          />
-        </.link>
-        <nav class="text-zinc-800 dark:text-zinc-100 bg-white/90 dark:bg-zinc-800 px-6 rounded-full ring-1 ring-zinc-900/5 dark:ring-white/10 shadow-lg shadow-zinc-800/5">
-          <ul class="flex space-x-6 font-medium">
-            <%= for %{to: to, label: label} <- header_links() do %>
-              <li class={
+    <div x-data="{ mobile_menu: false }">
+      <header class="flex justify-center sm:px-8 lg:px-16">
+        <div class="max-w-7xl w-full flex items-center justify-between px-16 pt-6">
+          <.link navigate="/" class="group shadow-lg shadow-zinc-800/5">
+            <img
+              class="inline-block h-8 rounded-full ring-2 ring-white group-hover:ring-cyan-400"
+              src="/images/me.jpg"
+              alt="logo"
+            />
+          </.link>
+          <nav class="text-zinc-800 dark:text-zinc-100 bg-white/90 dark:bg-zinc-800 px-6 rounded-full ring-1 ring-zinc-900/5 dark:ring-white/10 shadow-lg shadow-zinc-800/5 hidden md:block">
+            <ul class="flex space-x-6 font-medium">
+              <%= for %{to: to, label: label} <- header_links() do %>
+                <li class={
                 "relative px-3 py-2" <>
                   " " <> if active?(@url, to), do: "text-cyan-500 dark:text-cyan-400", else: "hover:text-cyan-500 hover:dark:text-cyan-400"
               }>
-                <.link navigate={to}>
-                  <%= label %>
-                </.link>
-                <%= if active?(@url, to) do %>
-                  <span class="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-400/0 via-cyan-500/80 to-cyan-500/0 dark:via-cyan-400/80 dark:to-cyan-400/0">
-                  </span>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </nav>
-        <.color_scheme_switch />
+                  <.link navigate={to}>
+                    <%= label %>
+                  </.link>
+                  <%= if active?(@url, to) do %>
+                    <span class="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-400/0 via-cyan-500/80 to-cyan-500/0 dark:via-cyan-400/80 dark:to-cyan-400/0">
+                    </span>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </nav>
+
+          <div
+            class="flex space-x-2 items-center text-zinc-800 dark:text-zinc-100 bg-white/90 dark:bg-zinc-800 px-4 rounded-full ring-1 ring-zinc-900/5 dark:ring-white/10 shadow-lg shadow-zinc-800/5 py-2 cursor-pointer md:hidden"
+            @click="mobile_menu = true"
+          >
+            <p>Menu</p>
+            <Heroicons.chevron_down solid class="w-5 h-5" />
+          </div>
+
+          <.color_scheme_switch />
+        </div>
+
+        <.mobile_nav />
+      </header>
+    </div>
+    """
+  end
+
+  def mobile_nav(assigns) do
+    ~H"""
+    <div x-show="mobile_menu" @keydown.escape.window="mobile_menu = false">
+      <div class="fixed inset-0 z-50 transition-opacity bg-zinc-900/80"></div>
+
+      <div class="fixed inset-0 z-50 flex items-center justify-center px-4 my-4 overflow-hidden transform sm:px-6">
+        <div
+          @click.outside="mobile_menu = false"
+          class="w-full max-h-full overflow-auto bg-white rounded shadow-lg dark:bg-zinc-800 max-w-xl"
+        >
+          <div class="px-5 py-3 border-b border-gray-100 dark:border-zinc-700">
+            <div class="flex items-center justify-between">
+              <p class="font-semibold text-zinc-800 dark:text-gray-200">
+                Navigation
+              </p>
+
+              <button @click="mobile_menu = false">
+                <Heroicons.x_mark solid class="w-5 h-5 dark:text-white" />
+              </button>
+            </div>
+          </div>
+          <div class="p-5">
+            <nav class="flex flex-col space-y-6">
+              <.link
+                :for={%{to: to, label: label} <- header_links()}
+                navigate={to}
+                class="dark:text-gray-200"
+              >
+                <%= label %>
+              </.link>
+            </nav>
+          </div>
+        </div>
       </div>
-    </header>
+    </div>
     """
   end
 
