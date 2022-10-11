@@ -282,7 +282,7 @@ defmodule WebsiteWeb.Helpers do
     <.link
       href={@link}
       target="_blank"
-      class="flex flex-col w-full md:w-max space-y-3 p-5 rounded-xl bg-zinc-200/30 dark:bg-zinc-800/30 group"
+      class="flex flex-col w-full lg:w-80 space-y-3 p-5 rounded-xl bg-zinc-200/30 dark:bg-zinc-800/30 group"
     >
       <p class="text-zinc-800 dark:text-zinc-100 font-medium">
         <%= @title %>
@@ -290,14 +290,16 @@ defmodule WebsiteWeb.Helpers do
       <p class="text-zinc-600 dark:text-zinc-400">
         <%= @description %>
       </p>
-      <div class="flex space-x-2 items-center text-zinc-800 dark:text-zinc-100 pt-3">
-        <Heroicons.link
-          solid
-          class="w-5 h-5 group-hover:text-cyan-500 group-hover:dark:text-cyan-400"
-        />
-        <p class="group-hover:text-cyan-500 group-hover:dark:text-cyan-400">
-          <%= @link_label %>
-        </p>
+      <div class="grow flex flex-col justify-end pt-4">
+        <div class="flex space-x-2 items-center text-zinc-800 dark:text-zinc-100">
+          <Heroicons.link
+            solid
+            class="w-5 h-5 group-hover:text-cyan-500 group-hover:dark:text-cyan-400"
+          />
+          <p class="group-hover:text-cyan-500 group-hover:dark:text-cyan-400">
+            <%= @link_label %>
+          </p>
+        </div>
       </div>
     </.link>
     """
