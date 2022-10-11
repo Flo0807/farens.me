@@ -146,16 +146,9 @@ defmodule WebsiteWeb.Helpers do
   attr :title, :string, required: true, doc: "The title."
   attr :logo, :string, required: true, doc: "The logo src."
   attr :description, :string, required: true, doc: "The description."
-  attr :from, :string, required: true, doc: "The starting time."
-  attr :to, :string, required: true, doc: "The end time."
+  attr :date_range, :string, required: true, doc: "The date range."
 
   def cv_item(assigns) do
-    description_items = String.split(assigns.description, "\\n")
-
-    assigns =
-      assigns
-      |> assign(:description_items, description_items)
-
     ~H"""
     <div class="flex space-x-6 pt-2">
       <img class="inline-block h-8 rounded-full ring-2 ring-zinc-100 mt-2" src={@logo} alt="logo" />
@@ -163,21 +156,12 @@ defmodule WebsiteWeb.Helpers do
         <p class="text-zinc-800 dark:text-zinc-100 font-medium text-md">
           <%= @title %>
         </p>
-        <div class="flex space-x-4">
+        <div class="flex space-x-4 justify-between">
           <div class="text-zinc-600 dark:text-zinc-400 w-3/4 text-sm flex flex-col space-y-2">
-            <%= for item <- @description_items do %>
-              <p>
-                <%= item %>
-              </p>
-            <% end %>
+            <p><%= @description %></p>
           </div>
-          <div class="flex flex-col text-zinc-600 dark:text-zinc-400 self-end text-xs">
-            <p>
-              <%= @from <> " -" %>
-            </p>
-            <p>
-              <%= @to %>
-            </p>
+          <div class="self-end" aria-label={@date_range} data-balloon-pos="up">
+            <Heroicons.calendar_days class="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
           </div>
         </div>
       </div>
