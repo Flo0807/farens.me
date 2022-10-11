@@ -2,19 +2,33 @@
   <div class="max-w-7xl w-full px-16 flex flex-col">
     <div class="flex flex-col space-y-6 max-w-2xl">
       <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100  sm:text-5xl">
-        Things I've built.
+        Things I’ve built.
       </h1>
 
       <p class="text-base text-zinc-600 dark:text-zinc-400 leading-loose">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+        I’ve been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my freetime. These are the ones that I’m most proud of.
       </p>
     </div>
 
-    <div class="pt-16 flex gap-8 flex-wrap w-full align-start">
+    <div class="flex pt-16 gap-8 flex-wrap w-full align-start">
       <.project_card
-        title="Website"
-        description="Portfolio website written in elixir."
+        title="This website"
+        description="Personal website built with the pheonix web framework and elixir."
         link="https://github.com/Flo0807/website"
+        link_label="github.com"
+      />
+
+      <.project_card
+        title="Gamejams"
+        description="With some friends I occasionally participate in local as well as global game jams. We named our team barely finished games and have already developed several games."
+        link="https://barely-finished-games.itch.io/"
+        link_label="itch.io"
+      />
+
+      <.project_card
+        title="StreamTime"
+        description="A web application to view streaming schedules and videos of multiple streamers written in Elm ."
+        link="https://github.com/StreamingTime/StreamTime"
         link_label="github.com"
       />
     </div>
