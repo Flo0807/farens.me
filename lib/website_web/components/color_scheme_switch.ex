@@ -10,11 +10,11 @@ defmodule WebsiteWeb.Components.ColorSchemeSwitch do
     >
       <Heroicons.sun
         solid
-        class="h-6 w-6 text-zinc-100 group-hover:text-yellow-300 color-scheme-light-icon"
+        class="h-6 w-6 text-zinc-100 group-hover:text-yellow-300 color-scheme-light-icon hidden"
       />
       <Heroicons.moon
         solid
-        class="h-6 w-6 text-zinc-500 group-hover:text-zinc-800 color-scheme-dark-icon"
+        class="h-6 w-6 text-zinc-500 group-hover:text-zinc-800 color-scheme-dark-icon hidden"
       />
     </button>
     """
