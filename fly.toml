@@ -6,7 +6,7 @@ kill_timeout = 5
 processes = []
 
 [env]
-  PHX_HOST = "florian-arens.fly.dev"
+  PHX_HOST = "farens.me"
   PORT = "8080"
 
 [experimental]
