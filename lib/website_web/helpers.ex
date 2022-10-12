@@ -15,7 +15,7 @@ defmodule WebsiteWeb.Helpers do
     ~H"""
     <div x-data="{ mobile_menu: false }">
       <header class="flex justify-center sm:px-8 lg:px-16">
-        <div class="max-w-7xl w-full flex items-center justify-between px-16 pt-6">
+        <div class="max-w-7xl w-full flex items-center justify-between px-8 sm:px-10 lg:px-16 pt-6">
           <.link navigate="/" class="group shadow-lg shadow-zinc-800/5">
             <img
               class="inline-block h-8 rounded-full ring-2 ring-white group-hover:ring-cyan-400"
@@ -117,7 +117,7 @@ defmodule WebsiteWeb.Helpers do
 
   def footer(assigns) do
     ~H"""
-    <footer class={"flex justify-center sm:px-8 lg:px-16 #{@class}"}>
+    <footer class={"flex justify-center px-8 sm:px-10 lg:px-16 #{@class}"}>
       <div class="max-w-7xl w-full border-t border-zinc-300 dark:border-zinc-700 pt-8 pb-16">
         <div class="flex flex-col items-center space-y-2 md:space-y-0 md:flex-row sm:justify-between px-16">
           <nav class="text-zinc-800 dark:text-zinc-100">
