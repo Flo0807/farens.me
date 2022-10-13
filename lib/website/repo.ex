@@ -15,7 +15,8 @@ defmodule Website.Repo do
     state =
       Enum.map(@resources, fn {name, resource} ->
         items =
-          Path.wildcard("#{resource.path()}/*.md")
+          Application.app_dir(:website, "#{resource.path()}/*.md")
+          |> Path.wildcard()
           |> Enum.map(&Parser.parse(&1, resource))
           |> Enum.sort(&resource.compare(&1, &2))
 
