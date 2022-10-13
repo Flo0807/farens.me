@@ -13,7 +13,7 @@ I always dreamed about having my own website. A few days ago, this dream came tr
 
 Let's start in the beginning. Why did I create this site and why there has to be another blog on the internet?
 
-Since the first year of my computer science studies and several courses of webprogramming and webdesign, I always thought about creating my own portfolio website. 
+Since the first year of my computer science studies and several courses of web development and web design, I always thought about creating my own portfolio website. 
 I don't know why I didn't just start creating it, but I always put it off. It was probably just not important enough. The courses at university and several side jobs didn't make it easier. So I focused on other things for a long time. After all, a website and especially a blog have to be maintained. You should be aware of this before creating one. 
 
 Currently I am doing an internship as a software developer. This means that I have regular working hours and therefore don't have much to do on the weekends. Do not unterstand me wrong. I do have something to do, but not as much as during semesters in university with multiple side jobs. 
