@@ -109,7 +109,7 @@ defmodule WebsiteWeb.Helpers do
   defp active?(current, to) do
     %{path: path} = URI.parse(current)
 
-    path == to
+    if to == "/", do: path == to, else: String.starts_with?(path, to)
   end
 
   attr :class, :string, default: "", doc: "Additional classes to be added to the footer."
