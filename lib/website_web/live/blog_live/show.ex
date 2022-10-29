@@ -4,13 +4,13 @@ defmodule WebsiteWeb.BlogLive.Show do
   alias Website.Repo
   alias Website.Utils
 
-  def handle_params(%{"id" => id}, _url, socket) do
+  def mount(%{"id" => id}, _session, socket) do
     article = Repo.get_by_slug!(:articles, id)
 
     socket =
       socket
       |> assign(:article, article)
 
-    {:noreply, socket}
+    {:ok, socket}
   end
 end
