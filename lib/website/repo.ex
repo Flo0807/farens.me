@@ -31,10 +31,6 @@ defmodule Website.Repo do
     GenServer.call(__MODULE__, {:list, resource})
   end
 
-  def get_by_slug(resource, slug) do
-    GenServer.call(__MODULE__, {:get_by_slug, resource, slug})
-  end
-
   def get_by_slug!(resource, slug) do
     case GenServer.call(__MODULE__, {:get_by_slug, resource, slug}) do
       {:ok, item} -> item
