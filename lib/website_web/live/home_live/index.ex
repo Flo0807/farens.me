@@ -3,7 +3,7 @@ defmodule WebsiteWeb.HomeLive.Index do
 
   alias Website.Repo
 
-  def handle_params(_params, _url, socket) do
+  def mount(_params, _session, socket) do
     {:ok, articles} = Repo.list(:articles)
 
     articles =
@@ -15,6 +15,6 @@ defmodule WebsiteWeb.HomeLive.Index do
       socket
       |> assign(:articles, articles)
 
-    {:noreply, socket}
+    {:ok, socket}
   end
 end
