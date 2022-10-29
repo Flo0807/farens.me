@@ -1,5 +1,5 @@
-defmodule WebsiteWeb.NoResourceFoundError do
-  alias WebsiteWeb.NoResourceFoundError
+defmodule WebsiteWeb.ResourceNotFoundError do
+  alias WebsiteWeb.ResourceNotFoundError
 
   @moduledoc """
   Exception raised when resource is not found.
@@ -10,6 +10,6 @@ defmodule WebsiteWeb.NoResourceFoundError do
     resource = Keyword.fetch!(opts, :resource)
     slug = Keyword.fetch!(opts, :slug)
 
-    %NoResourceFoundError{message: "no resources for type #{resource} found with slug #{slug}"}
+    %ResourceNotFoundError{message: "no resources for type #{resource} found with slug #{slug}"}
   end
 end

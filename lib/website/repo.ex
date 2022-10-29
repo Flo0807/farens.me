@@ -34,7 +34,7 @@ defmodule Website.Repo do
   def get_by_slug!(resource, slug) do
     case GenServer.call(__MODULE__, {:get_by_slug, resource, slug}) do
       {:ok, item} -> item
-      {:error, _} -> raise WebsiteWeb.NoResourceFoundError, resource: resource, slug: slug
+      {:error, _} -> raise WebsiteWeb.ResourceNotFoundError, resource: resource, slug: slug
     end
   end
 
