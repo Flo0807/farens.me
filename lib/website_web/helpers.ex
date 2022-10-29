@@ -134,7 +134,7 @@ defmodule WebsiteWeb.Helpers do
               <% end %>
             </ul>
           </nav>
-          <p class="text-zinc-400 dark:text-zinc-500">
+          <p class="text-zinc-400 dark:text-zinc-500 text-center">
             © 2022 Florian Arens. All rights reserved.
           </p>
         </div>
