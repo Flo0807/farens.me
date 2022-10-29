@@ -160,7 +160,7 @@ defmodule WebsiteWeb.Helpers do
           <div class="text-zinc-600 dark:text-zinc-400 w-3/4 text-sm flex flex-col space-y-2">
             <p><%= @description %></p>
           </div>
-          <div class="self-end" aria-label={@date_range} data-balloon-pos="up">
+          <div class="self-end" role="tooltip" aria-label={@date_range} data-balloon-pos="up">
             <Heroicons.calendar_days class="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
           </div>
         </div>
