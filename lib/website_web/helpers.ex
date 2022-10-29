@@ -18,7 +18,7 @@ defmodule WebsiteWeb.Helpers do
         <div class="max-w-7xl w-full flex items-center justify-between px-8 sm:px-10 lg:px-16 pt-6">
           <.link navigate="/" class="group shadow-lg shadow-zinc-800/5">
             <img
-              class="inline-block h-8 rounded-full ring-2 ring-white group-hover:ring-cyan-400"
+              class="inline-block h-8 w-8 rounded-full ring-2 ring-white group-hover:ring-cyan-400"
               src="/images/me.jpg"
               alt="logo"
             />
@@ -151,7 +151,7 @@ defmodule WebsiteWeb.Helpers do
   def cv_item(assigns) do
     ~H"""
     <div class="flex space-x-6 pt-2">
-      <img class="inline-block h-8 rounded-full ring-2 ring-zinc-100 mt-2" src={@logo} alt="logo" />
+      <img class="inline-block h-8 w-8 rounded-full ring-2 ring-zinc-100 mt-2" src={@logo} alt="logo" />
       <div class="flex flex-col space-y-1 w-full">
         <p class="text-zinc-800 dark:text-zinc-100 font-medium text-md">
           <%= @title %>
