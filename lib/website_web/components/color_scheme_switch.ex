@@ -7,6 +7,7 @@ defmodule WebsiteWeb.Components.ColorSchemeSwitch do
       id={Ecto.UUID.generate()}
       phx-hook="ColorSchemeHook"
       class="h-8 w-8 rounded-full ring-2 ring-zinc-500/80 hover:ring-zinc-800 dark:hover:ring-yellow-300 bg-white/90 dark:bg-zinc-800 flex items-center justify-center group cursor-pointer shadow-lg shadow-zinc-800/5"
+      aria-label="Toggle theme"
     >
       <Heroicons.sun
         solid
