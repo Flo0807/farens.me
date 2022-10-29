@@ -12,24 +12,11 @@
 
     <div class="flex pt-16 gap-8 flex-wrap w-full align-start">
       <.project_card
-        title="This website"
-        description="Personal website built with the pheonix web framework and elixir."
-        link="https://github.com/Flo0807/website"
-        link_label="github.com"
-      />
-
-      <.project_card
-        title="Gamejams"
-        description="With some friends I occasionally participate in local as well as global game jams. We named our team barely finished games and have already developed several games."
-        link="https://barely-finished-games.itch.io/"
-        link_label="itch.io"
-      />
-
-      <.project_card
-        title="StreamTime"
-        description="A web application to view streaming schedules and videos of multiple streamers written in Elm."
-        link="https://github.com/StreamingTime/StreamTime"
-        link_label="github.com"
+        :for={projects <- @projects}
+        title={projects.title}
+        link={projects.link}
+        link_label={projects.link_label}
+        description={projects.description}
       />
     </div>
   </div>

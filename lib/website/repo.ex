@@ -4,7 +4,8 @@ defmodule Website.Repo do
   alias Website.Parser
 
   @resources [
-    articles: Website.Articles.Article
+    articles: Website.Articles.Article,
+    projects: Website.Projects.Project
   ]
 
   def start_link(args) do
