@@ -1,17 +1,17 @@
-<div class="flex justify-center sm:px-8 lg:px-24 my-16">
-  <div class="max-w-7xl w-full px-8 sm:px-10 lg:px-16 flex flex-col">
-    <div class="flex flex-col space-y-6 max-w-2xl">
-      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100  sm:text-5xl">
+<div class="my-16 flex justify-center sm:px-8 lg:px-24">
+  <div class="flex w-full max-w-7xl flex-col px-8 sm:px-10 lg:px-16">
+    <div class="flex max-w-2xl flex-col space-y-6">
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
         Florian Arens
       </h1>
 
-      <p class="text-base text-zinc-600 dark:text-zinc-400 leading-7">
+      <p class="text-base leading-7 text-zinc-600 dark:text-zinc-400">
         I'm Florian, a software developer and student from Flensburg, Germany. I'm passionate about functional programming and web application development. I'm about to finish my bachelor's degree in computer science and I'm looking forward to start my master's program soon.
       </p>
 
       <div class="flex space-x-4">
         <.link href="https://github.com/Flo0807" target="_blank" class="group" aria-label="GitHub">
-          <.github_icon class="h-6 text-zinc-600 dark:text-zinc-400 group-hover:text-cyan-500 group-hover:dark:text-cyan-400" />
+          <.github_icon class="h-6 text-zinc-600 group-hover:text-cyan-500 dark:text-zinc-400 dark:group-hover:text-cyan-400" />
         </.link>
 
         <.link
@@ -20,15 +20,15 @@
           class="group"
           aria-label="LinkedIn"
         >
-          <.linkedin_icon class="h-6 text-zinc-600 dark:text-zinc-400 group-hover:text-cyan-500 group-hover:dark:text-cyan-400" />
+          <.linkedin_icon class="h-6 text-zinc-600 group-hover:text-cyan-500 dark:text-zinc-400 dark:group-hover:text-cyan-400" />
         </.link>
       </div>
     </div>
 
-    <div class="grid lg:grid-cols-2 lg:gap-16 mt-12">
+    <div class="mt-12 grid lg:grid-cols-2 lg:gap-16">
       <div>
         <div class="flex flex-col space-y-8">
-          <p class="text-xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100 underline">
+          <p class="text-xl font-semibold tracking-tight text-zinc-800 underline dark:text-zinc-100">
             Random articles:
           </p>
 
@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col space-y-8 justify-self-end w-full xl:w-3/4 mt-12 lg:mt-0">
+      <div class="mt-12 flex w-full flex-col space-y-8 justify-self-end lg:mt-0 xl:w-3/4">
         <.cv_container label="Work">
           <:icon>
             <Heroicons.briefcase class="h-6 text-zinc-600 dark:text-zinc-400" />

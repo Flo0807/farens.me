@@ -1,12 +1,12 @@
-<div class="flex justify-center sm:px-8 lg:px-24 my-16">
-  <div class="max-w-7xl w-full px-8 sm:px-10 lg:px-16">
+<div class="my-16 flex justify-center sm:px-8 lg:px-24">
+  <div class="w-full max-w-7xl px-8 sm:px-10 lg:px-16">
     <div class="grid grid-cols-1 xl:grid-cols-2 xl:gap-16">
       <div class="flex flex-col space-y-6">
         <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
           I’m a software developer.
         </h1>
 
-        <div class="space-y-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
+        <div class="space-y-6 text-base leading-7 text-zinc-600 dark:text-zinc-400">
           <p>
             As far as programming goes, I have tried a lot. The first web framework I used was Vue.js, followed by React in a university project. For the backend I mainly used Java and TypeScript. I was able to expand my programming experience in two research projects. One project involved the development of an iPad app in Swift and the development of a microservice architecture in Go. Another project involved the development of a Variational Autoencoder (VAE) in the area of machine learning. I am currently further expanding my skills as part of a student job as a software developer.
           </p>
@@ -23,20 +23,20 @@
 
       <div class="flex flex-col justify-self-start xl:justify-self-center">
         <img
-          class="inline-block h-96 justify-self-center rounded-xl mt-12 xl:mt-0 object-scale-down sm:object-contain"
+          class="mt-12 inline-block h-96 justify-self-center rounded-xl object-scale-down sm:object-contain xl:mt-0"
           src="/images/me.jpg"
           alt="logo"
         />
 
-        <div class="flex flex-col space-y-4 mt-12 text-zinc-200 font-medium text-sm">
+        <div class="mt-12 flex flex-col space-y-4 text-sm font-medium text-zinc-200">
           <div>
             <.link
               href="https://github.com/Flo0807"
               target="_blank"
-              class="flex items-center space-x-2 group text-zinc-600 dark:text-zinc-400"
+              class="group flex items-center space-x-2 text-zinc-600 dark:text-zinc-400"
             >
-              <.github_icon class="h-6 group-hover:text-cyan-500 group-hover:dark:text-cyan-400" />
-              <p class="group-hover:text-cyan-500 group-hover:dark:text-cyan-400">
+              <.github_icon class="h-6 group-hover:text-cyan-500 dark:group-hover:text-cyan-400" />
+              <p class="group-hover:text-cyan-500 dark:group-hover:text-cyan-400">
                 Follow me on GitHub
               </p>
             </.link>
@@ -46,19 +46,19 @@
             <.link
               href="https://linkedin.com/in/florian-arens/"
               target="_blank"
-              class="flex items-center space-x-2 group text-zinc-600 dark:text-zinc-400"
+              class="group flex items-center space-x-2 text-zinc-600 dark:text-zinc-400"
             >
-              <.linkedin_icon class="h-6 group-hover:text-cyan-500 group-hover:dark:text-cyan-400" />
-              <p class="group-hover:text-cyan-500 group-hover:dark:text-cyan-400">
+              <.linkedin_icon class="h-6 group-hover:text-cyan-500 dark:group-hover:text-cyan-400" />
+              <p class="group-hover:text-cyan-500 dark:group-hover:text-cyan-400">
                 Follow me on LinkedIn
               </p>
             </.link>
           </div>
 
-          <div class="pb-6 border-t border-zinc-300 dark:border-zinc-700 pt-8 text-zinc-600 dark:text-zinc-400">
-            <.link href="mailto:info@farens.me" class="flex items-center space-x-2 group">
-              <Heroicons.envelope class="h-6 group-hover:text-cyan-500 group-hover:dark:text-cyan-400" />
-              <p class="group-hover:text-cyan-500 group-hover:dark:text-cyan-400">
+          <div class="border-t border-zinc-300 pt-8 pb-6 text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
+            <.link href="mailto:info@farens.me" class="group flex items-center space-x-2">
+              <Heroicons.envelope class="h-6 group-hover:text-cyan-500 dark:group-hover:text-cyan-400" />
+              <p class="group-hover:text-cyan-500 dark:group-hover:text-cyan-400">
                 info@farens.me
               </p>
             </.link>

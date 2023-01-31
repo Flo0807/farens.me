@@ -1,16 +1,16 @@
-<div class="flex justify-center sm:px-8 lg:px-24 my-16">
-  <div class="max-w-7xl w-full px-8 sm:px-10 lg:px-16 flex flex-col">
-    <div class="flex flex-col space-y-6 max-w-2xl">
-      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100  sm:text-5xl">
+<div class="my-16 flex justify-center sm:px-8 lg:px-24">
+  <div class="flex w-full max-w-7xl flex-col px-8 sm:px-10 lg:px-16">
+    <div class="flex max-w-2xl flex-col space-y-6">
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
         Things I’ve built.
       </h1>
 
-      <p class="text-base text-zinc-600 dark:text-zinc-400 leading-7">
+      <p class="text-base leading-7 text-zinc-600 dark:text-zinc-400">
         I’ve been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my freetime. These are the ones that I’m most proud of.
       </p>
     </div>
 
-    <div class="flex pt-16 gap-8 flex-wrap w-full align-start">
+    <div class="align-start flex w-full flex-wrap gap-8 pt-16">
       <.project_card
         :for={projects <- @projects}
         title={projects.title}

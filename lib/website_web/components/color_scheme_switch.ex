@@ -6,16 +6,16 @@ defmodule WebsiteWeb.Components.ColorSchemeSwitch do
     <button
       id={Ecto.UUID.generate()}
       phx-hook="ColorSchemeHook"
-      class="h-8 w-8 rounded-full ring-2 ring-zinc-500/80 hover:ring-zinc-800 dark:hover:ring-yellow-300 bg-white/90 dark:bg-zinc-800 flex items-center justify-center group cursor-pointer shadow-lg shadow-zinc-800/5"
+      class="ring-zinc-500/80 bg-white/90 group shadow-zinc-800/5 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full shadow-lg ring-2 hover:ring-zinc-800 dark:bg-zinc-800 dark:hover:ring-yellow-300"
       aria-label="Toggle theme"
     >
       <Heroicons.sun
         solid
-        class="h-6 w-6 text-zinc-100 group-hover:text-yellow-300 color-scheme-light-icon hidden"
+        class="color-scheme-light-icon hidden h-6 w-6 text-zinc-100 group-hover:text-yellow-300"
       />
       <Heroicons.moon
         solid
-        class="h-6 w-6 text-zinc-500 group-hover:text-zinc-800 color-scheme-dark-icon hidden"
+        class="color-scheme-dark-icon hidden h-6 w-6 text-zinc-500 group-hover:text-zinc-800"
       />
     </button>
     """

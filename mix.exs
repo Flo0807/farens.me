@@ -50,7 +50,8 @@ defmodule Website.MixProject do
       {:earmark, "~> 1.4.27"},
       {:yaml_elixir, "~> 2.9.0"},
       {:timex, "~> 3.7.9"},
-      {:heroicons, "~> 0.5.0"}
+      {:heroicons, "~> 0.5.0"},
+      {:tailwind_formatter, "~> 0.3.2", only: :dev, runtime: false}
     ]
   end
 
