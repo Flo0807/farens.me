@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "alpinejs": "^3.11.1"
+    "alpinejs": "^3.11.1",
+    "topbar": "^2.0.0"
   }
 }
