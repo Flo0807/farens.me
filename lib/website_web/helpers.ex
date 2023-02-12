@@ -6,10 +6,18 @@ defmodule WebsiteWeb.Helpers do
 
   import WebsiteWeb.Components.ColorSchemeSwitch
 
+  @nav_links [
+    %{to: "/", label: "Home"},
+    %{to: "/about", label: "About"},
+    %{to: "/blog", label: "Blog"},
+    %{to: "/projects", label: "Projects"}
+  ]
+
   def merge_class(%{class: class}, default), do: class <> " " <> default
   def merge_class(_, default), do: default
 
   attr :url, :string, required: true, doc: "The current url."
+  attr :nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered."
 
   def header(assigns) do
     ~H"""
@@ -25,20 +33,25 @@ defmodule WebsiteWeb.Helpers do
           </.link>
           <nav class="bg-white/90 ring-zinc-900/5 shadow-zinc-800/5 hidden rounded-full px-6 text-zinc-800 shadow-lg ring-1 dark:ring-white/10 dark:bg-zinc-800 dark:text-zinc-100 md:block">
             <ul class="flex space-x-6 font-medium">
-              <%= for %{to: to, label: label} <- header_links() do %>
-                <li class={
-                "relative px-3 py-2" <>
-                  " " <> if active?(@url, to), do: "text-cyan-500 dark:text-cyan-400", else: "hover:text-cyan-500 hover:dark:text-cyan-400"
-              }>
-                  <.link navigate={to}>
-                    <%= label %>
-                  </.link>
-                  <%= if active?(@url, to) do %>
-                    <span class="from-cyan-400/0 via-cyan-500/80 to-cyan-500/0 absolute inset-x-1 -bottom-px h-px bg-gradient-to-r dark:via-cyan-400/80 dark:to-cyan-400/0">
-                    </span>
-                  <% end %>
-                </li>
-              <% end %>
+              <li
+                :for={%{to: to, label: label} <- @nav_links}
+                class={[
+                  "relative px-3 py-2",
+                  if(active?(@url, to),
+                    do: "text-cyan-500 dark:text-cyan-400",
+                    else: "hover:text-cyan-500 hover:dark:text-cyan-400"
+                  )
+                ]}
+              >
+                <.link navigate={to}>
+                  <%= label %>
+                </.link>
+                <span
+                  :if={active?(@url, to)}
+                  class="from-cyan-400/0 via-cyan-500/80 to-cyan-500/0 absolute inset-x-1 -bottom-px h-px bg-gradient-to-r dark:via-cyan-400/80 dark:to-cyan-400/0"
+                >
+                </span>
+              </li>
             </ul>
           </nav>
 
@@ -59,10 +72,12 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
+  attr :nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered."
+
   def mobile_nav(assigns) do
     ~H"""
     <div x-show="mobile_menu" @keydown.escape.window="mobile_menu = false">
-      <div class="bg-zinc-900/80 fixed inset-0 z-50 transition-opacity"></div>
+      <div class="bg-zinc-900/80 fixed inset-0 z-50 transition-opacity" />
 
       <div class="fixed inset-0 z-50 my-4 flex transform items-center justify-center overflow-hidden px-4 sm:px-6">
         <div
@@ -83,7 +98,7 @@ defmodule WebsiteWeb.Helpers do
           <div class="p-5">
             <nav class="flex flex-col space-y-6">
               <.link
-                :for={%{to: to, label: label} <- header_links()}
+                :for={%{to: to, label: label} <- @nav_links}
                 navigate={to}
                 class="dark:text-gray-200"
               >
@@ -97,15 +112,6 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  defp header_links do
-    [
-      %{to: "/", label: "Home"},
-      %{to: "/about", label: "About"},
-      %{to: "/blog", label: "Blog"},
-      %{to: "/projects", label: "Projects"}
-    ]
-  end
-
   defp active?(current, to) do
     %{path: path} = URI.parse(current)
 
@@ -114,6 +120,7 @@ defmodule WebsiteWeb.Helpers do
 
   attr :class, :string, default: "", doc: "Additional classes to be added to the footer."
   attr :url, :string, required: true, doc: "The current url."
+  attr :nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered."
 
   def footer(assigns) do
     ~H"""
@@ -122,16 +129,14 @@ defmodule WebsiteWeb.Helpers do
         <div class="flex flex-col items-center space-y-2 px-16 sm:justify-between md:flex-row md:space-y-0">
           <nav class="text-zinc-800 dark:text-zinc-100">
             <ul class="flex space-x-4 font-medium">
-              <%= for %{to: to, label: label} <- header_links() do %>
-                <li>
-                  <.link
-                    navigate={to}
-                    class={if active?(@url, to), do: "text-cyan-500 dark:text-cyan-400", else: ""}
-                  >
-                    <%= label %>
-                  </.link>
-                </li>
-              <% end %>
+              <li :for={%{to: to, label: label} <- @nav_links}>
+                <.link
+                  navigate={to}
+                  class={if active?(@url, to), do: "text-cyan-500 dark:text-cyan-400", else: ""}
+                >
+                  <%= label %>
+                </.link>
+              </li>
             </ul>
           </nav>
           <p class="text-center text-zinc-400 dark:text-zinc-500">
@@ -224,33 +229,32 @@ defmodule WebsiteWeb.Helpers do
     ~H"""
     <div class="border-0 md:border-l md:border-zinc-300 md:dark:border-zinc-700/50">
       <div class="flex flex-col space-y-14">
-        <%= for article <- @articles do %>
-          <div
-            to={"/blog/" <> Map.get(article, :slug)}
-            link_type="live_redirect"
-            class="flex flex-col space-y-4 md:flex-row md:space-x-2 md:space-y-0"
-          >
-            <p class="border-zinc-700/50 w-2/4 border-l-4 pl-4 text-sm text-zinc-500 md:ml-0 md:border-0 md:pl-10">
-              <%= Map.get(article, :date) |> Utils.date_to_string() %>
-            </p>
+        <div
+          :for={article <- @articles}
+          to={"/blog/" <> Map.get(article, :slug)}
+          link_type="live_redirect"
+          class="flex flex-col space-y-4 md:flex-row md:space-x-2 md:space-y-0"
+        >
+          <p class="border-zinc-700/50 w-2/4 border-l-4 pl-4 text-sm text-zinc-500 md:ml-0 md:border-0 md:pl-10">
+            <%= Map.get(article, :date) |> Utils.date_to_string() %>
+          </p>
 
-            <.link
-              navigate={Routes.blog_show_path(@socket, :show, Map.get(article, :slug))}
-              class="group flex flex-col space-y-2"
-            >
-              <p class="font-medium text-zinc-800 dark:text-zinc-100">
-                <%= Map.get(article, :title) %>
-              </p>
-              <p class="text-zinc-600 dark:text-zinc-400">
-                <%= Map.get(article, :summary) %>
-              </p>
-              <div class="flex items-center pt-4 text-zinc-800 group-hover:text-cyan-500 dark:text-zinc-100 dark:group-hover:text-cyan-400">
-                <p>Read article</p>
-                <Heroicons.arrow_right solid class="ml-2 h-4 w-4" />
-              </div>
-            </.link>
-          </div>
-        <% end %>
+          <.link
+            navigate={Routes.blog_show_path(@socket, :show, Map.get(article, :slug))}
+            class="group flex flex-col space-y-2"
+          >
+            <p class="font-medium text-zinc-800 dark:text-zinc-100">
+              <%= Map.get(article, :title) %>
+            </p>
+            <p class="text-zinc-600 dark:text-zinc-400">
+              <%= Map.get(article, :summary) %>
+            </p>
+            <div class="flex items-center pt-4 text-zinc-800 group-hover:text-cyan-500 dark:text-zinc-100 dark:group-hover:text-cyan-400">
+              <p>Read article</p>
+              <Heroicons.arrow_right solid class="ml-2 h-4 w-4" />
+            </div>
+          </.link>
+        </div>
       </div>
     </div>
     """
