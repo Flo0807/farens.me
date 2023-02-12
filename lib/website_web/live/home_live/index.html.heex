@@ -28,10 +28,6 @@
     <div class="mt-12 grid lg:grid-cols-2 lg:gap-16">
       <div>
         <div class="flex flex-col space-y-8">
-          <p class="text-xl font-semibold tracking-tight text-zinc-800 underline dark:text-zinc-100">
-            Random articles:
-          </p>
-
           <%= for article <- @articles do %>
             <.article_card socket={@socket} article={article} />
           <% end %>
