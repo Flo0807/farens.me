@@ -176,7 +176,7 @@ defmodule WebsiteWeb.Helpers do
 
   def cv_container(assigns) do
     ~H"""
-    <div class="flex flex-col space-y-3 rounded-xl px-6 py-4 ring-1 ring-zinc-200 dark:ring-zinc-800">
+    <div class="bg-zinc-200/30 flex flex-col space-y-3 rounded-xl px-6 py-4 dark:bg-zinc-800/30">
       <div class="text-md flex items-center space-x-4 font-medium">
         <%= render_slot(@icon) %>
         <p class="text-zinc-800 dark:text-zinc-100">
