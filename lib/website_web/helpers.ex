@@ -118,13 +118,13 @@ defmodule WebsiteWeb.Helpers do
     if to == "/", do: path == to, else: String.starts_with?(path, to)
   end
 
-  attr :class, :string, default: "", doc: "Additional classes to be added to the footer."
+  attr :class, :string, default: nil, doc: "Additional classes to be added to the footer."
   attr :url, :string, required: true, doc: "The current url."
   attr :nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered."
 
   def footer(assigns) do
     ~H"""
-    <footer class={"#{@class} flex justify-center px-8 sm:px-10 lg:px-16"}>
+    <footer class={["flex justify-center px-8 sm:px-10 lg:px-16", @class]}>
       <div class="w-full max-w-7xl border-t border-zinc-300 pt-8 pb-16 dark:border-zinc-700">
         <div class="flex flex-col items-center space-y-2 px-16 sm:justify-between md:flex-row md:space-y-0">
           <nav class="text-zinc-800 dark:text-zinc-100">
@@ -293,13 +293,13 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :class, :string, default: "", doc: "Additional classes to be added to the icon."
+  attr :class, :string, default: nil, doc: "Additional classes to be added to the icon."
 
   def github_icon(assigns) do
     ~H"""
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class={"#{@class} icon icon-tabler icon-tabler-brand-github"}
+      class={["icon icon-tabler icon-tabler-brand-github", @class]}
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -315,13 +315,13 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :class, :string, default: "", doc: "Additional classes to be added to the icon."
+  attr :class, :string, default: nil, doc: "Additional classes to be added to the icon."
 
   def linkedin_icon(assigns) do
     ~H"""
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class={"#{@class} icon icon-tabler icon-tabler-brand-linkedin"}
+      class={["icon icon-tabler icon-tabler-brand-linkedin", @class]}
       width="24"
       height="24"
       viewBox="0 0 24 24"
