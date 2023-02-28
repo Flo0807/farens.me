@@ -1,10 +1,10 @@
-defmodule WebsiteWeb.Helpers do
-  use Phoenix.{Component, HTML}
-
-  alias Website.Utils
-  alias WebsiteWeb.Router.Helpers, as: Routes
+defmodule WebsiteWeb.CoreComponents do
+  use WebsiteWeb, :verified_routes
+  use Phoenix.Component
 
   import WebsiteWeb.Components.ColorSchemeSwitch
+
+  alias Website.Utils
 
   @nav_links [
     %{to: "/", label: "Home"},
@@ -16,8 +16,8 @@ defmodule WebsiteWeb.Helpers do
   def merge_class(%{class: class}, default), do: class <> " " <> default
   def merge_class(_, default), do: default
 
-  attr :url, :string, required: true, doc: "The current url."
-  attr :nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered."
+  attr(:url, :string, required: true, doc: "The current url.")
+  attr(:nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered.")
 
   def header(assigns) do
     ~H"""
@@ -72,7 +72,7 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered."
+  attr(:nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered.")
 
   def mobile_nav(assigns) do
     ~H"""
@@ -118,9 +118,9 @@ defmodule WebsiteWeb.Helpers do
     if to == "/", do: path == to, else: String.starts_with?(path, to)
   end
 
-  attr :class, :string, default: nil, doc: "Additional classes to be added to the footer."
-  attr :url, :string, required: true, doc: "The current url."
-  attr :nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered."
+  attr(:class, :string, default: nil, doc: "Additional classes to be added to the footer.")
+  attr(:url, :string, required: true, doc: "The current url.")
+  attr(:nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered.")
 
   def footer(assigns) do
     ~H"""
@@ -148,10 +148,10 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :title, :string, required: true, doc: "The title."
-  attr :logo, :string, required: true, doc: "The logo src."
-  attr :description, :string, required: true, doc: "The description."
-  attr :date_range, :string, required: true, doc: "The date range."
+  attr(:title, :string, required: true, doc: "The title.")
+  attr(:logo, :string, required: true, doc: "The logo src.")
+  attr(:description, :string, required: true, doc: "The description.")
+  attr(:date_range, :string, required: true, doc: "The date range.")
 
   def cv_item(assigns) do
     ~H"""
@@ -174,10 +174,10 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :label, :string, required: true, doc: "The label to be displayed."
+  attr(:label, :string, required: true, doc: "The label to be displayed.")
 
-  slot :icon, doc: "The icon."
-  slot :inner_block
+  slot(:icon, doc: "The icon.")
+  slot(:inner_block)
 
   def cv_container(assigns) do
     ~H"""
@@ -193,13 +193,13 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :socket, :map, required: true, doc: "The socket."
-  attr :article, :map, required: true, doc: "The article."
+  attr(:socket, :map, required: true, doc: "The socket.")
+  attr(:article, :map, required: true, doc: "The article.")
 
   def article_card(assigns) do
     ~H"""
     <.link
-      navigate={Routes.blog_show_path(@socket, :show, Map.get(@article, :slug))}
+      navigate={~p"/blog/#{Map.get(@article, :slug)}"}
       class="bg-zinc-200/30 group flex flex-col space-y-4 rounded-xl p-5 dark:bg-zinc-800/30"
     >
       <p class="border-zinc-700/50 w-2/4 border-l-4 pl-4 text-sm text-zinc-500">
@@ -222,8 +222,8 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :socket, :map, required: true, doc: "The socket."
-  attr :articles, :list, required: true, doc: "A list of articles."
+  attr(:socket, :map, required: true, doc: "The socket.")
+  attr(:articles, :list, required: true, doc: "A list of articles.")
 
   def article_timeline(assigns) do
     ~H"""
@@ -239,10 +239,7 @@ defmodule WebsiteWeb.Helpers do
             <%= Map.get(article, :date) |> Utils.date_to_string() %>
           </p>
 
-          <.link
-            navigate={Routes.blog_show_path(@socket, :show, Map.get(article, :slug))}
-            class="group flex flex-col space-y-2"
-          >
+          <.link navigate={~p"/blog/#{Map.get(article, :slug)}"} class="group flex flex-col space-y-2">
             <p class="font-medium text-zinc-800 dark:text-zinc-100">
               <%= Map.get(article, :title) %>
             </p>
@@ -260,10 +257,10 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :link, :string, required: true, doc: "The link to the project."
-  attr :title, :string, required: true, doc: "The title of the project."
-  attr :description, :string, required: true, doc: "The description of the project."
-  attr :link_label, :string, required: true, doc: "The link label for the url."
+  attr(:link, :string, required: true, doc: "The link to the project.")
+  attr(:title, :string, required: true, doc: "The title of the project.")
+  attr(:description, :string, required: true, doc: "The description of the project.")
+  attr(:link_label, :string, required: true, doc: "The link label for the url.")
 
   def project_card(assigns) do
     ~H"""
@@ -293,7 +290,7 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :class, :string, default: nil, doc: "Additional classes to be added to the icon."
+  attr(:class, :string, default: nil, doc: "Additional classes to be added to the icon.")
 
   def github_icon(assigns) do
     ~H"""
@@ -315,7 +312,7 @@ defmodule WebsiteWeb.Helpers do
     """
   end
 
-  attr :class, :string, default: nil, doc: "Additional classes to be added to the icon."
+  attr(:class, :string, default: nil, doc: "Additional classes to be added to the icon.")
 
   def linkedin_icon(assigns) do
     ~H"""

@@ -10,7 +10,10 @@ import Config
 # Configures the endpoint
 config :website, WebsiteWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: WebsiteWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [
+    formats: [html: WebsiteWeb.ErrorHTML, json: WebsiteWeb.ErrorJSON],
+    layout: false
+  ],
   pubsub_server: Website.PubSub,
   live_view: [signing_salt: "RrqkD/ph"]
 
