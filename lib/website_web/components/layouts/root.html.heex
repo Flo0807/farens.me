@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="csrf-token" content={csrf_token_value()} />
+    <meta name="csrf-token" content={get_csrf_token()} />
     <meta
       name="description"
       content="Personal website built with the pheonix web framework and elixir."
@@ -13,12 +13,12 @@
     <.live_title suffix=" · Software Developer">
       <%= assigns[:page_title] || "Florian Arens" %>
     </.live_title>
-    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script
       defer
       phx-track-static
       type="text/javascript"
-      src={Routes.static_path(@conn, "/assets/app.js")}
+      src={~p"/assets/app.js"}
     >
     </script>
 

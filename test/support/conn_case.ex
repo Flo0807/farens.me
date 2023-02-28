@@ -19,19 +19,15 @@ defmodule WebsiteWeb.ConnCase do
 
   using do
     quote do
+      # The default endpoint for testing
+      @endpoint WebsiteWeb.Endpoint
+
+      use WebsiteWeb, :verified_routes
+
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import WebsiteWeb.ConnCase
-
-      alias WebsiteWeb.Router.Helpers, as: Routes
-
-      # The default endpoint for testing
-      @endpoint WebsiteWeb.Endpoint
     end
-  end
-
-  setup _tags do
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

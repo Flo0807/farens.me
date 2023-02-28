@@ -17,38 +17,58 @@ defmodule WebsiteWeb do
   and import those modules here.
   """
 
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+
   def controller do
     quote do
-      use Phoenix.Controller, namespace: WebsiteWeb
+      use Phoenix.Controller,
+        formats: [:html],
+        layouts: [html: WebsiteWeb.Layouts]
 
       import Plug.Conn
       import WebsiteWeb.Gettext
-      alias WebsiteWeb.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
     end
   end
 
-  def view do
+  def html do
     quote do
-      use Phoenix.View,
-        root: "lib/website_web/templates",
-        namespace: WebsiteWeb
+      use Phoenix.Component
 
-      # Import convenience functions from controllers
       import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+        only: [get_csrf_token: 0, view_module: 1, view_template: 1]
 
-      # Include shared imports and aliases for views
-      unquote(view_helpers())
+      unquote(html_helpers())
+    end
+  end
+
+  defp html_helpers do
+    quote do
+      # HTML escaping functionality
+      import Phoenix.HTML
+      # Core UI components and translation
+      import WebsiteWeb.CoreComponents
+      import WebsiteWeb.Gettext
+
+      # Shortcut for generating JS commands
+      alias Phoenix.LiveView.JS
+
+      use PetalComponents
+
+      import WebsiteWeb.Components.ColorSchemeSwitch
+
+      unquote(verified_routes())
     end
   end
 
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {WebsiteWeb.LayoutView, :live},
+        layout: {WebsiteWeb.Layouts, :app},
         container: {:div, class: "h-full"}
 
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
@@ -56,21 +76,13 @@ defmodule WebsiteWeb do
     quote do
       use Phoenix.LiveComponent
 
-      unquote(view_helpers())
-    end
-  end
-
-  def component do
-    quote do
-      use Phoenix.Component
-
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
   def router do
     quote do
-      use Phoenix.Router
+      use Phoenix.Router, helpers: false
 
       import Plug.Conn
       import Phoenix.Controller
@@ -81,33 +93,15 @@ defmodule WebsiteWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import WebsiteWeb.Gettext
     end
   end
 
-  defp view_helpers do
+  def verified_routes do
     quote do
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
-
-      # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
-      import Phoenix.Component
-
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
-
-      import WebsiteWeb.Helpers
-
-      use PetalComponents
-
-      import WebsiteWeb.ErrorHelpers
-      import WebsiteWeb.Gettext
-
-      alias WebsiteWeb.Router.Helpers, as: Routes
-
-      import WebsiteWeb.Components.{
-        ColorSchemeSwitch
-      }
+      use Phoenix.VerifiedRoutes,
+        endpoint: WebsiteWeb.Endpoint,
+        router: WebsiteWeb.Router,
+        statics: WebsiteWeb.static_paths()
     end
   end
 

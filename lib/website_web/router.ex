@@ -2,27 +2,27 @@ defmodule WebsiteWeb.Router do
   use WebsiteWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, {WebsiteWeb.LayoutView, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:put_root_layout, {WebsiteWeb.Layouts, :root})
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", WebsiteWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
     live_session :default, on_mount: WebsiteWeb.InitAssigns do
-      live "/", HomeLive.Index, :index
-      live "/about", AboutLive.Index, :index
-      live "/blog", BlogLive.Index, :index
-      live "/blog/:id", BlogLive.Show, :show
-      live "/projects", ProjectsLive.Index, :index
+      live("/", HomeLive.Index, :index)
+      live("/about", AboutLive.Index, :index)
+      live("/blog", BlogLive.Index, :index)
+      live("/blog/:id", BlogLive.Show, :show)
+      live("/projects", ProjectsLive.Index, :index)
     end
   end
 
@@ -42,9 +42,9 @@ defmodule WebsiteWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      live_dashboard "/dashboard", metrics: WebsiteWeb.Telemetry
+      live_dashboard("/dashboard", metrics: WebsiteWeb.Telemetry)
     end
   end
 end
