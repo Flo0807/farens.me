@@ -135,7 +135,7 @@ defmodule WebsiteWeb.CoreComponents do
           </ul>
         </nav>
         <p class="text-center text-zinc-400 dark:text-zinc-500">
-          © 2022 Florian Arens. All rights reserved.
+          © 2023 Florian Arens. All rights reserved.
         </p>
       </div>
     </footer>
