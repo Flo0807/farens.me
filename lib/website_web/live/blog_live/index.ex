@@ -9,6 +9,7 @@ defmodule WebsiteWeb.BlogLive.Index do
     socket =
       socket
       |> assign(:articles, articles)
+      |> assign(:page_title, "Blog")
 
     {:ok, socket}
   end

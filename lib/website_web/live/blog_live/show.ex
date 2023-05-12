@@ -10,6 +10,7 @@ defmodule WebsiteWeb.BlogLive.Show do
     socket =
       socket
       |> assign(:article, article)
+      |> assign(:page_title, article.title)
 
     {:ok, socket}
   end
