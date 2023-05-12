@@ -1,23 +1,19 @@
-<div class="my-16 flex justify-center sm:px-8 lg:px-24">
-  <div class="flex w-full max-w-7xl flex-col px-8 sm:px-10 lg:px-16">
-    <div class="flex max-w-2xl flex-col space-y-6">
-      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-        Things I’ve built.
-      </h1>
+<div>
+  <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+    Things I’ve built.
+  </h1>
 
-      <p class="text-base leading-7 text-zinc-600 dark:text-zinc-400">
-        I’ve been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my freetime. These are the ones that I’m most proud of.
-      </p>
-    </div>
+  <p class="max-w -2xl mt-6 text-base leading-7 text-zinc-600 dark:text-zinc-400">
+    I’ve been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my freetime. These are the ones that I’m most proud of.
+  </p>
 
-    <div class="align-start flex w-full flex-wrap gap-8 pt-16">
-      <.project_card
-        :for={projects <- @projects}
-        title={projects.title}
-        link={projects.link}
-        link_label={projects.link_label}
-        description={projects.description}
-      />
-    </div>
+  <div class="align-start mt-16 flex w-full flex-wrap gap-8">
+    <.project_card
+      :for={projects <- @projects}
+      title={projects.title}
+      link={projects.link}
+      link_label={projects.link_label}
+      description={projects.description}
+    />
   </div>
 </div>

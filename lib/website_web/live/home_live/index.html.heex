@@ -1,83 +1,51 @@
-<div class="my-16 flex justify-center sm:px-8 lg:px-24">
-  <div class="flex w-full max-w-7xl flex-col px-8 sm:px-10 lg:px-16">
-    <div class="flex max-w-2xl flex-col space-y-6">
-      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-        Florian Arens
-      </h1>
+<div class="grid grid-cols-1 gap-x-12 lg:grid-cols-2">
+  <div>
+    <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+      Hey, I’m Florian! Software developer and student.
+    </h1>
 
-      <p class="text-base leading-7 text-zinc-600 dark:text-zinc-400">
-        I'm Florian, a software developer and student from Flensburg, Germany. I'm passionate about functional programming and web application development. I'm about to finish my bachelor's degree in computer science and I'm looking forward to start my master's program soon.
-      </p>
+    <p class="mt-6 text-lg leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-400">
+      I'm Florian, a software developer and student from Flensburg, Germany. I'm passionate about functional programming and web application development. I'm about to finish my bachelor's degree in computer science and I'm looking forward to start my master's program soon.
+    </p>
 
-      <div class="flex space-x-4">
-        <.link href="https://github.com/Flo0807" target="_blank" class="group" aria-label="GitHub">
-          <.github_icon class="h-6 text-zinc-600 group-hover:text-cyan-500 dark:text-zinc-400 dark:group-hover:text-cyan-400" />
-        </.link>
-
-        <.link
-          href="https://linkedin.com/in/florian-arens/"
-          target="_blank"
-          class="group"
-          aria-label="LinkedIn"
-        >
-          <.linkedin_icon class="h-6 text-zinc-600 group-hover:text-cyan-500 dark:text-zinc-400 dark:group-hover:text-cyan-400" />
-        </.link>
-      </div>
-    </div>
-
-    <div class="mt-12 grid lg:grid-cols-2 lg:gap-16">
-      <div>
-        <div class="flex flex-col space-y-8">
-          <.article_card :for={article <- @articles} socket={@socket} article={article} />
+    <div class="mt-8 flex space-x-4">
+      <.link href="https://github.com/Flo0807" target="_blank" class="group" aria-label="GitHub">
+        <div class="rounded-xl border border-zinc-400 p-1 dark:border-zinc-700">
+          <.github_icon class="scale-75 fill-current dark:text-zinc-100" />
         </div>
-      </div>
+      </.link>
 
-      <div class="mt-12 flex w-full flex-col space-y-8 justify-self-end lg:mt-0 xl:w-3/4">
-        <.cv_container label="Work">
-          <:icon>
-            <Heroicons.briefcase class="h-6 text-zinc-600 dark:text-zinc-400" />
-          </:icon>
-          <.cv_item
-            logo="/images/sourceboat.jpg"
-            title="Sourceboat GmbH & Co. KG"
-            description="Software Developer"
-            date_range="Aug 2022 - Present"
-          />
+      <.link
+        href="https://linkedin.com/in/florian-arens/"
+        target="_blank"
+        class="group"
+        aria-label="LinkedIn"
+      >
+        <div class="rounded-xl border border-zinc-400 p-1 dark:border-zinc-700">
+          <.linkedin_icon class="h-8 scale-75 fill-current dark:text-zinc-100" />
+        </div>
+      </.link>
 
-          <.cv_item
-            logo="/images/hsflensburg.jpg"
-            title="Flensburg University of Applied Science"
-            description="Student assistant in two research projects"
-            date_range="Jul 2021 - Jul 2022"
-          />
-
-          <.cv_item
-            logo="/images/hsflensburg.jpg"
-            title="Flensburg University of Applied Science"
-            description="Tutor Algorithms and Data Structures"
-            date_range="Oct 2021 - Dec 2021"
-          />
-
-          <.cv_item
-            logo="/images/hsflensburg.jpg"
-            title="Flensburg University of Applied Science"
-            description="Tutor Usability Testing and Engineering"
-            date_range="Oct 2021 - Dec 2021"
-          />
-        </.cv_container>
-
-        <.cv_container label="Education">
-          <:icon>
-            <Heroicons.academic_cap class="h-6 text-zinc-600 dark:text-zinc-400" />
-          </:icon>
-          <.cv_item
-            logo="/images/hsflensburg.jpg"
-            title="Flensburg University of Applied Science"
-            description="Applied Computer Science, B. Sc."
-            date_range="Sep 2019- Present"
-          />
-        </.cv_container>
-      </div>
+      <.link
+        href="https://twitter.com/flo_arens"
+        target="_blank"
+        class="group"
+        aria-label="GitHub"
+      >
+        <div class="rounded-xl border border-zinc-400 p-1 dark:border-zinc-700">
+          <.twitter_icon class="h-8 scale-75 fill-current dark:text-zinc-100" />
+        </div>
+      </.link>
     </div>
+  </div>
+
+  <img
+    class="mt-12 inline-block h-96 justify-self-center rounded-xl object-scale-down lg:mt-0 lg:justify-self-end"
+    src="/images/me.jpg"
+    alt="Portrait of Florian Arens"
+  />
+
+  <div class="mt-12 flex w-full flex-col space-y-8 justify-self-center lg:col-span-2 lg:w-2/3">
+    <.article_card :for={article <- @articles} socket={@socket} article={article} />
   </div>
 </div>
