@@ -61,9 +61,9 @@ defmodule WebsiteWeb.CoreComponents do
         </div>
 
         <.color_scheme_switch />
-
-        <.mobile_nav />
       </header>
+
+      <.mobile_nav />
     </div>
     """
   end
