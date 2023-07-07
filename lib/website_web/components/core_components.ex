@@ -286,6 +286,18 @@ defmodule WebsiteWeb.CoreComponents do
     """
   end
 
+  def analytics(assigns) do
+    ~H"""
+    <script
+      :if={Application.get_env(:website, :env) == :prod}
+      defer
+      data-domain="farens.me"
+      src="https://plausible.storetastic.cloud/js/script.js"
+    >
+    </script>
+    """
+  end
+
   def theme_switch_light(assigns) do
     ~H"""
     <div class="ring-zinc-500/80 group flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-zinc-800 ring-2 hover:ring-yellow-300">

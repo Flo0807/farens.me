@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :website, env: Mix.env()
+
 # Configures the endpoint
 config :website, WebsiteWeb.Endpoint,
   url: [host: "localhost"],
