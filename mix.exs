@@ -46,7 +46,7 @@ defmodule Website.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:petal_components, "~> 1.2.0"},
-      {:earmark, "~> 1.4.27"},
+      {:mdex, "~> 0.1.6"},
       {:yaml_elixir, "~> 2.9.0"},
       {:timex, "~> 3.7.9"},
       {:heroicons, "~> 0.5.0"},

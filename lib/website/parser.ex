@@ -9,7 +9,7 @@ defmodule Website.Parser do
     [_, metadata, markdown] = String.split(file, "---", parts: 3)
 
     metadata = metadata_to_map(metadata)
-    html = Earmark.as_html!(markdown)
+    html = MDEx.to_html(markdown)
 
     {metadata, html}
   end
