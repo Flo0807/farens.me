@@ -12,8 +12,8 @@
 #   - https://pkgs.org/ - resource for finding needed packages
 #   - Ex: hexpm/elixir:1.14.0-erlang-25.1.1-debian-bullseye-20220801-slim
 #
-ARG ELIXIR_VERSION=1.14.0
-ARG OTP_VERSION=25.1.1
+ARG ELIXIR_VERSION=1.15.6
+ARG OTP_VERSION=26.1.1
 ARG DEBIAN_VERSION=bullseye-20220801-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
