@@ -8,8 +8,7 @@ FROM hexpm/elixir:1.15.6-erlang-26.1.1-debian-buster-20230612-slim as builder
 # install build dependencies
 RUN apt-get update && apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
-RUN apt-get install -y build-essential git npm
+RUN apt-get install -y nodejs git build-essential
 RUN apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
