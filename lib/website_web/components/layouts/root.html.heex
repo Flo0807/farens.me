@@ -10,8 +10,8 @@
       content="Personal website built with the pheonix web framework and elixir."
     />
     <meta name="author" content="Florian Arens" />
-    <.live_title>
-      <%= assigns[:page_title] || "Florian Arens · Software Developer" %>
+    <.live_title prefix="Florian Arens · ">
+      <%= assigns[:page_title] || "Software Developer" %>
     </.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
