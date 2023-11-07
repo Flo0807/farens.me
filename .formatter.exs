@@ -8,7 +8,7 @@ locals_without_parens = [
 
 [
   import_deps: [:phoenix],
-  plugins: [TailwindFormatter.MultiFormatter],
+  plugins: [TailwindFormatter, Phoenix.LiveView.HTMLFormatter],
   inputs: ["*.{heex,ex,exs}", "{config,lib,test}/**/*.{heex,ex,exs}"],
   locals_without_parens: locals_without_parens
 ]
