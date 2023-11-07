@@ -4,6 +4,7 @@ defmodule WebsiteWeb.BlogLive.Show do
   alias Website.Repo
   alias Website.Utils
 
+  @impl Phoenix.LiveView
   def mount(%{"id" => id}, _session, socket) do
     article = Repo.get_by_slug!(:articles, id)
 

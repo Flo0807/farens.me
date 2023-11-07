@@ -3,6 +3,7 @@ defmodule WebsiteWeb.ProjectsLive.Index do
 
   alias Website.Repo
 
+  @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
     {:ok, projects} = Repo.list(:projects)
 
