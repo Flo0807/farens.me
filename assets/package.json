@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "alpinejs": "^3.13.3",
-    "topbar": "^2.0.1"
+    "topbar": "^2.0.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
