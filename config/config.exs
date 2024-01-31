@@ -12,6 +12,7 @@ config :website, env: Mix.env()
 # Configures the endpoint
 config :website, WebsiteWeb.Endpoint,
   url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: WebsiteWeb.ErrorHTML, json: WebsiteWeb.ErrorJSON],
     layout: false
