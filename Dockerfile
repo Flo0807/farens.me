@@ -3,7 +3,7 @@
 #
 # https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=ubuntu
 # https://hub.docker.com/_/ubuntu?tab=tags
-FROM hexpm/elixir:1.15.6-erlang-26.1.1-debian-buster-20230612-slim as builder
+FROM hexpm/elixir:1.16.0-erlang-26.2.1-debian-buster-20231009-slim as builder
 
 # install build dependencies
 RUN apt-get update && apt-get install -y curl
