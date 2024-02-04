@@ -39,9 +39,9 @@ defmodule WebsiteWeb.CoreComponents do
   def page_intro(assigns) do
     ~H"""
     <.title text={@title} />
-    <section class="text-pretty my-8 leading-relaxed md:my-12 lg:w-2/3">
+    <div class="text-pretty my-8 leading-relaxed md:my-12 lg:w-2/3">
       <%= render_slot(@inner_block) %>
-    </section>
+    </div>
     """
   end
 
@@ -134,7 +134,6 @@ defmodule WebsiteWeb.CoreComponents do
     >
       <summary
         tabindex="0"
-        role="button"
         aria-label="Switch theme"
         phx-click-away={JS.remove_attribute("open", to: "#theme_switch")}
         class="btn-sm flex items-center"

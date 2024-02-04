@@ -6,26 +6,28 @@
   Hi there! As a software developer and computer science student, I am on a journey to create modern software solutions that make our digital lives easier and more enjoyable. At the moment, I mainly use Elixir and Phoenix for this. Have a look around; see what I've been up to, read my thoughts, and hit me up if you think we could create something exciting together.
 </p>
 
-<section class="mt-4 md:mt-8">
+<div class="mt-4 md:mt-8">
   <.contact_links class="flex space-x-6" icon_class="h-6 md:h-8 w-auto fill-current text-content" />
-</section>
-
-<div class="mt-8 flex items-center text-xl md:mt-12">
-  <span class="font-semibold">Latest blog posts</span>
-  <.link href="/blog" class="btn btn-link no-underline group">
-    <span class="group-hover:underline">View all</span>
-    <.icon name="hero-arrow-right" />
-  </.link>
 </div>
 
-<.grid class="mt-2 md:mt-4">
-  <.blog_preview_card
-    :for={article <- @articles}
-    :if={article.published}
-    link={~p"/blog/#{article.slug}"}
-    title={article.title}
-    date={article.date}
-    description={article.description}
-    read_minutes={article.read_minutes}
-  />
-</.grid>
+<section>
+  <div class="mt-8 flex items-center md:mt-12">
+    <h2 class="text-xl font-semibold">Latest blog posts</h2>
+    <.link href="/blog" class="btn btn-link no-underline group">
+      <span class="group-hover:underline">View all</span>
+      <.icon name="hero-arrow-right" />
+    </.link>
+  </div>
+
+  <.grid class="mt-2 md:mt-4">
+    <.blog_preview_card
+      :for={article <- @articles}
+      :if={article.published}
+      link={~p"/blog/#{article.slug}"}
+      title={article.title}
+      date={article.date}
+      description={article.description}
+      read_minutes={article.read_minutes}
+    />
+  </.grid>
+</section>

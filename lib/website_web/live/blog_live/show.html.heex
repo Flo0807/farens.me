@@ -2,7 +2,7 @@
   <div class="overflow-x-auto">
     <.page_intro title={@article.title} />
 
-    <section class="my-8 md:my-12">
+    <div class="my-8 md:my-12">
       <div class="flex items-center justify-between">
         <div class="flex w-fit items-center">
           <span class="flex items-center space-x-2 text-sm font-semibold">
@@ -16,7 +16,7 @@
         </div>
         <.share_article_dropdown title={@article.title} link={url(~p"/blog/#{@article.slug}")} />
       </div>
-    </section>
+    </div>
 
     <article class="prose prose-base prose-p:text-base-content">
       <%= raw(@article.body) %>

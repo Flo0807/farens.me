@@ -2,7 +2,7 @@
   I write about whatever comes to mind. Most of the time it is somehow related to software engineering. I also use this blog to document my progress in learning new things. I hope you find something useful here, and if you do, please let me know.
 </.page_intro>
 
-<section class="lg:w-2/3">
+<div class="lg:w-2/3">
   <.blog_preview_card
     :for={article <- @articles}
     :if={article.published}
@@ -13,4 +13,4 @@
     description={article.description}
     read_minutes={article.read_minutes}
   />
-</section>
+</div>
