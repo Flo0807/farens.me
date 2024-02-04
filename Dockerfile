@@ -1,13 +1,13 @@
 # Find eligible builder and runner images on Docker Hub. We use Ubuntu/Debian instead of
 # Alpine to avoid DNS resolution issues in production.
 #
-# https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=ubuntu
-# https://hub.docker.com/_/ubuntu?tab=tags
+# https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=debian
+# https://hub.docker.com/_/debian?tab=tags
 FROM hexpm/elixir:1.16.0-erlang-26.2.1-debian-buster-20231009-slim as builder
 
 # install build dependencies
 RUN apt-get update && apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs git build-essential
 RUN apt-get clean && rm -f /var/lib/apt/lists/*_*
 
@@ -20,6 +20,8 @@ RUN mix local.hex --force && \
 
 # set build ENV
 ENV MIX_ENV="prod"
+
+ENV ERL_FLAGS="+JPperf true"
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
@@ -54,7 +56,7 @@ RUN mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
-FROM debian:buster-20230612-slim
+FROM debian:buster-20240130-slim
 
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
@@ -78,6 +80,7 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/website ./
 USER nobody
 
 CMD ["/app/bin/server"]
+
 # Appended by flyctl
 ENV ECTO_IPV6 true
 ENV ERL_AFLAGS "-proto_dist inet6_tcp"
