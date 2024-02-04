@@ -299,7 +299,7 @@ defmodule WebsiteWeb.CoreComponents do
           <h2 class="card-title text-pretty mb-4">
             <%= @title %>
           </h2>
-          <p class="text-pretty mb-4 truncate">
+          <p class="text-pretty mb-4">
             <%= @description %>
           </p>
 
