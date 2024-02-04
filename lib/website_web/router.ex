@@ -19,7 +19,7 @@ defmodule WebsiteWeb.Router do
       live "/blog", BlogLive.Index, :index
       live "/blog/:slug", BlogLive.Show, :show
       live "/projects", ProjectsLive.Index, :index
-      live "/legal-notice", LeagalLive.Index, :index
+      live "/legal-notice", LegalLive.Index, :index
       live "/privacy-policy", PrivacyLive.Index, :index
     end
   end
