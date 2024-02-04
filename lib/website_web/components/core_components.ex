@@ -355,7 +355,7 @@ defmodule WebsiteWeb.CoreComponents do
               <%= @read_minutes %> min read
             </span>
           </div>
-          <p class="text-pretty mb-4 truncate">
+          <p class="text-pretty mb-4">
             <%= @description %>
           </p>
           <%!-- Article tags
