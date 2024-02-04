@@ -1,291 +1,477 @@
 defmodule WebsiteWeb.CoreComponents do
-  use WebsiteWeb, :verified_routes
+  @moduledoc """
+  Provides core UI components.
+  """
   use Phoenix.Component
+  use WebsiteWeb, :verified_routes
 
-  import WebsiteWeb.Components.ColorSchemeSwitch
+  alias Website.DateUtils
+  alias Phoenix.LiveView.JS
 
-  alias Website.Utils
+  import WebsiteWeb.Gettext
 
-  @nav_links [
-    %{to: "/", label: "Home"},
-    %{to: "/about", label: "About"},
-    %{to: "/blog", label: "Blog"},
-    %{to: "/projects", label: "Projects"}
+  @themes [
+    %{label: "Night", theme: "night", icon: "hero-star"},
+    %{label: "Dark", theme: "dark", icon: "hero-moon"},
+    %{label: "Sunset", theme: "sunset", icon: "hero-sun"},
+    %{label: "Dracula", theme: "dracula", icon: "hero-paint-brush"}
   ]
 
-  attr(:url, :string, required: true, doc: "The current url.")
-  attr(:nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered.")
-  attr(:class, :string, default: nil, doc: "A class to be added to the header.")
+  @doc """
+  Renders a title.
+  """
+  attr :text, :string, required: true
 
-  def header(assigns) do
+  def title(assigns) do
     ~H"""
-    <div x-data="{ mobile_menu: false }">
-      <header class={["flex items-center justify-between", @class]}>
-        <.link navigate="/" class="group shadow-zinc-800/5 shadow-lg">
-          <img
-            class="inline-block h-8 w-8 rounded-full ring-2 ring-white group-hover:ring-cyan-400"
-            src="/images/me.jpg"
-            alt="Portrait of Florian Arens"
-          />
-        </.link>
-        <nav class="bg-white/90 ring-zinc-900/5 shadow-zinc-800/5 hidden rounded-full px-6 text-zinc-800 shadow-lg ring-1 dark:ring-white/10 dark:bg-zinc-800 dark:text-zinc-100 md:block">
-          <ul class="flex space-x-6 font-medium">
-            <li
-              :for={%{to: to, label: label} <- @nav_links}
-              class={[
-                "relative px-3 py-2",
-                if(active?(@url, to),
-                  do: "text-cyan-500 dark:text-cyan-400",
-                  else: "hover:text-cyan-500 dark:hover:text-cyan-400"
-                )
-              ]}
-            >
-              <.link navigate={to}>
-                <%= label %>
-              </.link>
-              <span
-                :if={active?(@url, to)}
-                class="from-cyan-400/0 via-cyan-500/80 to-cyan-500/0 absolute inset-x-1 -bottom-px h-px bg-gradient-to-r dark:via-cyan-400/80 dark:to-cyan-400/0"
-              >
-              </span>
-            </li>
-          </ul>
-        </nav>
-
-        <div
-          class="bg-white/90 ring-zinc-900/5 shadow-zinc-800/5 flex cursor-pointer items-center space-x-2 rounded-full px-4 py-2 text-zinc-800 shadow-lg ring-1 dark:ring-white/10 dark:bg-zinc-800 dark:text-zinc-100 md:hidden"
-          @click="mobile_menu = true"
-        >
-          <p>Menu</p>
-          <Heroicons.chevron_down solid class="h-5 w-5" />
-        </div>
-
-        <.color_scheme_switch />
-      </header>
-
-      <.mobile_nav />
-    </div>
+    <h1 class="text-3xl font-semibold">
+      <%= @text %>
+    </h1>
     """
   end
 
-  attr(:nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered.")
+  @doc """
+  Renders the page intro.
+  """
+  attr :title, :string, required: true
+  slot :inner_block
 
-  def mobile_nav(assigns) do
+  def page_intro(assigns) do
     ~H"""
-    <div x-show="mobile_menu" @keydown.escape.window="mobile_menu = false">
-      <div class="bg-zinc-900/80 fixed inset-0 z-50 transition-opacity" />
+    <.title text={@title} />
+    <section class="text-pretty my-8 leading-relaxed md:my-12 lg:w-2/3">
+      <%= render_slot(@inner_block) %>
+    </section>
+    """
+  end
 
-      <div class="fixed inset-0 z-50 my-4 flex transform items-center justify-center overflow-hidden px-4 sm:px-6">
-        <div
-          @click.outside="mobile_menu = false"
-          class="max-h-full w-full max-w-xl overflow-auto rounded bg-white shadow-lg dark:bg-zinc-800"
-        >
-          <div class="border-b border-gray-100 px-5 py-3 dark:border-zinc-700">
-            <div class="flex items-center justify-between">
-              <p class="font-semibold text-zinc-800 dark:text-gray-200">
-                Navigation
-              </p>
+  @doc """
+  Renders a modal.
+  """
+  attr :id, :string, required: true, doc: "the unique id of the modal"
+  attr :header, :string, default: nil, doc: "the modal header"
 
-              <button @click="mobile_menu = false">
-                <Heroicons.x_mark solid class="h-5 w-5 dark:text-white" />
-              </button>
-            </div>
-          </div>
-          <div class="p-5">
-            <nav class="flex flex-col space-y-6">
-              <.link
-                :for={%{to: to, label: label} <- @nav_links}
-                navigate={to}
-                class="dark:text-gray-200"
-              >
-                <%= label %>
-              </.link>
-            </nav>
-          </div>
-        </div>
+  slot :inner_block, doc: "the inner block that renders the modal content"
+
+  def modal(assigns) do
+    ~H"""
+    <dialog id={@id} class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
+        </form>
+        <h3 if={@header} class="text-base-content text-lg font-bold">
+          <%= @header %>
+        </h3>
+        <%= render_slot(@inner_block) %>
       </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>
+          <%= gettext("close") %>
+        </button>
+      </form>
+    </dialog>
+    """
+  end
+
+  @doc """
+  Renders the navbar.
+  """
+  attr :current_url, :string, required: true
+
+  def navbar(assigns) do
+    ~H"""
+    <nav class="flex h-20">
+      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4">
+        <.avatar />
+
+        <div class="rounded-btn bg-base-300 hidden space-x-2 px-4 py-2 sm:block">
+          <.link
+            :for={%{label: label, to: to} <- main_navigation_links()}
+            navigate={to}
+            class={["btn btn-sm", if(active?(@current_url, to), do: "btn-primary", else: "btn-ghost")]}
+          >
+            <%= label %>
+          </.link>
+        </div>
+
+        <div class="rounded-btn bg-base-300 block p-2 sm:hidden">
+          <button
+            class="btn-sm flex items-center font-semibold"
+            onclick="mobile_navigation.showModal()"
+          >
+            <span>Menu</span>
+          </button>
+        </div>
+
+        <.theme_switch />
+      </div>
+    </nav>
+    """
+  end
+
+  def avatar(assigns) do
+    ~H"""
+    <.link navigate={~p"/"} class="avatar cursor-pointer">
+      <div class="h-10 w-auto rounded-full">
+        <img src={~p"/images/me.jpg"} alt="Portrait of Florian" />
+      </div>
+    </.link>
+    """
+  end
+
+  @doc """
+  Renders the theme switch.
+  """
+  def theme_switch(assigns) do
+    assigns = assign(assigns, :themes, @themes)
+
+    ~H"""
+    <div
+      id="theme_switch"
+      class="rounded-btn dropdown bg-base-300 dropdown-end p-2"
+      phx-hook="ThemeSwitch"
+    >
+      <div tabindex="0" role="button" aria-label="Switch theme" class="btn-sm flex items-center">
+        <.icon name="hero-swatch" />
+      </div>
+      <ul tabindex="0" class="dropdown-content z-[1] menu bg-base-300 rounded-box w-40 p-2 shadow">
+        <li :for={%{label: label, theme: theme, icon: icon} <- @themes}>
+          <div
+            role="button"
+            class="flex items-center space-x-2"
+            phx-click={JS.dispatch("change-theme", detail: %{theme: theme})}
+          >
+            <.icon name={icon} class="w-4 h-4" />
+            <span><%= label %></span>
+          </div>
+        </li>
+      </ul>
     </div>
     """
   end
 
-  defp active?(current, to) do
-    %{path: path} = URI.parse(current)
+  @doc """
+  Renders the article share dropdown button.
+  """
+  attr :title, :string, required: true
+  attr :link, :string, required: true
 
-    if to == "/", do: path == to, else: String.starts_with?(path, to)
+  def share_article_dropdown(assigns) do
+    ~H"""
+    <details id="share_dropdown" class="dropdown dropdown-end">
+      <summary
+        class="btn btn-ghost btn-sm btn-square"
+        phx-click-away={JS.remove_attribute("open", to: "#share_dropdown")}
+      >
+        <.icon name="hero-share" />
+      </summary>
+      <ul class="menu dropdown-content z-[1] bg-base-300 rounded-box w-40 p-2 shadow">
+        <li>
+          <.link
+            href={"https://x.com/intent/tweet?text=Just stumbled upon the blog post \"#{@title}\" by Florian&url=#{@link}"}
+            target="_blank"
+          >
+            Share on X
+          </.link>
+        </li>
+        <li>
+          <a id="copy-blog-url" role="button" data-value={@link} phx-hook="Copy">
+            Copy link
+          </a>
+        </li>
+      </ul>
+    </details>
+    """
   end
 
-  attr(:class, :string, default: nil, doc: "Additional classes to be added to the footer.")
-  attr(:url, :string, required: true, doc: "The current url.")
-  attr(:nav_links, :list, default: @nav_links, doc: "A list of nav links to be rendered.")
+  @doc """
+  Renders the mobile navigation modal.
+  """
+  def mobile_navigation(assigns) do
+    ~H"""
+    <.modal id="mobile_navigation" header="Navigation">
+      <nav class="mt-4 flex flex-col space-y-4">
+        <.link :for={%{label: label, to: to} <- main_navigation_links()} navigate={to}>
+          <%= label %>
+        </.link>
+      </nav>
+    </.modal>
+    """
+  end
+
+  @doc """
+  Renders a footer.
+  """
+  attr :class, :string, default: nil
+  attr :current_url, :string, required: true
 
   def footer(assigns) do
     ~H"""
-    <footer class={["border-t border-zinc-300 dark:border-zinc-700", @class]}>
-      <div class="flex flex-col items-center space-y-2 sm:justify-between md:flex-row md:space-y-0">
-        <nav class="text-zinc-800 dark:text-zinc-100">
-          <ul class="flex space-x-4 font-medium">
-            <li :for={%{to: to, label: label} <- @nav_links}>
-              <.link
-                navigate={to}
-                class={if active?(@url, to), do: "text-cyan-500 dark:text-cyan-400", else: ""}
-              >
-                <%= label %>
-              </.link>
-            </li>
-          </ul>
-        </nav>
-        <p class="text-center text-zinc-400 dark:text-zinc-500">
-          © 2023 Florian Arens. All rights reserved.
-        </p>
+    <footer class="mx-auto w-full max-w-6xl px-4">
+      <div class="bg-base-content h-px w-full opacity-20" />
+      <div class="my-8 md:my-12">
+        <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
+          <nav class="">
+            <h6 class="footer-title">Pages</h6>
+            <.link
+              :for={%{label: label, to: to} <- main_navigation_links()}
+              navigate={to}
+              class={[
+                "font-semibold mr-4",
+                if(active?(@current_url, to), do: "text-primary", else: "text-content")
+              ]}
+            >
+              <%= label %>
+            </.link>
+          </nav>
+          <div>
+            <h6 class="footer-title">Connect</h6>
+            <.contact_links class="flex space-x-4" icon_class="w-6 h-6 text-content fill-current" />
+          </div>
+          <nav class="md:flex md:w-full md:justify-center">
+            <h6 class="footer-title md:hidden">Legal</h6>
+            <.link
+              :for={%{label: label, to: to} <- secondary_navigation_links()}
+              navigate={to}
+              class={[
+                "font-semibold md:text-sm mr-4 md:opacity-60",
+                if(active?(@current_url, to), do: "text-primary !opacity-100", else: "text-content")
+              ]}
+            >
+              <%= label %>
+            </.link>
+          </nav>
+        </div>
       </div>
     </footer>
     """
   end
 
-  attr(:socket, :map, required: true, doc: "The socket.")
-  attr(:article, :map, required: true, doc: "The article.")
+  @doc """
+  Renders all contact links.
+  """
+  attr :class, :string, default: nil
+  attr :icon_class, :string, required: true
 
-  def article_card(assigns) do
+  def contact_links(assigns) do
     ~H"""
-    <.link
-      navigate={~p"/blog/#{Map.get(@article, :slug)}"}
-      class="bg-zinc-200/30 group flex flex-col space-y-4 rounded-xl p-5 dark:bg-zinc-800/30"
-    >
-      <p class="border-zinc-700/50 w-2/4 border-l-4 pl-4 text-sm text-zinc-500">
-        <%= Map.get(@article, :date) |> Utils.date_to_string() %>
-      </p>
-
-      <div class="flex flex-col space-y-2">
-        <p class="font-medium text-zinc-800 dark:text-zinc-100">
-          <%= Map.get(@article, :title) %>
-        </p>
-        <p class="text-zinc-600 dark:text-zinc-400">
-          <%= Map.get(@article, :summary) %>
-        </p>
-        <div class="flex items-center pt-4 text-zinc-800 group-hover:text-cyan-500 dark:text-zinc-100 dark:group-hover:text-cyan-400">
-          <p>Read article</p>
-          <Heroicons.arrow_right solid class="ml-2 h-4 w-4" />
-        </div>
-      </div>
-    </.link>
-    """
-  end
-
-  attr(:articles, :list, required: true, doc: "A list of articles.")
-
-  def article_timeline(assigns) do
-    ~H"""
-    <div class="border-0 md:border-l md:border-zinc-300 md:dark:border-zinc-700/50">
-      <div class="flex flex-col space-y-14">
-        <div
-          :for={article <- @articles}
-          to={"/blog/" <> Map.get(article, :slug)}
-          link_type="live_redirect"
-          class="flex flex-col space-y-4 md:flex-row md:space-x-2 md:space-y-0"
-        >
-          <p class="border-zinc-700/50 w-2/4 border-l-4 pl-4 text-sm text-zinc-500 md:ml-0 md:border-0 md:pl-10">
-            <%= Map.get(article, :date) |> Utils.date_to_string() %>
-          </p>
-
-          <.link navigate={~p"/blog/#{Map.get(article, :slug)}"} class="group flex flex-col space-y-2">
-            <p class="font-medium text-zinc-800 dark:text-zinc-100">
-              <%= Map.get(article, :title) %>
-            </p>
-            <p class="text-zinc-600 dark:text-zinc-400">
-              <%= Map.get(article, :summary) %>
-            </p>
-            <div class="flex items-center pt-4 text-zinc-800 group-hover:text-cyan-500 dark:text-zinc-100 dark:group-hover:text-cyan-400">
-              <p>Read article</p>
-              <Heroicons.arrow_right solid class="ml-2 h-4 w-4" />
-            </div>
-          </.link>
-        </div>
-      </div>
+    <div class={@class}>
+      <.link href="https://github.com/flo0807" target="_blank">
+        <span class="sr-only">GitHub Icon</span>
+        <.github_icon class={@icon_class} />
+      </.link>
+      <.link href="https://linkedin.com/in/florian-arens" target="_blank">
+        <span class="sr-only">LinkedIn Icon</span>
+        <.linkedin_icon class={@icon_class} />
+      </.link>
+      <.link href="https://x.com/flo_arens" target="_blank">
+        <span class="sr-only">X Icon</span>
+        <.x_icon class={@icon_class} />
+      </.link>
+      <.link href="mailto:info@farens.me">
+        <span class="sr-only">Mail Icon</span>
+        <.mail_icon class={@icon_class} />
+      </.link>
     </div>
     """
   end
 
-  attr(:link, :string, required: true, doc: "The link to the project.")
-  attr(:title, :string, required: true, doc: "The title of the project.")
-  attr(:description, :string, required: true, doc: "The description of the project.")
-  attr(:link_label, :string, required: true, doc: "The link label for the url.")
+  @doc """
+  Renders a project card.
+  """
+  attr :title, :string, required: true
+  attr :description, :string, required: true
+  attr :link_label, :string, required: true
+  attr :link, :string, required: true
 
   def project_card(assigns) do
     ~H"""
-    <.link
-      href={@link}
-      target="_blank"
-      class="bg-zinc-200/30 group flex w-full flex-col space-y-3 rounded-xl p-5 dark:bg-zinc-800/30 lg:w-80"
-    >
-      <p class="font-medium text-zinc-800 dark:text-zinc-100">
-        <%= @title %>
-      </p>
-      <p class="text-zinc-600 dark:text-zinc-400">
-        <%= @description %>
-      </p>
-      <div class="flex grow flex-col justify-end pt-4">
-        <div class="flex items-center space-x-2 text-zinc-800 dark:text-zinc-100">
-          <Heroicons.link
-            solid
-            class="h-5 w-5 group-hover:text-cyan-500 dark:group-hover:text-cyan-400"
-          />
-          <p class="group-hover:text-cyan-500 dark:group-hover:text-cyan-400">
-            <%= @link_label %>
+    <.link href={@link} target="_blank">
+      <article class="card bg-base-200 group h-full w-full cursor-pointer transition-all hover:-translate-y-1">
+        <div class="card-body">
+          <h2 class="card-title text-pretty mb-4">
+            <%= @title %>
+          </h2>
+          <p class="text-pretty mb-4 truncate">
+            <%= @description %>
           </p>
+
+          <div class="card-actions justify-end">
+            <div class="flex items-center space-x-2">
+              <.icon name="hero-link" class="text-content group-hover:text-primary" />
+              <span class="text-content group-hover:text-primary group-hover:underline">
+                <%= @link_label %>
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
+      </article>
     </.link>
     """
   end
 
-  attr(:class, :string, default: nil, doc: "Additional classes to be added to the icon.")
+  @doc """
+  Renders a grid.
+  """
+  attr :class, :string, default: nil
+  slot :inner_block
+
+  def grid(assigns) do
+    ~H"""
+    <section class={["grid gap-5 md:grid-cols-2 lg:grid-cols-3", @class]}>
+      <%= render_slot(@inner_block) %>
+    </section>
+    """
+  end
+
+  @doc """
+  Renders a blog preview card.
+  """
+  attr :link, :any, required: true
+  attr :class, :string, default: nil
+  attr :title, :string, required: true
+  attr :description, :string, required: true
+  attr :date, :any, required: true
+  attr :read_minutes, :integer, required: true
+
+  def blog_preview_card(assigns) do
+    ~H"""
+    <.link navigate={@link} target="_blank">
+      <article class={[
+        "card bg-base-200 group h-full w-full cursor-pointer transition-all hover:-translate-y-1",
+        @class
+      ]}>
+        <div class="card-body">
+          <h2 class="card-title text-pretty mb-4">
+            <%= @title %>
+          </h2>
+          <div class="mb-4 flex w-fit items-center">
+            <span class="text-xs font-semibold">
+              <%= DateUtils.date_to_string(@date) %>
+            </span>
+            <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
+            <span class="text-xs font-semibold">
+              <%= @read_minutes %> min read
+            </span>
+          </div>
+          <p class="text-pretty mb-4 truncate">
+            <%= @description %>
+          </p>
+          <%!-- Article tags
+            <div class="flex flex-wrap gap-x-2 gap-y-2">
+              <span class="badge badge-secondary">Tag 1</span>
+              <span class="badge badge-secondary">Tag 2</span>
+              <span class="badge badge-secondary">Tag 3</span>
+            </div>
+          --%>
+          <div class="card-actions justify-end">
+            <div class="flex items-center space-x-2">
+              <span class="text-content group-hover:text-primary group-hover:underline">
+                Read more
+              </span>
+              <.icon name="hero-arrow-right" class="text-content group-hover:text-primary" />
+            </div>
+          </div>
+        </div>
+      </article>
+    </.link>
+    """
+  end
+
+  @doc """
+  Renders a [Heroicon](https://heroicons.com).
+
+  Heroicons come in three styles – outline, solid, and mini.
+  By default, the outline style is used, but solid and mini may
+  be applied by using the `-solid` and `-mini` suffix.
+
+  You can customize the size and colors of the icons by setting
+  width, height, and background color classes.
+
+  Icons are extracted from your `assets/vendor/heroicons` directory and bundled
+  within your compiled app.css by the plugin in your `assets/tailwind.config.js`.
+
+  ## Examples
+
+      <.icon name="hero-x-mark-solid" />
+      <.icon name="hero-arrow-path" class="ml-1 w-3 h-3 animate-spin" />
+  """
+  attr :name, :string, required: true
+  attr :class, :string, default: nil
+
+  def icon(%{name: "hero-" <> _} = assigns) do
+    ~H"""
+    <span class={[@name, @class]} />
+    """
+  end
+
+  @doc """
+  Renders the GitHub icon.
+  """
+  attr :class, :string, default: nil
 
   def github_icon(assigns) do
     ~H"""
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64 64"
-      width="32px"
-      height="32px"
-      class={@class}
-    >
-      <path d="M32 6C17.641 6 6 17.641 6 32c0 12.277 8.512 22.56 19.955 25.286-.592-.141-1.179-.299-1.755-.479V50.85c0 0-.975.325-2.275.325-3.637 0-5.148-3.245-5.525-4.875-.229-.993-.827-1.934-1.469-2.509-.767-.684-1.126-.686-1.131-.92-.01-.491.658-.471.975-.471 1.625 0 2.857 1.729 3.429 2.623 1.417 2.207 2.938 2.577 3.721 2.577.975 0 1.817-.146 2.397-.426.268-1.888 1.108-3.57 2.478-4.774-6.097-1.219-10.4-4.716-10.4-10.4 0-2.928 1.175-5.619 3.133-7.792C19.333 23.641 19 22.494 19 20.625c0-1.235.086-2.751.65-4.225 0 0 3.708.026 7.205 3.338C28.469 19.268 30.196 19 32 19s3.531.268 5.145.738c3.497-3.312 7.205-3.338 7.205-3.338.567 1.474.65 2.99.65 4.225 0 2.015-.268 3.19-.432 3.697C46.466 26.475 47.6 29.124 47.6 32c0 5.684-4.303 9.181-10.4 10.4 1.628 1.43 2.6 3.513 2.6 5.85v8.557c-.576.181-1.162.338-1.755.479C49.488 54.56 58 44.277 58 32 58 17.641 46.359 6 32 6zM33.813 57.93C33.214 57.972 32.61 58 32 58 32.61 58 33.213 57.971 33.813 57.93zM37.786 57.346c-1.164.265-2.357.451-3.575.554C35.429 57.797 36.622 57.61 37.786 57.346zM32 58c-.61 0-1.214-.028-1.813-.07C30.787 57.971 31.39 58 32 58zM29.788 57.9c-1.217-.103-2.411-.289-3.574-.554C27.378 57.61 28.571 57.797 29.788 57.9z" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" class={@class}>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.862 8.369 6.838 9.727.5.09.687-.218.687-.487 0-.243-.013-1.05-.013-1.91C7 20.059 6.35 18.957 6.15 18.38c-.113-.295-.6-1.205-1.025-1.448-.35-.192-.85-.667-.013-.68.788-.012 1.35.744 1.538 1.051.9 1.551 2.338 1.116 2.912.846.088-.666.35-1.115.638-1.371-2.225-.256-4.55-1.14-4.55-5.062 0-1.115.387-2.038 1.025-2.756-.1-.256-.45-1.307.1-2.717 0 0 .837-.269 2.75 1.051.8-.23 1.65-.346 2.5-.346.85 0 1.7.115 2.5.346 1.912-1.333 2.75-1.05 2.75-1.05.55 1.409.2 2.46.1 2.716.637.718 1.025 1.628 1.025 2.756 0 3.934-2.337 4.806-4.562 5.062.362.32.675.936.675 1.897 0 1.371-.013 2.473-.013 2.82 0 .268.188.589.688.486a10.039 10.039 0 0 0 4.932-3.74A10.447 10.447 0 0 0 22 12.253C22 6.588 17.525 2 12 2Z"
+      >
+      </path>
     </svg>
     """
   end
 
-  attr(:class, :string, default: nil, doc: "Additional classes to be added to the icon.")
+  @doc """
+  Renders the X icon.
+  """
+  attr :class, :string, default: nil
+
+  def x_icon(assigns) do
+    ~H"""
+    <svg viewBox="0 0 24 24" aria-hidden="true" class={@class}>
+      <path d="M13.3174 10.7749L19.1457 4H17.7646L12.7039 9.88256L8.66193 4H4L10.1122 12.8955L4 20H5.38119L10.7254 13.7878L14.994 20H19.656L13.3171 10.7749H13.3174ZM11.4257 12.9738L10.8064 12.0881L5.87886 5.03974H8.00029L11.9769 10.728L12.5962 11.6137L17.7652 19.0075H15.6438L11.4257 12.9742V12.9738Z">
+      </path>
+    </svg>
+    """
+  end
+
+  @doc """
+  Renders the LinkedIn icon.
+  """
+  attr :class, :string, default: nil
 
   def linkedin_icon(assigns) do
     ~H"""
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 50 50"
-      width="32px"
-      height="32px"
-      class={@class}
-    >
-      <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" class={@class}>
+      <path d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715zM7.003 8.575a1.546 1.546 0 01-1.548-1.549 1.548 1.548 0 111.547 1.549zm1.336 9.764H5.666V9.75H8.34v8.589zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.003z">
+      </path>
     </svg>
     """
   end
 
-  attr(:class, :string, default: nil, doc: "Additional classes to be added to the icon.")
+  @doc """
+  Renders the mail icon
+  """
+  attr :class, :string, default: nil
 
-  def twitter_icon(assigns) do
+  def mail_icon(assigns) do
     ~H"""
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 50 50"
-      width="32px"
-      height="32px"
-      class={@class}
-    >
-      <path d="M 50.0625 10.4375 C 48.214844 11.257813 46.234375 11.808594 44.152344 12.058594 C 46.277344 10.785156 47.910156 8.769531 48.675781 6.371094 C 46.691406 7.546875 44.484375 8.402344 42.144531 8.863281 C 40.269531 6.863281 37.597656 5.617188 34.640625 5.617188 C 28.960938 5.617188 24.355469 10.21875 24.355469 15.898438 C 24.355469 16.703125 24.449219 17.488281 24.625 18.242188 C 16.078125 17.8125 8.503906 13.71875 3.429688 7.496094 C 2.542969 9.019531 2.039063 10.785156 2.039063 12.667969 C 2.039063 16.234375 3.851563 19.382813 6.613281 21.230469 C 4.925781 21.175781 3.339844 20.710938 1.953125 19.941406 C 1.953125 19.984375 1.953125 20.027344 1.953125 20.070313 C 1.953125 25.054688 5.5 29.207031 10.199219 30.15625 C 9.339844 30.390625 8.429688 30.515625 7.492188 30.515625 C 6.828125 30.515625 6.183594 30.453125 5.554688 30.328125 C 6.867188 34.410156 10.664063 37.390625 15.160156 37.472656 C 11.644531 40.230469 7.210938 41.871094 2.390625 41.871094 C 1.558594 41.871094 0.742188 41.824219 -0.0585938 41.726563 C 4.488281 44.648438 9.894531 46.347656 15.703125 46.347656 C 34.617188 46.347656 44.960938 30.679688 44.960938 17.09375 C 44.960938 16.648438 44.949219 16.199219 44.933594 15.761719 C 46.941406 14.3125 48.683594 12.5 50.0625 10.4375 Z" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" class={@class}>
+      <path
+        fill-rule="evenodd"
+        d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
+      >
+      </path>
     </svg>
     """
   end
 
+  @doc """
+  Renders the Plausible analytics script.
+  """
   def analytics(assigns) do
     ~H"""
     <script
@@ -298,11 +484,25 @@ defmodule WebsiteWeb.CoreComponents do
     """
   end
 
-  def theme_switch_light(assigns) do
-    ~H"""
-    <div class="ring-zinc-500/80 group flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-zinc-800 ring-2 hover:ring-yellow-300">
-      <Heroicons.sun solid class="h-6 w-6 text-zinc-100 group-hover:text-yellow-300" />
-    </div>
-    """
+  defp main_navigation_links do
+    [
+      %{label: "Home", to: ~p"/"},
+      %{label: "About", to: ~p"/about"},
+      %{label: "Blog", to: ~p"/blog"},
+      %{label: "Projects", to: ~p"/projects"}
+    ]
+  end
+
+  defp secondary_navigation_links do
+    [
+      %{label: "Legal Notice", to: ~p"/legal-notice"},
+      %{label: "Privacy Policy", to: ~p"/privacy-policy"}
+    ]
+  end
+
+  defp active?(current_url, to) do
+    %{path: path} = URI.parse(current_url)
+
+    if to == "/", do: path == to, else: String.starts_with?(path, to)
   end
 end

@@ -2,11 +2,11 @@ defmodule WebsiteWeb.BlogLive.Show do
   use WebsiteWeb, :live_view
 
   alias Website.Repo
-  alias Website.Utils
+  alias Website.DateUtils
 
   @impl Phoenix.LiveView
-  def mount(%{"id" => id}, _session, socket) do
-    article = Repo.get_by_slug!(:articles, id)
+  def mount(%{"slug" => slug} = _params, _session, socket) do
+    article = Repo.get_by_slug!(:articles, slug)
 
     socket =
       socket

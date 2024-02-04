@@ -1,21 +1,25 @@
-<div class="w-full md:items-center xl:px-48">
-  <.link
-    navigate="/blog"
-    class="flex space-x-2 text-zinc-800 hover:text-cyan-500 dark:text-zinc-100 dark:hover:text-cyan-400"
-  >
-    <Heroicons.arrow_left solid class="h-6 w-6" />
-    <p class="font-semibold">Back</p>
-  </.link>
+<div class="flex w-full justify-center">
+  <div class="overflow-x-auto">
+    <.page_intro title={@article.title} />
 
-  <p class="text-md border-zinc-700/50 mt-6 w-2/4 border-l-4 pl-4 text-zinc-500">
-    <%= Map.get(@article, :date) |> Utils.date_to_string() %>
-  </p>
+    <section class="my-8 md:my-12">
+      <div class="flex items-center justify-between">
+        <div class="flex w-fit items-center">
+          <span class="flex items-center space-x-2 text-sm font-semibold">
+            <.icon name="hero-calendar" class="w-4 h-4" />
+            <span><%= DateUtils.date_to_string(@article.date) %></span>
+          </span>
+          <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
+          <span class="text-sm font-semibold">
+            <%= @article.read_minutes %> min read
+          </span>
+        </div>
+        <.share_article_dropdown title={@article.title} link={url(~p"/blog/#{@article.slug}")} />
+      </div>
+    </section>
 
-  <h1 class="mt-8 text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-    <%= @article.title %>
-  </h1>
-
-  <article class="prose mt-8 text-zinc-600 dark:prose-invert dark:text-zinc-400 lg:prose-lg">
-    <%= raw(@article.body) %>
-  </article>
+    <article class="prose prose-base prose-p:text-base-content">
+      <%= raw(@article.body) %>
+    </article>
+  </div>
 </div>

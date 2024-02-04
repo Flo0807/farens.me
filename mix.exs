@@ -4,7 +4,7 @@ defmodule Website.MixProject do
   def project do
     [
       app: :website,
-      version: "0.1.0",
+      version: "0.0.0",
       elixir: "~> 1.16",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -32,25 +32,23 @@ defmodule Website.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.0"},
-      {:phoenix_html, "~> 3.0"},
+      {:phoenix, "~> 1.7.10"},
+      {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.18.0"},
+      {:phoenix_live_view, "~> 0.20.1"},
       {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.7"},
-      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
+      {:phoenix_live_dashboard, "~> 0.8.2"},
+      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.18"},
+      {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:bandit, "~> 1.0"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:petal_components, "~> 1.2.0"},
+      {:dns_cluster, "~> 0.1.1"},
+      {:bandit, ">= 0.0.0"},
       {:mdex, "~> 0.1.6"},
       {:yaml_elixir, "~> 2.9.0"},
-      {:timex, "~> 3.7.9"},
-      {:heroicons, "~> 0.5.0"},
-      {:tailwind_formatter, "~> 0.4.0", only: :dev, runtime: false}
+      {:tailwind_formatter, "~> 0.4.0", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -62,8 +60,14 @@ defmodule Website.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      setup: ["deps.get", "assets.setup", "assets.build"],
+      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
+      "assets.build": ["tailwind default", "esbuild default"],
+      "assets.deploy": [
+        "tailwind default --minify",
+        "esbuild default --minify --loader:.ttf=file",
+        "phx.digest"
+      ]
     ]
   end
 end

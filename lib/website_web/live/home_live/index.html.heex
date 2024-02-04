@@ -1,51 +1,31 @@
-<div class="grid grid-cols-1 gap-x-12 lg:grid-cols-2">
-  <div>
-    <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-      Hey, I’m Florian! Software developer and student.
-    </h1>
+<h1 class="text-pretty text-3xl font-semibold md:w-2/3 md:text-5xl">
+  Hey, I'm Florian! <br />Software developer and computer science student.
+</h1>
 
-    <p class="mt-6 text-lg leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-400">
-      I'm Florian, a software developer and student with a passion for building modern software solutions and open source software. Currently I'm developing web applications with Elixir and Phoenix.
-    </p>
+<p class="text-pretty mt-4 leading-relaxed md:mt-8 md:w-2/3">
+  Hi there! As a software developer and computer science student, I am on a journey to create modern software solutions that make our digital lives easier and more enjoyable. At the moment, I mainly use Elixir and Phoenix for this. Have a look around; see what I've been up to, read my thoughts, and hit me up if you think we could create something exciting together.
+</p>
 
-    <div class="mt-8 flex space-x-4">
-      <.link href="https://github.com/Flo0807" target="_blank" class="group" aria-label="GitHub">
-        <div class="rounded-xl border border-zinc-400 p-1 group-hover:scale-110 dark:border-zinc-700">
-          <.github_icon class="scale-75 fill-current dark:text-zinc-100" />
-        </div>
-      </.link>
+<section class="mt-4 md:mt-8">
+  <.contact_links class="flex space-x-6" icon_class="h-6 md:h-8 w-auto fill-current text-content" />
+</section>
 
-      <.link
-        href="https://linkedin.com/in/florian-arens/"
-        target="_blank"
-        class="group"
-        aria-label="LinkedIn"
-      >
-        <div class="rounded-xl border border-zinc-400 p-1 group-hover:scale-110 dark:border-zinc-700">
-          <.linkedin_icon class="scale-75 fill-current dark:text-zinc-100" />
-        </div>
-      </.link>
-
-      <.link
-        href="https://twitter.com/flo_arens"
-        target="_blank"
-        class="group"
-        aria-label="GitHub"
-      >
-        <div class="rounded-xl border border-zinc-400 p-1 group-hover:scale-110 dark:border-zinc-700">
-          <.twitter_icon class="scale-75 fill-current dark:text-zinc-100" />
-        </div>
-      </.link>
-    </div>
-  </div>
-
-  <img
-    class="mt-12 inline-block h-96 justify-self-center rounded-xl object-scale-down lg:mt-0 lg:justify-self-end"
-    src="/images/me.jpg"
-    alt="Portrait of Florian Arens"
-  />
-
-  <div class="mt-12 flex w-full flex-col space-y-8 justify-self-center lg:col-span-2 lg:w-2/3">
-    <.article_card :for={article <- @articles} socket={@socket} article={article} />
-  </div>
+<div class="mt-8 flex items-center text-xl md:mt-12">
+  <span class="font-semibold">Latest blog posts</span>
+  <.link href="/blog" class="btn btn-link no-underline group">
+    <span class="group-hover:underline">View all</span>
+    <.icon name="hero-arrow-right" />
+  </.link>
 </div>
+
+<.grid class="mt-2 md:mt-4">
+  <.blog_preview_card
+    :for={article <- @articles}
+    :if={article.published}
+    link={~p"/blog/#{article.slug}"}
+    title={article.title}
+    date={article.date}
+    description={article.description}
+    read_minutes={article.read_minutes}
+  />
+</.grid>

@@ -1,33 +1,41 @@
 defmodule Website.Parser do
+  @moduledoc """
+  A parser for resources.
+  """
+
+  @doc """
+  Parses a file and merges it with a resource.
+  """
   def parse(file, resource) do
     File.read!(file)
     |> split()
     |> merge(resource)
   end
 
-  def split(file) do
+  defp split(file) do
     [_, metadata, markdown] = String.split(file, "---", parts: 3)
 
     metadata = metadata_to_map(metadata)
     html = MDEx.to_html(markdown)
 
-    {metadata, html}
+    {metadata, html, markdown}
   end
 
-  def metadata_to_map(metadata) do
+  defp metadata_to_map(metadata) do
     {:ok, map} = YamlElixir.read_from_string(metadata)
 
     Map.new(map, &key_to_atom(&1))
   end
 
-  def key_to_atom({k, v}) do
+  defp key_to_atom({k, v}) do
     {String.to_atom(k), v}
   end
 
-  def merge({metadata, html}, resource) do
+  defp merge({metadata, html, markdown}, resource) do
     resource.__struct__()
     |> Map.merge(metadata)
     |> Map.put(:body, html)
+    |> Map.put(:markdown, markdown)
     |> resource.init()
   end
 end

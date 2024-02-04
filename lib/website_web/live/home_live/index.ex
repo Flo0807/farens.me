@@ -7,10 +7,7 @@ defmodule WebsiteWeb.HomeLive.Index do
   def mount(_params, _session, socket) do
     {:ok, articles} = Repo.list(:articles)
 
-    articles =
-      articles
-      |> Enum.shuffle()
-      |> Enum.take(3)
+    articles = Enum.take(articles, 3)
 
     socket =
       socket

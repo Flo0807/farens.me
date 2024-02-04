@@ -1,5 +1,4 @@
 @import "tailwindcss/base";
+@import "_fonts.css";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
-@import "balloon.css";
