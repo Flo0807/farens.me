@@ -127,14 +127,20 @@ defmodule WebsiteWeb.CoreComponents do
     assigns = assign(assigns, :themes, @themes)
 
     ~H"""
-    <div
+    <details
       id="theme_switch"
       class="rounded-btn dropdown bg-base-300 dropdown-end p-2"
       phx-hook="ThemeSwitch"
     >
-      <div tabindex="0" role="button" aria-label="Switch theme" class="btn-sm flex items-center">
+      <summary
+        tabindex="0"
+        role="button"
+        aria-label="Switch theme"
+        phx-click-away={JS.remove_attribute("open", to: "#theme_switch")}
+        class="btn-sm flex items-center"
+      >
         <.icon name="hero-swatch" />
-      </div>
+      </summary>
       <ul tabindex="0" class="dropdown-content z-[1] menu bg-base-300 rounded-box w-40 p-2 shadow">
         <li :for={%{label: label, theme: theme, icon: icon} <- @themes}>
           <div
@@ -147,7 +153,7 @@ defmodule WebsiteWeb.CoreComponents do
           </div>
         </li>
       </ul>
-    </div>
+    </details>
     """
   end
 
