@@ -2,7 +2,7 @@
 slug: hello-world
 title: Hello World!
 date: 2022-10-13
-summary: A short story about this website. Why I built it and what technologies I used. What blog articles you can expect here.
+description: A short story about this website. Why I built it and what technologies I used. What blog articles you can expect here.
 published: true
 ---
 A short story about this website. Why I built it and what technologies I used. What blog articles you can expect to find here.
@@ -27,9 +27,9 @@ You may have found this site via [my GitHub profile](https://github.com/Flo0807/
 I started learning Elixir a few weeks ago as part of my internship. It's by far the least familiar programming language I know, but I was surprised how quickly you can create complex web applications in no time. I decided to take a closer look and continued to learn Elixir in my spare time. Sure, it's overkill for a static portfolio site and a blog, but let's face it, isn't it a programmer's job to make things more complicated than they actually are? In fact, the pages on this site are not normal pages, they are live views. Maybe I will use it to add some real time features in the future.
 
 If you would like to take a closer look at Elixir, Phoenix and LiveView, here are some introductions:
-- https://elixir-lang.org/getting-started/introduction.html
-- https://hexdocs.pm/phoenix/overview.html
-- https://github.com/phoenixframework/phoenix_live_view#what-makes-liveview-unique
+- [https://elixir-lang.org/getting-started/introduction.html](https://elixir-lang.org/getting-started/introduction.html)
+- [https://hexdocs.pm/phoenix/overview.html](https://hexdocs.pm/phoenix/overview.html)
+- [https://github.com/phoenixframework/phoenix_live_view#what-makes-liveview-unique](https://hexdocs.pm/phoenix/overview.html)
 
 You may also wish to take a look at [the code of this website](https://github.com/Flo0807/website) if you have not already done so.
 

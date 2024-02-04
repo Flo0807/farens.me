@@ -8,15 +8,11 @@ defmodule Website.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Telemetry supervisor
       WebsiteWeb.Telemetry,
-      # Start the PubSub system
+      {DNSCluster, query: Application.get_env(:website, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Website.PubSub},
-      # Start the Endpoint (http/https)
-      WebsiteWeb.Endpoint,
-      # Start a worker by calling: Website.Worker.start_link(arg)
-      # {Website.Worker, arg}
-      Website.Repo
+      Website.Repo,
+      WebsiteWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

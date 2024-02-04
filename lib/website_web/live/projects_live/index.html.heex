@@ -1,19 +1,13 @@
-<div>
-  <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-    Things I’ve built.
-  </h1>
+<.page_intro title="Things I've built.">
+  I've been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my freetime. These are the ones that I'm most proud of.
+</.page_intro>
 
-  <p class="mt-6 max-w-2xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
-    I’ve been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my freetime. These are the ones that I’m most proud of.
-  </p>
-
-  <div class="align-start mt-16 flex w-full flex-wrap gap-8">
-    <.project_card
-      :for={projects <- @projects}
-      title={projects.title}
-      link={projects.link}
-      link_label={projects.link_label}
-      description={projects.description}
-    />
-  </div>
-</div>
+<.grid>
+  <.project_card
+    :for={project <- @projects}
+    title={project.title}
+    description={project.description}
+    link={project.link}
+    link_label={project.link_label}
+  />
+</.grid>

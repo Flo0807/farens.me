@@ -1,4 +1,7 @@
 defmodule Website.Resource do
+  @moduledoc """
+  A behaviour for resources.
+  """
   @callback path() :: binary()
 
   @callback init(map()) :: map()
