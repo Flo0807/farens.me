@@ -1,5 +1,5 @@
 <div align="center">
-  <img align="center" src="./priv/static/images/website-snapshot.png" alt="Website snapshot">
+  <img src="./priv/static/images/website-snapshot.png" alt="Website snapshot">
 </div>
 
 <h3 align="center">My website and blog built with Phoenix and Elixir.</h3>
@@ -17,7 +17,7 @@
 
 ## About
 
-This is the source code for my personal website and blog. It is built using the Phoenix Framework and Elixir. I built it mainly for learning purposes, to use as a digital playground. I use my blog to document my learning journey and to share my thoughts and ideas. Have a look around and let me know if you find any bugs or have any suggestions for improvement.
+This is the source code for my personal website and blog. It is built using the Phoenix Framework and Elixir. I built it mainly for learning purposes, to use as a digital playground. I use the blog to document my learning journey and to share my thoughts and ideas. Have a look around and let me know if you find any bugs or have any suggestions for improvement.
 
 ## Technologies
 
