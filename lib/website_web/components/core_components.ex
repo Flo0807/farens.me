@@ -39,7 +39,7 @@ defmodule WebsiteWeb.CoreComponents do
   def page_intro(assigns) do
     ~H"""
     <.title text={@title} />
-    <div class="text-pretty my-8 leading-relaxed md:my-12 lg:w-2/3">
+    <div :if={@inner_block != []} class="text-pretty my-8 leading-relaxed md:my-12 lg:w-2/3">
       <%= render_slot(@inner_block) %>
     </div>
     """
