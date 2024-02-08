@@ -1,13 +1,11 @@
 defmodule WebsiteWeb.HomeLive.Index do
   use WebsiteWeb, :live_view
 
-  alias Website.Repo
+  alias Website.Blog
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    {:ok, articles} = Repo.list(:articles)
-
-    articles = Enum.take(articles, 3)
+    articles = Blog.all_articles() |> Enum.take(3)
 
     socket =
       socket

@@ -1,11 +1,11 @@
 defmodule WebsiteWeb.ProjectsLive.Index do
   use WebsiteWeb, :live_view
 
-  alias Website.Repo
+  alias Website.Projects
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    {:ok, projects} = Repo.list(:projects)
+    projects = Projects.all_projects()
 
     socket =
       socket
