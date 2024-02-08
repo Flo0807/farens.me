@@ -18,7 +18,7 @@ defmodule WebsiteWeb.SEO do
       creator: "@flo_arens",
       title: conn.assigns.page_title,
       card: :summary_large_image,
-      image: url(~p"/images/og-image.jpg")
+      image: url(~p"/images/og/og-image.jpg")
     )
   end
 
@@ -31,7 +31,7 @@ defmodule WebsiteWeb.SEO do
       description:
         "Personal website and blog of Florian Arens, a software developer and computer science student.",
       locale: "en_US",
-      image: url(~p"/images/og-image.jpg"),
+      image: url(~p"/images/og/og-image.jpg"),
       url: conn.assigns.current_url
     )
   end

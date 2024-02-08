@@ -106,7 +106,7 @@ defmodule Website.Blog.Article do
         description: article.description,
         title: article.title,
         card: :summary_large_image,
-        image: url(~p"/images/og-image.jpg")
+        image: url(~p"/images/og/og-image.jpg")
       )
     end
   end
