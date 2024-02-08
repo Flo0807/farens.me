@@ -10,7 +10,7 @@
   <br />
   <a href="https://x.com/flo_arens">x.com</a>
   •
-  <a href="mailto:info@farens.me">Email</a>
+  <a href="mailto:info@farens.me">E-mail</a>
   •
   <a href="https://linkedin.com/in/florian-arens">LinkedIn</a>
 </div>
