@@ -173,7 +173,7 @@ defmodule WebsiteWeb.CoreComponents do
       <ul class="menu dropdown-content z-[1] bg-base-300 rounded-box w-40 p-2 shadow">
         <li>
           <.link
-            href={"https://x.com/intent/tweet?text=Just stumbled upon the blog post \"#{@title}\" by Florian&url=#{@link}"}
+            href={"https://x.com/intent/tweet?text=#{@title}&url=#{@link}&via=flo_arens"}
             target="_blank"
           >
             Share on X
