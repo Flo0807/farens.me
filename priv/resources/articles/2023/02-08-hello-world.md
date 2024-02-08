@@ -1,9 +1,9 @@
----
-slug: hello-world
-title: Hello World!
-date: 2022-10-13
-description: A short story about this website. Why I built it and what technologies I used. What blog articles you can expect here.
-published: true
+%{
+  slug: "hello-world",
+  title: "Hello World!",
+  description: "A short story about this website. Why I built it and what technologies I used. What blog articles you can expect here.",
+  published: true
+}
 ---
 A short story about this website. Why I built it and what technologies I used. What blog articles you can expect to find here.
 

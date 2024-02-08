@@ -11,7 +11,7 @@ defmodule Website.Application do
       WebsiteWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:website, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Website.PubSub},
-      Website.Repo,
+      # Website.Repo,
       WebsiteWeb.Endpoint
     ]
 

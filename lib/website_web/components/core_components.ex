@@ -5,7 +5,6 @@ defmodule WebsiteWeb.CoreComponents do
   use Phoenix.Component
   use WebsiteWeb, :verified_routes
 
-  alias Website.DateUtils
   alias Phoenix.LiveView.JS
 
   import WebsiteWeb.Gettext
@@ -353,7 +352,7 @@ defmodule WebsiteWeb.CoreComponents do
           </h2>
           <div class="mb-4 flex w-fit items-center">
             <span class="text-xs font-semibold">
-              <%= DateUtils.date_to_string(@date) %>
+              <%= Calendar.strftime(@date, "%d %B %Y") %>
             </span>
             <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
             <span class="text-xs font-semibold">

@@ -16,7 +16,8 @@ config :website, WebsiteWeb.Endpoint,
   secret_key_base: "n3ca9fTj7Q5Ez6IdRIh6aYUVBjaqTJwWRBlGRE1ypmvOv7Q1TxPKKPp0obBbkBIx",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch --loader:.ttf=file)]},
+    esbuild:
+      {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch --loader:.ttf=file)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
@@ -49,6 +50,7 @@ config :website, WebsiteWeb.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
+      ~r"priv/resources/.*(md|markdown)$",
       ~r"lib/website_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
