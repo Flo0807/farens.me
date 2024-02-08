@@ -384,6 +384,25 @@ defmodule WebsiteWeb.CoreComponents do
   end
 
   @doc """
+  Renders a table of contents from a list of headings.
+  """
+  attr :headings, :list, required: true
+  attr :class, :string, default: "menu w-56 p-0 opacity-60"
+
+  def toc(assigns) do
+    ~H"""
+    <ul class={@class}>
+      <li :for={%{label: label, href: href, childs: childs} <- @headings}>
+        <.link href={href}>
+          <%= label %>
+        </.link>
+        <.toc :if={childs != []} headings={childs} class="" />
+      </li>
+    </ul>
+    """
+  end
+
+  @doc """
   Renders a [Heroicon](https://heroicons.com).
 
   Heroicons come in three styles – outline, solid, and mini.
