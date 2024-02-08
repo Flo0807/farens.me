@@ -4,14 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <meta
-      name="description"
-      content="Florian's personal website and blog built with Phoenix and Elixir."
-    />
-    <meta name="author" content="Florian Arens" />
-    <.live_title prefix="Florian Arens · ">
-      <%= assigns[:page_title] || "Software Developer" %>
-    </.live_title>
+    <SEO.juice conn={@conn} config={WebsiteWeb.SEO.config()} page_title={@page_title} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static src={~p"/assets/app.js"}>
     </script>

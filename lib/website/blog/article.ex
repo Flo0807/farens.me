@@ -67,4 +67,69 @@ defmodule Website.Blog.Article do
       [href | _] -> href
     end
   end
+
+  defimpl SEO.OpenGraph.Build, for: Website.Article.Article do
+    use WebsiteWeb, :verified_routes
+
+    def build(article, _conn) do
+      SEO.OpenGraph.build(
+        detail:
+          SEO.OpenGraph.Article.build(
+            published_time: Date.to_iso8601(article.date),
+            author: "Florian Arens",
+            section: "Software Development"
+          ),
+        title: article.title,
+        description: article.description,
+        url: url(~p"/blog/#{article.slug}")
+      )
+    end
+  end
+
+  defimpl SEO.Site.Build, for: Website.Article.Article do
+    use WebsiteWeb, :verified_routes
+
+    def build(article, _conn) do
+      SEO.Site.build(
+        url: url(~p"/blog/#{article.slug}"),
+        title: article.title,
+        description: article.description
+      )
+    end
+  end
+
+  defimpl SEO.Twitter.Build, for: Website.Article.Article do
+    use WebsiteWeb, :verified_routes
+
+    def build(article, _conn) do
+      SEO.Twitter.build(
+        description: article.description,
+        title: article.title,
+        card: :summary_large_image,
+        image: url(~p"/images/og-image.jpg")
+      )
+    end
+  end
+
+  defimpl SEO.Unfurl.Build, for: Website.Article.Article do
+    def build(article, _conn) do
+      SEO.Unfurl.build(
+        label1: "Reading Time",
+        data1: "#{article.read_minutes} minutes",
+        label2: "Published",
+        data2: Date.to_iso8601(article.date)
+      )
+    end
+  end
+
+  defimpl SEO.Breadcrumb.Build, for: Website.Article.Article do
+    use WebsiteWeb, :verified_routes
+
+    def build(article, _conn) do
+      SEO.Breadcrumb.List.build([
+        %{name: "Blog", item: url(~p"/blog")},
+        %{name: article.title, item: url(~p"/blog/#{article.slug}")}
+      ])
+    end
+  end
 end

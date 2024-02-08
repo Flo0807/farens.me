@@ -10,7 +10,6 @@ defmodule WebsiteWeb.HomeLive.Index do
     socket =
       socket
       |> assign(:articles, articles)
-      |> assign(:page_title, "Software Developer")
 
     {:ok, socket}
   end
