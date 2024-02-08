@@ -69,8 +69,6 @@ defmodule Website.Blog.Article do
   end
 
   defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
-    use WebsiteWeb, :verified_routes
-
     def build(article, _conn) do
       SEO.OpenGraph.build(
         detail:
@@ -80,18 +78,14 @@ defmodule Website.Blog.Article do
             section: "Software Development"
           ),
         title: article.title,
-        description: article.description,
-        url: url(~p"/blog/#{article.slug}")
+        description: article.description
       )
     end
   end
 
   defimpl SEO.Site.Build, for: Website.Blog.Article do
-    use WebsiteWeb, :verified_routes
-
     def build(article, _conn) do
       SEO.Site.build(
-        url: url(~p"/blog/#{article.slug}"),
         title: article.title,
         description: article.description
       )

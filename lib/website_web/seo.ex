@@ -18,7 +18,9 @@ defmodule WebsiteWeb.SEO do
       creator: "@flo_arens",
       title: conn.assigns.page_title,
       card: :summary_large_image,
-      image: url(~p"/images/og/og-image.jpg")
+      image: url(~p"/images/og/og-image.jpg"),
+      description:
+        "Personal website and blog of Florian Arens, a software developer and computer science student."
     )
   end
 
@@ -39,8 +41,9 @@ defmodule WebsiteWeb.SEO do
   @doc """
   Configures the site.
   """
-  def site_config(_conn) do
+  def site_config(conn) do
     SEO.Site.build(
+      canonical_url: conn.assigns.current_url,
       description:
         "Personal website and blog of Florian Arens, a software developer and computer science student."
     )
