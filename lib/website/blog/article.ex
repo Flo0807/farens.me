@@ -68,7 +68,7 @@ defmodule Website.Blog.Article do
     end
   end
 
-  defimpl SEO.OpenGraph.Build, for: Website.Article.Article do
+  defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
     use WebsiteWeb, :verified_routes
 
     def build(article, _conn) do
@@ -86,7 +86,7 @@ defmodule Website.Blog.Article do
     end
   end
 
-  defimpl SEO.Site.Build, for: Website.Article.Article do
+  defimpl SEO.Site.Build, for: Website.Blog.Article do
     use WebsiteWeb, :verified_routes
 
     def build(article, _conn) do
@@ -98,7 +98,7 @@ defmodule Website.Blog.Article do
     end
   end
 
-  defimpl SEO.Twitter.Build, for: Website.Article.Article do
+  defimpl SEO.Twitter.Build, for: Website.Blog.Article do
     use WebsiteWeb, :verified_routes
 
     def build(article, _conn) do
@@ -111,7 +111,7 @@ defmodule Website.Blog.Article do
     end
   end
 
-  defimpl SEO.Unfurl.Build, for: Website.Article.Article do
+  defimpl SEO.Unfurl.Build, for: Website.Blog.Article do
     def build(article, _conn) do
       SEO.Unfurl.build(
         label1: "Reading Time",
@@ -122,7 +122,7 @@ defmodule Website.Blog.Article do
     end
   end
 
-  defimpl SEO.Breadcrumb.Build, for: Website.Article.Article do
+  defimpl SEO.Breadcrumb.Build, for: Website.Blog.Article do
     use WebsiteWeb, :verified_routes
 
     def build(article, _conn) do
