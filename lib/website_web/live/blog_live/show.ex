@@ -8,7 +8,7 @@ defmodule WebsiteWeb.BlogLive.Show do
     article = Blog.get_article_by_slug(slug)
 
     if is_nil(article) do
-      raise Phoenix.Router.NoRouteError
+      raise WebsiteWeb.ResourceNotFoundError, resource: :article, slug: slug
     end
 
     socket =
