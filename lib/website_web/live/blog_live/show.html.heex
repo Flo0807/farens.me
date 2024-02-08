@@ -1,25 +1,32 @@
-<div class="flex w-full justify-center">
-  <div class="overflow-x-auto">
-    <.page_intro title={@article.title} />
-
-    <div class="my-8 md:my-12">
-      <div class="flex items-center justify-between">
-        <div class="flex w-fit items-center">
-          <span class="flex items-center space-x-2 text-sm font-semibold">
-            <.icon name="hero-calendar" class="w-4 h-4" />
-            <span><%= Calendar.strftime(@article.date, "%d %B %Y") %></span>
-          </span>
-          <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
-          <span class="text-sm font-semibold">
-            <%= @article.read_minutes %> min read
-          </span>
-        </div>
-        <.share_article_dropdown title={@article.title} link={url(~p"/blog/#{@article.slug}")} />
-      </div>
+<div class="relative">
+  <div class="absolute top-16 -left-14 h-5/6 w-10 text-xs">
+    <div class="sticky top-6 hidden xl:block">
+      <.toc headings={@article.heading_links} />
     </div>
+  </div>
+  <div class="flex w-full justify-center">
+    <div class="overflow-x-auto">
+      <.page_intro title={@article.title} />
 
-    <article class="prose prose-base prose-p:text-base-content">
-      <%= raw(@article.body) %>
-    </article>
+      <div class="my-8 md:my-12">
+        <div class="flex items-center justify-between">
+          <div class="flex w-fit items-center">
+            <span class="flex items-center space-x-2 text-sm font-semibold">
+              <.icon name="hero-calendar" class="w-4 h-4" />
+              <span><%= Calendar.strftime(@article.date, "%d %B %Y") %></span>
+            </span>
+            <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
+            <span class="text-sm font-semibold">
+              <%= @article.read_minutes %> min read
+            </span>
+          </div>
+          <.share_article_dropdown title={@article.title} link={url(~p"/blog/#{@article.slug}")} />
+        </div>
+      </div>
+
+      <article class="prose prose-base prose-p:text-base-content">
+        <%= raw(@article.body) %>
+      </article>
+    </div>
   </div>
 </div>
