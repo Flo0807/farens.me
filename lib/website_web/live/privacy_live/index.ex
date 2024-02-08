@@ -3,6 +3,6 @@ defmodule WebsiteWeb.PrivacyLive.Index do
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :page_title, "Privacy Policy")}
+    {:ok, assign(socket, :page_title, "Privacy Policy - Florian Arens")}
   end
 end

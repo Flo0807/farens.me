@@ -5,12 +5,13 @@ defmodule WebsiteWeb.InitAssigns do
   import Phoenix.{Component, LiveView}
 
   @doc """
-  Calls all the hooks for the given event.
+  Initializes the assigns for the default live view.
   """
   def on_mount(:default, _params, _session, socket) do
     socket =
       socket
       |> attach_current_url_hook()
+      |> assign(:page_title, "Florian Arens - Software Developer")
 
     {:cont, socket}
   end

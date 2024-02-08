@@ -15,6 +15,7 @@ defmodule WebsiteWeb.BlogLive.Show do
       socket
       |> assign(:article, article)
       |> assign(:page_title, article.title)
+      |> SEO.assign(article)
 
     {:ok, socket}
   end

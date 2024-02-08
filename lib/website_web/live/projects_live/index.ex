@@ -10,7 +10,7 @@ defmodule WebsiteWeb.ProjectsLive.Index do
     socket =
       socket
       |> assign(:projects, projects)
-      |> assign(:page_title, "Projects")
+      |> assign(:page_title, "Projects - Florian Arens")
 
     {:ok, socket}
   end

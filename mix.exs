@@ -49,7 +49,8 @@ defmodule Website.MixProject do
       {:mdex, "~> 0.1.6"},
       {:yaml_elixir, "~> 2.9.0"},
       {:tailwind_formatter, "~> 0.4.0", only: [:dev, :test], runtime: false},
-      {:nimble_publisher, "~> 1.1"}
+      {:nimble_publisher, "~> 1.1.0"},
+      {:phoenix_seo, "~> 0.1.8"}
     ]
   end
 
