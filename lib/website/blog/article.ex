@@ -99,7 +99,6 @@ defmodule Website.Blog.Article do
       SEO.Twitter.build(
         description: article.description,
         title: article.title,
-        card: :summary_large_image,
         image: url(~p"/images/og/og-image.jpg")
       )
     end
