@@ -22,6 +22,11 @@
           </div>
           <.share_article_dropdown title={@article.title} link={url(~p"/blog/#{@article.slug}")} />
         </div>
+
+        <div class="mt-2 flex items-center space-x-2 md:mt-4">
+          <span class="text-sm font-semibold"><%= @live_reading %> reading now</span>
+          <div class="h-3 w-3 animate-pulse rounded-full bg-green-400 duration-500"></div>
+        </div>
       </div>
 
       <article class="prose prose-base prose-p:text-base-content">
