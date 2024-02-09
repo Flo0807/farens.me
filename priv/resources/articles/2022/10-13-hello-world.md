@@ -2,7 +2,7 @@
   slug: "hello-world",
   title: "Hello World!",
   description: "A short story about this website. Why I built it and what technologies I used. What blog articles you can expect here.",
-  published: true
+  published: false
 }
 ---
 A short story about this website. Why I built it and what technologies I used. What blog articles you can expect to find here.
