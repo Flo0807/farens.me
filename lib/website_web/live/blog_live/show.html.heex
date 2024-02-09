@@ -25,7 +25,11 @@
 
         <div class="mt-2 flex items-center space-x-2 md:mt-4">
           <span class="text-sm font-semibold"><%= @live_reading %> reading now</span>
-          <div class="h-3 w-3 animate-pulse rounded-full bg-green-400 duration-500"></div>
+          <span class="relative flex h-3 w-3">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75 duration-500">
+            </span>
+            <span class="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
+          </span>
         </div>
       </div>
 
