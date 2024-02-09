@@ -122,7 +122,7 @@ defmodule Website.Blog do
 end
 ```
 
-We are done! The markdown is properly parsed into HTML and code blocks are styled and highlighted. Unlike with the "standard" NimblePublisher way of syntax highlighting (which uses [Makeup] (https://hexdocs.pm/makeup/1.1.0/Makeup.html) under the hood), we do not need to include any CSS or install any packages to our application when using MDEx Markdown conversion.
+We are done! The markdown is properly parsed into HTML and code blocks are styled and highlighted. Unlike with the "standard" NimblePublisher way of syntax highlighting (which uses [Makeup](https://hexdocs.pm/makeup/1.1.0/Makeup.html) under the hood), we do not need to include any CSS or install any packages to our application when using MDEx Markdown conversion.
 
 The MDEx syntax highlighting is powered by Autumn. You can find a list of available themes in [the Autumn GitHub repository](https://github.com/leandrocp/autumn).
 
@@ -152,15 +152,15 @@ I will leave you with a teaser and cover the implementation details in another p
 
 ## Design and Themes
 
-The websites use [TalwindCSS](https://tailwindcss.com/) and [daysiUI](https://daisyui.com/) for styling. Tailwind is a CSS framework that provides countless utilities that you can use directly in your markup to quickly create a great looking website. Tailwind is even included and configured in new Phoenix projects. While there is a never-ending discussion about whether or not it is a good idea to overuse inline styles, I have no problem with it.
+The websites use [Tailwind CSS](https://tailwindcss.com/) and [daisyUI](https://daisyui.com/) for styling. Tailwind is a CSS framework that provides countless utilities that you can use directly in your markup to quickly create a great looking website. Tailwind is even included and configured in new Phoenix projects. While there is a never-ending discussion about whether or not it is a good idea to overuse inline styles, I have no problem with it.
 
-In addition to Tailwind, I wanted to give daysiUI a try. I had used it in other projects and liked working with it. It's a framework built on top of Tailwind that provides UI components. These components are not real components, but rather Tailwind wrapper classes that you can use in your markup. For example, there is a `btn` class that you can add to your HTML button to style it. Since the framework only provides classes and only uses CSS and Tailwind, it can be used by almost any framework and is not tied to one.
+In addition to Tailwind, I wanted to give daisyUI a try. I had used it in other projects and liked working with it. It's a framework built on top of Tailwind that provides UI components. These components are not real components, but rather Tailwind wrapper classes that you can use in your markup. For example, there is a `btn` class that you can add to your HTML button to style it. Since the framework only provides classes and only uses CSS and Tailwind, it can be used by almost any framework and is not tied to one.
 
-Unlike pure Tailwind, you do not define hard-coded colors in your markup (e.g. `bg-slate-700`). With daysiUI you use variable colors like `bg-base-200`. This is useful if you want to implement multiple color themes because you only need to add one class to your markup that represents multiple colors based on the selected theme. In addition, daysiUI comes with many themes by default. 
+Unlike pure Tailwind, you do not define hard-coded colors in your markup (e.g. `bg-slate-700`). With daisyUI you use variable colors like `bg-base-200`. This is useful if you want to implement multiple color themes because you only need to add one class to your markup that represents multiple colors based on the selected theme. In addition, daisyUI comes with many themes by default. 
 
-In summary, daysiUI gave me a good starting point for my design and made it easy to customize.
+In summary, daisyUI gave me a good starting point for my design and made it easy to customize.
 
-Because of the daysiUI classes, adding a theme switch that supports multiple themes was not difficult. I just included some predefined daysiUI themes in my `tailwind.config.js` and set the `data-theme` attribute on my HTML root element accordingly.
+Because of the daisyUI classes, adding a theme switch that supports multiple themes was not difficult. I just included some predefined daisyUI themes in my `tailwind.config.js` and set the `data-theme` attribute on my HTML root element accordingly.
 
 ```javascript
 // tailwind.config.js
@@ -193,4 +193,4 @@ export default ThemeSwitch;
 
 ## Conclusion 
 
-I recommend that every developer create a little playground project to try out new features and experiment with new technologies. It can be a blog, a portfolio, or a small web application, and it does not have to be public. It's a great way to learn new things and keep up with the latest technologies. This website and blog is my playground and I am happy with the result. I look forward to writing more articles and adding new features.
+I recommend that every developer creates a little playground project to try out new features and experiment with new technologies. It can be a blog, a portfolio, or a small web application, and it does not have to be public. It's a great way to learn new things and keep up with the latest technologies. This website and blog is my playground and I am happy with the result. I look forward to writing more articles and adding new features.
