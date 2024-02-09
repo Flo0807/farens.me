@@ -69,7 +69,9 @@ defmodule Website.Blog.Article do
   end
 
   defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
-    def build(article, _conn) do
+    use WebsiteWeb, :verified_routes
+
+    def build(article, conn) do
       SEO.OpenGraph.build(
         detail:
           SEO.OpenGraph.Article.build(
@@ -78,8 +80,35 @@ defmodule Website.Blog.Article do
             section: "Software Development"
           ),
         title: article.title,
-        description: article.description
+        description: article.description,
+        image: image(article, conn)
       )
+    end
+
+    defp image(article, conn) do
+      [year, month, day] =
+        Calendar.strftime(article.date, "%Y-%m-%d")
+        |> String.split("-", parts: 3)
+
+      file = "/images/og/blog/#{year}/#{month}-#{day}-#{article.id}.jpg"
+
+      exists? =
+        [Application.app_dir(:website), "/priv/static", file]
+        |> Path.join()
+        |> File.exists?()
+
+      case exists? do
+        true ->
+          url = Phoenix.VerifiedRoutes.unverified_url(conn, file)
+
+          SEO.OpenGraph.Image.build(
+            url: url,
+            alt: article.title
+          )
+
+        false ->
+          %{}
+      end
     end
   end
 
