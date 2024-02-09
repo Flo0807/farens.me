@@ -146,7 +146,7 @@ Now the application reloads when the content of markdown files changes. NimblePu
 
 ### Live User Count
 
-You may have noticed a little detail in this blog post. Below the title it shows the number of people reading this post right now (yes, this is live, try it by opening this page in another browser tab). Actually, one of the reasons I built it was to justify using Phoenix for this project (I am sure I had many problems building this feature with a static generator).
+You may have noticed a little detail on this blog post page. Below the title, date and reading time, it shows the number of people reading this post right now (yes, this is live, try it by opening this page in another browser tab). Actually, one of the reasons I built it was to justify using Phoenix for this project (I am sure I had many problems building this feature with a static generator).
 
 I will leave you with a teaser and cover the implementation details in another post. What I can say now is that the user counter uses a built-in feature of Phoenix called [Phoenix.Presence](https://hexdocs.pm/phoenix/Phoenix.Presence.html), which makes it not complicated to add a real-time user counter to your blog posts.
 
@@ -156,11 +156,11 @@ The websites use [TalwindCSS](https://tailwindcss.com/) and [daysiUI](https://da
 
 In addition to Tailwind, I wanted to give daysiUI a try. I had used it in other projects and liked working with it. It's a framework built on top of Tailwind that provides UI components. These components are not real components, but rather Tailwind wrapper classes that you can use in your markup. For example, there is a `btn` class that you can add to your HTML button to style it. Since the framework only provides classes and only uses CSS and Tailwind, it can be used by almost any framework and is not tied to one.
 
-Unlike pure Tailwind, you do not define hard-coded colors in your markup (e.g. `bg-slate-700`). With daysiUI you use variable colors like `bg-base-200`. This is useful if you want to implement multiple color themes because you only need to add one class to your markup that represents multiple colors based on the selected themes. In addition, daysiUI comes with many themes by default. 
+Unlike pure Tailwind, you do not define hard-coded colors in your markup (e.g. `bg-slate-700`). With daysiUI you use variable colors like `bg-base-200`. This is useful if you want to implement multiple color themes because you only need to add one class to your markup that represents multiple colors based on the selected theme. In addition, daysiUI comes with many themes by default. 
 
-In summary, daysiUI gives me a starting point for my design and makes it easy to customize.
+In summary, daysiUI gave me a good starting point for my design and made it easy to customize.
 
-Because of the daysiUI classes, adding a theme switch that supports multiple themes was not difficult. I just included some predefined daysiUI themes in my `tailwind.config.js` and set the `data-theme` attribute on my HTML root element.
+Because of the daysiUI classes, adding a theme switch that supports multiple themes was not difficult. I just included some predefined daysiUI themes in my `tailwind.config.js` and set the `data-theme` attribute on my HTML root element accordingly.
 
 ```javascript
 // tailwind.config.js
