@@ -332,6 +332,7 @@ defmodule WebsiteWeb.CoreComponents do
   @doc """
   Renders a blog preview card.
   """
+  attr :id, :string, default: nil
   attr :link, :any, required: true
   attr :class, :string, default: nil
   attr :title, :string, required: true

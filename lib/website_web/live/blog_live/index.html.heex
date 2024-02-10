@@ -2,10 +2,11 @@
   I write about whatever comes to mind. Most of the time it is somehow related to software engineering. I also use this blog to document my progress in learning new things. I hope you find something useful here, and if you do, please let me know.
 </.page_intro>
 
-<div class="lg:w-2/3">
+<div id="articles" class="lg:w-2/3" phx-update="stream">
   <.blog_preview_card
-    :for={article <- @articles}
+    :for={{dom_id, article} <- @streams.articles}
     :if={article.published}
+    id={dom_id}
     class="mt-4"
     link={~p"/blog/#{article.slug}"}
     title={article.title}
