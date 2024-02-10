@@ -1,11 +1,11 @@
 %{
   slug: "hello-world",
   title: "Hello World! Introduction to my website and blog",
-  description: "This is about why Elixir and Phoenix were chosen over a static site generator to build this site, along with explanations and code examples of how some interesting features work in detail.",
+  description: "This is about why Elixir and Phoenix were chosen over a static site generator to build this website, along with explanations and code examples of how some interesting features work in detail.",
   published: true
 }
 ---
-I talk about why Elixir and Phoenix were chosen over a static site generator to build this site, along with explanations and code examples of how some interesting features work in detail.
+I talk about why Elixir and Phoenix were chosen over a static site generator to build this website, along with explanations and code examples of how some interesting features work in detail.
 
 ## Introduction
 
@@ -17,13 +17,13 @@ I am always open to feedback and suggestions. If you find something broken on th
 
 ## Why Elixir and Phoenix?
 
-The site is powered by [Elixir](https://elixir-lang.org/) and [Phoenix](https://www.phoenixframework.org/). Elixir is a powerful dynamic, functional programming language and Phoenix is the web framework of choice for it. With Phoenix and the Elixir ecosystem, you can build complex web applications. In addition to that, with [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/welcome.html), you can make your web application even more powerful by adding real-time capabilities with server-rendered HTML.
+The website is powered by [Elixir](https://elixir-lang.org/) and [Phoenix](https://www.phoenixframework.org/). Elixir is a powerful dynamic, functional programming language and Phoenix is the web framework of choice for it. With Phoenix and the Elixir ecosystem, you can build complex web applications. In addition to that, with [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/welcome.html), you can make your web application even more powerful by adding real-time capabilities with server-rendered HTML.
 
 Sounds a bit overkill for a simple blog, doesn't it? So why are these technologies powering my website and blog instead of a static site generator?
 
 Because Elixir and Phoenix make building web applications so much fun. Over the past two years, Elixir has become one of my favorite programming languages. So of course I used these technologies to build my website. In my opinion, Phoenix and Elixir are good choices even for such small projects. I am always open to new frameworks and programming languages and have used many in past projects, but currently I really stick to Elixir and Phoenix. Also, it's cool to have a playground and project where I can try out new features and experiment with the framework and language.
 
-If you are interested in the source code of this site, it is available to the public on GitHub ([https://github.com/Flo0807/farens.me](https://github.com/Flo0807/farens.me)).
+If you are interested in the source code of this website and blog, it is available to the public on GitHub ([https://github.com/Flo0807/farens.me](https://github.com/Flo0807/farens.me)).
 
 Let's dive in even deeper and discuss how certain features are built.
 
@@ -32,7 +32,7 @@ Let's dive in even deeper and discuss how certain features are built.
 
 ### Publishing Engine
 
-When the site was first published, I wrote my own parser for markdown files and repository for blog posts, but for the redesign I looked into [NimblePublisher](https://github.com/dashbitco/nimble_publisher). A package that does the same, but more conveniently, by providing easy to use APIs.
+When the website was first published, I wrote my own parser for markdown files and repository for blog posts, but for the redesign I looked into [NimblePublisher](https://github.com/dashbitco/nimble_publisher). A package that does the same, but more conveniently, by providing easy to use APIs.
 
 To parse Markdown files, we only need two files.
 
@@ -98,7 +98,7 @@ After I created the context and schema module and displayed the HTML on my blog 
 
 This did not convince me, and I could not believe that making syntax highlighting work was that complicated. And yes, I came up with a much simpler solution.
 
-I wanted to try out a new hex.pm package called [MDEx](https://github.com/leandrocp/mdex) that was recently released anyway. It's another Markdown parser and an alternative to [Earmark](https://github.com/pragdave/earmark) (Earmark used by default by NimblePublisher) that promises to be really fast. I was about to read reading the documentation on how to set up a custom Markdown converter to use MDEx when I stumbled across MDEx's feature list, which includes syntax highlighting. So it promises to make our parsing much faster and the syntax highlighting just works out of the box, isn't that cool?
+I wanted to try out a new hex.pm package called [MDEx](https://github.com/leandrocp/mdex) that was recently released anyway. It's another Markdown parser and an alternative to [Earmark](https://github.com/pragdave/earmark) (Earmark used by default by NimblePublisher) that promises to be really fast. I was about to read the documentation on how to set up a custom Markdown converter to use MDEx when I stumbled across MDEx's feature list, which includes syntax highlighting. So it promises to make our parsing much faster and the syntax highlighting just works out of the box, isn't that cool?
 
 Let's get MDEx to work with NimblePublisher.
 
@@ -152,7 +152,7 @@ I will leave you with a teaser and cover the implementation details in another p
 
 ## Design and Themes
 
-The websites use [Tailwind CSS](https://tailwindcss.com/) and [daisyUI](https://daisyui.com/) for styling. Tailwind is a CSS framework that provides countless utilities that you can use directly in your markup to quickly create a great looking website. Tailwind is even included and configured in new Phoenix projects. While there is a never-ending discussion about whether or not it is a good idea to overuse inline styles, I have no problem with it.
+The website uses [Tailwind CSS](https://tailwindcss.com/) and [daisyUI](https://daisyui.com/) for styling. Tailwind is a CSS framework that provides countless utilities that you can use directly in your markup to quickly create a great looking website. Tailwind is even included and configured in new Phoenix projects. While there is a never-ending discussion about whether or not it is a good idea to overuse inline styles, I have no problem with it.
 
 In addition to Tailwind, I wanted to give daisyUI a try. I had used it in other projects and liked working with it. It's a framework built on top of Tailwind that provides UI components. These components are not real components, but rather Tailwind wrapper classes that you can use in your markup. For example, there is a `btn` class that you can add to your HTML button to style it. Since the framework only provides classes and only uses CSS and Tailwind, it can be used by almost any framework and is not tied to one.
 
