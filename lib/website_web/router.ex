@@ -13,6 +13,8 @@ defmodule WebsiteWeb.Router do
   scope "/", WebsiteWeb do
     pipe_through :browser
 
+    get "/rss.xml", RssController, :index
+
     live_session :default, on_mount: WebsiteWeb.InitAssigns do
       live "/", HomeLive.Index, :index
       live "/about", AboutLive.Index, :index
