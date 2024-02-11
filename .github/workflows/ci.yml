@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  test:
+    name: Test app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: '26.2.1'
+          elixir-version: '1.16.0'
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Check Formatting
+        run: mix format --check-formatted
+
+      - name: Run Tests
+        run: mix test
+
+  deploy:
+      if: github.ref == 'refs/heads/main'
+      name: Deploy app
+      needs: test
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - uses: superfly/flyctl-actions/setup-flyctl@master
+
+        - run: flyctl deploy --remote-only
