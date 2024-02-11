@@ -16,7 +16,7 @@ defmodule WebsiteWeb.RssController do
     feed = build_feed(articles)
 
     conn
-    |> put_resp_content_type("application/rss+xml")
+    |> put_resp_content_type("application/atom+xml")
     |> send_resp(200, feed)
   end
 
