@@ -22,7 +22,6 @@
   <.grid class="mt-2 md:mt-4">
     <.blog_preview_card
       :for={article <- @articles}
-      :if={article.published}
       link={~p"/blog/#{article.slug}"}
       title={article.title}
       date={article.date}

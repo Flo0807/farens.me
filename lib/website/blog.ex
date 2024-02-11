@@ -8,7 +8,7 @@ defmodule Website.Blog do
     as: :articles,
     html_converter: Website.MarkdownConverter
 
-  @articles Enum.sort_by(@articles, & &1.date, {:desc, Date})
+  @articles Enum.filter(@articles, & &1.published) |> Enum.sort_by(& &1.date, {:desc, Date})
 
   @doc """
   Returns all articles.

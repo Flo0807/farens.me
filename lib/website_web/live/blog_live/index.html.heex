@@ -5,7 +5,6 @@
 <div id="articles" class="lg:w-2/3" phx-update="stream">
   <.blog_preview_card
     :for={{dom_id, article} <- @streams.articles}
-    :if={article.published}
     id={dom_id}
     class="mt-4"
     link={~p"/blog/#{article.slug}"}
