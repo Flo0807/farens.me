@@ -4,7 +4,6 @@ on:
   push:
 
 env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
@@ -63,11 +62,13 @@ jobs:
   deploy:
       if: github.ref == 'refs/heads/main'
       name: Deploy app
-      needs: test
+      needs: build
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v4
+      - name: Trigger deployment
+        run: |
+          curl -X POST ${{ secrets.WEBHOOK_URL }} \
+               -H "Content-Type: application/json" \
+               -H "X-Signature: ${{ secrets.WEBHOOK_SECRET }}" \
+               -d '{}'
 
-        - uses: superfly/flyctl-actions/setup-flyctl@master
-
-        - run: flyctl deploy --remote-only
