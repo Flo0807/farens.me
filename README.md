@@ -23,7 +23,6 @@ This is the source code for my personal website and blog. It is built using the 
 
 - **Framework**: [Phoenix Framework](https://phoenixframework.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) and [daisyUI](https://daisyui.com/)
-- **Deployment**: [Fly.io](https://fly.io/)
 
 ## Development
 
