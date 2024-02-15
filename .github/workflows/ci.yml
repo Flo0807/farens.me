@@ -67,8 +67,13 @@ jobs:
       steps:
       - name: Trigger deployment
         run: |
-          curl -X POST ${{ secrets.WEBHOOK_URL }} \
-               -H "Content-Type: application/json" \
-               -H "X-Signature: ${{ secrets.WEBHOOK_SECRET }}" \
-               -d '{}'
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST ${{ secrets.WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -H "X-Signature: ${{ secrets.WEBHOOK_SECRET }}" \
+            -d '{}')
+          if [ "$RESPONSE" -ne "200" ]
+          then
+            echo "Deployment failed with status ${RESPONSE}"
+            exit 1
+          fi
 
