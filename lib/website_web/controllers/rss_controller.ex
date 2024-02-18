@@ -31,11 +31,12 @@ defmodule WebsiteWeb.RssController do
 
   defp get_entry(article) do
     date_time = DateTime.new!(article.date, Time.from_iso8601!("00:00:00"), "Etc/UTC")
+    content = "<h1>#{article.title}</h1>" <> article.body
 
     Entry.new(url(~p"/blog/#{article.slug}"), date_time, article.title)
     |> Entry.link(url(~p"/blog/#{article.slug}"))
     |> Entry.author(@author, email: @email)
-    |> Entry.content(article.description, type: "text")
+    |> Entry.content(content, type: "html")
     |> Entry.build()
   end
 end
