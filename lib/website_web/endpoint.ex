@@ -20,7 +20,7 @@ defmodule WebsiteWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :website,
-    gzip: false,
+    gzip: Mix.env() == :prod,
     only: WebsiteWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
