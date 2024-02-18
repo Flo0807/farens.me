@@ -1,4 +1,7 @@
 defmodule WebsiteWeb.ErrorJson do
+  @moduledoc """
+  A JSON error rendering module for the website.
+  """
   # If you want to customize a particular status code,
   # you may add your own clauses, such as:
   #

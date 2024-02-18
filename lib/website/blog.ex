@@ -1,5 +1,5 @@
 defmodule Website.Blog do
-  @doc """
+  @moduledoc """
   The blog context.
   """
   use NimblePublisher,

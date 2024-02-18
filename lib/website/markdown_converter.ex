@@ -1,5 +1,5 @@
 defmodule Website.MarkdownConverter do
-  @doc """
+  @moduledoc """
   Converts markdown to HTML.
   """
 

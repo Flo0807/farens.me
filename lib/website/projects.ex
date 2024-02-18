@@ -1,5 +1,5 @@
 defmodule Website.Projects do
-  @doc """
+  @moduledoc """
   The projects context.
   """
   use NimblePublisher,
