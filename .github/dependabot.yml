@@ -4,15 +4,23 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    reviewers:
+      - "Flo0807"
   - package-ecosystem: "npm"
     directory: "/assets"
     schedule:
       interval: "daily"
+    reviewers:
+      - "Flo0807"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+    reviewers:
+      - "Flo0807"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "daily"
+    reviewers:
+      - "Flo0807"
