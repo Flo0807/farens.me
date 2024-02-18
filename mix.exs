@@ -51,7 +51,8 @@ defmodule Website.MixProject do
       {:tailwind_formatter, "~> 0.4.0", only: [:dev, :test], runtime: false},
       {:nimble_publisher, "~> 1.1.0"},
       {:phoenix_seo, git: "https://github.com/Flo0807/phoenix_seo"},
-      {:atomex, "0.5.1"}
+      {:atomex, "0.5.1"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 
