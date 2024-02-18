@@ -12,7 +12,21 @@ module.exports = {
     "../lib/website_web/**/*.*ex"
   ],
   daisyui: {
-    themes: ["night", "dark", "sunset", "dracula"],
+    themes: [
+      {
+        night: {
+          ...require("daisyui/src/theming/themes")["night"],
+          "base-content": "#e4e4e7",
+        },
+        dark: {
+          ...require("daisyui/src/theming/themes")["dark"],
+          "base-content": "#e4e4e7",
+          primary: "#f97316",
+        },
+      },
+      "dracula",
+      "sunset"
+    ],
   },
   theme: {
     extend: {
