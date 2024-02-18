@@ -217,7 +217,7 @@ defmodule WebsiteWeb.CoreComponents do
       <div class="my-8 md:my-12">
         <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
           <nav class="">
-            <h6 class="footer-title">Pages</h6>
+            <p class="footer-title">Pages</p>
             <.link
               :for={%{label: label, to: to} <- main_navigation_links()}
               navigate={to}
@@ -230,11 +230,11 @@ defmodule WebsiteWeb.CoreComponents do
             </.link>
           </nav>
           <div>
-            <h6 class="footer-title">Connect</h6>
+            <p class="footer-title">Connect</p>
             <.contact_links class="flex space-x-4" icon_class="w-6 h-6 text-content fill-current" />
           </div>
           <nav class="md:flex md:w-full md:justify-center">
-            <h6 class="footer-title md:hidden">Legal</h6>
+            <p class="footer-title md:hidden">Legal</p>
             <.link
               :for={%{label: label, to: to} <- secondary_navigation_links()}
               navigate={to}
