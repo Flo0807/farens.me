@@ -113,7 +113,7 @@ defmodule WebsiteWeb.CoreComponents do
     ~H"""
     <.link navigate={~p"/"} class="avatar cursor-pointer">
       <div class="h-10 w-auto rounded-full">
-        <img src={~p"/images/me.jpg"} alt="Portrait of Florian" />
+        <img loading="lazy" src={~p"/images/me.jpg"} alt="Portrait of Florian" />
       </div>
     </.link>
     """
