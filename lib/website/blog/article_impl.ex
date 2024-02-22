@@ -2,6 +2,21 @@ defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
   use WebsiteWeb, :verified_routes
 
   def build(article, conn) do
+    og_img =
+      case Website.Blog.get_og_image_path(article, conn) do
+        nil ->
+          SEO.OpenGraph.Image.build(%{
+            url: url(~p"/images/og/og-image.jpg"),
+            alt: article.title
+          })
+
+        url ->
+          SEO.OpenGraph.Image.build(
+            url: url,
+            alt: article.title
+          )
+      end
+
     SEO.OpenGraph.build(
       detail:
         SEO.OpenGraph.Article.build(
@@ -11,34 +26,8 @@ defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
         ),
       title: article.title,
       description: article.description,
-      image: image(article, conn)
+      image: og_img
     )
-  end
-
-  defp image(article, conn) do
-    [year, month, day] =
-      Calendar.strftime(article.date, "%Y-%m-%d")
-      |> String.split("-", parts: 3)
-
-    file = "/images/og/blog/#{year}/#{month}-#{day}-#{article.id}.jpg"
-
-    exists? =
-      [Application.app_dir(:website), "/priv/static", file]
-      |> Path.join()
-      |> File.exists?()
-
-    case exists? do
-      true ->
-        url = Phoenix.VerifiedRoutes.unverified_url(conn, file)
-
-        SEO.OpenGraph.Image.build(
-          url: url,
-          alt: article.title
-        )
-
-      false ->
-        %{}
-    end
   end
 end
 
@@ -54,11 +43,20 @@ end
 defimpl SEO.Twitter.Build, for: Website.Blog.Article do
   use WebsiteWeb, :verified_routes
 
-  def build(article, _conn) do
+  def build(article, conn) do
+    img_url =
+      case Website.Blog.get_og_image_path(article, conn) do
+        nil ->
+          url(~p"/images/og/og-image.jpg")
+
+        url ->
+          url
+      end
+
     SEO.Twitter.build(
       description: article.description,
       title: article.title,
-      image: url(~p"/images/og/og-image.jpg")
+      image: img_url
     )
   end
 end
