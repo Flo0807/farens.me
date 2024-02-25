@@ -32,12 +32,12 @@ defmodule WebsiteWeb.CoreComponents do
   @doc """
   Renders the page intro.
   """
-  attr :title, :string, required: true
+  attr :title, :string, default: nil
   slot :inner_block
 
   def page_intro(assigns) do
     ~H"""
-    <.title text={@title} />
+    <.title :if={@title} text={@title} />
     <div :if={@inner_block != []} class="text-pretty my-8 leading-relaxed md:my-12 lg:w-2/3">
       <%= render_slot(@inner_block) %>
     </div>
