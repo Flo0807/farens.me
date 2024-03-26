@@ -39,8 +39,8 @@ if config_env() == :prod do
   config :website, WebsiteWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     check_origin: [
-      "https://farens.me",
-      "https://www.farens.me"
+      "https://#{host}",
+      "https://www.#{host}"
     ],
     http: [
       # Enable IPv6 and bind on all interfaces.
