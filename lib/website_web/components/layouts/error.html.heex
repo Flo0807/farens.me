@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="winter" class="h-full scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static src={~p"/assets/app.js"}>
+    </script>
+    <link rel="alternate" type="application/rss+xml" href={url(~p"/rss.xml")} />
+  </head>
+  <body class="h-full">
+    <.mobile_navigation />
+    <div class="flex h-full flex-col">
+      <header>
+        <.navbar current_url={Map.get(@conn, :request_path, "/")} />
+      </header>
+      <main class="mx-auto my-8 w-full max-w-6xl px-4 md:my-12">
+        <%= @inner_content %>
+      </main>
+      <div class="mt-auto">
+        <.footer current_url={Map.get(@conn, :request_path, "/")} />
+      </div>
+    </div>
+    <.analytics />
+  </body>
+</html>
