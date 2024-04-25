@@ -9,6 +9,7 @@ defmodule Website.Blog.Article do
             title: "",
             date: nil,
             description: "",
+            tags: [],
             body: "",
             read_minutes: 0,
             heading_links: [],

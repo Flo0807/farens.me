@@ -10,15 +10,33 @@ defmodule Website.Blog do
 
   @articles Enum.filter(@articles, & &1.published) |> Enum.sort_by(& &1.date, {:desc, Date})
 
+  @tags Enum.flat_map(@articles, & &1.tags) |> Enum.uniq() |> Enum.sort()
+
   @doc """
   Returns all articles.
   """
   def all_articles, do: @articles
 
   @doc """
+  Returns all tags.
+  """
+  def all_tags, do: @tags
+
+  @doc """
   Returns the most recent articles.
   """
   def recent_articles(count \\ 3), do: Enum.take(all_articles(), count)
+
+  @doc """
+  List articles by tag.
+  """
+  def articles_by_tag(tag) when is_nil(tag), do: @articles
+
+  def articles_by_tag(tag) do
+    Enum.filter(@articles, fn article ->
+      Enum.any?(article.tags, fn t -> String.downcase(t) == String.downcase(tag) end)
+    end)
+  end
 
   @doc """
   Returns an article by its slug.

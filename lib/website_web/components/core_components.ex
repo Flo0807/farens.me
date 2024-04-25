@@ -337,12 +337,13 @@ defmodule WebsiteWeb.CoreComponents do
   attr :class, :string, default: nil
   attr :title, :string, required: true
   attr :description, :string, required: true
+  attr :tags, :list, default: []
   attr :date, :any, required: true
   attr :read_minutes, :integer, required: true
 
   def blog_preview_card(assigns) do
     ~H"""
-    <.link navigate={@link} target="_blank">
+    <.link id={@id} navigate={@link} target="_blank">
       <article class={[
         "card bg-base-200 group h-full w-full cursor-pointer transition-all hover:-translate-y-1",
         @class
@@ -360,16 +361,12 @@ defmodule WebsiteWeb.CoreComponents do
               <%= @read_minutes %> min read
             </span>
           </div>
+          <div :if={@tags != []} class="mb-4 flex flex-wrap gap-x-2 gap-y-2">
+            <span :for={tag <- @tags} class="badge badge-neutral"><%= tag %></span>
+          </div>
           <p class="text-pretty mb-4">
             <%= @description %>
           </p>
-          <%!-- Article tags
-            <div class="flex flex-wrap gap-x-2 gap-y-2">
-              <span class="badge badge-secondary">Tag 1</span>
-              <span class="badge badge-secondary">Tag 2</span>
-              <span class="badge badge-secondary">Tag 3</span>
-            </div>
-          --%>
           <div class="card-actions justify-end">
             <div class="flex items-center space-x-2">
               <span class="text-content group-hover:text-primary group-hover:underline">
@@ -381,6 +378,35 @@ defmodule WebsiteWeb.CoreComponents do
         </div>
       </article>
     </.link>
+    """
+  end
+
+  @doc """
+  Renders all blog tags.
+  """
+  attr :id, :string, default: nil
+  attr :tags, :list, required: true
+  attr :search_tag, :string, default: nil
+  attr :select_event, :string
+
+  def blog_tags(assigns) do
+    ~H"""
+    <section id={@id}>
+      <h2 class="mb-4 text-xl font-semibold">
+        Tags
+      </h2>
+
+      <div class="flex flex-wrap gap-2">
+        <button
+          :for={tag <- @tags}
+          phx-click="select-tag"
+          phx-value-tag={tag}
+          class={["badge badge-neutral", String.downcase(tag) == @search_tag && "badge-primary"]}
+        >
+          <%= tag %>
+        </button>
+      </div>
+    </section>
     """
   end
 

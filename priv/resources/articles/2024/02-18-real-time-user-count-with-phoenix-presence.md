@@ -2,7 +2,8 @@
   slug: "real-time-user-count-with-phoenix-presence",
   title: "Display the number of online users in real-time using Phoenix Presence",
   description: "Adding real-time functionality is often a challenge, but in Phoenix we already have built-in functionality to make our application live. We dive into how LiveView and Phoenix Presence can be used to build a real-time user count.", 
-  published: true
+  published: true,
+  tags: ["Elixir", "LiveView", "Phoenix", "Presence"]
 }
 ---
 Adding real-time functionality is often a challenge, but in Phoenix we already have built-in functionality to make our application live. We dive into how Phoenix Presence can be used to build a real-time user count.

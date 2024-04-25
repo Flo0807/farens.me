@@ -2,7 +2,8 @@
   slug: "hello-world",
   title: "Hello World! Introduction to my website and blog",
   description: "This is about why Elixir and Phoenix were chosen over a static site generator to build this website, along with explanations and code examples of how some interesting features work in detail.",
-  published: true
+  published: true,
+  tags: ["Elixir", "Hello World", "LiveView", "Phoenix"]
 }
 ---
 I talk about why Elixir and Phoenix were chosen over a static site generator to build this website, along with explanations and code examples of how some interesting features work in detail.

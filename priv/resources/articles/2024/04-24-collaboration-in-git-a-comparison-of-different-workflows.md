@@ -2,7 +2,8 @@
   slug: "collaboration-in-git-a-comparison-of-different-workflows",
   title: "Collaboration in Git: A comparison of different workflows",
   description: "Choosing the right Git workflow is crucial for the success of a project. This article breaks down the nuances of different Git workflows and provides insight into the pros and cons of each.",
-  published: true
+  published: true,
+  tags: ["Collaboration", "Git", "Git Workflows", "Version Control"]
 }
 ---
 

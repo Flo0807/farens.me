@@ -5,13 +5,44 @@ defmodule WebsiteWeb.BlogLive.Index do
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    articles = Blog.all_articles()
+    all_tags = Blog.all_tags()
 
     socket =
       socket
       |> assign(:page_title, "Blog - Florian Arens")
-      |> stream(:articles, articles)
+      |> assign(:all_tags, all_tags)
 
     {:ok, socket}
+  end
+
+  @impl Phoenix.LiveView
+  def handle_params(params, _uri, socket) do
+    tag =
+      case Map.get(params, "tag") do
+        nil -> nil
+        tag -> String.downcase(tag)
+      end
+
+    articles = Blog.articles_by_tag(tag)
+
+    socket =
+      socket
+      |> assign(:search_tag, tag)
+      |> stream(:articles, articles, reset: true)
+
+    {:noreply, socket}
+  end
+
+  @impl Phoenix.LiveView
+  def handle_event("select-tag", %{"tag" => tag}, socket) do
+    tag = String.downcase(tag)
+
+    socket =
+      case tag == socket.assigns.search_tag do
+        true -> push_patch(socket, to: ~p"/blog")
+        false -> push_patch(socket, to: ~p"/blog/tag/#{tag}")
+      end
+
+    {:noreply, socket}
   end
 end
