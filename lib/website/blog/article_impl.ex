@@ -22,7 +22,8 @@ defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
         SEO.OpenGraph.Article.build(
           published_time: Date.to_iso8601(article.date),
           author: "Florian Arens",
-          section: "Software Development"
+          section: "Software Development",
+          tag: article.tags
         ),
       title: article.title,
       description: article.description,
