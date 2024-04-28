@@ -138,6 +138,7 @@ defmodule WebsiteWeb.CoreComponents do
         class="btn-sm flex items-center"
       >
         <.icon name="hero-swatch" />
+        <span class="sr-only">Switch theme</span>
       </summary>
       <ul tabindex="0" class="dropdown-content z-[1] menu bg-base-300 rounded-box w-40 p-2 shadow">
         <li :for={%{label: label, theme: theme, icon: icon} <- @themes}>
@@ -169,6 +170,7 @@ defmodule WebsiteWeb.CoreComponents do
         phx-click-away={JS.remove_attribute("open", to: "#share_dropdown")}
       >
         <.icon name="hero-share" />
+        <span class="sr-only">Share</span>
       </summary>
       <ul class="menu dropdown-content z-[1] bg-base-300 rounded-box w-40 p-2 shadow">
         <li>
