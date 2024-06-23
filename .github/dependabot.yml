@@ -4,22 +4,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    groups:
-      production-dependencies:
-        dependency-type: "production"
-      development-dependencies:
-        dependency-type: "development"
     reviewers:
       - "Flo0807"
   - package-ecosystem: "npm"
     directory: "/assets"
     schedule:
       interval: "weekly"
-    groups:
-      production-dependencies:
-        dependency-type: "production"
-      development-dependencies:
-        dependency-type: "development"
     reviewers:
       - "Flo0807"
   - package-ecosystem: "github-actions"
