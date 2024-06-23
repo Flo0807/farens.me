@@ -21,7 +21,7 @@ defmodule WebsiteWeb.RssController do
   end
 
   defp build_feed(articles) do
-    Feed.new(url(~p"/"), DateTime.utc_now(), "Blog Feed")
+    Feed.new(url(~p"/"), DateTime.utc_now(), "farens.me Blog")
     |> Feed.author(@author, email: @email)
     |> Feed.link(url(~p"/rss.xml"), rel: "self")
     |> Feed.entries(Enum.map(articles, &get_entry/1))
