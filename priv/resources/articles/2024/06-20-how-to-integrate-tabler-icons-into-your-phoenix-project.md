@@ -204,7 +204,3 @@ In this article, we have shown how to integrate Tabler Icons into a Phoenix proj
 ## Credits
 
 I would like to credit the Phoenix team for the inspiration for this article. They are already using the same approach to integrate [Heroicons](https://heroicons.com/) into Phoenix projects. I just adapted it to work with Tabler Icons. For more information, you can check out [the Phoenix Asset Management guide](https://hexdocs.pm/phoenix/asset_management.html).
-
-
-
-
