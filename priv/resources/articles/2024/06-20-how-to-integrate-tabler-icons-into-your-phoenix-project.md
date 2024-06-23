@@ -22,10 +22,16 @@ The first step is to track the Tabler Icons source repository using Mix. This wi
 To track the Tabler Icons source repository, we need to add the following to the `deps` function in the `mix.exs` file:
 
 ```elixir
-{:tabler_icons, github: "tabler/tabler-icons", sparse: "icons", app: false, compile: false}
+# mix.exs
+{:tabler_icons,
+ github: "tabler/tabler-icons", 
+ sparse: "icons",
+ app: false, 
+ compile: false, 
+ depth: 1}
 ```
 
-This will add the Tabler Icons repository as a dependency to our project. The `sparse` option is used to only download the `icons` directory from the repository. We set `app` to `false` because we don't want to read the app file. We also set `compile` to `false` because we don't want to compile the icons. We just want to download the icons so we can use them later in our Tailwind CSS config.
+This will add the Tabler Icons repository as a dependency to our project. The `sparse` option is used to only download the `icons` directory from the repository. We set `app` to `false` because we don't want to read the app file. We also set `compile` to `false` because we don't want to compile the icons. We just want to download the icons so we can use them later in our Tailwind CSS config. To increase the speed of the download, we set the `depth` option to `1` to only load the latest commit.
 
 If you have not seen the above options before, you can find a detailed explanation of them in the [Mix documentation](https://hexdocs.pm/mix/1.17.1/Mix.Tasks.Deps.html).
 
