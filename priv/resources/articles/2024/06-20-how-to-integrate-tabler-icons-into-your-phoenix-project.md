@@ -7,7 +7,7 @@
 }
 ---
 
-[Tabler Icons](https://tablericons.com/) is one of the most popular icon libraries. This article shows how to integrate the icon library into Phoenix projects. We will track the Tabler Icons source repository using Mix and use the Tailwind CSS plugin feature to create an icon component.
+[Tabler Icons](https://tabler.io/icons) is one of the most popular icon libraries. This article shows how to integrate the icon library into Phoenix projects. We will track the Tabler Icons source repository using Mix and use the Tailwind CSS plugin feature to create an icon component.
 
 ## Introduction
 
