@@ -216,7 +216,7 @@ defmodule WebsiteWeb.CoreComponents do
     ~H"""
     <footer class="mx-auto w-full max-w-6xl px-4">
       <div class="bg-base-content h-px w-full opacity-20" />
-      <div class="my-8 md:my-12">
+      <div class="py-8 md:py-12">
         <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
           <nav class="">
             <p class="footer-title">Pages</p>

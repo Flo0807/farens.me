@@ -2,3 +2,16 @@
 @import "_fonts.css";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer base {
+
+  html,
+  body,
+  [data-phx-main] {
+    @apply h-full;
+  }
+
+  body>[data-phx-main]>footer {
+    @apply sticky top-[100dvh];
+  }
+}

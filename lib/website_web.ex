@@ -51,9 +51,7 @@ defmodule WebsiteWeb do
 
   def live_view do
     quote do
-      use Phoenix.LiveView,
-        layout: {WebsiteWeb.Layouts, :app},
-        container: {:div, class: "h-full"}
+      use Phoenix.LiveView, layout: {WebsiteWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
