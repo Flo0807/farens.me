@@ -83,7 +83,7 @@ We append the suffix `-filled` to filled icon names to distinguish between the f
 
 ### Generating the CSS classes
 
-Next, we need to get the plugin to generate the CSS classes for the icons. We want to add the CSS for elements that contain a `hero-*` class. For example, if we have an element with a `hero-user` class, we want to add the CSS for the user icon. To do this, we use the `matchComponent` function provided by Tailwind CSS.
+Next, we need to get the plugin to generate the CSS classes for the icons. We want to add the CSS for elements that contain a `tabler-*` class. For example, if we have an element with a `tabler-user` class, we want to add the CSS for the user icon. To do this, we use the `matchComponent` function provided by Tailwind CSS.
 
 ```javascript
 module.exports = {
@@ -198,7 +198,7 @@ This component takes the name of the icon as an argument and renders a `span` el
 We can use this component in our templates like this:
 
 ```elixir
-<.icon name="hero-user" class="bg-blue-600" />
+<.icon name="tabler-user" class="bg-blue-600" />
 ```
 
 Tailwind CSS will generate the appropriate CSS classes for the icon based on the plugin we built in the previous step, and the icon will be displayed with a blue background.
