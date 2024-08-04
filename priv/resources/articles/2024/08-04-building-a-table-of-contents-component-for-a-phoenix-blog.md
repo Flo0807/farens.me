@@ -42,7 +42,7 @@ end
 
 As you can see, the generated HTML includes an anchor link with the ID `introduction` for the heading `## Introduction`.
 
-### Parse headings and store them in the article metadata
+### Parse and convert headings
 
 The next step is to parse the generated HTML, extract the headings from it and transform them into a suitable data structure that we can use to build the table of contents component. We will use the [Floki](https://github.com/philss/floki) library for this. From the README: "Floki is a simple HTML parser that enables search for nodes using CSS selectors."
 
