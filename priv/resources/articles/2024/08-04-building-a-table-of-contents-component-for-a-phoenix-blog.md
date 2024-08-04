@@ -144,7 +144,7 @@ def toc(assigns) do
 end
 ```
 
-### Place the component in your layout
+### How to use the component
 
 We are now ready to use the component in our layout. On my blog, I only show the table of contents on larger screens so I can place it next to the main content. I also made it sticky so that it stays visible while scrolling. Here is an example of how I placed the component in my layout:
 
