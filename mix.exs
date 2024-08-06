@@ -52,7 +52,8 @@ defmodule Website.MixProject do
       {:nimble_publisher, "~> 1.1.0"},
       {:phoenix_seo, "~> 0.1.9"},
       {:atomex, "0.5.1"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:appsignal_phoenix, "~> 2.4"}
     ]
   end
 

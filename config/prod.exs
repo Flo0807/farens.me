@@ -10,5 +10,7 @@ config :website, WebsiteWeb.Endpoint, cache_static_manifest: "priv/static/cache_
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :appsignal, :config, active: true
+
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.

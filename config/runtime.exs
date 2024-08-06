@@ -84,3 +84,6 @@ if config_env() == :prod do
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
 end
+
+config :logger,
+  backends: [:console, {Appsignal.Logger.Backend, [group: "phoenix"]}]
