@@ -530,7 +530,7 @@ defmodule WebsiteWeb.CoreComponents do
       :if={Application.get_env(:website, :env) == :prod}
       defer
       data-domain="farens.me"
-      src="https://plausible.storetastic.cloud/js/script.js"
+      src="https://plausible.farens.me/js/script.js"
     >
     </script>
     """
