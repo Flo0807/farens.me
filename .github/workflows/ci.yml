@@ -23,33 +23,25 @@ jobs:
           version-file: .tool-versions
           version-type: strict
 
-      - name: Restore the deps cache
+      - name: Restore the deps and _build cache
         uses: actions/cache@v4
-        id: deps-cache
+        id: restore-cache
+        env:
+          OTP_VERSION: ${{ steps.beam.outputs.otp-version }}
+          ELIXIR_VERSION: ${{ steps.beam.outputs.elixir-version }}
+          MIX_LOCK_HASH: hashFiles('**/mix.lock')
         with:
-          path: deps
-          key: ${{ runner.os }}-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-${{ env.MIX_ENV }}-deps-mixlockhash-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-${{ env.MIX_ENV }}-deps-
-
-      - name: Restore the _build cache
-        uses: actions/cache@v4
-        id: build-cache
-        with:
-          path: _build
-          key: ${{ runner.os }}-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-${{ env.MIX_ENV }}-build-mixlockhash-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-${{ env.MIX_ENV }}-build-
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-deps-mixlockhash-${{ env.MIX_LOCK_HASH }}
 
       - name: Install mix dependencies
-        if: steps.deps-cache.outputs.cache-hit != 'true'
-        run: |
-          mix local.rebar --force
-          mix local.hex --force
-          mix deps.get
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+        run: mix deps.get
 
       - name: Compile dependencies
-        if: steps.deps-cache.outputs.cache-hit != 'true'
+        if: steps.restore-cache.outputs.cache-hit != 'true'
         run: mix deps.compile
 
       - name: Compile
@@ -57,6 +49,9 @@ jobs:
 
       - name: Check Formatting
         run: mix format --check-formatted
+
+      - name: "Check unused deps"
+        run: mix deps.unlock --check-unused
 
       - name: Credo
         run: mix credo
