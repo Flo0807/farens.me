@@ -29,7 +29,7 @@ jobs:
         env:
           OTP_VERSION: ${{ steps.beam.outputs.otp-version }}
           ELIXIR_VERSION: ${{ steps.beam.outputs.elixir-version }}
-          MIX_LOCK_HASH: hashFiles('**/mix.lock')
+          MIX_LOCK_HASH: ${{ hashFiles('**/mix.lock') }}
         with:
           path: |
             deps
