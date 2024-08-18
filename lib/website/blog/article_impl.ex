@@ -1,7 +1,7 @@
 defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
   use WebsiteWeb, :verified_routes
 
-  def build(article, conn) do
+  def build(article, _conn) do
     og_img =
       SEO.OpenGraph.Image.build(%{
         url: "https://og-image.farens.me/image?text=#{article.title}",
@@ -35,7 +35,7 @@ end
 defimpl SEO.Twitter.Build, for: Website.Blog.Article do
   use WebsiteWeb, :verified_routes
 
-  def build(article, conn) do
+  def build(article, _conn) do
     SEO.Twitter.build(
       description: article.description,
       title: article.title,
