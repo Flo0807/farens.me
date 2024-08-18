@@ -11,7 +11,7 @@ This article shows how to parse [MDEx](https://github.com/leandrocp/mdex)-genera
 
 ## Introduction
 
-In this article, we are going to build a table of contents component that can be used in blogs or other markdown based pages. The table of contents component will display a link to each section of your content that allow users to quickly navigate through the content.
+In this article, we are going to build a table of contents component that can be used in blogs or other markdown based pages. The table of contents component will display a link to each section of your content that allows users to quickly navigate through the content.
 
 We assume that you have set up a Phoenix project and are using the MDEx markdown parser to render markdown content. We will configure MDEx to include IDs and anchor links for headings in the generated HTML that we can use to build the table of contents component. If you are not using MDEx, you can still follow along, but you will need to make some adjustments to the code to make it work with your markdown parser.
 
@@ -146,7 +146,7 @@ end
 
 ### How to use the component
 
-We are now ready to use the component in our layout. On my blog, I only show the table of contents on larger screens so I can place it next to the main content. I also made it sticky so that it stays visible while scrolling. Here is an example of how I placed the component in my layout:
+We are now ready to use the component in our layout. On my blog, I only show the table of contents on larger screens, so I can place it next to the main content. I also made it sticky so that it stays visible while scrolling. Here is an example of how I placed the component in my layout:
 
 ```html
 <div class="relative">
