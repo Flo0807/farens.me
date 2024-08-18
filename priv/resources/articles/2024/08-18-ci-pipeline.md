@@ -104,7 +104,7 @@ steps:
     run: mix compile --warnings-as-errors --force
 ```
 
-We define three steps to install the mix dependencies, compile the dependencies and compile the code. We use an `if` condition in the first two steps to check if the cache has been restored. If the cache has not been restored, we install the mix dependencies and compile the dependencies. The compilation step has to be done every time because the code may have changed. We use the `--warnings-as-errors` flag to treat warnings as errors as we don't want to allow warnings in our codebase.
+We define three steps to install the mix dependencies, compile the dependencies and compile the code. We use an `if` condition in the first two steps to check if the cache has been restored. If the cache has not been restored, we install the mix dependencies and compile the dependencies. The step of compiling our codebase has to be done every time because the code may have changed. We use the `--warnings-as-errors` flag to treat warnings as errors as we don't want to allow warnings in our codebase.
 
 ### Running Checks and Tests
 
@@ -115,7 +115,7 @@ steps:
   - name: Check Formatting
     run: mix format --check-formatted
 
-  - name: "Check unused deps"
+  - name: Check unused deps
     run: mix deps.unlock --check-unused
 
   - name: Credo
@@ -180,7 +180,7 @@ jobs:
       - name: Check Formatting
         run: mix format --check-formatted
 
-      - name: "Check unused deps"
+      - name: Check unused deps
         run: mix deps.unlock --check-unused
 
       - name: Credo
@@ -230,7 +230,7 @@ steps:
 
 As you can see, we use an `if` condition to check whether the workflow was triggered by a GitHub release event. If it was, we publish the package to Hex. We set the `HEX_API_KEY` environment variable to the secret we created earlier. The `--yes` flag is used to automatically confirm the release.
 
-You may want to create a new job in your pipeline to publish your Hex package to separate testing and publishing, but note that you must set up the BEAM environment and install the dependencies before you can publish the package.
+You may want to create a new job in your pipeline to publish your hex package to separate testing and publishing, but note that you must set up the BEAM environment and install the dependencies before you can publish the package.
 
 ## Bonus: Building and Publishing Docker Images
 
@@ -261,7 +261,7 @@ jobs:
 
 **Log in to the Container Registry**
 
-Before we can push the Docker image to the GitHub Container Registry, we need to log in to the registry. We use the [`docker/login-action` action](https://github.com/docker/login-action) to authenticate to the registry. We set the `registry` parameter to the URL of the registry, the `username` parameter to the GitHub actor, and the `password` parameter to the GitHub token. We defined the `REGISTRY` environment variable earlier. The GitHub token and GitHub actor variables are automatically provided by GitHub actions.
+Before we can push the Docker image to the GitHub Container Registry, we need to log in to the registry. We use the [`docker/login-action` action](https://github.com/docker/login-action) to authenticate to the registry. We set the `registry` parameter to the URL of the registry, the `username` parameter to the GitHub actor, and the `password` parameter to the GitHub token. We defined the `REGISTRY` environment variable earlier. The GitHub token and GitHub actor variables are automatically provided by GitHub Actions.
 
 ```yaml
 steps:
