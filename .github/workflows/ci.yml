@@ -50,7 +50,7 @@ jobs:
       - name: Check Formatting
         run: mix format --check-formatted
 
-      - name: "Check unused deps"
+      - name: Check unused deps
         run: mix deps.unlock --check-unused
 
       - name: Credo
