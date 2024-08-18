@@ -3,19 +3,10 @@ defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
 
   def build(article, conn) do
     og_img =
-      case Website.Blog.get_og_image_path(article, conn) do
-        nil ->
-          SEO.OpenGraph.Image.build(%{
-            url: url(~p"/images/og/og-image.jpg"),
-            alt: article.title
-          })
-
-        url ->
-          SEO.OpenGraph.Image.build(
-            url: url,
-            alt: article.title
-          )
-      end
+      SEO.OpenGraph.Image.build(%{
+        url: "https://og-image.farens.me/image?text=#{article.title}",
+        alt: article.title
+      })
 
     SEO.OpenGraph.build(
       detail:
@@ -45,19 +36,10 @@ defimpl SEO.Twitter.Build, for: Website.Blog.Article do
   use WebsiteWeb, :verified_routes
 
   def build(article, conn) do
-    img_url =
-      case Website.Blog.get_og_image_path(article, conn) do
-        nil ->
-          url(~p"/images/og/og-image.jpg")
-
-        url ->
-          url
-      end
-
     SEO.Twitter.build(
       description: article.description,
       title: article.title,
-      image: img_url
+      image: "https://og-image.farens.me/image?text=#{article.title}"
     )
   end
 end

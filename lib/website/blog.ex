@@ -44,28 +44,4 @@ defmodule Website.Blog do
   def get_article_by_slug(slug) do
     Enum.find(@articles, &(&1.slug == slug))
   end
-
-  @doc """
-  Returns the og image path for an article.
-  """
-  def get_og_image_path(article, conn) do
-    [year, month, day] =
-      Calendar.strftime(article.date, "%Y-%m-%d")
-      |> String.split("-", parts: 3)
-
-    file = "/images/og/blog/#{year}/#{month}-#{day}-#{article.id}.jpg"
-
-    exists? =
-      [Application.app_dir(:website), "/priv/static", file]
-      |> Path.join()
-      |> File.exists?()
-
-    case exists? do
-      true ->
-        Phoenix.VerifiedRoutes.unverified_url(conn, file)
-
-      false ->
-        nil
-    end
-  end
 end

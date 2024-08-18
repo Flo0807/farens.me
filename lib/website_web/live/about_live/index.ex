@@ -3,6 +3,11 @@ defmodule WebsiteWeb.AboutLive.Index do
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :page_title, "About Me - Florian Arens")}
+    socket =
+      socket
+      |> assign(:page_title, "About Me - Florian Arens")
+      |> assign(:og_image_text, "About")
+
+    {:ok, socket}
   end
 end

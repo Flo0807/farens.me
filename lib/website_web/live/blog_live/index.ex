@@ -11,6 +11,7 @@ defmodule WebsiteWeb.BlogLive.Index do
       socket
       |> assign(:page_title, "Blog - Florian Arens")
       |> assign(:all_tags, all_tags)
+      |> assign(:og_image_text, "Blog")
 
     {:ok, socket}
   end

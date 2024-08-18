@@ -11,6 +11,7 @@ defmodule WebsiteWeb.ProjectsLive.Index do
       socket
       |> assign(:projects, projects)
       |> assign(:page_title, "Projects - Florian Arens")
+      |> assign(:og_image_text, "Projects")
 
     {:ok, socket}
   end
