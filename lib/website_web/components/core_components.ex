@@ -403,7 +403,10 @@ defmodule WebsiteWeb.CoreComponents do
           :for={tag <- @tags}
           phx-click="select-tag"
           phx-value-tag={tag}
-          class={["badge badge-neutral", String.downcase(tag) == @search_tag && "badge-primary"]}
+          class={[
+            "badge badge-neutral transition-transform duration-100 hover:scale-105",
+            String.downcase(tag) == @search_tag && "badge-primary"
+          ]}
         >
           <%= tag %>
         </button>
