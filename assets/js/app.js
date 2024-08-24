@@ -23,13 +23,15 @@ import { LiveSocket } from "phoenix_live_view"
 import topbar from "topbar"
 import ThemeSwitch from "./hooks/themeSwitch"
 import Copy from "./hooks/copy"
+import ShareArticle from "./hooks/share_article"
 
 // Set the theme on page load
 document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'night');
 
 const Hooks = {
   ThemeSwitch,
-  Copy
+  Copy,
+  ShareArticle
 }
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")

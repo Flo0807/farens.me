@@ -164,30 +164,36 @@ defmodule WebsiteWeb.CoreComponents do
 
   def share_article_dropdown(assigns) do
     ~H"""
-    <details id="share_dropdown" class="dropdown dropdown-end">
-      <summary
-        class="btn btn-ghost btn-sm btn-square"
-        phx-click-away={JS.remove_attribute("open", to: "#share_dropdown")}
-      >
+    <div id="share_container" phx-hook="ShareArticle" data-title={@title} data-url={@link}>
+      <button class="btn btn-ghost btn-sm btn-square" id="share_button">
         <.icon name="hero-share" />
         <span class="sr-only">Share</span>
-      </summary>
-      <ul class="menu dropdown-content z-[1] bg-base-300 rounded-box w-40 p-2 shadow">
-        <li>
-          <.link
-            href={"https://x.com/intent/tweet?text=#{@title}&url=#{@link}&via=flo_arens"}
-            target="_blank"
-          >
-            Share on X
-          </.link>
-        </li>
-        <li>
-          <a id="copy-blog-url" role="button" data-value={@link} phx-hook="Copy">
-            Copy link
-          </a>
-        </li>
-      </ul>
-    </details>
+      </button>
+      <details id="share_dropdown" class="dropdown dropdown-end hidden">
+        <summary
+          class="btn btn-ghost btn-sm btn-square"
+          phx-click-away={JS.remove_attribute("open", to: "#share_dropdown")}
+        >
+          <.icon name="hero-share" />
+          <span class="sr-only">Share</span>
+        </summary>
+        <ul class="menu dropdown-content z-[1] bg-base-300 rounded-box w-40 p-2 shadow">
+          <li>
+            <.link
+              href={"https://x.com/intent/tweet?text=#{@title}&url=#{@link}&via=flo_arens"}
+              target="_blank"
+            >
+              Share on X
+            </.link>
+          </li>
+          <li>
+            <a id="copy-blog-url" role="button" data-value={@link} phx-hook="Copy">
+              Copy link
+            </a>
+          </li>
+        </ul>
+      </details>
+    </div>
     """
   end
 
