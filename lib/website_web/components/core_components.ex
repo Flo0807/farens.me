@@ -164,12 +164,12 @@ defmodule WebsiteWeb.CoreComponents do
 
   def share_article_dropdown(assigns) do
     ~H"""
-    <div id="share_container" phx-hook="ShareArticle" data-title={@title} data-url={@link}>
-      <button class="btn btn-ghost btn-sm btn-square" id="share_button">
+    <div id="share_container" phx-hook="WebShareApi" data-title={@title} data-url={@link}>
+      <button data-share-web-share class="btn btn-ghost btn-sm btn-square hidden">
         <.icon name="hero-share" />
         <span class="sr-only">Share</span>
       </button>
-      <details id="share_dropdown" class="dropdown dropdown-end hidden">
+      <details id="share_dropdown" data-share-fallback class="dropdown dropdown-end hidden">
         <summary
           class="btn btn-ghost btn-sm btn-square"
           phx-click-away={JS.remove_attribute("open", to: "#share_dropdown")}
