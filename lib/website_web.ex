@@ -42,8 +42,9 @@ defmodule WebsiteWeb do
         formats: [:html, :json],
         layouts: [html: WebsiteWeb.Layouts]
 
+      use Gettext, backend: Website.Gettext
+
       import Plug.Conn
-      import WebsiteWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -80,11 +81,13 @@ defmodule WebsiteWeb do
 
   defp html_helpers do
     quote do
+      use Gettext, backend: Website.Gettext
+
       # HTML escaping functionality
       import Phoenix.HTML
-      # Core UI components and translation
+
+      # Core UI components
       import WebsiteWeb.CoreComponents
-      import WebsiteWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
