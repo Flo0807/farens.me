@@ -2,12 +2,11 @@ defmodule WebsiteWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
   """
+  use Gettext, backend: Website.Gettext
   use Phoenix.Component
   use WebsiteWeb, :verified_routes
 
   alias Phoenix.LiveView.JS
-
-  import WebsiteWeb.Gettext
 
   @themes [
     %{label: "Night", theme: "night", icon: "hero-star"},
