@@ -19,7 +19,7 @@ defmodule WebsiteWeb.BlogLive.Show do
 
     if connected?(socket) do
       Phoenix.PubSub.subscribe(Website.PubSub, topic(article))
-      {:ok, _ref} = Presence.track(self(), topic(article), @presence_key, %{})
+      {:ok, _ref} = Presence.track(self(), topic(article), @presence_key, %{ip: get_ip(socket)})
     end
 
     socket =
@@ -41,12 +41,29 @@ defmodule WebsiteWeb.BlogLive.Show do
 
   defp get_live_reading_count(article) do
     case Presence.list(topic(article)) do
-      %{@presence_key => %{metas: list}} -> Enum.count(list)
-      _other -> 0
+      %{@presence_key => %{metas: list}} ->
+        list
+        |> Enum.uniq_by(fn %{ip: ip} -> ip end)
+        |> Enum.count()
+
+      _other ->
+        0
     end
   end
 
   defp topic(%{id: id} = _article) do
     "article:#{id}"
+  end
+
+  defp get_ip(socket) do
+    get_connect_info(socket, :x_headers)
+    |> Enum.filter(fn {header, _value} -> header == "x-real-ip" end)
+    |> then(fn
+      [{_header, value}] ->
+        value
+
+      _other ->
+        "0.0.0.0"
+    end)
   end
 end
