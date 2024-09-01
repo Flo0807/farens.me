@@ -1,12 +1,12 @@
 %{
   slug: "implement-the-web-share-api-in-phoenix-liveview",
   title: "Implement the Web Share API in Phoenix LiveView",
-  description: "Learn how to implement the Web Share API in your Phoenix LiveView application. This article will show you how to create a custom Phoenix hook to seamlessly share content, improve the user experience, and increase engagement.",
+  description: "Learn how to implement the Web Share API in your Phoenix LiveView application. This article will show you how to create a custom Phoenix LiveView hook to seamlessly share content, improve the user experience, and increase engagement.",
   published: true,
   tags: ["LiveView", "Phoenix", "Web Share API"]
 }
 ---
-Learn how to implement the Web Share API in your Phoenix LiveView application. This article will show you how to create a custom Phoenix hook to seamlessly share content, improve the user experience, and increase engagement.
+Learn how to implement the Web Share API in your Phoenix LiveView application. This article will show you how to create a custom Phoenix LiveView hook to seamlessly share content, improve the user experience, and increase engagement.
 
 ## Introduction
 
