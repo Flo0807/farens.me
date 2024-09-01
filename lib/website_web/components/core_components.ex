@@ -163,7 +163,7 @@ defmodule WebsiteWeb.CoreComponents do
 
   def share_article_dropdown(assigns) do
     ~H"""
-    <div id="share_container" phx-hook="WebShareApi" data-title={@title} data-url={@link}>
+    <div id="share_container" phx-hook="WebShareAPI" data-title={@title} data-url={@link}>
       <button data-share-web-share class="btn btn-ghost btn-sm btn-square hidden">
         <.icon name="hero-share" />
         <span class="sr-only">Share</span>

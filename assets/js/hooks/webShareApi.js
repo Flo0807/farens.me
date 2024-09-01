@@ -1,5 +1,5 @@
 /**
- * ShareArticle Hook
+ * WebShareAPI Hook
  *
  * This hook provides functionality for sharing data using either the
  * Web Share API or a fallback sharing mechanism.
@@ -16,7 +16,7 @@
  *   </div>
  * </div>
  */
-const WebShareApi = {
+const WebShareAPI = {
   /**
    * Initializes the sharing functionality when the element is mounted.
    */
@@ -31,13 +31,15 @@ const WebShareApi = {
    * @param {Object} shareData - The data to be shared (title and URL).
    */
   initializeSharing(shareData) {
-    const webShareButton = this.el.querySelector("[data-share-web-share]");
+    const webShareButton = this.el.querySelector("button[data-share-web-share]");
     const fallbackShareElement = this.el.querySelector("[data-share-fallback]");
 
-    if (navigator.share && navigator.canShare(shareData)) {
+    if (navigator.share && navigator.canShare(shareData) && webShareButton) {
       this.setupWebSharing(webShareButton, shareData);
+    } else if (fallbackShareElement) {
+      this.setupFallbackSharing(fallbackShareElement);
     } else {
-      this.setupFallbackSharing(webShareButton, fallbackShareElement);
+      console.error("Can not initialize sharing");
     }
   },
   /**
@@ -46,30 +48,22 @@ const WebShareApi = {
    * @param {Object} shareData - The data to be shared.
    */
   setupWebSharing(webShareButton, shareData) {
-    if (webShareButton) {
-      webShareButton.classList.remove("hidden");
-      webShareButton.addEventListener("click", async () => {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {
-          console.error("Error sharing:", err);
-        }
-      });
-    }
+    webShareButton.classList.remove("hidden");
+    webShareButton.addEventListener("click", async () => {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.error("Error sharing:", err);
+      }
+    });
   },
   /**
    * Sets up the fallback sharing mechanism when native sharing is not supported.
-   * @param {HTMLElement} webShareButton - The Web Share API button to be hidden.
    * @param {HTMLElement} fallbackElement - The fallback sharing element to be displayed.
    */
-  setupFallbackSharing(webShareButton, fallbackElement) {
-    if (webShareButton) {
-      webShareButton.classList.add("hidden");
-    }
-    if (fallbackElement) {
-      fallbackElement.classList.remove("hidden");
-    }
+  setupFallbackSharing(fallbackElement) {
+    fallbackElement.classList.remove("hidden");
   }
 };
 
-export default WebShareApi;
+export default WebShareAPI;
