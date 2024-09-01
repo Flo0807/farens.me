@@ -1,5 +1,5 @@
 /**
- * WebShareAPI Hook
+ * WebShareApi Hook
  *
  * This hook provides functionality for sharing data using either the
  * Web Share API or a fallback sharing mechanism.
@@ -16,7 +16,7 @@
  *   </div>
  * </div>
  */
-const WebShareAPI = {
+const WebShareApi = {
   /**
    * Initializes the sharing functionality when the element is mounted.
    */
@@ -66,4 +66,4 @@ const WebShareAPI = {
   }
 };
 
-export default WebShareAPI;
+export default WebShareApi;

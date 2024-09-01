@@ -36,16 +36,16 @@ In the following sections, we will create a new LiveView hook that will handle t
 
 To integrate the Web Share API into our LiveView application, we need to create a hook. A Phoenix LiveView hook is a way to add custom JavaScript functionality to your LiveView pages. You can learn more about hooks in the [Phoenix LiveView documentation](https://hexdocs.pm/phoenix_live_view/js-interop.html#client-hooks-via-phx-hook).
 
-We need to create a hook because we need to write some client-side JavaScript to use the Web Share API. We create a new file `assets/js/hooks/webShareAPI.js` and add the following boilerplate code to it:
+We need to create a hook because we need to write some client-side JavaScript to use the Web Share API. We create a new file `assets/js/hooks/webShareApi.js` and add the following boilerplate code to it:
 
 ```javascript
-const WebShareAPI = {
+const WebShareApi = {
   mounted() {
-    console.log("WebShareAPI mounted");
+    console.log("WebShareApi mounted");
   }
 }
 
-export default WebShareAPI
+export default WebShareApi
 ```
 
 This is a very simple hook that logs to the console when mounted.
@@ -55,23 +55,23 @@ This is a very simple hook that logs to the console when mounted.
 To make the hook available to our LiveView, we need to add it to our project. We do this by adding the hook to the `assets/js/app.js` file.
 
 ```javascript
-// Import the WebShareAPI hook
-import WebShareAPI from "./hooks/webShareAPI"
+// Import the WebShareApi hook
+import WebShareApi from "./hooks/webShareApi"
 
-// Add the WebShareAPI hook to a JavaScript object
+// Add the WebShareApi hook to a JavaScript object
 const Hooks = {
-  WebShareAPI
+  WebShareApi
 }
 
 // Create a new LiveSocket instance and pass in the Hooks object
 let liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken }, hooks: Hooks })
 ```
 
-You are now ready to call the `WebShareAPI` hook in your LiveView application.
+You are now ready to call the `WebShareApi` hook in your LiveView application.
 
 ### Calling the Hook in your LiveView
 
-We will call the `WebShareAPI` hook from our markup to see if everything works. Let's add a new component `share_article.ex` to our `core_components.ex` file. We will use this component to share blog articles, but you can use it for other things as well.
+We will call the `WebShareApi` hook from our markup to see if everything works. Let's add a new component `share_article.ex` to our `core_components.ex` file. We will use this component to share blog articles, but you can use it for other things as well.
 
 ```elixir
 attr :title, :string, required: true
@@ -79,7 +79,7 @@ attr :link, :string, required: true
 
 def share_article(assigns) do
   ~H"""
-  <div id="share-article" phx-hook="WebShareAPI" data-title={@title} data-url={@link}>
+  <div id="share-article" phx-hook="WebShareApi" data-title={@title} data-url={@link}>
   </div>
   """
 end
@@ -87,16 +87,16 @@ end
 
 As you can see, we pass in the title and link of the blog article to the component and add these values to the dataset of the `share-article` div.
 
-Add this component to your LiveView page and you will notice that the `WebShareAPI` hook is called by looking at the "WebShareAPI mounted" log in your browser's console.
+Add this component to your LiveView page and you will notice that the `WebShareApi` hook is called by looking at the "WebShareApi mounted" log in your browser's console.
 
 ### Add Functionality to the Hook
 
-We now begin to add the actual functionality to the `WebShareAPI` hook.
+We now begin to add the actual functionality to the `WebShareApi` hook.
 
 ```javascript
-const WebShareAPI = {
+const WebShareApi = {
   mounted() {
-    console.log("WebShareAPI mounted")
+    console.log("WebShareApi mounted")
 
     const { title, url } = this.el.dataset;
     const shareData = { title, url };
@@ -108,7 +108,7 @@ const WebShareAPI = {
   }
 }
 
-export default WebShareAPI
+export default WebShareApi
 ```
 
 Obviously, we need the title and URL of the article to share. We extract these values from the dataset of the `share-article` div. Note that we have already added these values to the dataset in the previous step. Next, we want to initialize the sharing functionality. We do this by calling the `initializeSharing` method and passing in the `shareData` object that contains the title and URL of the article.
@@ -118,7 +118,7 @@ You should see the `initializeSharing` method called in the console when you rel
 In the `initializeSharing` method we will now check if the Web Share API is supported by the browser. If it is, we set up the sharing functionality. If not, we set up a fallback sharing functionality.
 
 ```javascript
-const WebShareAPI = {
+const WebShareApi = {
   mounted() {
     ...
   },
@@ -144,13 +144,13 @@ const WebShareAPI = {
   }
 }
 
-export default WebShareAPI
+export default WebShareApi
 ```
 
 Note that we are trying to find a web share button and a fallback element in the markup by looking for the `data-share-web-share` and `data-share-fallback` attributes. Let's add those attributes to our elements.
 
 ```elixir
-<div id="share-article" phx-hook="WebShareAPI" data-title={@title} data-url={@link}>
+<div id="share-article" phx-hook="WebShareApi" data-title={@title} data-url={@link}>
   <button data-share-web-share class="hidden">Share</button>
   <div data-share-fallback class="hidden"><%= @link %></div>
 </div>
@@ -160,10 +160,10 @@ The button is used to trigger the Web Share API and the fallback element is used
 
 By default, we will hide the button and the fallback element. We will show the button if the Web Share API is supported, and the fallback element if it is not.
 
-We can start implementing the actual sharing functionality for the Web Share API by adding the following to our `WebShareAPI` hook:
+We can start implementing the actual sharing functionality for the Web Share API by adding the following to our `WebShareApi` hook:
 
 ```javascript
-const WebShareAPI = {
+const WebShareApi = {
   mounted() {
     ...
   },
@@ -184,7 +184,7 @@ const WebShareAPI = {
   }
 }
 
-export default WebShareAPI
+export default WebShareApi
 ```
 
 First, we remove the `hidden` class from the web share button. This makes the button visible to the user. We then add an event listener to the button to handle the click event. When the button is clicked, the `navigator#share` method is called. This will share the content with the user's device. Note that we have already checked for Web Share API support in the `initializeSharing` method.
@@ -193,10 +193,10 @@ We wrap the `navigator.share` call in a `try/catch` block to handle any errors t
 
 It is important to note that the Web Share API is only available in secure contexts (HTTPS).
 
-We now set up the fallback sharing mechanism by adding the following to our `WebShareAPI` hook:
+We now set up the fallback sharing mechanism by adding the following to our `WebShareApi` hook:
 
 ```javascript
-const WebShareAPI = {
+const WebShareApi = {
   mounted() {
     ...
   },
@@ -211,16 +211,16 @@ const WebShareAPI = {
   }
 }
 
-export default WebShareAPI
+export default WebShareApi
 ```
 
 The fallback mechanism is as simple as removing the `hidden` class from the fallback element. This makes the fallback element visible to the user.
 
-The complete `WebShareAPI` hook should now look like this:
+The complete `WebShareApi` hook should now look like this:
 
 ```javascript
-// assets/js/hooks/webShareAPI.js
-const WebShareAPI = {
+// assets/js/hooks/webShareApi.js
+const WebShareApi = {
   mounted() {
     const { title, url } = this.el.dataset;
     const shareData = { title, url };
@@ -254,7 +254,7 @@ const WebShareAPI = {
   }
 };
 
-export default WebShareAPI;
+export default WebShareApi;
 ```
 
 ### Bonus: Setup Copy to Clipboard as Fallback
@@ -264,7 +264,7 @@ We can improve the fallback sharing mechanism by adding a "Copy to Clipboard" bu
 Since the fallback sharing mechanism also uses a button, we can use the same button for both the Web Share API and the Copy to Clipboard functionality. Let's adjust our markup accordingly.
 
 ```elixir
-<div id="share-article" phx-hook="WebShareAPI" data-title={@title} data-url={@link}>
+<div id="share-article" phx-hook="WebShareApi" data-title={@title} data-url={@link}>
   <button data-share-btn>Share</button>
 </div>
 ```
@@ -274,7 +274,7 @@ We add the `data-share-btn` attribute to the button. We will use this attribute 
 Next, we need to adjust the JavaScript code to handle the copy to clipboard functionality and to only look for the `data-share-btn` attribute:
 
 ```javascript
-const WebShareAPI = {
+const WebShareApi = {
   mounted() {
     const { title, url } = this.el.dataset;
     const shareData = { title, url };
@@ -315,7 +315,7 @@ const WebShareAPI = {
   }
 };
 
-export default WebShareAPI;
+export default WebShareApi;
 ```
 
 We add an event listener to the button to handle the click event. When the button is clicked, the link is copied to the clipboard and the button text changes to "Link Copied". After a short delay, the button text changes back to the original text. We have not touched the Web Share API in this section. We just added a better fallback mechanism that is triggered when the Web Share API is not supported.
