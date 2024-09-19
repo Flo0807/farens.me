@@ -4,5 +4,9 @@
     "config:best-practices",
     ":disableRateLimiting",
     ":reviewer(Flo0807)"
+  ],
+  "labels": [
+    "dependencies",
+    "{{categories}}"
   ]
 }
