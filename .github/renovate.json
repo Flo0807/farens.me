@@ -2,6 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:best-practices",
-    ":assignee(Flo0807)"
+    ":reviewer(Flo0807)"
   ]
 }
