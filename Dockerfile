@@ -3,8 +3,12 @@
 #
 # https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=debian
 # https://hub.docker.com/_/debian?tab=tags
+
+# renovate: datasource=github-tags depName=elixir packageName=elixir-lang/elixir
 ARG ELIXIR_VERSION=1.17.3
+# renovate: datasource=github-tags depName=erlang packageName=erlang/otp versioning=regex:^OTP-(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)?$
 ARG OTP_VERSION=27.0
+# renovate: datasource=docker depName=debian versioning=debian
 ARG DEBIAN_VERSION=buster-20240612-slim
 
 ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}
