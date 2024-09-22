@@ -3,7 +3,14 @@
 #
 # https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=debian
 # https://hub.docker.com/_/debian?tab=tags
-FROM hexpm/elixir:1.17.3-erlang-27.0-debian-buster-20240612-slim@sha256:b27b9e026a2aaed00ed2c18997b56e00b876bbdf870ff44ae1891ee7e702e056 AS builder
+ARG ELIXIR_VERSION=1.17.3
+ARG OTP_VERSION=27.0
+ARG DEBIAN_VERSION=buster-20240612-slim
+
+ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}
+ARG RUNNER_IMAGE=debian:${DEBIAN_VERSION}
+
+FROM ${BUILDER_IMAGE} AS builder
 
 # install build dependencies
 RUN apt-get update && apt-get install -y curl
@@ -56,7 +63,7 @@ RUN mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
-FROM debian:buster-20240612-slim@sha256:bb3dc79fddbca7e8903248ab916bb775c96ec61014b3d02b4f06043b604726dc
+FROM ${RUNNER_IMAGE}
 
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
