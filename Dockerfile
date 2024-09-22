@@ -6,7 +6,7 @@
 
 # renovate: datasource=github-tags depName=elixir packageName=elixir-lang/elixir
 ARG ELIXIR_VERSION=1.17.3
-# renovate: datasource=github-tags depName=erlang packageName=erlang/otp versioning=regex:^OTP-(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)?$
+# renovate: datasource=github-tags depName=erlang packageName=erlang/otp
 ARG OTP_VERSION=27.0
 # renovate: datasource=docker depName=debian versioning=debian
 ARG DEBIAN_VERSION=buster-20240612-slim
