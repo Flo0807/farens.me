@@ -6,6 +6,16 @@
     ":disableRateLimiting",
     ":reviewer(Flo0807)"
   ],
+  "packageRules": [
+    {
+      "groupName": "Elixir Image",
+      "matchDepNames": [
+        "elixir",
+        "erlang",
+        "debian"
+      ]
+    }
+  ],
   "labels": [
     "dependencies",
     "{{categories}}"
