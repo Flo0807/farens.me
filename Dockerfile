@@ -9,7 +9,7 @@ ARG ELIXIR_VERSION=1.17.3
 # renovate: datasource=github-tags depName=erlang packageName=erlang/otp
 ARG OTP_VERSION=27.0
 # renovate: datasource=docker depName=ubuntu versioning=ubuntu
-ARG UBUNTU_VERSION=jammy-20240808
+ARG UBUNTU_VERSION=24.04
 
 ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-${UBUNTU_VERSION}
 ARG RUNNER_IMAGE=ubuntu:${UBUNTU_VERSION}
