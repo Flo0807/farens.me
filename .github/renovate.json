@@ -12,8 +12,17 @@
       "matchDepNames": [
         "elixir",
         "erlang",
-        "debian"
+        "ubuntu"
       ]
+    },
+    {
+      "matchDepNames": [
+        "ubuntu"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "enabled": false
     }
   ],
   "labels": [
