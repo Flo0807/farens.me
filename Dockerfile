@@ -1,18 +1,18 @@
 # Find eligible builder and runner images on Docker Hub. We use Ubuntu/Debian instead of
 # Alpine to avoid DNS resolution issues in production.
 #
-# https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=debian
-# https://hub.docker.com/_/debian?tab=tags
+# https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=ubuntu
+# https://hub.docker.com/_/ubuntu?tab=tags
 
 # renovate: datasource=github-tags depName=elixir packageName=elixir-lang/elixir
 ARG ELIXIR_VERSION=1.17.3
 # renovate: datasource=github-tags depName=erlang packageName=erlang/otp
 ARG OTP_VERSION=27.0
-# renovate: datasource=docker depName=debian versioning=debian
-ARG DEBIAN_VERSION=buster-20240612-slim
+# renovate: datasource=docker depName=ubuntu versioning=ubuntu
+ARG UBUNTU_VERSION=jammy-20240808
 
-ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}
-ARG RUNNER_IMAGE=debian:${DEBIAN_VERSION}
+ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-${UBUNTU_VERSION}
+ARG RUNNER_IMAGE=ubuntu:${UBUNTU_VERSION}
 
 FROM ${BUILDER_IMAGE} AS builder
 
