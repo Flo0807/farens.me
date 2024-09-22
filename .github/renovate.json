@@ -23,6 +23,12 @@
         "major"
       ],
       "enabled": false
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": false
     }
   ],
   "labels": [
