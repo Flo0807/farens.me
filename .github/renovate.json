@@ -29,6 +29,16 @@
         "docker"
       ],
       "pinDigests": false
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true
     }
   ],
   "labels": [
