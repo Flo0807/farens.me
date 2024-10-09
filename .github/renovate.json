@@ -3,8 +3,7 @@
   "extends": [
     "config:best-practices",
     "customManagers:dockerfileVersions",
-    ":disableRateLimiting",
-    ":reviewer(Flo0807)"
+    ":disableRateLimiting"
   ],
   "packageRules": [
     {
