@@ -23,7 +23,7 @@ defmodule WebsiteWeb.CoreComponents do
   def title(assigns) do
     ~H"""
     <h1 class="text-3xl font-semibold">
-      <%= @text %>
+      {@text}
     </h1>
     """
   end
@@ -38,7 +38,7 @@ defmodule WebsiteWeb.CoreComponents do
     ~H"""
     <.title :if={@title} text={@title} />
     <div :if={@inner_block != []} class="text-pretty my-8 leading-relaxed md:my-12 lg:w-2/3">
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -59,13 +59,13 @@ defmodule WebsiteWeb.CoreComponents do
           <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
         </form>
         <h3 if={@header} class="text-base-content text-lg font-bold">
-          <%= @header %>
+          {@header}
         </h3>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </div>
       <form method="dialog" class="modal-backdrop">
         <button>
-          <%= gettext("close") %>
+          {gettext("close")}
         </button>
       </form>
     </dialog>
@@ -89,7 +89,7 @@ defmodule WebsiteWeb.CoreComponents do
             navigate={to}
             class={["btn btn-sm", if(active?(@current_url, to), do: "btn-primary", else: "btn-ghost")]}
           >
-            <%= label %>
+            {label}
           </.link>
         </div>
 
@@ -147,7 +147,7 @@ defmodule WebsiteWeb.CoreComponents do
             phx-click={JS.dispatch("change-theme", detail: %{theme: theme})}
           >
             <.icon name={icon} class="w-4 h-4" />
-            <span><%= label %></span>
+            <span>{label}</span>
           </div>
         </li>
       </ul>
@@ -204,7 +204,7 @@ defmodule WebsiteWeb.CoreComponents do
     <.modal id="mobile_navigation" header="Navigation">
       <nav class="mt-4 flex flex-col space-y-4">
         <.link :for={%{label: label, to: to} <- main_navigation_links()} navigate={to}>
-          <%= label %>
+          {label}
         </.link>
       </nav>
     </.modal>
@@ -233,7 +233,7 @@ defmodule WebsiteWeb.CoreComponents do
                 if(active?(@current_url, to), do: "text-primary", else: "text-content")
               ]}
             >
-              <%= label %>
+              {label}
             </.link>
           </nav>
           <div>
@@ -250,7 +250,7 @@ defmodule WebsiteWeb.CoreComponents do
                 if(active?(@current_url, to), do: "text-primary !opacity-100", else: "text-content")
               ]}
             >
-              <%= label %>
+              {label}
             </.link>
           </nav>
         </div>
@@ -302,17 +302,17 @@ defmodule WebsiteWeb.CoreComponents do
       <article class="card bg-base-200 group h-full w-full cursor-pointer transition-all hover:-translate-y-1">
         <div class="card-body">
           <h2 class="card-title text-pretty mb-4">
-            <%= @title %>
+            {@title}
           </h2>
           <p class="text-pretty mb-4">
-            <%= @description %>
+            {@description}
           </p>
 
           <div class="card-actions justify-end">
             <div class="flex items-center space-x-2">
               <.icon name="hero-link" class="text-content group-hover:text-primary" />
               <span class="text-content group-hover:text-primary group-hover:underline">
-                <%= @link_label %>
+                {@link_label}
               </span>
             </div>
           </div>
@@ -331,7 +331,7 @@ defmodule WebsiteWeb.CoreComponents do
   def grid(assigns) do
     ~H"""
     <section class={["grid gap-5 md:grid-cols-2 lg:grid-cols-3", @class]}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </section>
     """
   end
@@ -357,22 +357,22 @@ defmodule WebsiteWeb.CoreComponents do
       ]}>
         <div class="card-body">
           <h2 class="card-title text-pretty mb-4">
-            <%= @title %>
+            {@title}
           </h2>
           <div class="mb-4 flex w-fit items-center">
             <span class="text-xs font-semibold">
-              <%= Calendar.strftime(@date, "%d %B %Y") %>
+              {Calendar.strftime(@date, "%d %B %Y")}
             </span>
             <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
             <span class="text-xs font-semibold">
-              <%= @read_minutes %> min read
+              {@read_minutes} min read
             </span>
           </div>
           <div :if={@tags != []} class="mb-4 flex flex-wrap gap-x-2 gap-y-2">
-            <span :for={tag <- @tags} class="badge badge-neutral"><%= tag %></span>
+            <span :for={tag <- @tags} class="badge badge-neutral">{tag}</span>
           </div>
           <p class="text-pretty mb-4">
-            <%= @description %>
+            {@description}
           </p>
           <div class="card-actions justify-end">
             <div class="flex items-center space-x-2">
@@ -413,7 +413,7 @@ defmodule WebsiteWeb.CoreComponents do
             String.downcase(tag) == @search_tag && "badge-primary"
           ]}
         >
-          <%= tag %>
+          {tag}
         </button>
       </div>
     </section>
@@ -431,7 +431,7 @@ defmodule WebsiteWeb.CoreComponents do
     <ul class={@class}>
       <li :for={%{label: label, href: href, childs: childs} <- @headings}>
         <.link href={href}>
-          <%= label %>
+          {label}
         </.link>
         <.toc :if={childs != []} headings={childs} class="" />
       </li>
