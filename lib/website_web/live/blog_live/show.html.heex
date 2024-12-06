@@ -21,18 +21,18 @@
           <div class="flex w-fit items-center">
             <span class="flex items-center space-x-2 text-sm font-semibold">
               <.icon name="hero-calendar" class="w-4 h-4" />
-              <span><%= Calendar.strftime(@article.date, "%d %B %Y") %></span>
+              <span>{Calendar.strftime(@article.date, "%d %B %Y")}</span>
             </span>
             <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
             <span class="text-sm font-semibold">
-              <%= @article.read_minutes %> min read
+              {@article.read_minutes} min read
             </span>
           </div>
           <.share_article_dropdown title={@article.title} link={url(~p"/blog/#{@article.slug}")} />
         </div>
 
         <div class="mt-2 flex items-center space-x-2 md:mt-4">
-          <span class="text-sm font-semibold"><%= @live_reading %> reading now</span>
+          <span class="text-sm font-semibold">{@live_reading} reading now</span>
           <span class="relative flex h-3 w-3">
             <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75 duration-500">
             </span>
@@ -42,7 +42,7 @@
       </div>
 
       <article class="prose prose-base prose-p:text-base-content">
-        <%= raw(@article.body) %>
+        {raw(@article.body)}
       </article>
     </div>
   </div>
