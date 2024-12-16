@@ -39,7 +39,7 @@ defmodule Website.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, ">= 0.0.0"},
-      {:mdex, "~> 0.2.0"},
+      {:mdex, "~> 0.3.0"},
       {:yaml_elixir, "~> 2.11.0"},
       {:tailwind_formatter, "~> 0.4.0", only: [:dev, :test], runtime: false},
       {:nimble_publisher, "~> 1.1.0"},
