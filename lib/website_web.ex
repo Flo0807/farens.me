@@ -88,6 +88,7 @@ defmodule WebsiteWeb do
 
       # Core UI components
       import WebsiteWeb.CoreComponents
+      import WebsiteWeb.Icons
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
