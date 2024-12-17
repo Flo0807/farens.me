@@ -240,7 +240,10 @@ defmodule WebsiteWeb.CoreComponents do
           </nav>
           <div>
             <p class="footer-title">Connect</p>
-            <.contact_links class="flex space-x-4" icon_class="size-6 text-content fill-current" />
+            <.contact_links
+              class="flex space-x-4"
+              icon_class="size-6 text-base-content/85 hover:text-base-content fill-current "
+            />
           </div>
           <nav class="md:flex md:w-full md:justify-center">
             <p class="footer-title md:hidden">Legal</p>
