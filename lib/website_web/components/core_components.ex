@@ -238,7 +238,7 @@ defmodule WebsiteWeb.CoreComponents do
           </nav>
           <div>
             <p class="footer-title">Connect</p>
-            <.contact_links class="flex space-x-4" icon_class="w-6 h-6 text-content fill-current" />
+            <.contact_links class="flex space-x-4" icon_class="size-6 text-content fill-current" />
           </div>
           <nav class="md:flex md:w-full md:justify-center">
             <p class="footer-title md:hidden">Legal</p>
@@ -269,19 +269,23 @@ defmodule WebsiteWeb.CoreComponents do
     ~H"""
     <div class={@class}>
       <.link href="https://github.com/flo0807" target="_blank">
-        <span class="sr-only">GitHub Icon</span>
+        <span class="sr-only">GitHub</span>
         <.github_icon class={@icon_class} />
       </.link>
       <.link href="https://linkedin.com/in/florian-arens" target="_blank">
-        <span class="sr-only">LinkedIn Icon</span>
+        <span class="sr-only">LinkedIn</span>
         <.linkedin_icon class={@icon_class} />
       </.link>
+      <.link href="https://bsky.app/profile/farens.me" target="_blank">
+        <span class="sr-only">Blueksy</span>
+        <.bluesky_icon class={@icon_class} />
+      </.link>
       <.link href="https://x.com/flo_arens" target="_blank">
-        <span class="sr-only">X Icon</span>
+        <span class="sr-only">X</span>
         <.x_icon class={@icon_class} />
       </.link>
       <.link href="mailto:info@farens.me">
-        <span class="sr-only">Mail Icon</span>
+        <span class="sr-only">Mail</span>
         <.mail_icon class={@icon_class} />
       </.link>
     </div>
@@ -493,6 +497,15 @@ defmodule WebsiteWeb.CoreComponents do
     ~H"""
     <svg viewBox="0 0 24 24" aria-hidden="true" class={@class}>
       <path d="M13.3174 10.7749L19.1457 4H17.7646L12.7039 9.88256L8.66193 4H4L10.1122 12.8955L4 20H5.38119L10.7254 13.7878L14.994 20H19.656L13.3171 10.7749H13.3174ZM11.4257 12.9738L10.8064 12.0881L5.87886 5.03974H8.00029L11.9769 10.728L12.5962 11.6137L17.7652 19.0075H15.6438L11.4257 12.9742V12.9738Z">
+      </path>
+    </svg>
+    """
+  end
+
+  def bluesky_icon(assigns) do
+    ~H"""
+    <svg viewBox="0 0 24 24" aria-hidden="true" class={@class}>
+      <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z">
       </path>
     </svg>
     """
