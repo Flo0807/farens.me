@@ -8,6 +8,12 @@
   ],
   "packageRules": [
     {
+      "matchManagers": [
+        "mix"
+      ],
+      "rangeStrategy": "update-lockfile"
+    },
+    {
       "groupName": "Elixir Image",
       "matchDepNames": [
         "elixir",
