@@ -148,7 +148,7 @@ defmodule WebsiteWeb.CoreComponents do
             class="flex items-center space-x-2"
             phx-click={JS.dispatch("change-theme", detail: %{theme: theme})}
           >
-            <.icon name={icon} class="w-4 h-4" />
+            <.icon name={icon} class="h-4 w-4" />
             <span>{label}</span>
           </div>
         </li>
@@ -231,7 +231,7 @@ defmodule WebsiteWeb.CoreComponents do
               :for={%{label: label, to: to} <- main_navigation_links()}
               navigate={to}
               class={[
-                "font-semibold mr-4",
+                "mr-4 font-semibold",
                 if(active?(@current_url, to), do: "text-primary", else: "text-content")
               ]}
             >
@@ -251,7 +251,7 @@ defmodule WebsiteWeb.CoreComponents do
               :for={%{label: label, to: to} <- secondary_navigation_links()}
               navigate={to}
               class={[
-                "font-semibold md:text-sm mr-4 md:opacity-60",
+                "mr-4 font-semibold md:text-sm md:opacity-60",
                 if(active?(@current_url, to), do: "text-primary !opacity-100", else: "text-content")
               ]}
             >
