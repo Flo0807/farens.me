@@ -46,7 +46,8 @@
         "patch",
         "pin",
         "pinDigest"
-      ]
+      ],
+      "automerge": true
     }
   ],
   "labels": [
