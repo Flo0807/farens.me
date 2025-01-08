@@ -4,7 +4,8 @@
     "config:best-practices",
     "customManagers:dockerfileVersions",
     ":disableRateLimiting",
-    ":reviewer(Flo0807)"
+    ":reviewer(Flo0807)",
+    "helpers:pinGitHubActionDigestsToSemver"
   ],
   "packageRules": [
     {
@@ -40,7 +41,12 @@
       "matchManagers": [
         "github-actions"
       ],
-      "automerge": true
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest"
+      ]
     }
   ],
   "labels": [
