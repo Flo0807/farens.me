@@ -75,7 +75,7 @@ jobs:
         run: echo "IMAGE_NAME=$(echo "$IMAGE_NAME" | awk '{print tolower($0)}')" >> $GITHUB_ENV
 
       - name: Log in to the container registry
-        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
