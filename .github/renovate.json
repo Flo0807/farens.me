@@ -2,7 +2,8 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>Flo0807/renovate-config//base",
-    "github>Flo0807/renovate-config//elixir-ubuntu"
+    "github>Flo0807/renovate-config//elixir-ubuntu",
+    ":reviewer(Flo0807)"
   ],
   "packageRules": [
     {
