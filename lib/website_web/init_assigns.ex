@@ -24,7 +24,7 @@ defmodule WebsiteWeb.InitAssigns do
       _params, url, socket ->
         socket =
           socket
-          |> assign(:current_url, url)
+          |> assign(:current_url, String.replace(url, "http://", "https://"))
 
         {:cont, socket}
     end)
