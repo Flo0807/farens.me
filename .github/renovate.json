@@ -4,13 +4,5 @@
     "github>Flo0807/renovate-config//base",
     "github>Flo0807/renovate-config//elixir-ubuntu",
     ":reviewer(Flo0807)"
-  ],
-  "packageRules": [
-    {
-      "matchManagers": [
-        "mix"
-      ],
-      "rangeStrategy": "update-lockfile"
-    }
   ]
 }
