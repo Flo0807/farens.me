@@ -5,6 +5,9 @@
     "github>Flo0807/renovate-config//elixir-ubuntu",
     ":reviewer(Flo0807)"
   ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchManagers": [
