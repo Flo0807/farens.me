@@ -24,7 +24,7 @@ config :website, WebsiteWeb.Endpoint,
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.0.0",
+  version: "0.24.2",
   path: Path.expand("../assets/node_modules/.bin/esbuild", __DIR__),
   default: [
     args:
