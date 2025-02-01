@@ -4,6 +4,7 @@
     "github>Flo0807/renovate-config//base",
     "github>Flo0807/renovate-config//elixir-ubuntu",
     "github>Flo0807/renovate-config//customManagers/mixEsbuild",
+    "github>Flo0807/renovate-config//customManagers/mixTailwind",
     ":reviewer(Flo0807)"
   ],
   "lockFileMaintenance": {
