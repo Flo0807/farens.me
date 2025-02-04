@@ -60,7 +60,8 @@ defmodule Website.MixProject do
 
       # Dev and Test
       {:esbuild, "== 0.8.2", runtime: Mix.env() == :dev},
-      {:tailwind, "== 0.2.4", runtime: Mix.env() == :dev},
+      # TODO: change to 0.3.0
+      {:tailwind, github: "phoenixframework/tailwind", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "== 1.5.3", only: :dev},
       {:tailwind_formatter, "== 0.4.2", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.11", only: [:dev, :test], runtime: false}

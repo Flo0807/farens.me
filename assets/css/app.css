@@ -1,17 +1,24 @@
-@import "tailwindcss/base";
-@import "_fonts.css";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+@import "./_fonts.css";
+@plugin "daisyui";
+/* TODO: install as bundled by CLI */
+/* @plugin "@tailwindcss/typography" */
+@plugin "../tailwind/tailwind_heroicons.js";
+@variant phx-click-loading ([".phx-click-loading&", ".phx-click-loading &"]);
+@variant phx-submit-loading ([".phx-submit-loading&", ".phx-submit-loading &"]);
+@variant phx-change-loading ([".phx-change-loading&", ".phx-change-loading &"]);
 
-@layer base {
+@theme {
+  --font-sans: "GeistSans", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Inter", "Segoe UI", "Roboto", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "GeistMono", "ui-monospace", "SFMono-Regular", "Roboto Mono", "Menlo", "Monaco", "Liberation Mono", "DejaVu Sans Mono", "Courier New", "monospace";
+}
 
-  html,
-  body,
-  [data-phx-main] {
-    @apply h-full;
-  }
+html,
+body,
+[data-phx-main] {
+  @apply h-full;
+}
 
-  body>[data-phx-main]>footer {
-    @apply sticky top-[100dvh];
-  }
+body>[data-phx-main]>footer {
+  @apply sticky top-[100dvh];
 }
