@@ -59,7 +59,7 @@ defmodule Website.MixProject do
       {:floki, "== 0.37.0"},
 
       # Dev and Test
-      {:esbuild, "== 0.8.2", runtime: Mix.env() == :dev},
+      {:esbuild, "== 0.9.0", runtime: Mix.env() == :dev},
       {:tailwind, "== 0.2.4", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "== 1.5.3", only: :dev},
       {:tailwind_formatter, "== 0.4.2", only: [:dev, :test], runtime: false},
