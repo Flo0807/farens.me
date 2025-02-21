@@ -27,7 +27,7 @@ defmodule Website.MixProject do
     [
       # Core
       {:phoenix, "== 1.7.20"},
-      {:phoenix_html, "== 4.2.0"},
+      {:phoenix_html, "== 4.2.1"},
       {:phoenix_live_view, "== 1.0.4"},
       {:bandit, "== 1.6.7"},
 
