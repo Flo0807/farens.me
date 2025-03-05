@@ -11,8 +11,9 @@ defmodule WebsiteWeb.CoreComponents do
   alias Phoenix.LiveView.JS
 
   @themes [
-    %{label: "Night", theme: "night", icon: "hero-star"},
+    %{label: "Light", theme: "light", icon: "hero-sun"},
     %{label: "Dark", theme: "dark", icon: "hero-moon"},
+    %{label: "Night", theme: "night", icon: "hero-star"},
     %{label: "Sunset", theme: "sunset", icon: "hero-sun"},
     %{label: "Dracula", theme: "dracula", icon: "hero-paint-brush"}
   ]
@@ -127,33 +128,27 @@ defmodule WebsiteWeb.CoreComponents do
     assigns = assign(assigns, :themes, @themes)
 
     ~H"""
-    <details
-      id="theme_switch"
-      class="rounded-btn dropdown bg-base-300 dropdown-end p-2"
-      phx-hook="ThemeSwitch"
-    >
-      <summary
-        tabindex="0"
-        aria-label="Switch theme"
-        phx-click-away={JS.remove_attribute("open", to: "#theme_switch")}
-        class="btn-sm flex items-center"
-      >
+    <div id="theme_switch" phx-hook="ThemeSwitch" title="Change theme" class="dropdown dropdown-end">
+      <div tabindex="0" aria role="button" class="btn btn-sm btn-ghost">
         <.icon name="hero-swatch" />
+        <.icon name="hero-chevron-down" class="size-3 opacity-60" />
         <span class="sr-only">Switch theme</span>
-      </summary>
-      <ul tabindex="0" class="dropdown-content z-[1] menu bg-base-300 rounded-box w-40 p-2 shadow">
-        <li :for={%{label: label, theme: theme, icon: icon} <- @themes}>
-          <div
-            role="button"
+      </div>
+      <ul
+        tabindex="0"
+        class="dropdown-content menu bg-base-200 rounded-box z-1 mt-2 w-52 p-2 shadow-sm"
+      >
+        <li :for={%{label: label, theme: theme, icon: icon} <- @themes} class="menu-active">
+          <button
             class="flex items-center space-x-2"
             phx-click={JS.dispatch("change-theme", detail: %{theme: theme})}
           >
             <.icon name={icon} class="h-4 w-4" />
             <span>{label}</span>
-          </div>
+          </button>
         </li>
       </ul>
-    </details>
+    </div>
     """
   end
 

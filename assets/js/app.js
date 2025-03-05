@@ -26,7 +26,7 @@ import Copy from "./hooks/copy"
 import WebShareApi from "./hooks/webShareApi"
 
 // Set the theme on page load
-document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'night');
+document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
 
 const Hooks = {
   ThemeSwitch,
