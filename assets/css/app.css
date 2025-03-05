@@ -1,17 +1,46 @@
-@import "tailwindcss/base";
-@import "_fonts.css";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-@layer base {
+@plugin "daisyui" {
+  themes: light, dark --default --prefersdark, night, sunset, dracula;
+}
 
-  html,
-  body,
-  [data-phx-main] {
-    @apply h-full;
-  }
+@plugin "daisyui/theme" {
+  name: "light";
+  --color-secondary: oklch(68.011% 0.158 276.934);
+  --color-primary: oklch(0.488 0.243 264.376);
+}
 
-  body>[data-phx-main]>footer {
-    @apply sticky top-[100dvh];
-  }
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-primary: oklch(68.5% 0.169 237.323);
+  --color-secondary: oklch(68.011% 0.158 276.934);
+}
+
+@plugin "daisyui/theme" {
+  name: "night";
+  --color-base-content: oklch(97.807% 0.029 256.847);
+}
+
+@plugin "../js/tailwind_heroicons.js";
+@import "./_fonts.css";
+@variant phx-click-loading ([".phx-click-loading&", ".phx-click-loading &"]);
+@variant phx-submit-loading ([".phx-submit-loading&", ".phx-submit-loading &"]);
+@variant phx-change-loading ([".phx-change-loading&", ".phx-change-loading &"]);
+
+@theme {
+  --font-sans: "GeistSans", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Inter", "Segoe UI", "Roboto", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "GeistMono", "ui-monospace", "SFMono-Regular", "Roboto Mono", "Menlo", "Monaco", "Liberation Mono", "DejaVu Sans Mono", "Courier New", "monospace";
+}
+
+html,
+body,
+[data-phx-main] {
+  height: 100%;
+}
+
+body>[data-phx-main]>footer {
+  position: sticky;
+  top: 100dvh;
 }
