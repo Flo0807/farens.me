@@ -55,7 +55,7 @@ defmodule Website.MixProject do
       # Utilities
       {:gettext, "== 0.26.2"},
       {:jason, "== 1.4.4"},
-      {:dns_cluster, "== 0.1.3"},
+      {:dns_cluster, "== 0.2.0"},
       {:floki, "== 0.37.0"},
 
       # Dev and Test
