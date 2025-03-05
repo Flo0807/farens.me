@@ -28,7 +28,7 @@ defmodule Website.MixProject do
       # Core
       {:phoenix, "== 1.7.20"},
       {:phoenix_html, "== 4.2.1"},
-      {:phoenix_live_view, "== 1.0.4"},
+      {:phoenix_live_view, "== 1.0.5"},
       {:bandit, "== 1.6.7"},
 
       # SEO & Content
@@ -55,7 +55,7 @@ defmodule Website.MixProject do
       # Utilities
       {:gettext, "== 0.26.2"},
       {:jason, "== 1.4.4"},
-      {:dns_cluster, "== 0.1.3"},
+      {:dns_cluster, "== 0.2.0"},
       {:floki, "== 0.37.0"},
 
       # Dev and Test
