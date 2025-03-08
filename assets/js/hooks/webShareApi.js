@@ -20,26 +20,26 @@ export default {
   /**
    * Initializes the sharing functionality when the element is mounted.
    */
-  mounted() {
-    const { title, url } = this.el.dataset;
-    const shareData = { title, url };
+  mounted () {
+    const { title, url } = this.el.dataset
+    const shareData = { title, url }
 
-    this.initializeSharing(shareData);
+    this.initializeSharing(shareData)
   },
   /**
    * Sets up the appropriate sharing method based on browser support.
    * @param {Object} shareData - The data to be shared (title and URL).
    */
-  initializeSharing(shareData) {
-    const webShareButton = this.el.querySelector("button[data-share-web-share]");
-    const fallbackShareElement = this.el.querySelector("[data-share-fallback]");
+  initializeSharing (shareData) {
+    const webShareButton = this.el.querySelector('button[data-share-web-share]')
+    const fallbackShareElement = this.el.querySelector('[data-share-fallback]')
 
     if (navigator.share && navigator.canShare(shareData) && webShareButton) {
-      this.setupWebSharing(webShareButton, shareData);
+      this.setupWebSharing(webShareButton, shareData)
     } else if (fallbackShareElement) {
-      this.setupFallbackSharing(fallbackShareElement);
+      this.setupFallbackSharing(fallbackShareElement)
     } else {
-      console.error("Can not initialize sharing");
+      console.error('Can not initialize sharing')
     }
   },
   /**
@@ -47,21 +47,21 @@ export default {
    * @param {HTMLElement} webShareButton - The button element for sharing.
    * @param {Object} shareData - The data to be shared.
    */
-  setupWebSharing(webShareButton, shareData) {
-    webShareButton.classList.remove("hidden");
-    webShareButton.addEventListener("click", async () => {
+  setupWebSharing (webShareButton, shareData) {
+    webShareButton.classList.remove('hidden')
+    webShareButton.addEventListener('click', async () => {
       try {
-        await navigator.share(shareData);
+        await navigator.share(shareData)
       } catch (err) {
-        console.error("Error sharing:", err);
+        console.error('Error sharing:', err)
       }
-    });
+    })
   },
   /**
    * Sets up the fallback sharing mechanism when native sharing is not supported.
    * @param {HTMLElement} fallbackElement - The fallback sharing element to be displayed.
    */
-  setupFallbackSharing(fallbackElement) {
-    fallbackElement.classList.remove("hidden");
+  setupFallbackSharing (fallbackElement) {
+    fallbackElement.classList.remove('hidden')
   }
-};
+}
