@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "daisyui": "5.0.0",
-    "standard": "^17.1.2"
+    "standard": "17.1.2"
   }
 }
