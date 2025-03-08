@@ -1,8 +1,13 @@
 {
+  "scripts": {
+    "lint:standard": "standard",
+    "format:standard": "standard --fix"
+  },
   "dependencies": {
     "topbar": "^3.0.0"
   },
   "devDependencies": {
-    "daisyui": "5.0.0"
+    "daisyui": "5.0.0",
+    "standard": "^17.1.2"
   }
 }

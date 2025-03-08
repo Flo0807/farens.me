@@ -23,6 +23,16 @@ jobs:
           version-file: .tool-versions
           version-type: strict
 
+      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
+        with:
+          cache: 'npm'
+          cache-dependency-path: './assets/package-lock.json'
+          node-version: 20
+
+      - name: Install npm dependencies
+        run: npm ci
+        working-directory: ./assets
+
       - name: Restore the deps and _build cache
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         id: restore-cache
@@ -47,8 +57,12 @@ jobs:
       - name: Compile
         run: mix compile --warnings-as-errors --force
 
-      - name: Check Formatting
+      - name: Check Formatting (Elixir)
         run: mix format --check-formatted
+
+      - name: Check Formatting (JS)
+        run: npm run lint:standard
+        working-directory: ./assets
 
       - name: Check unused deps
         run: mix deps.unlock --check-unused
