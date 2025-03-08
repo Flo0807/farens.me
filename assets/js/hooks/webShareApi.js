@@ -16,7 +16,7 @@
  *   </div>
  * </div>
  */
-const WebShareApi = {
+export default {
   /**
    * Initializes the sharing functionality when the element is mounted.
    */
@@ -65,5 +65,3 @@ const WebShareApi = {
     fallbackElement.classList.remove("hidden");
   }
 };
-
-export default WebShareApi;

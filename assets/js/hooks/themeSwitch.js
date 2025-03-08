@@ -1,4 +1,4 @@
-const ThemeSwitch = {
+export default {
   mounted() {
     this.el.addEventListener('change-theme', (event) => {
       const theme = event.detail.theme;
@@ -7,5 +7,3 @@ const ThemeSwitch = {
     });
   },
 }
-
-export default ThemeSwitch;

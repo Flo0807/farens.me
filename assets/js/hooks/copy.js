@@ -1,4 +1,4 @@
-const Copy = {
+export default {
   mounted() {
     let { value } = this.el.dataset;
 
@@ -8,5 +8,3 @@ const Copy = {
     });
   },
 }
-
-export default Copy;
