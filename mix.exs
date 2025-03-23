@@ -56,7 +56,7 @@ defmodule Website.MixProject do
       {:gettext, "== 0.26.2"},
       {:jason, "== 1.4.4"},
       {:dns_cluster, "== 0.2.0"},
-      {:floki, "== 0.37.0"},
+      {:floki, "== 0.37.1"},
 
       # Dev and Test
       {:esbuild, "== 0.9.0", runtime: Mix.env() == :dev},
