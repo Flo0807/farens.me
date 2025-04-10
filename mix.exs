@@ -61,7 +61,7 @@ defmodule Website.MixProject do
       # Dev and Test
       {:esbuild, "== 0.9.0", runtime: Mix.env() == :dev},
       {:tailwind, "== 0.3.1", runtime: Mix.env() == :dev},
-      {:phoenix_live_reload, "== 1.5.3", only: :dev},
+      {:phoenix_live_reload, "== 1.6.0", only: :dev},
       {:tailwind_formatter, "== 0.4.2", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.11", only: [:dev, :test], runtime: false}
     ]
