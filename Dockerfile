@@ -7,9 +7,9 @@
 # renovate: datasource=github-tags depName=elixir packageName=elixir-lang/elixir versioning=semver
 ARG ELIXIR_VERSION=1.18.3
 # renovate: datasource=github-tags depName=erlang packageName=erlang/otp versioning=regex:^(?<major>\d+)\.(?<minor>\d+)(\.(?<patch>\d+))?$ extractVersion=^OTP-(?<version>.*)$
-ARG OTP_VERSION=27.3.3
+ARG OTP_VERSION=27.3.4
 # renovate: datasource=docker depName=ubuntu versioning=ubuntu
-ARG UBUNTU_VERSION=jammy-20250404
+ARG UBUNTU_VERSION=jammy-20250415.1
 
 ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-${UBUNTU_VERSION}
 ARG RUNNER_IMAGE=ubuntu:${UBUNTU_VERSION}
