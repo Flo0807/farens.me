@@ -25,6 +25,7 @@ defmodule WebsiteWeb.ConnCase do
       use WebsiteWeb, :verified_routes
 
       # Import conveniences for testing with connections
+      import PhoenixTest
       import Plug.Conn
       import Phoenix.ConnTest
       import WebsiteWeb.ConnCase

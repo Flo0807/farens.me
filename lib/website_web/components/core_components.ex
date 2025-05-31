@@ -82,7 +82,7 @@ defmodule WebsiteWeb.CoreComponents do
 
   def navbar(assigns) do
     ~H"""
-    <nav class="flex h-20">
+    <nav aria-label="Main navigation" class="flex h-20">
       <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4">
         <.avatar />
 
@@ -199,7 +199,7 @@ defmodule WebsiteWeb.CoreComponents do
   def mobile_navigation(assigns) do
     ~H"""
     <.modal id="mobile_navigation" header="Navigation">
-      <nav class="mt-4 flex flex-col space-y-4">
+      <nav aria-label="Mobile navigation" class="mt-4 flex flex-col space-y-4">
         <.link :for={%{label: label, to: to} <- main_navigation_links()} navigate={to}>
           {label}
         </.link>
@@ -220,7 +220,7 @@ defmodule WebsiteWeb.CoreComponents do
       <div class="bg-base-content h-px w-full opacity-20" />
       <div class="py-8 md:py-12">
         <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
-          <nav class="">
+          <nav aria-label="Page navigation">
             <p class="footer-title">Pages</p>
             <.link
               :for={%{label: label, to: to} <- main_navigation_links()}
@@ -240,7 +240,7 @@ defmodule WebsiteWeb.CoreComponents do
               icon_class="size-6 text-base-content/85 hover:text-base-content fill-current "
             />
           </div>
-          <nav class="md:flex md:w-full md:justify-center">
+          <nav class="md:flex md:w-full md:justify-center" aria-label="Legal navigation">
             <p class="footer-title md:hidden">Legal</p>
             <.link
               :for={%{label: label, to: to} <- secondary_navigation_links()}
