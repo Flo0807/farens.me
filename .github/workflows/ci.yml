@@ -70,6 +70,9 @@ jobs:
       - name: Credo
         run: mix credo
 
+      - name: Install chromium browser
+        run: npm exec --prefix assets playwright install chromium --with-deps --only-shell
+
       - name: Run Tests
         run: mix test
   build:
