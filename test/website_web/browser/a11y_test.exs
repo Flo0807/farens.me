@@ -18,7 +18,11 @@ defmodule WebsiteWeb.A11yTest do
 
   for theme <- @themes, page <- @pages do
     @tag page: page, theme: theme
-    test "page #{page} with #{theme} theme has no accessibility violations", %{conn: conn, page: page, theme: theme} do
+    test "page #{page} with #{theme} theme has no accessibility violations", %{
+      conn: conn,
+      page: page,
+      theme: theme
+    } do
       conn
       |> set_theme(theme)
       |> visit(page)
@@ -27,7 +31,11 @@ defmodule WebsiteWeb.A11yTest do
   end
 
   defp set_theme(session, theme) do
-    Frame.evaluate(session.frame_id, "document.documentElement.setAttribute('data-theme','#{theme}')")
+    Frame.evaluate(
+      session.frame_id,
+      "document.documentElement.setAttribute('data-theme','#{theme}')"
+    )
+
     session
   end
 
