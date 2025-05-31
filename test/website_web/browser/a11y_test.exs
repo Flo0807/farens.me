@@ -1,5 +1,5 @@
 defmodule WebsiteWeb.A11yTest do
-  use PhoenixTest.Playwright.Case, async: false
+  use PhoenixTest.Playwright.Case, async: true
 
   alias PhoenixTest.Playwright.Frame
 
@@ -14,13 +14,21 @@ defmodule WebsiteWeb.A11yTest do
     "/privacy-policy"
   ]
 
-  for page <- @pages do
-    @tag page: page
-    test "page #{page} has no accessibility violations", %{conn: conn, page: page} do
+  @themes ["light", "dark", "night", "sunset", "dracula"]
+
+  for theme <- @themes, page <- @pages do
+    @tag page: page, theme: theme
+    test "page #{page} with #{theme} theme has no accessibility violations", %{conn: conn, page: page, theme: theme} do
       conn
+      |> set_theme(theme)
       |> visit(page)
       |> assert_a11y()
     end
+  end
+
+  defp set_theme(session, theme) do
+    Frame.evaluate(session.frame_id, "document.documentElement.setAttribute('data-theme','#{theme}')")
+    session
   end
 
   defp assert_a11y(session) do
