@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "daisyui": "5.0.43",
-    "playwright": "1.53.1",
+    "playwright": "1.53.2",
     "standard": "17.1.2"
   }
 }
