@@ -7,7 +7,7 @@
     "topbar": "^3.0.0"
   },
   "devDependencies": {
-    "daisyui": "5.0.47",
+    "daisyui": "5.0.48",
     "playwright": "1.54.1",
     "standard": "17.1.2"
   }
