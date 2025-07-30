@@ -7,6 +7,7 @@ defmodule Website.MixProject do
       version: "0.0.0",
       elixir: "~> 1.16",
       elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix_live_view] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -28,7 +29,7 @@ defmodule Website.MixProject do
       # Core
       {:phoenix, "== 1.7.21"},
       {:phoenix_html, "== 4.2.1"},
-      {:phoenix_live_view, "== 1.0.17"},
+      {:phoenix_live_view, "== 1.1.1"},
       {:bandit, "== 1.7.0"},
 
       # SEO & Content
@@ -66,7 +67,8 @@ defmodule Website.MixProject do
       {:tailwind, "== 0.3.1", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "== 1.6.0", only: :dev},
       {:tailwind_formatter, "== 0.4.2", only: [:dev, :test], runtime: false},
-      {:credo, "== 1.7.12", only: [:dev, :test], runtime: false}
+      {:credo, "== 1.7.12", only: [:dev, :test], runtime: false},
+      {:lazy_html, "== 0.1.3", only: :test}
     ]
   end
 
