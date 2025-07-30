@@ -66,7 +66,8 @@ defmodule Website.MixProject do
       {:tailwind, "== 0.3.1", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "== 1.6.0", only: :dev},
       {:tailwind_formatter, "== 0.4.2", only: [:dev, :test], runtime: false},
-      {:credo, "== 1.7.12", only: [:dev, :test], runtime: false}
+      {:credo, "== 1.7.12", only: [:dev, :test], runtime: false},
+      {:lazy_html, "== 0.1.3", only: :test},
     ]
   end
 
