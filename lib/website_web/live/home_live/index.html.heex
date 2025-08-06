@@ -1,39 +1,41 @@
-<h1 class="text-pretty text-3xl font-semibold md:w-2/3 md:text-5xl">
-  Hey, I'm
-  <span class="from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent">
-    Florian!
-  </span>
-  <br />Software developer and computer science student.
-</h1>
+<Layouts.app current_url={@current_url}>
+  <h1 class="text-pretty text-3xl font-semibold md:w-2/3 md:text-5xl">
+    Hey, I'm
+    <span class="from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent">
+      Florian!
+    </span>
+    <br />Software developer and computer science student.
+  </h1>
 
-<p class="text-pretty mt-4 leading-relaxed md:mt-8 md:w-2/3">
-  Hi there! As a software developer and computer science student, I am on a journey to create modern software solutions that make our digital lives easier and more enjoyable. At the moment, I mainly use Elixir and Phoenix for this. Have a look around; see what I've been up to, read my thoughts, and hit me up if you think we could create something exciting together.
-</p>
+  <p class="text-pretty mt-4 leading-relaxed md:mt-8 md:w-2/3">
+    Hi there! As a software developer and computer science student, I am on a journey to create modern software solutions that make our digital lives easier and more enjoyable. At the moment, I mainly use Elixir and Phoenix for this. Have a look around; see what I've been up to, read my thoughts, and hit me up if you think we could create something exciting together.
+  </p>
 
-<div class="mt-4 md:mt-8">
-  <.contact_links
-    class="flex flex-wrap gap-x-2 gap-y-2 md:gap-x-4"
-    icon_class="size-10 w-auto fill-current text-content border border-base-content/25 rounded-xl p-2 hover:bg-base-content/10"
-  />
-</div>
-
-<section>
-  <div class="mt-8 flex items-center md:mt-12">
-    <h2 class="text-xl font-semibold">Latest blog posts</h2>
-    <.link navigate={~p"/blog"} class="btn btn-link group no-underline">
-      <span class="group-hover:underline">View all</span>
-      <.icon name="hero-arrow-right" />
-    </.link>
+  <div class="mt-4 md:mt-8">
+    <.contact_links
+      class="flex flex-wrap gap-x-2 gap-y-2 md:gap-x-4"
+      icon_class="size-10 w-auto fill-current text-content border border-base-content/25 rounded-xl p-2 hover:bg-base-content/10"
+    />
   </div>
 
-  <.grid class="mt-2 md:mt-4">
-    <.blog_preview_card
-      :for={article <- @articles}
-      link={~p"/blog/#{article.slug}"}
-      title={article.title}
-      date={article.date}
-      description={article.description}
-      read_minutes={article.read_minutes}
-    />
-  </.grid>
-</section>
+  <section>
+    <div class="mt-8 flex items-center md:mt-12">
+      <h2 class="text-xl font-semibold">Latest blog posts</h2>
+      <.link navigate={~p"/blog"} class="btn btn-link group no-underline">
+        <span class="group-hover:underline">View all</span>
+        <.icon name="hero-arrow-right" />
+      </.link>
+    </div>
+
+    <.grid class="mt-2 md:mt-4">
+      <.blog_preview_card
+        :for={article <- @articles}
+        link={~p"/blog/#{article.slug}"}
+        title={article.title}
+        date={article.date}
+        description={article.description}
+        read_minutes={article.read_minutes}
+      />
+    </.grid>
+  </section>
+</Layouts.app>

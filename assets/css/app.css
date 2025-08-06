@@ -23,7 +23,7 @@
   --color-base-content: oklch(97.807% 0.029 256.847);
 }
 
-@plugin "../js/tailwind_heroicons.js";
+@plugin "../vendor/heroicons";
 @import "./_fonts.css";
 @variant phx-click-loading ([".phx-click-loading&", ".phx-click-loading &"]);
 @variant phx-submit-loading ([".phx-submit-loading&", ".phx-submit-loading &"]);

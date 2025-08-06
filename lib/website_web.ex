@@ -38,9 +38,7 @@ defmodule WebsiteWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller,
-        formats: [:html, :json],
-        layouts: [html: WebsiteWeb.Layouts]
+      use Phoenix.Controller, formats: [:html, :json]
 
       use Gettext, backend: Website.Gettext
 
@@ -52,7 +50,7 @@ defmodule WebsiteWeb do
 
   def live_view do
     quote do
-      use Phoenix.LiveView, layout: {WebsiteWeb.Layouts, :app}
+      use Phoenix.LiveView
 
       unquote(html_helpers())
     end
@@ -90,8 +88,9 @@ defmodule WebsiteWeb do
       import WebsiteWeb.CoreComponents
       import WebsiteWeb.Icons
 
-      # Shortcut for generating JS commands
+      # Common modules used in templates
       alias Phoenix.LiveView.JS
+      alias WebsiteWeb.Layouts
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())
