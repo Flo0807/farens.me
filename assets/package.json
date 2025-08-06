@@ -4,7 +4,10 @@
     "format:standard": "standard --fix"
   },
   "dependencies": {
-    "topbar": "^3.0.0"
+    "topbar": "^3.0.0",
+    "phoenix": "../deps/phoenix",
+    "phoenix_html": "../deps/phoenix_html",
+    "phoenix_live_view": "../deps/phoenix_live_view"
   },
   "devDependencies": {
     "daisyui": "5.0.50",
