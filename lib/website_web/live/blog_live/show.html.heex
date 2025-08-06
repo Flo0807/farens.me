@@ -29,7 +29,10 @@
                 {@article.read_minutes} min read
               </span>
             </div>
-            <.share_article_dropdown title={@article.title} link={url(~p"/blog/#{@article.slug}")} />
+            <.share_article_dropdown
+              title={@article.title}
+              link={url(~p"/blog/#{@article.slug}")}
+            />
           </div>
 
           <div class="mt-2 flex items-center space-x-2 md:mt-4">
