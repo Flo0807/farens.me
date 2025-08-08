@@ -67,7 +67,7 @@ defmodule Website.MixProject do
       {:floki, "== 0.38.0"},
 
       # Dev and Test
-      {:phoenix_test, "== 0.7.0", only: :test, runtime: false},
+      {:phoenix_test, "== 0.7.1", only: :test, runtime: false},
       {:phoenix_test_playwright, "== 0.7.1", only: :test, runtime: false},
       {:a11y_audit, "== 0.2.3", only: :test},
       {:esbuild, "== 0.10.0", runtime: Mix.env() == :dev},
