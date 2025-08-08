@@ -22,7 +22,7 @@ defmodule WebsiteWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :website,
-    zip: not code_reloading?,
+    gzip: not code_reloading?,
     only: WebsiteWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
