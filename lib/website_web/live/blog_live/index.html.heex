@@ -1,63 +1,65 @@
-<div class="relative">
-  <div class="absolute top-0 right-0 bottom-16 hidden w-64 lg:block">
-    <div class="sticky top-6">
+<Layouts.app current_url={@current_url}>
+  <div class="relative">
+    <div class="absolute top-0 right-0 bottom-16 hidden w-64 lg:block">
+      <div class="sticky top-6">
+        <.blog_tags
+          id="desktop-tag-list"
+          tags={@all_tags}
+          search_tag={@search_tag}
+          select_event="select-tag"
+        />
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between space-x-6 lg:w-2/3">
+      <h1 class="text-3xl font-semibold">
+        My thoughts.
+      </h1>
+      <.link
+        target="_blank"
+        href={~p"/rss.xml"}
+        class="group flex items-center space-x-2 transition-transform duration-100 hover:text-primary"
+      >
+        <.icon
+          name="hero-rss"
+          class="h-5 w-5 transition-transform duration-100 group-hover:rotate-12 group-hover:scale-110"
+        />
+        <span class="font-medium transition-transform duration-100 group-hover:underline">
+          Subscribe
+        </span>
+        <span class="sr-only">RSS feed</span>
+      </.link>
+    </div>
+
+    <.page_intro>
+      I write about whatever comes to mind. Most of the time it is somehow related to software engineering. I also use this blog to document my progress in learning new things. I hope you find something useful here, and if you do, please let me know.
+    </.page_intro>
+
+    <section class="my-8 md:my-12 lg:hidden">
       <.blog_tags
-        id="desktop-tag-list"
+        id="mobile-tag-list"
         tags={@all_tags}
         search_tag={@search_tag}
         select_event="select-tag"
       />
+    </section>
+
+    <div id="articles" class="lg:w-2/3" phx-update="stream">
+      <p class="hidden text-xl font-semibold only:block">
+        No articles found.
+      </p>
+
+      <.blog_preview_card
+        :for={{dom_id, article} <- @streams.articles}
+        id={dom_id}
+        class="mt-4"
+        link={~p"/blog/#{article.slug}"}
+        title={article.title}
+        date={article.date}
+        description={article.description}
+        tags={article.tags}
+        read_minutes={article.read_minutes}
+      />
     </div>
   </div>
-
-  <div class="flex items-center justify-between space-x-6 lg:w-2/3">
-    <h1 class="text-3xl font-semibold">
-      My thoughts.
-    </h1>
-    <.link
-      target="_blank"
-      href={~p"/rss.xml"}
-      class="group flex items-center space-x-2 transition-transform duration-100 hover:text-primary"
-    >
-      <.icon
-        name="hero-rss"
-        class="h-5 w-5 transition-transform duration-100 group-hover:rotate-12 group-hover:scale-110"
-      />
-      <span class="font-medium transition-transform duration-100 group-hover:underline">
-        Subscribe
-      </span>
-      <span class="sr-only">RSS feed</span>
-    </.link>
-  </div>
-
-  <.page_intro>
-    I write about whatever comes to mind. Most of the time it is somehow related to software engineering. I also use this blog to document my progress in learning new things. I hope you find something useful here, and if you do, please let me know.
-  </.page_intro>
-
-  <section class="my-8 md:my-12 lg:hidden">
-    <.blog_tags
-      id="mobile-tag-list"
-      tags={@all_tags}
-      search_tag={@search_tag}
-      select_event="select-tag"
-    />
-  </section>
-
-  <div id="articles" class="lg:w-2/3" phx-update="stream">
-    <p class="hidden text-xl font-semibold only:block">
-      No articles found.
-    </p>
-
-    <.blog_preview_card
-      :for={{dom_id, article} <- @streams.articles}
-      id={dom_id}
-      class="mt-4"
-      link={~p"/blog/#{article.slug}"}
-      title={article.title}
-      date={article.date}
-      description={article.description}
-      tags={article.tags}
-      read_minutes={article.read_minutes}
-    />
-  </div>
-</div>
+</Layouts.app>

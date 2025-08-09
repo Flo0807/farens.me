@@ -7,10 +7,17 @@ defmodule Website.MixProject do
       version: "0.0.0",
       elixir: "~> 1.16",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix_live_view] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      compilers: [:phoenix_live_view] ++ Mix.compilers(),
+      listeners: [Phoenix.CodeReloader]
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [precommit: :test]
     ]
   end
 
@@ -27,7 +34,7 @@ defmodule Website.MixProject do
   defp deps do
     [
       # Core
-      {:phoenix, "== 1.7.21"},
+      {:phoenix, "== 1.8.0", override: true},
       {:phoenix_html, "== 4.2.1"},
       {:phoenix_live_view, "== 1.1.3"},
       {:bandit, "== 1.7.0"},
@@ -81,7 +88,8 @@ defmodule Website.MixProject do
         "tailwind default --minify",
         "esbuild default --minify --loader:.ttf=file",
         "phx.digest"
-      ]
+      ],
+      precommit: ["compile --warning-as-errors", "deps.unlock --unused", "format", "test"]
     ]
   end
 end

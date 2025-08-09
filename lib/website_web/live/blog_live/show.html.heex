@@ -1,49 +1,54 @@
-<div class="relative">
-  <div class="absolute top-16 bottom-16 -left-14 w-10 text-xs">
-    <div class="sticky top-6 hidden xl:block">
-      <.toc headings={@article.heading_links} />
+<Layouts.app current_url={@current_url}>
+  <div class="relative">
+    <div class="absolute top-16 bottom-16 -left-14 w-10 text-xs">
+      <div class="sticky top-6 hidden xl:block">
+        <.toc headings={@article.heading_links} />
+      </div>
     </div>
-  </div>
-  <div class="flex w-full justify-center">
-    <div class="max-w-2xl overflow-x-auto ">
-      <.link
-        navigate={~p"/blog"}
-        class="mb-4 flex items-center space-x-1 text-sm hover:text-primary hover:underline md:mb-6"
-      >
-        <.icon name="hero-arrow-left" class="h-4 w-4" />
-        <span>Back to all articles</span>
-      </.link>
+    <div class="flex w-full justify-center">
+      <div class="max-w-2xl overflow-x-auto ">
+        <.link
+          navigate={~p"/blog"}
+          class="mb-4 flex items-center space-x-1 text-sm hover:text-primary hover:underline md:mb-6"
+        >
+          <.icon name="hero-arrow-left" class="h-4 w-4" />
+          <span>Back to all articles</span>
+        </.link>
 
-      <.page_intro title={@article.title} />
+        <.page_intro title={@article.title} />
 
-      <div class="my-8 md:my-12">
-        <div class="flex items-center justify-between">
-          <div class="flex w-fit items-center">
-            <span class="flex items-center space-x-2 text-sm font-semibold">
-              <.icon name="hero-calendar" class="h-4 w-4" />
-              <span>{Calendar.strftime(@article.date, "%d %B %Y")}</span>
-            </span>
-            <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
-            <span class="text-sm font-semibold">
-              {@article.read_minutes} min read
+        <div class="my-8 md:my-12">
+          <div class="flex items-center justify-between">
+            <div class="flex w-fit items-center">
+              <span class="flex items-center space-x-2 text-sm font-semibold">
+                <.icon name="hero-calendar" class="h-4 w-4" />
+                <span>{Calendar.strftime(@article.date, "%d %B %Y")}</span>
+              </span>
+              <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
+              <span class="text-sm font-semibold">
+                {@article.read_minutes} min read
+              </span>
+            </div>
+            <.share_article_dropdown
+              title={@article.title}
+              link={url(~p"/blog/#{@article.slug}")}
+            />
+          </div>
+
+          <div class="mt-2 flex items-center space-x-2 md:mt-4">
+            <span class="text-sm font-semibold">{@live_reading} reading now</span>
+            <span class="relative flex h-3 w-3">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75 duration-500">
+              </span>
+              <span class="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
             </span>
           </div>
-          <.share_article_dropdown title={@article.title} link={url(~p"/blog/#{@article.slug}")} />
         </div>
 
-        <div class="mt-2 flex items-center space-x-2 md:mt-4">
-          <span class="text-sm font-semibold">{@live_reading} reading now</span>
-          <span class="relative flex h-3 w-3">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75 duration-500">
-            </span>
-            <span class="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
-          </span>
-        </div>
+        <article class="prose prose-base prose-p:text-base-content">
+          {raw(@article.body)}
+        </article>
       </div>
-
-      <article class="prose prose-base prose-p:text-base-content">
-        {raw(@article.body)}
-      </article>
     </div>
   </div>
-</div>
+</Layouts.app>
