@@ -42,7 +42,7 @@ defmodule Website.MixProject do
       # SEO & Content
       {:phoenix_seo, "== 0.1.11"},
       {:atomex, "== 0.5.1"},
-      {:mdex, "== 0.9.1"},
+      {:mdex, "== 0.9.2"},
       {:yaml_elixir, "== 2.12.0"},
       {:nimble_publisher, "== 1.1.1"},
 
