@@ -48,6 +48,20 @@
         <article class="prose prose-base prose-p:text-base-content">
           {raw(@article.body)}
         </article>
+
+        <div :if={@article.tags != []} class="mt-8 md:mt-12">
+          <div class="divider"></div>
+          <h3 class="text-lg font-semibold">Tags</h3>
+          <div class="mt-2 flex flex-wrap gap-2">
+            <.link
+              :for={tag <- @article.tags}
+              navigate={~p"/blog/tag/#{tag}"}
+              class="badge badge-neutral cursor-pointer hover:badge-primary"
+            >
+              {tag}
+            </.link>
+          </div>
+        </div>
       </div>
     </div>
   </div>
