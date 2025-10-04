@@ -16,6 +16,7 @@ defmodule WebsiteWeb.BlogLive.Show do
     end
 
     live_reading = get_live_reading_count(article)
+    recommended_articles = Blog.get_recommended_articles(article, 2)
 
     if connected?(socket) do
       Phoenix.PubSub.subscribe(Website.PubSub, topic(article))
@@ -27,6 +28,7 @@ defmodule WebsiteWeb.BlogLive.Show do
       |> assign(:article, article)
       |> assign(:page_title, article.title)
       |> assign(:live_reading, live_reading)
+      |> assign(:recommended_articles, recommended_articles)
       |> SEO.assign(article)
 
     {:ok, socket}

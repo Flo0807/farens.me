@@ -44,4 +44,13 @@ defmodule Website.Blog do
   def get_article_by_slug(slug) do
     Enum.find(@articles, &(&1.slug == slug))
   end
+
+  @doc """
+  Returns recommended articles for a given article.
+  """
+  def get_recommended_articles(current_article, count) do
+    all_articles()
+    |> Enum.reject(&(&1.id == current_article.id))
+    |> Enum.take_random(count)
+  end
 end

@@ -62,6 +62,32 @@
             </.link>
           </div>
         </div>
+
+        <div class="mt-6">
+          <.divider />
+          <div class="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <h3 class="mt-2 text-lg font-semibold">You might also like</h3>
+            <.link
+              navigate={~p"/blog"}
+              class="flex items-center space-x-1 text-sm hover:text-primary hover:underline"
+            >
+              <span>Browse all articles</span>
+              <.icon name="hero-arrow-right" class="size-4" />
+            </.link>
+          </div>
+          <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <.blog_preview_card
+              :for={article <- @recommended_articles}
+              id={"recommended-article-#{article.id}"}
+              link={~p"/blog/#{article.slug}"}
+              title={article.title}
+              date={article.date}
+              description={article.description}
+              tags={article.tags}
+              read_minutes={article.read_minutes}
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
