@@ -217,7 +217,7 @@ defmodule WebsiteWeb.CoreComponents do
   def footer(assigns) do
     ~H"""
     <footer class="mx-auto w-full max-w-6xl px-4">
-      <div class="bg-base-content h-px w-full opacity-20" />
+      <.divider />
       <div class="py-8 md:py-12">
         <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
           <nav aria-label="Page navigation">
@@ -455,6 +455,15 @@ defmodule WebsiteWeb.CoreComponents do
       src="https://plausible.farens.me/js/script.js"
     >
     </script>
+    """
+  end
+
+  @doc """
+  Renders a divider.
+  """
+  def divider(assigns) do
+    ~H"""
+    <div class="bg-base-content h-px w-full opacity-20"></div>
     """
   end
 
