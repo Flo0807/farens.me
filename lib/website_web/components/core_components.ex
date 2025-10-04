@@ -413,7 +413,7 @@ defmodule WebsiteWeb.CoreComponents do
           phx-click="select-tag"
           phx-value-tag={tag}
           class={[
-            "badge badge-neutral transition-transform duration-100 hover:scale-105",
+            "badge badge-neutral cursor-pointer hover:badge-primary",
             String.downcase(tag) == @search_tag && "badge-primary"
           ]}
         >
