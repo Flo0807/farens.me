@@ -56,7 +56,7 @@
             <.link
               :for={tag <- @article.tags}
               navigate={~p"/blog/tag/#{tag}"}
-              class="badge badge-neutral cursor-pointer hover:badge-primary"
+              class="badge badge-neutral transition-transform duration-100 hover:scale-105"
             >
               {tag}
             </.link>
