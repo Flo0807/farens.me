@@ -5,11 +5,11 @@
 # https://hub.docker.com/_/ubuntu?tab=tags
 
 # renovate: datasource=github-tags depName=elixir packageName=elixir-lang/elixir versioning=semver
-ARG ELIXIR_VERSION=1.18.4
+ARG ELIXIR_VERSION=1.19.1
 # renovate: datasource=github-tags depName=erlang packageName=erlang/otp versioning=regex:^(?<major>\d+)\.(?<minor>\d+)(\.(?<patch>\d+))?$ extractVersion=^OTP-(?<version>.*)$
-ARG OTP_VERSION=28.1
+ARG OTP_VERSION=28.1.1
 # renovate: datasource=docker depName=ubuntu versioning=ubuntu
-ARG UBUNTU_VERSION=noble-20250925
+ARG UBUNTU_VERSION=noble-20251001
 
 ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-${UBUNTU_VERSION}
 ARG RUNNER_IMAGE=ubuntu:${UBUNTU_VERSION}
