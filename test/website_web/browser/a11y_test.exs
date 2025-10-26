@@ -16,6 +16,8 @@ defmodule WebsiteWeb.A11yTest do
 
   @themes ["light", "dark", "night", "sunset", "dracula"]
 
+  @moduletag :playwright
+
   for theme <- @themes, page <- @pages do
     @tag page: page, theme: theme
     test "page #{page} with #{theme} theme has no accessibility violations", %{

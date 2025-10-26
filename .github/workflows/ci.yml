@@ -76,11 +76,14 @@ jobs:
       - name: Credo
         run: mix credo
 
+      - name: Run Tests
+        run: mix test --warnings-as-errors
+
       - name: Install chromium browser
         run: npm exec --prefix assets playwright install chromium --with-deps --only-shell
 
-      - name: Run Tests
-        run: mix test
+      - name: Run Playwright Tests
+        run: mix test --warnings-as-errors --only playwright || if [[ $? = 2 ]]; then PLAYWRIGHT_TRACE=true mix test --only playwright --max-cases 1 --failed; else false; fi
   build:
     name: Build and push image to ghcr
     needs: test
