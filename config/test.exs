@@ -13,4 +13,10 @@ config :phoenix, :plug_init_mode, :runtime
 
 config :phoenix_test,
   otp_app: :website,
-  endpoint: WebsiteWeb.Endpoint
+  endpoint: WebsiteWeb.Endpoint,
+  playwright: [
+    browser: :chromium,
+    browser_launch_timeout: 10_000,
+    trace: System.get_env("PLAYWRIGHT_TRACE", "false") in ~w(t true),
+    trace_dir: "tmp"
+  ]
