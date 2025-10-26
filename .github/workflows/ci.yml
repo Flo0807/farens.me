@@ -25,8 +25,8 @@ jobs:
 
       - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          cache: 'npm'
-          cache-dependency-path: './assets/package-lock.json'
+          cache: "npm"
+          cache-dependency-path: "./assets/package-lock.json"
           node-version: 22
 
       - name: Install npm dependencies
@@ -56,6 +56,12 @@ jobs:
 
       - name: Compile
         run: mix compile --warnings-as-errors --force
+
+      - name: Setup assets
+        run: mix assets.setup
+
+      - name: Build assets
+        run: mix assets.build
 
       - name: Check Formatting (Elixir)
         run: mix format --check-formatted
@@ -116,11 +122,11 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
   deploy:
-      if: github.ref == 'refs/heads/main'
-      name: Deploy app
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
+    if: github.ref == 'refs/heads/main'
+    name: Deploy app
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Trigger deployment
         run: |
           RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST ${{ secrets.WEBHOOK_URL }} \
@@ -132,4 +138,3 @@ jobs:
             echo "Deployment failed with status ${RESPONSE}"
             exit 1
           fi
-
