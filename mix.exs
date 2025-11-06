@@ -78,7 +78,7 @@ defmodule Website.MixProject do
       {:lazy_html, "== 0.1.8", only: :test},
       {:tidewave, "== 0.5.1", only: :dev},
       {:igniter, "== 0.7.0", only: [:dev, :test]},
-      {:usage_rules, "== 0.1.25", only: [:dev]}
+      {:usage_rules, "== 0.1.26", only: [:dev]}
     ]
   end
 
