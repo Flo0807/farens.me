@@ -34,10 +34,10 @@ defmodule Website.MixProject do
   defp deps do
     [
       # Core
-      {:phoenix, "== 1.8.3"},
+      {:phoenix, "1.8.3"},
       {:phoenix_html, "4.3.0"},
-      {:phoenix_live_view, "== 1.1.19"},
-      {:bandit, "== 1.9.0"},
+      {:phoenix_live_view, "1.1.19"},
+      {:bandit, "1.9.0"},
 
       # SEO & Content
       {:phoenix_seo, "0.1.11"},
@@ -72,7 +72,7 @@ defmodule Website.MixProject do
       {:a11y_audit, "0.3.0", only: :test},
       {:esbuild, "0.10.0", runtime: Mix.env() == :dev},
       {:tailwind, "0.4.1", runtime: Mix.env() == :dev},
-      {:phoenix_live_reload, "== 1.6.2", only: :dev},
+      {:phoenix_live_reload, "1.6.2", only: :dev},
       {:tailwind_formatter, "0.4.2", only: [:dev, :test], runtime: false},
       {:credo, "1.7.14", only: [:dev, :test], runtime: false},
       {:lazy_html, "0.1.8", only: :test},
