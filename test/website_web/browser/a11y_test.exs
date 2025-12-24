@@ -3,7 +3,7 @@ defmodule WebsiteWeb.A11yTest do
 
   alias PlaywrightEx.Frame
 
-  @timeout Application.compile_env(:phoenix_test, :timeout, 5_000)
+  @timeout Application.compile_env(:phoenix_test, [:playwright, :timeout], 5_000)
 
   @pages [
     "/",

@@ -18,5 +18,6 @@ config :phoenix_test,
     browser: :chromium,
     browser_launch_timeout: 10_000,
     trace: System.get_env("PLAYWRIGHT_TRACE", "false") in ~w(t true),
-    trace_dir: "tmp"
+    trace_dir: "tmp",
+    timeout: 5_000
   ]
