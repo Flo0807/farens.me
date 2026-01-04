@@ -125,9 +125,23 @@ defmodule WebsiteWeb.CoreComponents do
 
   def avatar(assigns) do
     ~H"""
-    <.link navigate={~p"/"} class="avatar cursor-pointer">
-      <div class="h-10 w-auto rounded-full">
-        <img loading="lazy" src={~p"/images/me.jpg"} alt="Portrait of Florian" />
+    <.link
+      navigate={~p"/"}
+      class={[
+        "group relative",
+        "rounded-full",
+        "ring-2 ring-transparent",
+        "transition-all duration-300",
+        "hover:ring-primary/20 hover:ring-offset-base-100 hover:ring-offset-2"
+      ]}
+    >
+      <div class="size-10 overflow-hidden rounded-full">
+        <img
+          loading="lazy"
+          src={~p"/images/me.jpg"}
+          alt="Portrait of Florian"
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+        />
       </div>
     </.link>
     """
