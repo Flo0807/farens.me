@@ -108,7 +108,6 @@ defmodule WebsiteWeb.CoreComponents do
           </.link>
         </div>
 
-        <div class="rounded-btn bg-base-300 block p-2 sm:hidden">
           <button
             class="btn flex items-center font-semibold sm:hidden"
             onclick="mobile_navigation.showModal()"
