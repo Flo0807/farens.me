@@ -86,11 +86,23 @@ defmodule WebsiteWeb.CoreComponents do
       <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4">
         <.avatar />
 
-        <div class="rounded-btn bg-base-300 hidden space-x-2 px-4 py-2 sm:block">
+        <div class={[
+          "hidden items-center gap-1 sm:flex",
+          "bg-base-200/80 rounded-box",
+          "border-base-content/5 border",
+          "px-1.5 py-1"
+        ]}>
           <.link
             :for={%{label: label, to: to} <- main_navigation_links()}
             navigate={to}
-            class={["btn btn-sm", if(active?(@current_url, to), do: "btn-primary", else: "btn-ghost")]}
+            class={[
+              "rounded-box px-4 py-2 text-sm font-medium",
+              "transition-all duration-200",
+              if(active?(@current_url, to),
+                do: "text-primary bg-primary/10",
+                else: "text-base-content hover:bg-base-content/5"
+              )
+            ]}
           >
             {label}
           </.link>
