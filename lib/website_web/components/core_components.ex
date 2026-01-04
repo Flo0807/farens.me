@@ -110,12 +110,12 @@ defmodule WebsiteWeb.CoreComponents do
 
         <div class="rounded-btn bg-base-300 block p-2 sm:hidden">
           <button
-            class="btn-sm flex items-center font-semibold"
+            class="btn flex items-center font-semibold sm:hidden"
             onclick="mobile_navigation.showModal()"
           >
             <span>Menu</span>
+            <.icon name="hero-bars-3" class="size-4" />
           </button>
-        </div>
 
         <.theme_switch />
       </div>
