@@ -154,23 +154,49 @@ defmodule WebsiteWeb.CoreComponents do
     assigns = assign(assigns, :themes, @themes)
 
     ~H"""
-    <div id="theme_switch" phx-hook="ThemeSwitch" title="Change theme" class="dropdown dropdown-end">
-      <div tabindex="0" aria role="button" class="btn btn-sm btn-ghost">
-        <.icon name="hero-swatch" />
-        <.icon name="hero-chevron-down" class="size-3 opacity-60" />
+    <div
+      id="theme_switch"
+      phx-hook="ThemeSwitch"
+      title="Change theme"
+      class="dropdown dropdown-end"
+    >
+      <div
+        tabindex="0"
+        role="button"
+        class={[
+          "btn",
+          "hover:bg-base-content/5",
+          "transition-all duration-200",
+          "border-base-content/5 border",
+        ]}
+      >
+        <.icon name="hero-swatch" class="size-4" />
+        <.icon name="hero-chevron-down" class="size-3 opacity-40" />
         <span class="sr-only">Switch theme</span>
       </div>
       <ul
         tabindex="0"
-        class="dropdown-content menu bg-base-200 rounded-box z-1 mt-2 w-52 p-2 shadow-sm"
+        class={[
+          "dropdown-content menu",
+          "mt-3 w-56 p-2",
+          "bg-base-100/95 backdrop-blur-xl",
+          "rounded-2xl",
+          "border-base-content/5 border",
+          "shadow-base-content/10 shadow-xl",
+          "z-50"
+        ]}
       >
-        <li :for={%{label: label, theme: theme, icon: icon} <- @themes} class="menu-active">
+        <li :for={%{label: label, theme: theme, icon: icon} <- @themes}>
           <button
-            class="flex items-center space-x-2"
+            class={[
+              "flex items-center gap-3 rounded-xl px-3 py-2.5",
+              "transition-colors duration-150",
+              "hover:bg-base-content/5"
+            ]}
             phx-click={JS.dispatch("change-theme", detail: %{theme: theme})}
           >
-            <.icon name={icon} class="h-4 w-4" />
-            <span>{label}</span>
+            <.icon name={icon} class="size-4 opacity-60" />
+            <span class="flex-1 text-left">{label}</span>
           </button>
         </li>
       </ul>
