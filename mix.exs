@@ -76,7 +76,7 @@ defmodule Website.MixProject do
       {:tailwind_formatter, "0.4.2", only: [:dev, :test], runtime: false},
       {:credo, "1.7.15", only: [:dev, :test], runtime: false},
       {:lazy_html, "0.1.8", only: :test},
-      {:tidewave, "0.5.3", only: :dev},
+      {:tidewave, "== 0.5.4", only: :dev},
       {:igniter, "0.7.0", only: [:dev, :test]},
       {:usage_rules, "0.1.26", only: [:dev]}
     ]
