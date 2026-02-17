@@ -25,7 +25,7 @@ defmodule WebsiteWeb.CoreComponents do
 
   def title(assigns) do
     ~H"""
-    <h1 class="text-3xl font-semibold">
+    <h1 class="text-base-content text-3xl font-bold md:text-4xl">
       {@text}
     </h1>
     """
@@ -34,13 +34,17 @@ defmodule WebsiteWeb.CoreComponents do
   @doc """
   Renders the page intro.
   """
+  attr :label, :string, default: nil
   attr :title, :string, default: nil
   slot :inner_block
 
   def page_intro(assigns) do
     ~H"""
+    <p :if={@label} class="text-base-content/40 mb-2 text-xs uppercase tracking-wider">
+      {@label}
+    </p>
     <.title :if={@title} text={@title} />
-    <div :if={@inner_block != []} class="text-pretty my-8 leading-relaxed md:my-12 lg:w-2/3">
+    <div :if={@inner_block != []} class="text-base-content/60 text-pretty mt-6 mb-10 leading-relaxed lg:w-2/3">
       {render_slot(@inner_block)}
     </div>
     """
@@ -108,13 +112,13 @@ defmodule WebsiteWeb.CoreComponents do
           </.link>
         </div>
 
-          <button
-            class="btn flex items-center font-semibold sm:hidden"
-            onclick="mobile_navigation.showModal()"
-          >
-            <span>Menu</span>
-            <.icon name="hero-bars-3" class="size-4" />
-          </button>
+        <button
+          class="btn flex items-center font-semibold sm:hidden"
+          onclick="mobile_navigation.showModal()"
+        >
+          <span>Menu</span>
+          <.icon name="hero-bars-3" class="size-4" />
+        </button>
 
         <.theme_switch />
       </div>
@@ -166,7 +170,7 @@ defmodule WebsiteWeb.CoreComponents do
           "btn",
           "hover:bg-base-content/5",
           "transition-all duration-200",
-          "border-base-content/5 border",
+          "border-base-content/5 border"
         ]}
       >
         <.icon name="hero-swatch" class="size-4" />
@@ -249,13 +253,52 @@ defmodule WebsiteWeb.CoreComponents do
   """
   def mobile_navigation(assigns) do
     ~H"""
-    <.modal id="mobile_navigation" header="Navigation">
-      <nav aria-label="Mobile navigation" class="mt-4 flex flex-col space-y-4">
-        <.link :for={%{label: label, to: to} <- main_navigation_links()} navigate={to}>
-          {label}
-        </.link>
-      </nav>
-    </.modal>
+    <dialog id="mobile_navigation" class="modal modal-bottom">
+      <div class={[
+        "modal-box rounded-t-3xl",
+        "bg-base-100/95 backdrop-blur-xl",
+        "border-base-content/5 border-t",
+        "pb-safe"
+      ]}>
+        <div class="flex justify-center pb-4">
+          <div class="bg-base-content/20 h-1.5 w-12 rounded-full" />
+        </div>
+
+        <form method="dialog" class="absolute top-4 right-4">
+          <button class="btn btn-sm btn-circle btn-ghost">
+            <.icon name="hero-x-mark" class="size-5" />
+          </button>
+        </form>
+
+        <nav aria-label="Mobile navigation" class="flex flex-col gap-1 px-2 pb-4">
+          <.link
+            :for={%{label: label, to: to} <- main_navigation_links()}
+            navigate={to}
+            class={[
+              "flex items-center gap-4 rounded-2xl px-4 py-4",
+              "text-lg font-medium",
+              "transition-all duration-200",
+              "active:scale-[0.98]",
+              "hover:bg-base-content/5"
+            ]}
+          >
+            <span class="flex-1">{label}</span>
+            <.icon name="hero-chevron-right" class="size-5 text-base-content/30" />
+          </.link>
+        </nav>
+
+        <div class="border-base-content/5 border-t px-6 pt-4">
+          <p class="text-base-content/40 mb-3 text-xs uppercase tracking-wider">Connect</p>
+          <.contact_links
+            class="flex gap-4"
+            icon_class="size-6 text-base-content/50 hover:text-primary transition-colors fill-current"
+          />
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop bg-base-content/50 backdrop-blur-sm">
+        <button>close</button>
+      </form>
+    </dialog>
     """
   end
 
@@ -267,39 +310,61 @@ defmodule WebsiteWeb.CoreComponents do
 
   def footer(assigns) do
     ~H"""
-    <footer class="mx-auto w-full max-w-6xl px-4">
-      <.divider />
-      <div class="py-8 md:py-12">
-        <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
-          <nav aria-label="Page navigation">
-            <p class="footer-title">Pages</p>
-            <.link
-              :for={%{label: label, to: to} <- main_navigation_links()}
-              navigate={to}
-              class={[
-                "mr-4 font-semibold",
-                if(active?(@current_url, to), do: "text-primary", else: "text-content")
-              ]}
-            >
-              {label}
+    <footer class="border-base-content/5 relative mt-8 border-t md:mt-12">
+      <div class="from-base-100 pointer-events-none absolute inset-x-0 -top-8 h-8 bg-gradient-to-t to-transparent md:-top-12 md:h-12" />
+
+      <div class="mx-auto w-full max-w-6xl px-4 py-12 md:py-16">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
+          <div class="md:col-span-1">
+            <.link navigate={~p"/"} class="group inline-flex items-center gap-3">
+              <div class="ring-base-content/5 h-10 w-10 overflow-hidden rounded-full ring-2 transition-all duration-200 group-hover:ring-primary/20">
+                <img src={~p"/images/me.jpg"} alt="Florian" class="h-full w-full object-cover" />
+              </div>
+              <span class="text-base-content font-semibold">Florian Arens</span>
             </.link>
+            <p class="text-base-content/50 mt-4 max-w-xs text-sm">
+              Software developer crafting modern web experiences with Elixir and Phoenix.
+            </p>
+          </div>
+
+          <nav aria-label="Footer navigation" class="md:col-span-1">
+            <p class="text-base-content/40 mb-4 text-xs font-semibold uppercase tracking-wider">
+              Navigation
+            </p>
+            <div class="flex flex-col gap-2">
+              <.link
+                :for={%{label: label, to: to} <- main_navigation_links()}
+                navigate={to}
+                class={[
+                  "text-base-content/60 text-sm transition-colors duration-150 hover:text-primary",
+                  active?(@current_url, to) && "text-primary"
+                ]}
+              >
+                {label}
+              </.link>
+            </div>
           </nav>
-          <div>
-            <p class="footer-title">Connect</p>
+
+          <div class="md:col-span-1">
+            <p class="text-base-content/40 mb-4 text-xs font-semibold uppercase tracking-wider">
+              Connect
+            </p>
             <.contact_links
-              class="flex space-x-4"
-              icon_class="size-6 text-base-content/85 hover:text-base-content fill-current "
+              class="flex gap-3"
+              icon_class="size-5 text-base-content/40 hover:text-primary transition-colors duration-150 fill-current"
             />
           </div>
-          <nav class="md:flex md:w-full md:justify-center" aria-label="Legal navigation">
-            <p class="footer-title md:hidden">Legal</p>
+        </div>
+
+        <div class="border-base-content/5 mt-12 flex flex-col gap-4 border-t pt-6 md:flex-row md:items-center md:justify-between">
+          <p class="text-base-content/30 text-xs">
+            &copy; {Date.utc_today().year} Florian Arens. All rights reserved.
+          </p>
+          <nav class="flex gap-4" aria-label="Legal">
             <.link
               :for={%{label: label, to: to} <- secondary_navigation_links()}
               navigate={to}
-              class={[
-                "mr-4 font-semibold md:text-sm md:opacity-60",
-                if(active?(@current_url, to), do: "text-primary !opacity-100", else: "text-content")
-              ]}
+              class="text-base-content/30 text-xs transition-colors duration-150 hover:text-base-content/60"
             >
               {label}
             </.link>
@@ -314,7 +379,7 @@ defmodule WebsiteWeb.CoreComponents do
   Renders all contact links.
   """
   attr :class, :string, default: nil
-  attr :icon_class, :string, required: true
+  attr :icon_class, :any, required: true
 
   def contact_links(assigns) do
     ~H"""
@@ -354,22 +419,44 @@ defmodule WebsiteWeb.CoreComponents do
   def project_card(assigns) do
     ~H"""
     <.link href={@link} target="_blank">
-      <article class="card bg-base-200 group h-full w-full cursor-pointer transition-all hover:-translate-y-1">
-        <div class="card-body">
-          <h2 class="card-title text-pretty mb-4">
-            {@title}
-          </h2>
-          <p class="text-pretty mb-4">
+      <article class={[
+        "group relative h-full",
+        "rounded-2xl",
+        "from-base-200 to-base-200/50 bg-gradient-to-b",
+        "border-base-content/5 border",
+        "p-6",
+        "transition-all duration-300 ease-out",
+        "hover:border-base-content/10",
+        "hover:shadow-base-content/5 hover:shadow-lg",
+        "hover:-translate-y-1"
+      ]}>
+        <div class="from-primary/5 to-secondary/5 absolute inset-0 rounded-2xl bg-gradient-to-br via-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+        <div class="relative">
+          <div class="flex items-start justify-between">
+            <h2 class="text-base-content text-lg font-semibold transition-colors duration-200 group-hover:text-primary">
+              {@title}
+            </h2>
+            <.icon
+              name="hero-arrow-up-right"
+              class={[
+                "size-5 text-base-content/30",
+                "transition-all duration-200",
+                "group-hover:text-primary",
+                "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              ]}
+            />
+          </div>
+
+          <p class="text-base-content/60 mt-3 text-sm leading-relaxed">
             {@description}
           </p>
 
-          <div class="card-actions justify-end">
-            <div class="flex items-center space-x-2">
-              <.icon name="hero-link" class="text-content group-hover:text-primary" />
-              <span class="text-content group-hover:text-primary group-hover:underline">
-                {@link_label}
-              </span>
-            </div>
+          <div class="text-base-content/40 mt-4 flex items-center gap-2 text-sm">
+            <.icon name="hero-link" class="size-4" />
+            <span class="transition-colors duration-200 group-hover:text-primary group-hover:underline">
+              {@link_label}
+            </span>
           </div>
         </div>
       </article>
@@ -405,37 +492,71 @@ defmodule WebsiteWeb.CoreComponents do
 
   def blog_preview_card(assigns) do
     ~H"""
-    <.link id={@id} navigate={@link} target="_blank">
+    <.link id={@id} navigate={@link}>
       <article class={[
-        "card bg-base-200 group h-full w-full cursor-pointer transition-all hover:-translate-y-1",
+        "group relative h-full",
+        "rounded-box",
+        "from-base-200 to-base-200/50 bg-linear-to-br",
+        "border-base-content/5 border",
+        "p-6",
+        "transition-all duration-300 ease-out",
+        "hover:border-base-content/10",
+        "hover:shadow-base-content/5 hover:shadow-lg",
+        "hover:-translate-y-1",
         @class
       ]}>
-        <div class="card-body">
-          <h2 class="card-title text-pretty mb-4">
+        <div class="from-primary/5 to-secondary/5 bg-linear-to-br absolute inset-0 rounded-2xl via-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+        <div class="relative flex h-full flex-col">
+          <div class="text-base-content/50 flex items-center gap-3 text-xs font-medium">
+            <time datetime={@date}>
+              {Calendar.strftime(@date, "%b %d, %Y")}
+            </time>
+            <span class="bg-base-content/20 h-1 w-1 rounded-full" />
+            <span>{@read_minutes} min read</span>
+          </div>
+
+          <h2 class={[
+            "mt-4 text-lg font-semibold leading-snug",
+            "text-base-content",
+            "transition-colors duration-200",
+            "group-hover:text-primary"
+          ]}>
             {@title}
           </h2>
-          <div class="mb-4 flex w-fit items-center">
-            <span class="text-xs font-semibold">
-              {Calendar.strftime(@date, "%d %B %Y")}
-            </span>
-            <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
-            <span class="text-xs font-semibold">
-              {@read_minutes} min read
+
+          <div :if={@tags != []} class="mt-3 flex flex-wrap gap-2">
+            <span
+              :for={tag <- @tags}
+              class={[
+                "inline-flex items-center",
+                "px-2.5 py-0.5",
+                "text-xs font-medium",
+                "rounded-full",
+                "bg-base-content/5 text-base-content/60",
+                "transition-colors duration-200",
+                "group-hover:bg-primary/10 group-hover:text-primary"
+              ]}
+            >
+              {tag}
             </span>
           </div>
-          <div :if={@tags != []} class="mb-4 flex flex-wrap gap-x-2 gap-y-2">
-            <span :for={tag <- @tags} class="badge badge-neutral">{tag}</span>
-          </div>
-          <p class="text-pretty mb-4">
+
+          <p class="text-base-content/70 line-clamp-3 mt-4 text-sm leading-relaxed">
             {@description}
           </p>
-          <div class="card-actions justify-end">
-            <div class="flex items-center space-x-2">
-              <span class="text-content group-hover:text-primary group-hover:underline">
-                Read more
-              </span>
-              <.icon name="hero-arrow-right" class="text-content group-hover:text-primary" />
-            </div>
+
+          <div class={[
+            "mt-auto flex items-center gap-2 pt-6",
+            "text-base-content/50 text-sm font-medium",
+            "transition-all duration-200",
+            "group-hover:text-primary group-hover:gap-3"
+          ]}>
+            <span>Read article</span>
+            <.icon
+              name="hero-arrow-right"
+              class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+            />
           </div>
         </div>
       </article>
@@ -453,9 +574,9 @@ defmodule WebsiteWeb.CoreComponents do
 
   def blog_tags(assigns) do
     ~H"""
-    <section id={@id}>
-      <h2 class="mb-4 text-xl font-semibold">
-        Tags
+    <section id={@id} class="space-y-4">
+      <h2 class="text-base-content/40 text-sm font-semibold uppercase tracking-wider">
+        Filter by topic
       </h2>
 
       <div class="flex flex-wrap gap-2">
@@ -464,8 +585,19 @@ defmodule WebsiteWeb.CoreComponents do
           phx-click="select-tag"
           phx-value-tag={tag}
           class={[
-            "badge badge-neutral cursor-pointer transition-transform duration-100 hover:scale-105",
-            String.downcase(tag) == @search_tag && "badge-primary"
+            "inline-flex items-center px-2.5 py-1",
+            "text-xs font-medium",
+            "rounded-full",
+            "border cursor-pointer",
+            "transition-all duration-200",
+            "hover:scale-105 active:scale-100",
+            if(String.downcase(tag) == @search_tag,
+              do: ["bg-primary/10 text-primary border-primary/20", "shadow-primary/10 shadow-sm"],
+              else: [
+                "bg-base-200/50 text-base-content/60 border-base-content/5",
+                "hover:bg-base-200 hover:text-base-content hover:border-base-content/10"
+              ]
+            )
           ]}
         >
           {tag}
@@ -479,16 +611,51 @@ defmodule WebsiteWeb.CoreComponents do
   Renders a table of contents from a list of headings.
   """
   attr :headings, :list, required: true
-  attr :class, :string, default: "menu w-56 p-0 opacity-60"
+  attr :class, :string, default: nil
+  attr :is_root, :boolean, default: true
 
   def toc(assigns) do
     ~H"""
-    <ul class={@class}>
+    <nav :if={@is_root} aria-label="Table of contents" class={["group", @class]}>
+      <p class="text-base-content/40 mb-4 text-xs font-semibold uppercase tracking-wider">
+        On this page
+      </p>
+      <ul class="space-y-1">
+        <li :for={%{label: label, href: href, childs: childs} <- @headings}>
+          <.link
+            href={href}
+            class={[
+              "text-base-content/50 block py-1.5 text-sm",
+              "hover:text-primary",
+              "transition-colors duration-150",
+              "border-l-2 border-transparent pl-3",
+              "hover:border-primary/50"
+            ]}
+          >
+            {label}
+          </.link>
+          <ul :if={childs != []} class="ml-3 space-y-1">
+            <li :for={%{label: child_label, href: child_href} <- childs}>
+              <.link
+                href={child_href}
+                class="text-base-content/40 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
+              >
+                {child_label}
+              </.link>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul :if={!@is_root} class="ml-3 space-y-1">
       <li :for={%{label: label, href: href, childs: childs} <- @headings}>
-        <.link href={href}>
+        <.link
+          href={href}
+          class="text-base-content/40 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
+        >
           {label}
         </.link>
-        <.toc :if={childs != []} headings={childs} class="" />
+        <.toc :if={childs != []} headings={childs} is_root={false} />
       </li>
     </ul>
     """
@@ -514,7 +681,11 @@ defmodule WebsiteWeb.CoreComponents do
   """
   def divider(assigns) do
     ~H"""
-    <div class="bg-base-content h-px w-full opacity-20"></div>
+    <div class="relative py-4">
+      <div class="absolute inset-0 flex items-center">
+        <div class="border-base-content/5 w-full border-t" />
+      </div>
+    </div>
     """
   end
 

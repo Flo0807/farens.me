@@ -2,7 +2,12 @@
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui" {
-  themes: light, dark --default --prefersdark, night, sunset, dracula;
+  themes:
+    light,
+    dark --default --prefersdark,
+    night,
+    sunset,
+    dracula;
 }
 
 @plugin "daisyui/theme" {
@@ -10,7 +15,6 @@
   --color-secondary: oklch(68.011% 0.158 276.934);
   --color-primary: oklch(0.488 0.243 264.376);
 }
-
 
 @plugin "daisyui/theme" {
   name: "dark";
@@ -30,17 +34,28 @@
 @variant phx-change-loading ([".phx-change-loading&", ".phx-change-loading &"]);
 
 @theme {
-  --font-sans: "GeistSans", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Inter", "Segoe UI", "Roboto", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: "GeistMono", "ui-monospace", "SFMono-Regular", "Roboto Mono", "Menlo", "Monaco", "Liberation Mono", "DejaVu Sans Mono", "Courier New", "monospace";
+  --font-sans:
+    "GeistSans", "ui-sans-serif", "system-ui", "-apple-system",
+    "BlinkMacSystemFont", "Inter", "Segoe UI", "Roboto", "sans-serif",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    "GeistMono", "ui-monospace", "SFMono-Regular", "Roboto Mono", "Menlo",
+    "Monaco", "Liberation Mono", "DejaVu Sans Mono", "Courier New", "monospace";
 }
 
-html,
-body,
-[data-phx-main] {
-  height: 100%;
+/* Smooth font rendering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body>[data-phx-main]>footer {
-  position: sticky;
-  top: 100dvh;
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
