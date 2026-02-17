@@ -44,7 +44,10 @@ defmodule WebsiteWeb.CoreComponents do
       {@label}
     </p>
     <.title :if={@title} text={@title} />
-    <div :if={@inner_block != []} class="text-base-content/60 text-pretty mt-6 mb-10 leading-relaxed lg:w-2/3">
+    <div
+      :if={@inner_block != []}
+      class="text-base-content/60 text-pretty mt-6 mb-10 leading-relaxed lg:w-2/3"
+    >
       {render_slot(@inner_block)}
     </div>
     """
@@ -588,7 +591,7 @@ defmodule WebsiteWeb.CoreComponents do
             "inline-flex items-center px-2.5 py-1",
             "text-xs font-medium",
             "rounded-full",
-            "border cursor-pointer",
+            "cursor-pointer border",
             "transition-all duration-200",
             "hover:scale-105 active:scale-100",
             if(String.downcase(tag) == @search_tag,
