@@ -1,26 +1,83 @@
 <Layouts.app current_url={@current_url}>
-  <.page_intro title="I'm a software developer." />
+  <article class="relative">
+    <header>
+      <p class="text-base-content/40 mb-2 text-xs uppercase tracking-wider">About</p>
+      <h1 class="text-base-content text-3xl font-bold md:text-4xl">
+        I'm a Software Developer
+      </h1>
+    </header>
 
-  <article class="mt-8 flex w-full flex-col justify-between gap-x-16 gap-y-8 md:mt-12 lg:flex-row">
-    <div>
-      <p class="text-pretty leading-relaxed">
-        I acquired my software development skills by working on a variety of projects. During my practical studies in Applied Computer Science, I was able to successfully complete numerous projects, both as part of a team and independently. I have also been involved in several research projects and gained professional experience as a software developer. Outside of my studies and work, I am also very passionate about software development. I have already built a few open source projects and enjoy attending conferences and meetups.
-      </p>
+    <div class="mt-10 flex flex-col gap-12 lg:flex-row lg:gap-16">
+      <div class="flex-1 space-y-6">
+        <p class="text-base-content/70 leading-relaxed">
+          I acquired my software development skills by working on a variety of projects.
+          During my practical studies in Applied Computer Science, I was able to successfully
+          complete numerous projects, both as part of a team and independently. I have also
+          been involved in several research projects and gained professional experience as a
+          software developer.
+        </p>
 
-      <p class="text-pretty mt-6 leading-relaxed">
-        In the last year I have focused more on functional programming. Currently I am building web applications using Phoenix, Elixir and LiveView.
-      </p>
+        <p class="text-base-content/70 leading-relaxed">
+          Outside of my studies and work, I am also very passionate about software development.
+          I have already built a few open source projects and enjoy attending conferences and meetups.
+        </p>
 
-      <p class="text-pretty mt-6 leading-relaxed">
-        I find my balance in sport, which I do in a variety of ways. From cycling to functional strength training, I'm always looking for new challenges. This ambition is also reflected in my work and studies.
-      </p>
+        <div class={[
+          "rounded-2xl p-6",
+          "from-primary/5 to-secondary/5 bg-gradient-to-br",
+          "border-primary/10 border"
+        ]}>
+          <p class="text-base-content/80 leading-relaxed">
+            In the last year I have focused more on functional programming. Currently I am
+            building web applications using <span class="text-primary font-semibold">Phoenix</span>,
+            <span class="text-primary font-semibold">Elixir</span>
+            and <span class="text-primary font-semibold">LiveView</span>.
+          </p>
+        </div>
+
+        <p class="text-base-content/70 leading-relaxed">
+          I find my balance in sport, which I do in a variety of ways. From cycling to
+          functional strength training, I'm always looking for new challenges. This ambition
+          is also reflected in my work and studies.
+        </p>
+
+        <div class="pt-4">
+          <.link
+            navigate={~p"/projects"}
+            class={[
+              "inline-flex items-center gap-2",
+              "text-primary font-medium",
+              "hover:gap-3",
+              "transition-all duration-200"
+            ]}
+          >
+            View my projects <.icon name="hero-arrow-right" class="size-4" />
+          </.link>
+        </div>
+      </div>
+
+      <div class="mx-auto w-64 md:w-72 lg:mx-0 lg:w-80 lg:flex-shrink-0">
+        <div class={[
+          "group relative",
+          "lg:rotate-2 lg:hover:-rotate-1",
+          "transition-transform duration-500"
+        ]}>
+          <div class="from-primary/20 to-secondary/20 absolute inset-0 rounded-2xl bg-gradient-to-br opacity-50 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
+
+          <img
+            loading="lazy"
+            class={[
+              "relative",
+              "aspect-square w-full object-cover",
+              "rounded-2xl",
+              "shadow-base-content/10 shadow-2xl",
+              "ring-base-content/5 ring-1"
+            ]}
+            src="/images/me.jpg"
+            alt="Portrait of Florian"
+          />
+        </div>
+      </div>
     </div>
-
-    <img
-      loading="lazy"
-      class="h-96 self-start rounded-xl object-scale-down lg:mr-2 lg:rotate-2 lg:transition-all lg:duration-500 lg:hover:-rotate-3"
-      src="/images/me.jpg"
-      alt="Portrait of Florian"
-    />
   </article>
 </Layouts.app>

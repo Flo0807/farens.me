@@ -1,33 +1,90 @@
 <Layouts.app current_url={@current_url}>
-  <h1 class="text-pretty text-3xl font-semibold md:w-2/3 md:text-5xl">
-    Hey, I'm
-    <span class="from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent">
-      Florian!
-    </span>
-    <br />Software developer and computer science student.
-  </h1>
+  <section class="pb-4 md:pb-6">
+    <h1 class="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+      <span class="text-base-content">Hey, I'm</span>
+      <span class={["from-primary to-secondary bg-gradient-to-r", "bg-clip-text text-transparent"]}>
+        Florian!
+      </span>
+    </h1>
 
-  <p class="text-pretty mt-4 leading-relaxed md:mt-8 md:w-2/3">
-    Hi there! As a software developer and computer science student, I am on a journey to create modern software solutions that make our digital lives easier and more enjoyable. At the moment, I mainly use Elixir and Phoenix for this. Have a look around; see what I've been up to, read my thoughts, and hit me up if you think we could create something exciting together.
-  </p>
+    <p class="text-base-content/60 mt-2 text-xl font-medium md:text-2xl">
+      Team Lead in Software Development
+    </p>
 
-  <div class="mt-4 md:mt-8">
-    <.contact_links
-      class="flex flex-wrap gap-x-2 gap-y-2 md:gap-x-4"
-      icon_class="size-10 w-auto fill-current text-content border border-base-content/25 rounded-xl p-2 hover:bg-base-content/10"
-    />
-  </div>
+    <p class="text-base-content/70 mt-6 max-w-2xl text-base leading-relaxed md:text-lg">
+      Building modern web solutions with Elixir and Phoenix LiveView.
+      Passionate about functional programming, clean architecture, and creating
+      delightful user experiences.
+    </p>
 
-  <section>
-    <div class="mt-8 flex items-center md:mt-12">
-      <h2 class="text-xl font-semibold">Latest blog posts</h2>
-      <.link navigate={~p"/blog"} class="btn btn-link group no-underline">
-        <span class="group-hover:underline">View all</span>
-        <.icon name="hero-arrow-right" />
+    <div class="mt-8 flex flex-wrap gap-4">
+      <.link
+        navigate={~p"/blog"}
+        class={[
+          "inline-flex items-center gap-2 px-4 py-2 text-sm",
+          "bg-primary text-primary-content",
+          "rounded-lg font-medium",
+          "shadow-primary/25 shadow-lg",
+          "hover:shadow-primary/30 hover:shadow-xl hover:brightness-110",
+          "transition-all duration-200",
+          "active:scale-[0.98]"
+        ]}
+      >
+        Read my blog <.icon name="hero-arrow-right" class="size-4" />
+      </.link>
+
+      <.link
+        navigate={~p"/about"}
+        class={[
+          "inline-flex items-center gap-2 px-4 py-2 text-sm",
+          "bg-base-200 text-base-content",
+          "rounded-lg font-medium",
+          "border-base-content/5 border",
+          "hover:bg-base-300 hover:border-base-content/10",
+          "transition-all duration-200",
+          "active:scale-[0.98]"
+        ]}
+      >
+        About me
       </.link>
     </div>
 
-    <.grid class="mt-2 md:mt-4">
+    <div class="mt-10">
+      <p class="text-base-content/40 mb-4 text-xs uppercase tracking-wider">Connect with me</p>
+      <.contact_links
+        class="flex gap-3"
+        icon_class={[
+          "size-10 p-2.5",
+          "rounded-xl",
+          "bg-base-200/50 border border-base-content/5",
+          "text-base-content/60 fill-current",
+          "hover:bg-base-200 hover:text-primary hover:border-primary/20",
+          "transition-all duration-200"
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="pt-2">
+    <div class="mb-8 flex items-end justify-between">
+      <div>
+        <p class="text-base-content/40 mb-2 text-xs uppercase tracking-wider">From the blog</p>
+        <h2 class="text-base-content text-2xl font-bold md:text-3xl">Latest Articles</h2>
+      </div>
+      <.link
+        navigate={~p"/blog"}
+        class={[
+          "hidden items-center gap-2 sm:inline-flex",
+          "text-base-content/60 text-sm font-medium",
+          "hover:text-primary",
+          "transition-colors duration-200"
+        ]}
+      >
+        View all articles <.icon name="hero-arrow-right" class="size-4" />
+      </.link>
+    </div>
+
+    <.grid>
       <.blog_preview_card
         :for={article <- @articles}
         link={~p"/blog/#{article.slug}"}
@@ -37,5 +94,19 @@
         read_minutes={article.read_minutes}
       />
     </.grid>
+
+    <.link
+      navigate={~p"/blog"}
+      class={[
+        "mt-8 flex items-center justify-center gap-2 sm:hidden",
+        "text-primary text-sm font-medium",
+        "rounded-xl px-4 py-3",
+        "bg-primary/5 border-primary/10 border",
+        "active:scale-[0.98]",
+        "transition-all duration-200"
+      ]}
+    >
+      View all articles <.icon name="hero-arrow-right" class="size-4" />
+    </.link>
   </section>
 </Layouts.app>

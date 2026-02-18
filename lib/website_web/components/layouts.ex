@@ -19,14 +19,20 @@ defmodule WebsiteWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <.mobile_navigation />
-    <header>
-      <.navbar current_url={@current_url} />
-    </header>
-    <main class="mx-auto my-8 w-full max-w-6xl px-4 md:my-12">
-      {render_slot(@inner_block)}
-    </main>
-    <.footer current_url={@current_url} />
+    <div class="flex min-h-screen flex-col">
+      <.mobile_navigation />
+      <header>
+        <.navbar current_url={@current_url} />
+      </header>
+      <main class={[
+        "relative mx-auto w-full max-w-6xl px-4",
+        "pt-8 pb-4 md:pt-12 md:pb-6 lg:pt-16 lg:pb-8",
+        "flex-1"
+      ]}>
+        {render_slot(@inner_block)}
+      </main>
+      <.footer current_url={@current_url} />
+    </div>
     """
   end
 end
