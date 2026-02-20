@@ -65,7 +65,7 @@ defmodule WebsiteWeb.Icons do
   end
 
   @doc """
-  Renders the Blueksy icon.
+  Renders the Bluesky icon.
   """
   attr :class, :string, default: nil
 

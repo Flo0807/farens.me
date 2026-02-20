@@ -22,7 +22,7 @@
       >
         <.icon
           name="hero-arrow-left"
-          class="size-4 transition-transform duration-200 group-hover:-translate-x-1"
+          class="size-4 transition-[translate] duration-200 group-hover:-translate-x-1"
         />
         <span>Back to articles</span>
       </.link>
@@ -36,7 +36,7 @@
           <div class="flex items-center gap-2">
             <.icon name="hero-calendar" class="size-4" />
             <time datetime={@article.date}>
-              {Calendar.strftime(@article.date, "%B %d, %Y")}
+              {Calendar.strftime(@article.date, "%b %d, %Y")}
             </time>
           </div>
 
@@ -48,9 +48,9 @@
 
           <div class="flex items-center gap-2">
             <span class="relative flex h-2 w-2">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75">
+              <span class="bg-success absolute inline-flex h-full w-full animate-ping rounded-full opacity-75">
               </span>
-              <span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+              <span class="bg-success relative inline-flex h-2 w-2 rounded-full"></span>
             </span>
             <span>{@live_reading} reading now</span>
           </div>
@@ -79,7 +79,7 @@
       </div>
 
       <div :if={@article.tags != []} class="mt-12">
-        <p class="text-base-content/40 mb-4 text-xs uppercase tracking-wider">Tagged with</p>
+        <.section_label class="mb-4">Tagged with</.section_label>
         <div class="flex flex-wrap gap-2">
           <.link
             :for={tag <- @article.tags}
@@ -90,7 +90,7 @@
               "bg-base-200/50 text-base-content/60",
               "border-base-content/5 border",
               "hover:bg-primary/10 hover:text-primary hover:border-primary/20",
-              "transition-all duration-200"
+              "transition-colors duration-200"
             ]}
           >
             {tag}
@@ -101,16 +101,14 @@
       <section class="mt-12">
         <div class="mb-6 flex items-end justify-between">
           <div>
-            <p class="text-base-content/40 mb-2 text-xs uppercase tracking-wider">
-              Continue reading
-            </p>
+            <.section_label class="mb-2">Continue reading</.section_label>
             <h2 class="text-base-content text-xl font-bold">You might also like</h2>
           </div>
           <.link
             navigate={~p"/blog"}
             class="text-base-content/50 text-sm transition-colors duration-150 hover:text-primary"
           >
-            View all
+            View all articles
           </.link>
         </div>
 

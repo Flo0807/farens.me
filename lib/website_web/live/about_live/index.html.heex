@@ -1,10 +1,7 @@
 <Layouts.app current_url={@current_url}>
   <article class="relative">
     <header>
-      <p class="text-base-content/40 mb-2 text-xs uppercase tracking-wider">About</p>
-      <h1 class="text-base-content text-3xl font-bold md:text-4xl">
-        I'm a Software Developer
-      </h1>
+      <.page_intro label="About" title="I'm a Software Developer" />
     </header>
 
     <div class="mt-10 flex flex-col gap-12 lg:flex-row lg:gap-16">
@@ -40,7 +37,7 @@
               "inline-flex items-center gap-2",
               "text-primary font-medium",
               "hover:gap-3",
-              "transition-all duration-200"
+              "transition-[color,gap] duration-200"
             ]}
           >
             View my projects <.icon name="hero-arrow-right" class="size-4" />
@@ -52,9 +49,9 @@
         <div class={[
           "group relative",
           "lg:rotate-2 lg:hover:-rotate-1",
-          "transition-transform duration-500"
+          "transition-[rotate] duration-500"
         ]}>
-          <div class="from-primary/20 to-secondary/20 absolute inset-0 rounded-2xl bg-gradient-to-br opacity-50 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
+          <div class="from-primary/20 to-secondary/20 bg-linear-to-br absolute inset-0 rounded-2xl opacity-50 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
 
           <img
             loading="lazy"

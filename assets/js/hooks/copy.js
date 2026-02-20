@@ -11,6 +11,9 @@ export default {
       navigator.clipboard.writeText(value).then(() => {
         this.el.innerText = notice
         setTimeout(() => { this.el.innerText = originalText }, 2000)
+      }).catch(() => {
+        this.el.innerText = 'Failed to copy'
+        setTimeout(() => { this.el.innerText = originalText }, 2000)
       })
     })
   }

@@ -40,9 +40,9 @@ defmodule WebsiteWeb.CoreComponents do
 
   def page_intro(assigns) do
     ~H"""
-    <p :if={@label} class="text-base-content/40 mb-2 text-xs uppercase tracking-wider">
+    <.section_label :if={@label} class="mb-2">
       {@label}
-    </p>
+    </.section_label>
     <.title :if={@title} text={@title} />
     <div
       :if={@inner_block != []}
@@ -50,6 +50,20 @@ defmodule WebsiteWeb.CoreComponents do
     >
       {render_slot(@inner_block)}
     </div>
+    """
+  end
+
+  @doc """
+  Renders a section label.
+  """
+  attr :class, :string, default: nil
+  slot :inner_block, required: true
+
+  def section_label(assigns) do
+    ~H"""
+    <p class={["text-base-content/50 text-xs font-semibold uppercase tracking-wider", @class]}>
+      {render_slot(@inner_block)}
+    </p>
     """
   end
 
@@ -68,7 +82,7 @@ defmodule WebsiteWeb.CoreComponents do
         <form method="dialog">
           <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
         </form>
-        <h3 if={@header} class="text-base-content text-lg font-bold">
+        <h3 :if={@header} class="text-base-content text-lg font-bold">
           {@header}
         </h3>
         {render_slot(@inner_block)}
@@ -102,9 +116,10 @@ defmodule WebsiteWeb.CoreComponents do
           <.link
             :for={%{label: label, to: to} <- main_navigation_links()}
             navigate={to}
+            aria-current={active?(@current_url, to) && "page"}
             class={[
               "rounded-box px-4 py-2 text-sm font-medium",
-              "transition-all duration-200",
+              "transition-colors duration-200",
               if(active?(@current_url, to),
                 do: "text-primary bg-primary/10",
                 else: "text-base-content hover:bg-base-content/5"
@@ -137,7 +152,7 @@ defmodule WebsiteWeb.CoreComponents do
         "group relative",
         "rounded-full",
         "ring-2 ring-transparent",
-        "transition-all duration-300",
+        "transition-[box-shadow] duration-300",
         "hover:ring-primary/20 hover:ring-offset-base-100 hover:ring-offset-2"
       ]}
     >
@@ -146,7 +161,7 @@ defmodule WebsiteWeb.CoreComponents do
           loading="lazy"
           src={~p"/images/me.jpg"}
           alt="Portrait of Florian"
-          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+          class="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-110"
         />
       </div>
     </.link>
@@ -172,7 +187,7 @@ defmodule WebsiteWeb.CoreComponents do
         class={[
           "btn",
           "hover:bg-base-content/5",
-          "transition-all duration-200",
+          "transition-colors duration-200",
           "border-base-content/5 border"
         ]}
       >
@@ -185,7 +200,7 @@ defmodule WebsiteWeb.CoreComponents do
         class={[
           "dropdown-content menu",
           "mt-3 w-56 p-2",
-          "bg-base-100/95 backdrop-blur-xl",
+          "bg-base-100/95 backdrop-blur-md",
           "rounded-2xl",
           "border-base-content/5 border",
           "shadow-base-content/10 shadow-xl",
@@ -231,11 +246,12 @@ defmodule WebsiteWeb.CoreComponents do
           <.icon name="hero-share" />
           <span class="sr-only">Share</span>
         </summary>
-        <ul class="menu dropdown-content z-[1] bg-base-300 rounded-box w-40 p-2 shadow">
+        <ul class="menu dropdown-content bg-base-100/95 border-base-content/5 shadow-base-content/10 z-50 w-40 rounded-2xl border p-2 shadow-xl backdrop-blur-md">
           <li>
             <.link
               href={"https://x.com/intent/tweet?text=#{@title}&url=#{@link}&via=flo_arens"}
               target="_blank"
+              rel="noopener noreferrer"
             >
               Share on X
             </.link>
@@ -254,12 +270,14 @@ defmodule WebsiteWeb.CoreComponents do
   @doc """
   Renders the mobile navigation modal.
   """
+  attr :current_url, :string, required: true
+
   def mobile_navigation(assigns) do
     ~H"""
     <dialog id="mobile_navigation" class="modal modal-bottom">
       <div class={[
         "modal-box rounded-t-3xl",
-        "bg-base-100/95 backdrop-blur-xl",
+        "bg-base-100/95 backdrop-blur-md",
         "border-base-content/5 border-t",
         "pb-safe"
       ]}>
@@ -268,7 +286,7 @@ defmodule WebsiteWeb.CoreComponents do
         </div>
 
         <form method="dialog" class="absolute top-4 right-4">
-          <button class="btn btn-sm btn-circle btn-ghost">
+          <button class="btn btn-sm btn-circle btn-ghost" aria-label="Close navigation">
             <.icon name="hero-x-mark" class="size-5" />
           </button>
         </form>
@@ -277,29 +295,37 @@ defmodule WebsiteWeb.CoreComponents do
           <.link
             :for={%{label: label, to: to} <- main_navigation_links()}
             navigate={to}
+            onclick="mobile_navigation.close()"
+            aria-current={active?(@current_url, to) && "page"}
             class={[
               "flex items-center gap-4 rounded-2xl px-4 py-4",
               "text-lg font-medium",
-              "transition-all duration-200",
+              "transition-colors duration-200",
               "active:scale-[0.98]",
               "hover:bg-base-content/5"
             ]}
           >
             <span class="flex-1">{label}</span>
-            <.icon name="hero-chevron-right" class="size-5 text-base-content/30" />
+            <.icon name="hero-chevron-right" class="size-5 text-base-content/50" />
           </.link>
         </nav>
 
         <div class="border-base-content/5 border-t px-6 pt-4">
-          <p class="text-base-content/40 mb-3 text-xs uppercase tracking-wider">Connect</p>
+          <.section_label class="mb-3">Connect</.section_label>
           <.contact_links
-            class="flex gap-4"
-            icon_class="size-6 text-base-content/50 hover:text-primary transition-colors fill-current"
+            class="flex gap-2"
+            icon_class={[
+              "size-11 p-2.5",
+              "rounded-xl",
+              "text-base-content/50 fill-current",
+              "hover:text-primary hover:bg-base-content/5",
+              "transition-colors"
+            ]}
           />
         </div>
       </div>
       <form method="dialog" class="modal-backdrop bg-base-content/50 backdrop-blur-sm">
-        <button>close</button>
+        <button aria-label="Close navigation">{gettext("close")}</button>
       </form>
     </dialog>
     """
@@ -314,30 +340,29 @@ defmodule WebsiteWeb.CoreComponents do
   def footer(assigns) do
     ~H"""
     <footer class="border-base-content/5 relative mt-8 border-t md:mt-12">
-      <div class="from-base-100 pointer-events-none absolute inset-x-0 -top-8 h-8 bg-gradient-to-t to-transparent md:-top-12 md:h-12" />
+      <div class="from-base-100 bg-linear-to-t pointer-events-none absolute inset-x-0 -top-8 h-8 to-transparent md:-top-12 md:h-12" />
 
       <div class="mx-auto w-full max-w-6xl px-4 py-12 md:py-16">
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
           <div class="md:col-span-1">
             <.link navigate={~p"/"} class="group inline-flex items-center gap-3">
-              <div class="ring-base-content/5 h-10 w-10 overflow-hidden rounded-full ring-2 transition-all duration-200 group-hover:ring-primary/20">
+              <div class="ring-base-content/5 h-10 w-10 overflow-hidden rounded-full ring-2 transition-[box-shadow] duration-200 group-hover:ring-primary/20">
                 <img src={~p"/images/me.jpg"} alt="Florian" class="h-full w-full object-cover" />
               </div>
               <span class="text-base-content font-semibold">Florian Arens</span>
             </.link>
             <p class="text-base-content/50 mt-4 max-w-xs text-sm">
-              Software developer crafting modern web experiences with Elixir and Phoenix.
+              Crafting modern web experiences with Elixir and Phoenix.
             </p>
           </div>
 
           <nav aria-label="Footer navigation" class="md:col-span-1">
-            <p class="text-base-content/40 mb-4 text-xs font-semibold uppercase tracking-wider">
-              Navigation
-            </p>
+            <.section_label class="mb-4">Navigation</.section_label>
             <div class="flex flex-col gap-2">
               <.link
                 :for={%{label: label, to: to} <- main_navigation_links()}
                 navigate={to}
+                aria-current={active?(@current_url, to) && "page"}
                 class={[
                   "text-base-content/60 text-sm transition-colors duration-150 hover:text-primary",
                   active?(@current_url, to) && "text-primary"
@@ -349,25 +374,23 @@ defmodule WebsiteWeb.CoreComponents do
           </nav>
 
           <div class="md:col-span-1">
-            <p class="text-base-content/40 mb-4 text-xs font-semibold uppercase tracking-wider">
-              Connect
-            </p>
+            <.section_label class="mb-4">Connect</.section_label>
             <.contact_links
               class="flex gap-3"
-              icon_class="size-5 text-base-content/40 hover:text-primary transition-colors duration-150 fill-current"
+              icon_class="size-5 text-base-content/50 hover:text-primary transition-colors duration-150 fill-current"
             />
           </div>
         </div>
 
         <div class="border-base-content/5 mt-12 flex flex-col gap-4 border-t pt-6 md:flex-row md:items-center md:justify-between">
-          <p class="text-base-content/30 text-xs">
+          <p class="text-base-content/50 text-xs">
             &copy; {Date.utc_today().year} Florian Arens. All rights reserved.
           </p>
           <nav class="flex gap-4" aria-label="Legal">
             <.link
               :for={%{label: label, to: to} <- secondary_navigation_links()}
               navigate={to}
-              class="text-base-content/30 text-xs transition-colors duration-150 hover:text-base-content/60"
+              class="text-base-content/50 text-xs transition-colors duration-150 hover:text-base-content/70"
             >
               {label}
             </.link>
@@ -387,19 +410,19 @@ defmodule WebsiteWeb.CoreComponents do
   def contact_links(assigns) do
     ~H"""
     <div class={@class}>
-      <.link href="https://github.com/flo0807" target="_blank">
+      <.link href="https://github.com/flo0807" target="_blank" rel="noopener noreferrer">
         <span class="sr-only">GitHub</span>
         <.github_icon class={@icon_class} />
       </.link>
-      <.link href="https://linkedin.com/in/florian-arens" target="_blank">
+      <.link href="https://linkedin.com/in/florian-arens" target="_blank" rel="noopener noreferrer">
         <span class="sr-only">LinkedIn</span>
         <.linkedin_icon class={@icon_class} />
       </.link>
-      <.link href="https://bsky.app/profile/farens.me" target="_blank">
-        <span class="sr-only">Blueksy</span>
+      <.link href="https://bsky.app/profile/farens.me" target="_blank" rel="noopener noreferrer">
+        <span class="sr-only">Bluesky</span>
         <.bluesky_icon class={@icon_class} />
       </.link>
-      <.link href="https://x.com/flo_arens" target="_blank">
+      <.link href="https://x.com/flo_arens" target="_blank" rel="noopener noreferrer">
         <span class="sr-only">X</span>
         <.x_icon class={@icon_class} />
       </.link>
@@ -421,19 +444,19 @@ defmodule WebsiteWeb.CoreComponents do
 
   def project_card(assigns) do
     ~H"""
-    <.link href={@link} target="_blank">
+    <.link href={@link} target="_blank" rel="noopener noreferrer">
       <article class={[
         "group relative h-full",
         "rounded-2xl",
-        "from-base-200 to-base-200/50 bg-gradient-to-b",
+        "from-base-200 to-base-200/50 bg-linear-to-b",
         "border-base-content/5 border",
         "p-6",
-        "transition-all duration-300 ease-out",
+        "transition-[translate,box-shadow,border-color] duration-300 ease-out",
         "hover:border-base-content/10",
         "hover:shadow-base-content/5 hover:shadow-lg",
         "hover:-translate-y-1"
       ]}>
-        <div class="from-primary/5 to-secondary/5 absolute inset-0 rounded-2xl bg-gradient-to-br via-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div class="from-primary/5 to-secondary/5 bg-linear-to-br absolute inset-0 rounded-2xl via-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         <div class="relative">
           <div class="flex items-start justify-between">
@@ -443,8 +466,8 @@ defmodule WebsiteWeb.CoreComponents do
             <.icon
               name="hero-arrow-up-right"
               class={[
-                "size-5 text-base-content/30",
-                "transition-all duration-200",
+                "size-5 text-base-content/50",
+                "transition-[color,translate] duration-200",
                 "group-hover:text-primary",
                 "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               ]}
@@ -455,7 +478,7 @@ defmodule WebsiteWeb.CoreComponents do
             {@description}
           </p>
 
-          <div class="text-base-content/40 mt-4 flex items-center gap-2 text-sm">
+          <div class="text-base-content/50 mt-4 flex items-center gap-2 text-sm">
             <.icon name="hero-link" class="size-4" />
             <span class="transition-colors duration-200 group-hover:text-primary group-hover:underline">
               {@link_label}
@@ -502,7 +525,7 @@ defmodule WebsiteWeb.CoreComponents do
         "from-base-200 to-base-200/50 bg-linear-to-br",
         "border-base-content/5 border",
         "p-6",
-        "transition-all duration-300 ease-out",
+        "transition-[translate,box-shadow,border-color] duration-300 ease-out",
         "hover:border-base-content/10",
         "hover:shadow-base-content/5 hover:shadow-lg",
         "hover:-translate-y-1",
@@ -552,13 +575,13 @@ defmodule WebsiteWeb.CoreComponents do
           <div class={[
             "mt-auto flex items-center gap-2 pt-6",
             "text-base-content/50 text-sm font-medium",
-            "transition-all duration-200",
+            "transition-[color,gap] duration-200",
             "group-hover:text-primary group-hover:gap-3"
           ]}>
             <span>Read article</span>
             <.icon
               name="hero-arrow-right"
-              class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+              class="size-4 transition-[translate] duration-200 group-hover:translate-x-1"
             />
           </div>
         </div>
@@ -578,9 +601,7 @@ defmodule WebsiteWeb.CoreComponents do
   def blog_tags(assigns) do
     ~H"""
     <section id={@id} class="space-y-4">
-      <h2 class="text-base-content/40 text-sm font-semibold uppercase tracking-wider">
-        Filter by topic
-      </h2>
+      <.section_label>Filter by topic</.section_label>
 
       <div class="flex flex-wrap gap-2">
         <button
@@ -592,8 +613,7 @@ defmodule WebsiteWeb.CoreComponents do
             "text-xs font-medium",
             "rounded-full",
             "cursor-pointer border",
-            "transition-all duration-200",
-            "hover:scale-105 active:scale-100",
+            "transition-colors duration-200",
             if(String.downcase(tag) == @search_tag,
               do: ["bg-primary/10 text-primary border-primary/20", "shadow-primary/10 shadow-sm"],
               else: [
@@ -620,9 +640,7 @@ defmodule WebsiteWeb.CoreComponents do
   def toc(assigns) do
     ~H"""
     <nav :if={@is_root} aria-label="Table of contents" class={["group", @class]}>
-      <p class="text-base-content/40 mb-4 text-xs font-semibold uppercase tracking-wider">
-        On this page
-      </p>
+      <.section_label class="mb-4">On this page</.section_label>
       <ul class="space-y-1">
         <li :for={%{label: label, href: href, childs: childs} <- @headings}>
           <.link
@@ -641,7 +659,7 @@ defmodule WebsiteWeb.CoreComponents do
             <li :for={%{label: child_label, href: child_href} <- childs}>
               <.link
                 href={child_href}
-                class="text-base-content/40 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
+                class="text-base-content/50 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
               >
                 {child_label}
               </.link>
@@ -654,7 +672,7 @@ defmodule WebsiteWeb.CoreComponents do
       <li :for={%{label: label, href: href, childs: childs} <- @headings}>
         <.link
           href={href}
-          class="text-base-content/40 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
+          class="text-base-content/50 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
         >
           {label}
         </.link>

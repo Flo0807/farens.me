@@ -20,7 +20,7 @@ defmodule WebsiteWeb.Layouts do
   def app(assigns) do
     ~H"""
     <div class="flex min-h-screen flex-col">
-      <.mobile_navigation />
+      <.mobile_navigation current_url={@current_url} />
       <header>
         <.navbar current_url={@current_url} />
       </header>
