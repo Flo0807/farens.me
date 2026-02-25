@@ -34,7 +34,7 @@ defmodule Website.MixProject do
   defp deps do
     [
       # Core
-      {:phoenix, "1.8.3"},
+      {:phoenix, "== 1.8.4"},
       {:phoenix_html, "4.3.0"},
       {:phoenix_live_view, "== 1.1.24"},
       {:bandit, "1.10.2"},
