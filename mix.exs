@@ -34,16 +34,16 @@ defmodule Website.MixProject do
   defp deps do
     [
       # Core
-      {:phoenix, "== 1.8.4"},
+      {:phoenix, "1.8.4"},
       {:phoenix_html, "4.3.0"},
-      {:phoenix_live_view, "== 1.1.25"},
+      {:phoenix_live_view, "1.1.25"},
       {:bandit, "1.10.2"},
 
       # SEO & Content
       {:phoenix_seo, "0.1.11"},
       {:atomex, "0.5.1"},
       {:mdex, "0.11.0"},
-      {:yaml_elixir, "== 2.12.1"},
+      {:yaml_elixir, "2.12.1"},
       {:nimble_publisher, "1.1.1"},
 
       # Monitoring and Telemetry
@@ -68,15 +68,15 @@ defmodule Website.MixProject do
 
       # Dev and Test
       {:phoenix_test, "0.9.1", only: :test, runtime: false},
-      {:phoenix_test_playwright, "== 0.12.1", only: :test, runtime: false},
+      {:phoenix_test_playwright, "0.12.1", only: :test, runtime: false},
       {:a11y_audit, "0.3.1", only: :test},
       {:esbuild, "0.10.0", runtime: Mix.env() == :dev},
       {:tailwind, "0.4.1", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "1.6.2", only: :dev},
       {:tailwind_formatter, "0.4.2", only: [:dev, :test], runtime: false},
       {:credo, "1.7.16", only: [:dev, :test], runtime: false},
-      {:lazy_html, "== 0.1.10", only: :test},
-      {:tidewave, "== 0.5.5", only: :dev},
+      {:lazy_html, "0.1.10", only: :test},
+      {:tidewave, "0.5.5", only: :dev},
       {:igniter, "0.7.2", only: [:dev, :test]},
       {:usage_rules, "0.1.26", only: [:dev]}
     ]
