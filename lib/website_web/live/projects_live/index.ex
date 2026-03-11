@@ -12,6 +12,10 @@ defmodule WebsiteWeb.ProjectsLive.Index do
       |> assign(:projects, projects)
       |> assign(:page_title, "Projects - Florian Arens")
       |> assign(:og_image_text, "Projects")
+      |> assign(
+        :meta_description,
+        "Explore projects built by Florian Arens, including open source tools and web applications using Elixir and Phoenix."
+      )
 
     {:ok, socket}
   end
