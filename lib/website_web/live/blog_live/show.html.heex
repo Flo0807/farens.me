@@ -11,7 +11,7 @@
         navigate={~p"/blog"}
         class={[
           "inline-flex items-center gap-2",
-          "text-base-content/50 text-sm",
+          "text-base-content/70 text-sm",
           "hover:text-primary",
           "transition-colors duration-200",
           "group"
@@ -29,7 +29,7 @@
           {@article.title}
         </h1>
 
-        <div class="text-base-content/50 mt-6 flex flex-wrap items-center gap-4 text-sm">
+        <div class="text-base-content/70 mt-6 flex flex-wrap items-center gap-4 text-sm">
           <div class="flex items-center gap-2">
             <.icon name="hero-calendar" class="size-4" />
             <time datetime={@article.date}>
@@ -74,7 +74,7 @@
             class={[
               "inline-flex items-center px-3 py-1.5",
               "rounded-full text-sm font-medium",
-              "bg-base-200/50 text-base-content/60",
+              "bg-base-200/50 text-base-content/70",
               "border-base-content/5 border",
               "hover:bg-primary/10 hover:text-primary hover:border-primary/20",
               "transition-colors duration-200"
@@ -93,7 +93,7 @@
           </div>
           <.link
             navigate={~p"/blog"}
-            class="text-base-content/50 text-sm transition-colors duration-150 hover:text-primary"
+            class="text-base-content/70 text-sm transition-colors duration-150 hover:text-primary"
           >
             View all articles
           </.link>

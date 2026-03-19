@@ -46,7 +46,7 @@ defmodule WebsiteWeb.CoreComponents do
     <.title :if={@title} text={@title} />
     <div
       :if={@inner_block != []}
-      class="text-base-content/60 text-pretty mt-6 mb-10 leading-relaxed lg:w-2/3"
+      class="text-base-content/70 text-pretty mt-6 mb-10 leading-relaxed lg:w-2/3"
     >
       {render_slot(@inner_block)}
     </div>
@@ -61,7 +61,7 @@ defmodule WebsiteWeb.CoreComponents do
 
   def section_label(assigns) do
     ~H"""
-    <p class={["text-base-content/50 text-xs font-semibold uppercase tracking-wider", @class]}>
+    <p class={["text-base-content/70 text-xs font-semibold uppercase tracking-wider", @class]}>
       {render_slot(@inner_block)}
     </p>
     """
@@ -306,7 +306,7 @@ defmodule WebsiteWeb.CoreComponents do
             ]}
           >
             <span class="flex-1">{label}</span>
-            <.icon name="hero-chevron-right" class="size-5 text-base-content/50" />
+            <.icon name="hero-chevron-right" class="size-5 text-base-content/70" />
           </.link>
         </nav>
 
@@ -317,7 +317,7 @@ defmodule WebsiteWeb.CoreComponents do
             icon_class={[
               "size-11 p-2.5",
               "rounded-xl",
-              "text-base-content/50 fill-current",
+              "text-base-content/70 fill-current",
               "hover:text-primary hover:bg-base-content/5",
               "transition-colors"
             ]}
@@ -351,7 +351,7 @@ defmodule WebsiteWeb.CoreComponents do
               </div>
               <span class="text-base-content font-semibold">Florian Arens</span>
             </.link>
-            <p class="text-base-content/50 mt-4 max-w-xs text-sm">
+            <p class="text-base-content/70 mt-4 max-w-xs text-sm">
               Crafting modern web experiences with Elixir and Phoenix.
             </p>
           </div>
@@ -364,7 +364,7 @@ defmodule WebsiteWeb.CoreComponents do
                 navigate={to}
                 aria-current={active?(@current_url, to) && "page"}
                 class={[
-                  "text-base-content/60 text-sm transition-colors duration-150 hover:text-primary",
+                  "text-base-content/70 text-sm transition-colors duration-150 hover:text-primary",
                   active?(@current_url, to) && "text-primary"
                 ]}
               >
@@ -377,20 +377,20 @@ defmodule WebsiteWeb.CoreComponents do
             <.section_label class="mb-4">Connect</.section_label>
             <.contact_links
               class="flex gap-3"
-              icon_class="size-5 text-base-content/50 hover:text-primary transition-colors duration-150 fill-current"
+              icon_class="size-5 text-base-content/70 hover:text-primary transition-colors duration-150 fill-current"
             />
           </div>
         </div>
 
         <div class="border-base-content/5 mt-12 flex flex-col gap-4 border-t pt-6 md:flex-row md:items-center md:justify-between">
-          <p class="text-base-content/50 text-xs">
+          <p class="text-base-content/70 text-xs">
             &copy; {Date.utc_today().year} Florian Arens. All rights reserved.
           </p>
           <nav class="flex gap-4" aria-label="Legal">
             <.link
               :for={%{label: label, to: to} <- secondary_navigation_links()}
               navigate={to}
-              class="text-base-content/50 text-xs transition-colors duration-150 hover:text-base-content/70"
+              class="text-base-content/70 text-xs transition-colors duration-150 hover:text-base-content/70"
             >
               {label}
             </.link>
@@ -466,7 +466,7 @@ defmodule WebsiteWeb.CoreComponents do
             <.icon
               name="hero-arrow-up-right"
               class={[
-                "size-5 text-base-content/50",
+                "size-5 text-base-content/70",
                 "transition-[color,translate] duration-200",
                 "group-hover:text-primary",
                 "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -474,11 +474,11 @@ defmodule WebsiteWeb.CoreComponents do
             />
           </div>
 
-          <p class="text-base-content/60 mt-3 text-sm leading-relaxed">
+          <p class="text-base-content/70 mt-3 text-sm leading-relaxed">
             {@description}
           </p>
 
-          <div class="text-base-content/50 mt-4 flex items-center gap-2 text-sm">
+          <div class="text-base-content/70 mt-4 flex items-center gap-2 text-sm">
             <.icon name="hero-link" class="size-4" />
             <span class="transition-colors duration-200 group-hover:text-primary group-hover:underline">
               {@link_label}
@@ -534,7 +534,7 @@ defmodule WebsiteWeb.CoreComponents do
         <div class="from-primary/5 to-secondary/5 bg-linear-to-br absolute inset-0 rounded-2xl via-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         <div class="relative flex h-full flex-col">
-          <div class="text-base-content/50 flex items-center gap-3 text-xs font-medium">
+          <div class="text-base-content/70 flex items-center gap-3 text-xs font-medium">
             <time datetime={@date}>
               {Calendar.strftime(@date, "%b %d, %Y")}
             </time>
@@ -559,7 +559,7 @@ defmodule WebsiteWeb.CoreComponents do
                 "px-2.5 py-0.5",
                 "text-xs font-medium",
                 "rounded-full",
-                "bg-base-content/5 text-base-content/60",
+                "bg-base-content/5 text-base-content/70",
                 "transition-colors duration-200",
                 "group-hover:bg-primary/10 group-hover:text-primary"
               ]}
@@ -574,7 +574,7 @@ defmodule WebsiteWeb.CoreComponents do
 
           <div class={[
             "mt-auto flex items-center gap-2 pt-6",
-            "text-base-content/50 text-sm font-medium",
+            "text-base-content/70 text-sm font-medium",
             "transition-[color,gap] duration-200",
             "group-hover:text-primary group-hover:gap-3"
           ]}>
@@ -617,7 +617,7 @@ defmodule WebsiteWeb.CoreComponents do
             if(String.downcase(tag) == @search_tag,
               do: ["bg-primary/10 text-primary border-primary/20", "shadow-primary/10 shadow-sm"],
               else: [
-                "bg-base-200/50 text-base-content/60 border-base-content/5",
+                "bg-base-200/50 text-base-content/70 border-base-content/5",
                 "hover:bg-base-200 hover:text-base-content hover:border-base-content/10"
               ]
             )
@@ -646,7 +646,7 @@ defmodule WebsiteWeb.CoreComponents do
           <.link
             href={href}
             class={[
-              "text-base-content/50 block py-1.5 text-sm",
+              "text-base-content/70 block py-1.5 text-sm",
               "hover:text-primary",
               "transition-colors duration-150",
               "border-l-2 border-transparent pl-3",
@@ -659,7 +659,7 @@ defmodule WebsiteWeb.CoreComponents do
             <li :for={%{label: child_label, href: child_href} <- childs}>
               <.link
                 href={child_href}
-                class="text-base-content/50 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
+                class="text-base-content/70 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
               >
                 {child_label}
               </.link>
@@ -672,7 +672,7 @@ defmodule WebsiteWeb.CoreComponents do
       <li :for={%{label: label, href: href, childs: childs} <- @headings}>
         <.link
           href={href}
-          class="text-base-content/50 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
+          class="text-base-content/70 block py-1 pl-3 text-xs transition-colors duration-150 hover:text-primary"
         >
           {label}
         </.link>
