@@ -55,7 +55,10 @@
     </section>
 
     <div id="articles" class="mt-10 flex flex-col gap-5 lg:w-2/3" phx-update="stream">
-      <div class="hidden flex-col items-center justify-center py-16 text-center only:flex">
+      <div
+        id="articles-empty"
+        class="hidden flex-col items-center justify-center py-16 text-center only:flex"
+      >
         <div class="bg-base-200 mb-4 flex h-16 w-16 items-center justify-center rounded-full">
           <.icon name="hero-document-magnifying-glass" class="size-8 text-base-content/50" />
         </div>
