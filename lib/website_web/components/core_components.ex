@@ -161,7 +161,7 @@ defmodule WebsiteWeb.CoreComponents do
           loading="lazy"
           src={~p"/images/me.jpg"}
           alt="Portrait of Florian"
-          class="h-full w-full object-cover transition-[scale] duration-300 group-hover:scale-110"
+          class="transition-[scale] h-full w-full object-cover duration-300 group-hover:scale-110"
         />
       </div>
     </.link>
@@ -346,7 +346,7 @@ defmodule WebsiteWeb.CoreComponents do
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
           <div class="md:col-span-1">
             <.link navigate={~p"/"} class="group inline-flex items-center gap-3">
-              <div class="ring-base-content/5 h-10 w-10 overflow-hidden rounded-full ring-2 transition-[box-shadow] duration-200 group-hover:ring-primary/20">
+              <div class="ring-base-content/5 transition-[box-shadow] h-10 w-10 overflow-hidden rounded-full ring-2 duration-200 group-hover:ring-primary/20">
                 <img src={~p"/images/me.jpg"} alt="Florian" class="h-full w-full object-cover" />
               </div>
               <span class="text-base-content font-semibold">Florian Arens</span>
