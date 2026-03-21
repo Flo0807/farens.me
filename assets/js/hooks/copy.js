@@ -1,6 +1,6 @@
 export default {
   mounted () {
-    this.el.addEventListener('click', (e) => {
+    this.handleClick = (e) => {
       e.preventDefault()
 
       const { value } = this.el.dataset
@@ -10,11 +10,18 @@ export default {
 
       navigator.clipboard.writeText(value).then(() => {
         this.el.innerText = notice
-        setTimeout(() => { this.el.innerText = originalText }, 2000)
+        this.timeout = setTimeout(() => { this.el.innerText = originalText }, 2000)
       }).catch(() => {
         this.el.innerText = 'Failed to copy'
-        setTimeout(() => { this.el.innerText = originalText }, 2000)
+        this.timeout = setTimeout(() => { this.el.innerText = originalText }, 2000)
       })
-    })
+    }
+
+    this.el.addEventListener('click', this.handleClick)
+  },
+
+  destroyed () {
+    this.el.removeEventListener('click', this.handleClick)
+    clearTimeout(this.timeout)
   }
 }

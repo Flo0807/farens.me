@@ -3,6 +3,15 @@ defmodule WebsiteWeb.LegalLive.Index do
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :page_title, "Legal Notice - Florian Arens")}
+    socket =
+      socket
+      |> assign(:page_title, "Legal Notice - Florian Arens")
+      |> assign(:og_image_text, "Legal Notice")
+      |> assign(
+        :meta_description,
+        "Legal notice and contact information for farens.me"
+      )
+
+    {:ok, socket}
   end
 end

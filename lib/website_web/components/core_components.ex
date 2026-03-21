@@ -80,7 +80,9 @@ defmodule WebsiteWeb.CoreComponents do
     <dialog id={@id} class="modal">
       <div class="modal-box">
         <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
+          <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2" aria-label="Close">
+            ✕
+          </button>
         </form>
         <h3 :if={@header} class="text-base-content text-lg font-bold">
           {@header}
@@ -181,20 +183,16 @@ defmodule WebsiteWeb.CoreComponents do
       title="Change theme"
       class="dropdown dropdown-end"
     >
-      <div
-        tabindex="0"
-        role="button"
-        class={[
-          "btn",
-          "hover:bg-base-content/5",
-          "transition-colors duration-200",
-          "border-base-content/5 border"
-        ]}
-      >
+      <button class={[
+        "btn",
+        "hover:bg-base-content/5",
+        "transition-colors duration-200",
+        "border-base-content/5 border"
+      ]}>
         <.icon name="hero-swatch" class="size-4" />
         <.icon name="hero-chevron-down" class="size-3 opacity-40" />
         <span class="sr-only">Switch theme</span>
-      </div>
+      </button>
       <ul
         tabindex="0"
         class={[
@@ -257,9 +255,9 @@ defmodule WebsiteWeb.CoreComponents do
             </.link>
           </li>
           <li>
-            <a id="copy-blog-url" role="button" data-value={@link} phx-hook="Copy">
+            <button id="copy-blog-url" data-value={@link} phx-hook="Copy">
               Copy link
-            </a>
+            </button>
           </li>
         </ul>
       </details>
@@ -377,7 +375,7 @@ defmodule WebsiteWeb.CoreComponents do
             <.section_label class="mb-4">Connect</.section_label>
             <.contact_links
               class="flex gap-3"
-              icon_class="size-5 text-base-content/70 hover:text-primary transition-colors duration-150 fill-current"
+              icon_class="size-5 p-3 box-content text-base-content/70 hover:text-primary transition-colors duration-150 fill-current"
             />
           </div>
         </div>
@@ -390,7 +388,7 @@ defmodule WebsiteWeb.CoreComponents do
             <.link
               :for={%{label: label, to: to} <- secondary_navigation_links()}
               navigate={to}
-              class="text-base-content/70 text-xs transition-colors duration-150 hover:text-base-content/70"
+              class="text-base-content/70 text-xs transition-colors duration-150 hover:text-base-content"
             >
               {label}
             </.link>
@@ -498,9 +496,9 @@ defmodule WebsiteWeb.CoreComponents do
 
   def grid(assigns) do
     ~H"""
-    <section class={["grid gap-5 md:grid-cols-2 lg:grid-cols-3", @class]}>
+    <div class={["grid gap-5 md:grid-cols-2 lg:grid-cols-3", @class]}>
       {render_slot(@inner_block)}
-    </section>
+    </div>
     """
   end
 
@@ -521,7 +519,7 @@ defmodule WebsiteWeb.CoreComponents do
     <.link id={@id} navigate={@link}>
       <article class={[
         "group relative h-full",
-        "rounded-box",
+        "rounded-2xl",
         "from-base-200 to-base-200/50 bg-linear-to-br",
         "border-base-content/5 border",
         "p-6",
@@ -606,8 +604,9 @@ defmodule WebsiteWeb.CoreComponents do
       <div class="flex flex-wrap gap-2">
         <button
           :for={tag <- @tags}
-          phx-click="select-tag"
+          phx-click={@select_event}
           phx-value-tag={tag}
+          aria-pressed={to_string(String.downcase(tag) == @search_tag)}
           class={[
             "inline-flex items-center px-2.5 py-1",
             "text-xs font-medium",
