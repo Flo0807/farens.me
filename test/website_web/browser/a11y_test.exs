@@ -28,8 +28,8 @@ defmodule WebsiteWeb.A11yTest do
       theme: theme
     } do
       conn
-      |> set_theme(theme)
       |> visit(page)
+      |> set_theme(theme)
       |> assert_a11y()
     end
   end

@@ -1,15 +1,19 @@
 <Layouts.app current_url={@current_url}>
-  <.page_intro title="Things I've built.">
-    I've been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my freetime. These are the ones that I'm most proud of.
-  </.page_intro>
+  <article class="relative">
+    <header>
+      <.page_intro title="Things I've built" label="Portfolio">
+        I've been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my free time. These are the ones that I'm most proud of.
+      </.page_intro>
+    </header>
 
-  <.grid>
-    <.project_card
-      :for={project <- @projects}
-      title={project.title}
-      description={project.description}
-      link={project.link}
-      link_label={project.link_label}
-    />
-  </.grid>
+    <.grid>
+      <.project_card
+        :for={project <- @projects}
+        title={project.title}
+        description={project.description}
+        link={project.link}
+        link_label={project.link_label}
+      />
+    </.grid>
+  </article>
 </Layouts.app>

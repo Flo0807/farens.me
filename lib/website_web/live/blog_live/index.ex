@@ -12,6 +12,10 @@ defmodule WebsiteWeb.BlogLive.Index do
       |> assign(:page_title, "Blog - Florian Arens")
       |> assign(:all_tags, all_tags)
       |> assign(:og_image_text, "Blog")
+      |> assign(
+        :meta_description,
+        "Articles about software engineering, functional programming, Elixir, and Phoenix LiveView by Florian Arens."
+      )
 
     {:ok, socket}
   end
