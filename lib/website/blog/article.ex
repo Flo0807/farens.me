@@ -11,6 +11,7 @@ defmodule Website.Blog.Article do
             description: "",
             tags: [],
             body: "",
+            plain_body: "",
             read_minutes: 0,
             heading_links: [],
             published: false
@@ -20,20 +21,27 @@ defmodule Website.Blog.Article do
     [month, day, id] = String.split(month_day_id, "-", parts: 3)
     date = Date.from_iso8601!("#{year}-#{month}-#{day}")
 
-    read_minutes = calculate_read_minutes(body)
+    plain_body = Floki.parse_fragment!(body) |> Floki.text()
+    read_minutes = calculate_read_minutes(plain_body)
     heading_links = parse_headings(body)
 
     struct!(
       __MODULE__,
-      [id: id, date: date, body: body, read_minutes: read_minutes, heading_links: heading_links] ++
+      [
+        id: id,
+        date: date,
+        body: body,
+        plain_body: plain_body,
+        read_minutes: read_minutes,
+        heading_links: heading_links
+      ] ++
         Map.to_list(attrs)
     )
   end
 
-  defp calculate_read_minutes(html) do
+  defp calculate_read_minutes(plain_text) do
     word_count =
-      Floki.parse_fragment!(html)
-      |> Floki.text()
+      plain_text
       |> String.split(~r/\s+/)
       |> Enum.count()
 

@@ -21,6 +21,7 @@ defmodule WebsiteWeb.Layouts do
     ~H"""
     <div class="flex min-h-screen flex-col">
       <.mobile_navigation current_url={@current_url} />
+      <.live_component module={WebsiteWeb.SearchLive} id="global-search" />
       <header>
         <.navbar current_url={@current_url} />
       </header>

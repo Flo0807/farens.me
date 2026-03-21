@@ -140,7 +140,27 @@ defmodule WebsiteWeb.CoreComponents do
           <.icon name="hero-bars-3" class="size-4" />
         </button>
 
-        <.theme_switch />
+        <div class="flex items-center gap-2">
+          <button
+            onclick="window.dispatchEvent(new CustomEvent('open-search'))"
+            aria-label="Search articles"
+            class={[
+              "flex items-center gap-2",
+              "bg-base-200/80 rounded-box",
+              "border-base-content/5 border",
+              "px-3 py-2 text-sm",
+              "text-base-content/50 hover:text-base-content/80",
+              "transition-colors duration-200"
+            ]}
+          >
+            <.icon name="hero-magnifying-glass" class="size-4" />
+            <span class="hidden md:inline">Search...</span>
+            <kbd class="bg-base-300/80 font-mono border-base-content/10 hidden rounded border px-1.5 py-0.5 text-xs md:inline">
+              ⌘K
+            </kbd>
+          </button>
+          <.theme_switch />
+        </div>
       </div>
     </nav>
     """
