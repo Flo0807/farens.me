@@ -46,6 +46,11 @@ defmodule Website.Blog do
   end
 
   @doc """
+  Searches articles by query string.
+  """
+  def search_articles(query), do: Website.Blog.Search.search(query)
+
+  @doc """
   Returns recommended articles for a given article.
   """
   def get_recommended_articles(current_article, count) do
