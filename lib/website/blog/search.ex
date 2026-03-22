@@ -98,16 +98,18 @@ defmodule Website.Blog.Search do
     if String.length(query) < 2 do
       text
     else
-      parts = Regex.split(~r/#{Regex.escape(query)}/i, text, include_captures: true)
+      ~r/#{Regex.escape(query)}/i
+      |> Regex.split(text, include_captures: true)
+      |> Enum.map(&highlight_part(&1, query))
+    end
+  end
 
-      Enum.map(parts, fn part ->
-        if String.downcase(part) == String.downcase(query) do
-          {:safe,
-           "<mark class=\"bg-primary/20 text-primary rounded\">#{Phoenix.HTML.html_escape(part) |> Phoenix.HTML.safe_to_string()}</mark>"}
-        else
-          Phoenix.HTML.html_escape(part)
-        end
-      end)
+  defp highlight_part(part, query) do
+    if String.downcase(part) == String.downcase(query) do
+      escaped = part |> Phoenix.HTML.html_escape() |> Phoenix.HTML.safe_to_string()
+      Phoenix.HTML.raw("<mark class=\"bg-primary/20 text-primary rounded\">#{escaped}</mark>")
+    else
+      Phoenix.HTML.html_escape(part)
     end
   end
 

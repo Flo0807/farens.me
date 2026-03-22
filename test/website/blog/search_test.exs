@@ -27,7 +27,7 @@ defmodule Website.Blog.SearchTest do
 
     test "returns results matching article titles" do
       results = Search.search("Hello World")
-      assert length(results) > 0
+      assert results != []
       assert Enum.any?(results, fn r -> r.match_field == :title end)
     end
 
@@ -85,7 +85,7 @@ defmodule Website.Blog.SearchTest do
   describe "highlight/2" do
     test "wraps matched text in mark tags" do
       result = Search.highlight("Hello World", "World")
-      html = result |> Enum.map(&safe_to_string/1) |> Enum.join()
+      html = Enum.map_join(result, &safe_to_string/1)
 
       assert html =~ "<mark"
       assert html =~ "World</mark>"
@@ -103,7 +103,7 @@ defmodule Website.Blog.SearchTest do
       malicious = "<script>alert(1)</script>"
       text = "before #{malicious} after"
       result = Search.highlight(text, malicious)
-      html = result |> Enum.map(&safe_to_string/1) |> Enum.join()
+      html = Enum.map_join(result, &safe_to_string/1)
 
       refute html =~ "<script>"
       refute html =~ "</script>"
@@ -113,7 +113,7 @@ defmodule Website.Blog.SearchTest do
 
     test "returns escaped empty text for empty string" do
       result = Search.highlight("", "query")
-      html = result |> Enum.map(&safe_to_string/1) |> Enum.join()
+      html = Enum.map_join(result, &safe_to_string/1)
 
       assert html == ""
     end
