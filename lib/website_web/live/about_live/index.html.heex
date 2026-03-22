@@ -1,27 +1,32 @@
 <Layouts.app current_url={@current_url}>
   <article class="relative">
     <header>
-      <.page_intro label="About" title="I'm a Lead Engineer" />
+      <.page_intro label="About" title="I'm Florian." />
     </header>
 
     <div class="mt-10 flex flex-col gap-12 lg:flex-row lg:gap-16">
       <div class="flex-1 space-y-6">
         <p class="text-base-content/70 leading-relaxed">
-          I acquired my software development skills by working on a variety of projects.
-          During my practical studies in Applied Computer Science, I was able to successfully
-          complete numerous projects, both as part of a team and independently. I have also
-          been involved in several research projects and gained professional experience as a
-          software developer.
+          I work as a Lead Engineer at <.link
+            href="https://naymspace.de/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+          >naymspace</.link>,
+          where I am technically responsible for multiple projects. Driven by an entrepreneurial mindset,
+          I am passionate about leveraging AI to accelerate software development workflows, always with a focus on quality.
         </p>
 
         <p class="text-base-content/70 leading-relaxed">
-          Outside of my studies and work, I am also very passionate about software development.
-          I have already built a few open source projects and enjoy attending conferences and meetups.
+          I have a background in Applied Computer Science (B.Sc. & M.Sc.) and acquired my skills by
+          working on a variety of projects. I successfully completed numerous projects, both as part of
+          a team and independently. I have also participated in several research projects and gained professional
+          working experience as a Software Developer and Lead Engineer.
         </p>
 
         <p class="text-base-content/70 leading-relaxed">
-          I'm passionate about functional programming. Currently I am
-          building web applications using Phoenix, Elixir and LiveView.
+          Outside of work, I'm passionate about software development as well.
+          I build open source projects, explore new technologies, and enjoy attending conferences and meetups.
         </p>
 
         <p class="text-base-content/70 leading-relaxed">
@@ -50,7 +55,7 @@
         <div class={[
           "group relative",
           "lg:rotate-2 lg:hover:-rotate-1",
-          "transition-transform duration-500"
+          "transition-[rotate] duration-500"
         ]}>
           <div class="from-primary/20 to-secondary/20 bg-linear-to-br absolute inset-0 rounded-2xl opacity-50 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
 
