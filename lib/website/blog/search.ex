@@ -62,8 +62,9 @@ defmodule Website.Blog.Search do
   @doc """
   Extracts a snippet of text around the first occurrence of the query.
   """
-  def extract_snippet(text, query_down) do
+  def extract_snippet(text, query) when is_binary(text) and is_binary(query) do
     text_down = String.downcase(text)
+    query_down = String.downcase(query)
 
     case :binary.match(text_down, query_down) do
       {pos, _len} ->
