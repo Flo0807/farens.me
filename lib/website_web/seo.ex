@@ -9,7 +9,7 @@ defmodule WebsiteWeb.SEO do
     open_graph: &__MODULE__.open_graph_config/1,
     twitter: &__MODULE__.twitter_config/1
 
-  @default_description "Personal website and blog of Florian Arens. Software Engineer passionate about leveraging AI to accelerate software development."
+  @default_description "Personal website and blog of Florian Arens. Crafting modern web experiences with Elixir and Phoenix."
 
   @doc """
   Configures the Twitter card.
@@ -20,7 +20,8 @@ defmodule WebsiteWeb.SEO do
       creator: "@flo_arens",
       title: conn.assigns.page_title,
       card: :summary_large_image,
-      image: "https://og-image.farens.me/image?text=#{conn.assigns[:og_image_text]}",
+      image:
+        "https://og-image.farens.me/image?text=#{URI.encode(conn.assigns[:og_image_text] || "")}",
       description: conn.assigns[:meta_description] || @default_description
     )
   end
@@ -33,7 +34,8 @@ defmodule WebsiteWeb.SEO do
       title: conn.assigns.page_title,
       description: conn.assigns[:meta_description] || @default_description,
       locale: "en_US",
-      image: "https://og-image.farens.me/image?text=#{conn.assigns[:og_image_text]}",
+      image:
+        "https://og-image.farens.me/image?text=#{URI.encode(conn.assigns[:og_image_text] || "")}",
       url: conn.assigns.current_url
     )
   end
