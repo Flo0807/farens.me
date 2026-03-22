@@ -41,8 +41,6 @@
               aria-expanded={to_string(@results != [])}
               aria-controls="search-results"
               aria-activedescendant={if @results != [], do: "search-result-#{@selected_index}"}
-              phx-keydown="keydown"
-              phx-key="Escape"
               phx-debounce="300"
               phx-target={@myself}
               class={[

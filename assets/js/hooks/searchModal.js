@@ -12,9 +12,15 @@ const SearchModal = {
         e.preventDefault()
         if (this.isOpen) {
           this.pushEventTo(this.el, 'close', {})
+          this.closeModal()
         } else {
           this.openSearch()
         }
+      }
+
+      if (e.key === 'Escape' && this.isOpen) {
+        this.pushEventTo(this.el, 'close', {})
+        this.closeModal()
       }
     }
 

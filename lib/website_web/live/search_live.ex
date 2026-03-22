@@ -27,14 +27,6 @@ defmodule WebsiteWeb.SearchLive do
     {:noreply, assign(socket, results: results, selected_index: 0, loading: false)}
   end
 
-  def handle_event("keydown", %{"key" => "Escape"}, socket) do
-    {:noreply, reset_search(socket)}
-  end
-
-  def handle_event("keydown", _params, socket) do
-    {:noreply, socket}
-  end
-
   def handle_event("navigate", %{"slug" => slug}, socket) do
     {:noreply,
      socket
