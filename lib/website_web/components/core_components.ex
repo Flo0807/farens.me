@@ -145,7 +145,7 @@ defmodule WebsiteWeb.CoreComponents do
             onclick="window.dispatchEvent(new CustomEvent('open-search'))"
             aria-label="Search articles"
             class={[
-              "btn",
+              "btn font-normal",
               "hover:bg-base-content/5",
               "transition-colors duration-200",
               "border-base-content/5 border"
