@@ -134,7 +134,7 @@ defmodule WebsiteWeb.CoreComponents do
 
         <button
           class="btn flex items-center font-semibold sm:hidden"
-          onclick="mobile_navigation.showModal()"
+          onclick="document.getElementById('mobile_navigation').showModal()"
         >
           <span>Menu</span>
           <.icon name="hero-bars-3" class="size-4" />
@@ -293,7 +293,7 @@ defmodule WebsiteWeb.CoreComponents do
           <.link
             :for={%{label: label, to: to} <- main_navigation_links()}
             navigate={to}
-            onclick="mobile_navigation.close()"
+            onclick="document.getElementById('mobile_navigation').close()"
             aria-current={active?(@current_url, to) && "page"}
             class={[
               "flex items-center gap-4 rounded-2xl px-4 py-4",
@@ -594,7 +594,7 @@ defmodule WebsiteWeb.CoreComponents do
   attr :id, :string, default: nil
   attr :tags, :list, required: true
   attr :search_tag, :string, default: nil
-  attr :select_event, :string
+  attr :select_event, :string, default: "select-tag"
 
   def blog_tags(assigns) do
     ~H"""

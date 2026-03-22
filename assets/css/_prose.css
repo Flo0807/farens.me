@@ -3,7 +3,10 @@
   @apply prose-headings:font-semibold prose-headings:tracking-tight;
 
   /* Links */
-  @apply prose-a:text-primary prose-a:no-underline hover:prose-a:underline;
+  @apply prose-a:text-primary prose-a:no-underline;
+  & :where(a:hover) {
+    @apply underline;
+  }
 
   /* Inline code */
   @apply prose-code:bg-base-200 prose-code:rounded prose-code:px-1.5 prose-code:py-0.5;
