@@ -49,10 +49,6 @@ defmodule WebsiteWeb.SearchLive do
      |> push_event("scroll-to-selected", %{id: "search-result-#{new_index}"})}
   end
 
-  def handle_event("keydown", %{"key" => "Enter"}, socket) do
-    navigate_to_selected(socket)
-  end
-
   def handle_event("keydown", %{"key" => "Escape"}, socket) do
     {:noreply, assign(socket, query: "", results: [], selected_index: 0, open: false)}
   end
