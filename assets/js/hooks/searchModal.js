@@ -124,23 +124,30 @@ const SearchModal = {
       })
     })
 
+    this.handleEvent('close-search', () => {
+      this.closeModal()
+    })
+
     this.handleEvent('scroll-to-selected', ({ id }) => {
       const el = document.getElementById(id)
       if (el) el.scrollIntoView({ block: 'nearest' })
     })
   },
 
-  destroyed() {
-    document.removeEventListener('keydown', this.handleKeydown)
-    window.removeEventListener('open-search', this.handleOpenSearch)
+  closeModal() {
     this.el.removeEventListener('keydown', this.handleModalKeydown)
-
     this.isOpen = false
 
     if (this.previouslyFocused && typeof this.previouslyFocused.focus === 'function') {
       this.previouslyFocused.focus()
       this.previouslyFocused = null
     }
+  },
+
+  destroyed() {
+    document.removeEventListener('keydown', this.handleKeydown)
+    window.removeEventListener('open-search', this.handleOpenSearch)
+    this.closeModal()
   }
 }
 

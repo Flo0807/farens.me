@@ -47,7 +47,9 @@ defmodule WebsiteWeb.SearchLive do
   end
 
   defp reset_search(socket) do
-    assign(socket, query: "", results: [], selected_index: 0, open: false)
+    socket
+    |> assign(query: "", results: [], selected_index: 0, open: false)
+    |> push_event("close-search", %{})
   end
 
   defp match_field_label(:title), do: "in title"
