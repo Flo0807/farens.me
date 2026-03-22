@@ -322,7 +322,7 @@ defmodule WebsiteWeb.CoreComponents do
           />
         </div>
       </div>
-      <form method="dialog" class="modal-backdrop bg-base-content/50 backdrop-blur-sm">
+      <form method="dialog" class="modal-backdrop bg-black/50 backdrop-blur-sm">
         <button aria-label="Close navigation">{gettext("close")}</button>
       </form>
     </dialog>
