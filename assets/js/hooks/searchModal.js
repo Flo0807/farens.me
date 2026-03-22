@@ -1,5 +1,5 @@
 const SearchModal = {
-  mounted() {
+  mounted () {
     this.isOpen = false
     this.previouslyFocused = null
 
@@ -80,7 +80,6 @@ const SearchModal = {
           const slug = selected.getAttribute('phx-value-slug')
           if (slug) this.pushEventTo(this.el, 'navigate', { slug })
         }
-        return
       }
     }
 
@@ -119,8 +118,8 @@ const SearchModal = {
 
       this.el.addEventListener('keydown', this.handleModalKeydown)
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
           const input = document.getElementById('search-input')
           if (input) {
             input.focus()
@@ -140,7 +139,7 @@ const SearchModal = {
     })
   },
 
-  closeModal() {
+  closeModal () {
     this.el.removeEventListener('keydown', this.handleModalKeydown)
     this.isOpen = false
 
@@ -150,7 +149,7 @@ const SearchModal = {
     }
   },
 
-  destroyed() {
+  destroyed () {
     document.removeEventListener('keydown', this.handleKeydown)
     window.removeEventListener('open-search', this.handleOpenSearch)
     this.closeModal()
