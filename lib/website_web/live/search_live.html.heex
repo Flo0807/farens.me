@@ -6,13 +6,11 @@
     aria-label="Search articles"
     role="dialog"
     aria-modal="true"
-    phx-window-keydown="keydown"
-    phx-key="Escape"
     phx-target={@myself}
   >
     <%!-- Backdrop --%>
     <div
-      class="bg-black/50 fixed inset-0 backdrop-blur-sm"
+      class="bg-black/60 fixed inset-0 backdrop-blur-sm"
       phx-click="close"
       phx-target={@myself}
     >
@@ -27,7 +25,7 @@
         "flex flex-col overflow-hidden"
       ]}>
         <%!-- Search input --%>
-        <form phx-change="search" phx-submit="navigate-selected" phx-target={@myself}>
+        <form phx-change="search" phx-submit="search" phx-target={@myself}>
           <div class="border-base-content/10 flex items-center gap-3 border-b px-4 py-3">
             <.icon name="hero-magnifying-glass" class="text-base-content/50 size-5 shrink-0" />
             <input
@@ -39,10 +37,13 @@
               autocomplete="off"
               autofocus
               role="combobox"
+              aria-label="Search articles"
               aria-expanded={to_string(@results != [])}
               aria-controls="search-results"
               aria-activedescendant={if @results != [], do: "search-result-#{@selected_index}"}
               phx-keydown="keydown"
+              phx-key="Escape"
+              phx-debounce="300"
               phx-target={@myself}
               class={[
                 "flex-1 border-none bg-transparent outline-none",
@@ -64,18 +65,29 @@
           class="max-h-96 overflow-y-auto overscroll-contain"
         >
           <div
-            :if={@query != "" and @results == []}
+            :if={@loading}
+            class="text-base-content/50 px-4 py-12 text-center"
+          >
+            <span class="loading loading-spinner loading-md mx-auto mb-3"></span>
+            <p>Searching...</p>
+          </div>
+
+          <div
+            :if={!@loading and @query != "" and @results == []}
             class="text-base-content/50 px-4 py-12 text-center"
           >
             <.icon name="hero-magnifying-glass" class="size-8 mx-auto mb-3 opacity-50" />
             <p>No articles found for "<span class="text-base-content">{@query}</span>"</p>
           </div>
 
-          <div :if={@query == ""} class="text-base-content/50 px-4 py-12 text-center">
+          <div
+            :if={!@loading and @query == ""}
+            class="text-base-content/50 px-4 py-12 text-center"
+          >
             <p>Start typing to search articles...</p>
           </div>
 
-          <ul :if={@results != []} class="py-2">
+          <ul :if={!@loading and @results != []} class="py-2">
             <li
               :for={{result, index} <- Enum.with_index(@results)}
               id={"search-result-#{index}"}
@@ -115,9 +127,21 @@
           </ul>
         </div>
 
+        <%!-- aria-live region for screen readers --%>
+        <div aria-live="polite" class="sr-only">
+          <%= cond do %>
+            <% @results != [] -> %>
+              {length(@results)} {if length(@results) == 1, do: "result", else: "results"}
+            <% @query != "" and @results == [] -> %>
+              No articles found
+            <% true -> %>
+          <% end %>
+        </div>
+
         <%!-- Footer with keyboard hints --%>
         <div
           :if={@results != []}
+          aria-hidden="true"
           class="border-base-content/10 text-base-content/40 flex items-center gap-4 border-t px-4 py-2.5 text-xs"
         >
           <span class="flex items-center gap-1">
@@ -138,7 +162,7 @@
             </kbd>
             close
           </span>
-          <span class="ml-auto" aria-live="polite">
+          <span class="ml-auto">
             {length(@results)} {if length(@results) == 1, do: "result", else: "results"}
           </span>
         </div>

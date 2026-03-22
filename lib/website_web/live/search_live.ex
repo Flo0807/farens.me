@@ -5,12 +5,12 @@ defmodule WebsiteWeb.SearchLive do
 
   @impl true
   def mount(socket) do
-    {:ok, assign(socket, query: "", results: [], selected_index: 0, open: false)}
+    {:ok, reset_search(socket) |> assign(loading: false)}
   end
 
   @impl true
   def update(assigns, socket) do
-    {:ok, assign(socket, assigns)}
+    {:ok, assign(socket, id: assigns.id)}
   end
 
   @impl true
@@ -22,35 +22,13 @@ defmodule WebsiteWeb.SearchLive do
   end
 
   def handle_event("search", %{"query" => query}, socket) do
+    socket = assign(socket, query: query, loading: true)
     results = Blog.search_articles(query)
-    {:noreply, assign(socket, query: query, results: results, selected_index: 0)}
-  end
-
-  def handle_event("navigate-selected", _params, socket) do
-    navigate_to_selected(socket)
-  end
-
-  def handle_event("keydown", %{"key" => "ArrowDown"}, socket) do
-    max_index = max(length(socket.assigns.results) - 1, 0)
-    new_index = min(socket.assigns.selected_index + 1, max_index)
-
-    {:noreply,
-     socket
-     |> assign(selected_index: new_index)
-     |> push_event("scroll-to-selected", %{id: "search-result-#{new_index}"})}
-  end
-
-  def handle_event("keydown", %{"key" => "ArrowUp"}, socket) do
-    new_index = max(socket.assigns.selected_index - 1, 0)
-
-    {:noreply,
-     socket
-     |> assign(selected_index: new_index)
-     |> push_event("scroll-to-selected", %{id: "search-result-#{new_index}"})}
+    {:noreply, assign(socket, results: results, selected_index: 0, loading: false)}
   end
 
   def handle_event("keydown", %{"key" => "Escape"}, socket) do
-    {:noreply, assign(socket, query: "", results: [], selected_index: 0, open: false)}
+    {:noreply, reset_search(socket)}
   end
 
   def handle_event("keydown", _params, socket) do
@@ -60,31 +38,23 @@ defmodule WebsiteWeb.SearchLive do
   def handle_event("navigate", %{"slug" => slug}, socket) do
     {:noreply,
      socket
-     |> assign(query: "", results: [], selected_index: 0, open: false)
+     |> reset_search()
      |> push_navigate(to: ~p"/blog/#{slug}")}
   end
 
   def handle_event("close", _params, socket) do
-    {:noreply, assign(socket, query: "", results: [], selected_index: 0, open: false)}
+    {:noreply, reset_search(socket)}
   end
 
-  defp navigate_to_selected(socket) do
-    case Enum.at(socket.assigns.results, socket.assigns.selected_index) do
-      nil ->
-        {:noreply, socket}
-
-      result ->
-        {:noreply,
-         socket
-         |> assign(query: "", results: [], selected_index: 0, open: false)
-         |> push_navigate(to: ~p"/blog/#{result.article.slug}")}
-    end
+  defp reset_search(socket) do
+    assign(socket, query: "", results: [], selected_index: 0, open: false)
   end
 
   defp match_field_label(:title), do: "in title"
   defp match_field_label(:description), do: "in description"
   defp match_field_label(:tags), do: "in tags"
   defp match_field_label(:body), do: "in content"
+  defp match_field_label(_), do: ""
 
   defp highlight(text, query) do
     Blog.Search.highlight(text, query)
