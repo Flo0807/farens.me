@@ -10,11 +10,11 @@ defmodule WebsiteWeb.HomeLive.Index do
     socket =
       socket
       |> assign(:articles, articles)
-      |> assign(:page_title, "Florian Arens - Lead Engineer")
+      |> assign(:page_title, "Florian Arens - Software Engineer")
       |> assign(:og_image_text, "Florian Arens")
       |> assign(
         :meta_description,
-        "Lead Engineer passionate about leveraging AI to accelerate software development. Explore my blog, projects, and more."
+        "Software Engineer passionate about leveraging AI to accelerate software development. Explore my blog, projects, and more."
       )
 
     {:ok, socket}
