@@ -90,7 +90,7 @@ defmodule Website.Blog.Search do
 
   @doc """
   Highlights all occurrences of the query in the given text by wrapping them in <mark> tags.
-  Returns a Phoenix.HTML safe string.
+  Returns a list of Phoenix.HTML safe iodata fragments.
   """
   def highlight(text, query) when is_binary(text) and is_binary(query) do
     query = String.trim(query)
