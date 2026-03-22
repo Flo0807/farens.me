@@ -16,6 +16,15 @@ defmodule Website.Blog.SearchTest do
       assert Search.search(nil) == []
     end
 
+    test "returns empty list for whitespace-only query" do
+      assert Search.search("   ") == []
+    end
+
+    test "handles very long query without crashing" do
+      results = Search.search(String.duplicate("a", 500))
+      assert is_list(results)
+    end
+
     test "returns results matching article titles" do
       results = Search.search("Hello World")
       assert length(results) > 0
@@ -64,6 +73,13 @@ defmodule Website.Blog.SearchTest do
       assert snippet =~ "target"
       refute String.starts_with?(snippet, "...")
     end
+
+    test "handles Unicode text with accented characters and emoji" do
+      text = "Le café est délicieux et le résumé est prêt 🎉 pour la fête"
+      snippet = Search.extract_snippet(text, "résumé")
+
+      assert snippet =~ "résumé"
+    end
   end
 
   describe "highlight/2" do
@@ -81,6 +97,25 @@ defmodule Website.Blog.SearchTest do
 
     test "handles nil text" do
       assert Search.highlight(nil, "test") == ""
+    end
+
+    test "escapes HTML in query to prevent XSS" do
+      malicious = "<script>alert(1)</script>"
+      text = "before #{malicious} after"
+      result = Search.highlight(text, malicious)
+      html = result |> Enum.map(&safe_to_string/1) |> Enum.join()
+
+      refute html =~ "<script>"
+      refute html =~ "</script>"
+      assert html =~ "&lt;script&gt;"
+      assert html =~ "<mark"
+    end
+
+    test "returns escaped empty text for empty string" do
+      result = Search.highlight("", "query")
+      html = result |> Enum.map(&safe_to_string/1) |> Enum.join()
+
+      assert html == ""
     end
   end
 
