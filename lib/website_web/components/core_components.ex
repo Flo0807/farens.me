@@ -183,16 +183,20 @@ defmodule WebsiteWeb.CoreComponents do
       title="Change theme"
       class="dropdown dropdown-end"
     >
-      <button class={[
-        "btn",
-        "hover:bg-base-content/5",
-        "transition-colors duration-200",
-        "border-base-content/5 border"
-      ]}>
+      <div
+        tabindex="0"
+        role="button"
+        class={[
+          "btn",
+          "hover:bg-base-content/5",
+          "transition-colors duration-200",
+          "border-base-content/5 border"
+        ]}
+      >
         <.icon name="hero-swatch" class="size-4" />
         <.icon name="hero-chevron-down" class="size-3 opacity-40" />
         <span class="sr-only">Switch theme</span>
-      </button>
+      </div>
       <ul
         tabindex="0"
         class={[
