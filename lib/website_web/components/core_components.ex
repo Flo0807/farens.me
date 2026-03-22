@@ -141,22 +141,7 @@ defmodule WebsiteWeb.CoreComponents do
         </button>
 
         <div class="flex items-center gap-2">
-          <button
-            onclick="window.dispatchEvent(new CustomEvent('open-search'))"
-            aria-label="Search articles"
-            class={[
-              "btn font-normal",
-              "hover:bg-base-content/5",
-              "transition-colors duration-200",
-              "border-base-content/5 border"
-            ]}
-          >
-            <.icon name="hero-magnifying-glass" class="size-4" />
-            <span class="hidden md:inline">Search...</span>
-            <kbd class="bg-base-300/80 font-mono border-base-content/10 hidden rounded border px-1.5 py-0.5 text-xs md:inline">
-              ⌘K
-            </kbd>
-          </button>
+          <.search_button />
           <.theme_switch />
         </div>
       </div>
@@ -186,6 +171,30 @@ defmodule WebsiteWeb.CoreComponents do
         />
       </div>
     </.link>
+    """
+  end
+
+  @doc """
+  Renders the search button.
+  """
+  def search_button(assigns) do
+    ~H"""
+    <button
+      onclick="window.dispatchEvent(new CustomEvent('open-search'))"
+      aria-label="Search articles"
+      class={[
+        "btn font-normal",
+        "hover:bg-base-content/5",
+        "transition-colors duration-200",
+        "border-base-content/5 border"
+      ]}
+    >
+      <.icon name="hero-magnifying-glass" class="size-4" />
+      <span class="hidden md:inline">Search...</span>
+      <kbd class="bg-base-300/80 font-mono border-base-content/10 hidden rounded border px-1.5 py-0.5 text-xs md:inline">
+        ⌘K
+      </kbd>
+    </button>
     """
   end
 
