@@ -92,6 +92,8 @@ defmodule Website.Blog.Search do
   Highlights all occurrences of the query in the given text by wrapping them in <mark> tags.
   Returns a list of Phoenix.HTML safe iodata fragments.
   """
+  def highlight(nil, _query), do: ""
+
   def highlight(text, query) when is_binary(text) and is_binary(query) do
     query = String.trim(query)
 
@@ -112,6 +114,4 @@ defmodule Website.Blog.Search do
       Phoenix.HTML.html_escape(part)
     end
   end
-
-  def highlight(nil, _query), do: ""
 end
