@@ -11,7 +11,7 @@ defmodule WebsiteWeb.InitAssigns do
     socket =
       socket
       |> attach_current_url_hook()
-      |> assign(:page_title, "Florian Arens - Software Developer")
+      |> assign(:page_title, "Florian Arens - Software Engineer")
 
     {:cont, socket}
   end

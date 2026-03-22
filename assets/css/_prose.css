@@ -1,0 +1,32 @@
+.prose-article {
+  /* Headings */
+  @apply prose-headings:font-semibold prose-headings:tracking-tight;
+
+  /* Links */
+  @apply prose-a:text-primary prose-a:no-underline;
+  & :where(a:hover) {
+    @apply underline;
+  }
+
+  /* Inline code */
+  @apply prose-code:bg-base-200 prose-code:rounded prose-code:px-1.5 prose-code:py-0.5;
+
+  /* Code blocks */
+  @apply prose-pre:border-base-content/5 prose-pre:border;
+
+  /* Images */
+  @apply prose-img:rounded-xl prose-img:shadow-lg;
+
+  /* Reset inline code styles inside pre blocks */
+  & pre code {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  /* Remove backtick decorations from code */
+  & :where(code)::before,
+  & :where(code)::after {
+    content: none;
+  }
+}

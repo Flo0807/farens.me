@@ -24,7 +24,7 @@ defmodule WebsiteWeb.Icons do
       <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
   """
   attr :name, :string, required: true
-  attr :class, :string, default: "size-4"
+  attr :class, :any, default: "size-4"
 
   def icon(%{name: "hero-" <> _} = assigns) do
     ~H"""
@@ -65,7 +65,7 @@ defmodule WebsiteWeb.Icons do
   end
 
   @doc """
-  Renders the Blueksy icon.
+  Renders the Bluesky icon.
   """
   attr :class, :string, default: nil
 
