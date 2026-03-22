@@ -53,6 +53,64 @@ defmodule Website.Blog.SearchTest do
       results = Search.search("the")
       assert length(results) <= 10
     end
+
+    test "results contain required keys" do
+      results = Search.search("Hello World")
+      assert results != []
+
+      for result <- results do
+        assert Map.has_key?(result, :article)
+        assert Map.has_key?(result, :match_field)
+        assert Map.has_key?(result, :snippet)
+        assert result.match_field in [:title, :description, :tags, :body]
+      end
+    end
+
+    test "title matches are ranked above body matches" do
+      results = Search.search("Elixir")
+
+      fields = Enum.map(results, & &1.match_field)
+      title_idx = Enum.find_index(fields, &(&1 == :title))
+      body_idx = Enum.find_index(fields, &(&1 == :body))
+
+      if title_idx && body_idx do
+        assert title_idx < body_idx
+      end
+    end
+
+    test "trims leading and trailing whitespace from query" do
+      results_trimmed = Search.search("Hello World")
+      results_padded = Search.search("  Hello World  ")
+
+      slugs_trimmed = Enum.map(results_trimmed, & &1.article.slug)
+      slugs_padded = Enum.map(results_padded, & &1.article.slug)
+
+      assert slugs_trimmed == slugs_padded
+    end
+
+    test "query is capped at 200 characters" do
+      long_query = "Hello " <> String.duplicate("a", 300)
+      results = Search.search(long_query)
+      assert is_list(results)
+    end
+
+    test "body matches include a snippet" do
+      results = Search.search("Elixir")
+      body_results = Enum.filter(results, &(&1.match_field == :body))
+
+      for result <- body_results do
+        assert is_binary(result.snippet)
+      end
+    end
+
+    test "title and tag matches have nil snippet" do
+      results = Search.search("Hello World")
+      title_results = Enum.filter(results, &(&1.match_field == :title))
+
+      for result <- title_results do
+        assert is_nil(result.snippet)
+      end
+    end
   end
 
   describe "extract_snippet/2" do
@@ -79,6 +137,29 @@ defmodule Website.Blog.SearchTest do
       snippet = Search.extract_snippet(text, "résumé")
 
       assert snippet =~ "résumé"
+    end
+
+    test "handles match at end of text" do
+      text = "some words before the target"
+      snippet = Search.extract_snippet(text, "target")
+      assert snippet =~ "target"
+      refute String.ends_with?(snippet, "...")
+    end
+
+    test "snippet does not exceed expected length" do
+      text = String.duplicate("word ", 200) <> "needle" <> String.duplicate(" word", 200)
+      snippet = Search.extract_snippet(text, "needle")
+      assert String.length(snippet) <= 200
+    end
+
+    test "returns nil for empty text" do
+      assert Search.extract_snippet("", "query") == nil
+    end
+
+    test "is case-insensitive" do
+      text = "The Quick Brown Fox jumps over the lazy dog"
+      snippet = Search.extract_snippet(text, "quick brown")
+      assert snippet =~ "Quick Brown"
     end
   end
 
@@ -116,6 +197,42 @@ defmodule Website.Blog.SearchTest do
       html = Enum.map_join(result, &safe_to_string/1)
 
       assert html == ""
+    end
+
+    test "is case-insensitive" do
+      result = Search.highlight("Hello WORLD world", "world")
+      html = Enum.map_join(result, &safe_to_string/1)
+
+      assert html =~ "WORLD</mark>"
+      assert html =~ "world</mark>"
+    end
+
+    test "highlights multiple occurrences" do
+      result = Search.highlight("foo bar foo baz foo", "foo")
+      html = Enum.map_join(result, &safe_to_string/1)
+
+      assert length(Regex.scan(~r/<mark/, html)) == 3
+    end
+
+    test "preserves original case in highlighted text" do
+      result = Search.highlight("Elixir is great", "elixir")
+      html = Enum.map_join(result, &safe_to_string/1)
+
+      assert html =~ "Elixir</mark>"
+      refute html =~ "elixir</mark>"
+    end
+
+    test "escapes HTML entities in non-matched text" do
+      result = Search.highlight("a <b>bold</b> match here", "match")
+      html = Enum.map_join(result, &safe_to_string/1)
+
+      assert html =~ "&lt;b&gt;"
+      refute html =~ "<b>"
+      assert html =~ "match</mark>"
+    end
+
+    test "returns plain text for whitespace-only query" do
+      assert Search.highlight("Hello", "  ") == "Hello"
     end
   end
 
