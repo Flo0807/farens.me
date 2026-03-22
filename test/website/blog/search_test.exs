@@ -84,10 +84,9 @@ defmodule Website.Blog.SearchTest do
     end
   end
 
-  defp safe_to_string({:safe, str}), do: str
   defp safe_to_string(str) when is_binary(str), do: str
 
   defp safe_to_string(safe) do
-    safe |> Phoenix.HTML.safe_to_string()
+    Phoenix.HTML.safe_to_string(safe)
   end
 end
