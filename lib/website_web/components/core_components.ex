@@ -378,7 +378,7 @@ defmodule WebsiteWeb.CoreComponents do
               <span class="text-base-content font-semibold">Florian Arens</span>
             </.link>
             <p class="text-base-content/70 mt-4 max-w-xs text-sm">
-              Crafting modern web experiences with Elixir and Phoenix.
+              Software Engineer passionate about leveraging AI to accelerate software development.
             </p>
           </div>
 
