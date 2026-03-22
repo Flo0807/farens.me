@@ -9,7 +9,7 @@ defmodule WebsiteWeb.SEO do
     open_graph: &__MODULE__.open_graph_config/1,
     twitter: &__MODULE__.twitter_config/1
 
-  @default_description "Personal website and blog of Florian Arens. Crafting modern web experiences with Elixir and Phoenix."
+  @default_description "Personal website and blog of Florian Arens. Software Engineer passionate about leveraging AI to accelerate software development."
 
   @doc """
   Configures the Twitter card.
