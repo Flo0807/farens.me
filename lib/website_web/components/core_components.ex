@@ -134,7 +134,7 @@ defmodule WebsiteWeb.CoreComponents do
 
         <button
           class="btn flex items-center font-semibold sm:hidden"
-          onclick="document.getElementById('mobile_navigation').showModal()"
+          onclick="mobile_navigation.showModal()"
         >
           <span>Menu</span>
           <.icon name="hero-bars-3" class="size-4" />
@@ -145,12 +145,10 @@ defmodule WebsiteWeb.CoreComponents do
             onclick="window.dispatchEvent(new CustomEvent('open-search'))"
             aria-label="Search articles"
             class={[
-              "flex items-center gap-2",
-              "bg-base-200/80 rounded-box",
-              "border-base-content/5 border",
-              "px-3 py-2 text-sm",
-              "text-base-content/50 hover:text-base-content/80",
-              "transition-colors duration-200"
+              "btn",
+              "hover:bg-base-content/5",
+              "transition-colors duration-200",
+              "border-base-content/5 border"
             ]}
           >
             <.icon name="hero-magnifying-glass" class="size-4" />
@@ -166,6 +164,7 @@ defmodule WebsiteWeb.CoreComponents do
     """
   end
 
+  @doc false
   def avatar(assigns) do
     ~H"""
     <.link
@@ -313,7 +312,7 @@ defmodule WebsiteWeb.CoreComponents do
           <.link
             :for={%{label: label, to: to} <- main_navigation_links()}
             navigate={to}
-            onclick="document.getElementById('mobile_navigation').close()"
+            onclick="mobile_navigation.close()"
             aria-current={active?(@current_url, to) && "page"}
             class={[
               "flex items-center gap-4 rounded-2xl px-4 py-4",
@@ -342,7 +341,7 @@ defmodule WebsiteWeb.CoreComponents do
           />
         </div>
       </div>
-      <form method="dialog" class="modal-backdrop bg-black/50 backdrop-blur-sm">
+      <form method="dialog" class="modal-backdrop bg-base-content/50 backdrop-blur-sm">
         <button aria-label="Close navigation">{gettext("close")}</button>
       </form>
     </dialog>
@@ -370,7 +369,7 @@ defmodule WebsiteWeb.CoreComponents do
               <span class="text-base-content font-semibold">Florian Arens</span>
             </.link>
             <p class="text-base-content/70 mt-4 max-w-xs text-sm">
-              Software Engineer passionate about leveraging AI to accelerate software development.
+              Crafting modern web experiences with Elixir and Phoenix.
             </p>
           </div>
 
@@ -533,8 +532,11 @@ defmodule WebsiteWeb.CoreComponents do
   attr :tags, :list, default: []
   attr :date, :any, required: true
   attr :read_minutes, :integer, required: true
+  attr :heading_level, :atom, default: :h2
 
   def blog_preview_card(assigns) do
+    assigns = assign(assigns, :heading_tag, to_string(assigns.heading_level))
+
     ~H"""
     <.link id={@id} navigate={@link}>
       <article class={[
@@ -556,18 +558,21 @@ defmodule WebsiteWeb.CoreComponents do
             <time datetime={@date}>
               {Calendar.strftime(@date, "%b %d, %Y")}
             </time>
-            <span class="bg-base-content/20 h-1 w-1 rounded-full" />
+            <span class="bg-base-content/20 h-1 w-1 rounded-full" aria-hidden="true" />
             <span>{@read_minutes} min read</span>
           </div>
 
-          <h2 class={[
-            "mt-4 text-lg font-semibold leading-snug",
-            "text-base-content",
-            "transition-colors duration-200",
-            "group-hover:text-primary"
-          ]}>
+          <.dynamic_tag
+            tag_name={@heading_tag}
+            class={[
+              "mt-4 text-lg font-semibold leading-snug",
+              "text-base-content",
+              "transition-colors duration-200",
+              "group-hover:text-primary"
+            ]}
+          >
             {@title}
-          </h2>
+          </.dynamic_tag>
 
           <div :if={@tags != []} class="mt-3 flex flex-wrap gap-2">
             <span
@@ -614,7 +619,7 @@ defmodule WebsiteWeb.CoreComponents do
   attr :id, :string, default: nil
   attr :tags, :list, required: true
   attr :search_tag, :string, default: nil
-  attr :select_event, :string, default: "select-tag"
+  attr :select_event, :string
 
   def blog_tags(assigns) do
     ~H"""
