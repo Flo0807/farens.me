@@ -102,6 +102,7 @@ defmodule WebsiteWeb.CoreComponents do
   Renders the navbar.
   """
   attr :current_url, :string, required: true
+  attr :show_search, :boolean, default: true
 
   def navbar(assigns) do
     ~H"""
@@ -141,7 +142,7 @@ defmodule WebsiteWeb.CoreComponents do
         </button>
 
         <div class="flex items-center gap-2">
-          <.search_button />
+          <.search_button :if={@show_search} />
           <.theme_switch />
         </div>
       </div>
