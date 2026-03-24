@@ -59,10 +59,14 @@ export default {
   activate (id) {
     for (const link of this.tocLinks) {
       delete link.dataset.tocActive
+      link.removeAttribute('aria-current')
     }
 
     const active = this.el.querySelector(`a[href="#${CSS.escape(id)}"]`)
-    if (active) active.dataset.tocActive = ''
+    if (active) {
+      active.dataset.tocActive = ''
+      active.setAttribute('aria-current', 'location')
+    }
   },
 
   activateFirstVisible (anchors) {
