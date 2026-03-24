@@ -677,7 +677,13 @@ defmodule WebsiteWeb.CoreComponents do
 
   def toc(assigns) do
     ~H"""
-    <nav :if={@is_root} aria-label="Table of contents" class={["group", @class]}>
+    <nav
+      :if={@is_root}
+      id="toc"
+      phx-hook="TocHighlight"
+      aria-label="Table of contents"
+      class={["group", "**:data-toc-active:text-primary **:data-toc-active:border-primary/50", @class]}
+    >
       <.section_label class="mb-4">On this page</.section_label>
       <ul class="space-y-1">
         <li :for={%{label: label, href: href, childs: childs} <- @headings}>
