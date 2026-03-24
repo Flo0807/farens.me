@@ -66,8 +66,11 @@ defmodule Website.Blog.Search do
     text_down = String.downcase(text)
     query_down = String.downcase(query)
 
-    case :binary.match(text_down, query_down) do
-      {pos, _len} ->
+    case grapheme_index_of(text_down, query_down) do
+      nil ->
+        nil
+
+      pos ->
         start = max(0, pos - div(@snippet_length, 2))
         snippet = String.slice(text, start, @snippet_length)
 
@@ -82,10 +85,19 @@ defmodule Website.Blog.Search do
             else: snippet
 
         snippet
-
-      :nomatch ->
-        nil
     end
+  end
+
+  defp grapheme_index_of(text, query) do
+    query_len = String.length(query)
+
+    text
+    |> String.graphemes()
+    |> Stream.chunk_every(query_len, 1, :discard)
+    |> Stream.with_index()
+    |> Enum.find_value(fn {chunk, index} ->
+      if Enum.join(chunk) == query, do: index
+    end)
   end
 
   @doc """
