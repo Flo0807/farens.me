@@ -63,15 +63,7 @@
           class="max-h-96 overflow-y-auto overscroll-contain"
         >
           <div
-            :if={@loading}
-            class="text-base-content/50 px-4 py-12 text-center"
-          >
-            <span class="loading loading-spinner loading-md mx-auto mb-3"></span>
-            <p>Searching...</p>
-          </div>
-
-          <div
-            :if={!@loading and @query != "" and @results == []}
+            :if={@query != "" and @results == []}
             class="text-base-content/50 px-4 py-12 text-center"
           >
             <.icon name="hero-magnifying-glass" class="size-8 mx-auto mb-3 opacity-50" />
@@ -79,13 +71,13 @@
           </div>
 
           <div
-            :if={!@loading and @query == ""}
+            :if={@query == ""}
             class="text-base-content/50 px-4 py-12 text-center"
           >
             <p>Start typing to search articles...</p>
           </div>
 
-          <ul :if={!@loading and @results != []} class="py-2">
+          <ul :if={@results != []} class="py-2">
             <li
               :for={{result, index} <- Enum.with_index(@results)}
               id={"search-result-#{index}"}

@@ -5,7 +5,7 @@ defmodule WebsiteWeb.SearchLive do
 
   @impl true
   def mount(socket) do
-    {:ok, reset_search(socket) |> assign(loading: false)}
+    {:ok, reset_search(socket)}
   end
 
   @impl true
@@ -22,9 +22,9 @@ defmodule WebsiteWeb.SearchLive do
   end
 
   def handle_event("search", %{"query" => query}, socket) do
-    socket = assign(socket, query: query, loading: true)
-    results = Blog.search_articles(query)
-    {:noreply, assign(socket, results: results, selected_index: 0, loading: false)}
+    trimmed_query = String.trim(query)
+    results = Blog.search_articles(trimmed_query)
+    {:noreply, assign(socket, query: trimmed_query, results: results, selected_index: 0)}
   end
 
   def handle_event("navigate", %{"slug" => slug}, socket) do
