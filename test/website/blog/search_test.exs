@@ -173,11 +173,15 @@ defmodule Website.Blog.SearchTest do
     end
 
     test "returns original text for short query" do
-      assert Search.highlight("Hello", "a") == "Hello"
+      result = Search.highlight("Hello", "a")
+      html = Enum.map_join(result, &safe_to_string/1)
+      assert html == "Hello"
     end
 
     test "handles nil text" do
-      assert Search.highlight(nil, "test") == ""
+      result = Search.highlight(nil, "test")
+      html = Enum.map_join(result, &safe_to_string/1)
+      assert html == ""
     end
 
     test "escapes HTML in query to prevent XSS" do
@@ -232,11 +236,11 @@ defmodule Website.Blog.SearchTest do
     end
 
     test "returns plain text for whitespace-only query" do
-      assert Search.highlight("Hello", "  ") == "Hello"
+      result = Search.highlight("Hello", "  ")
+      html = Enum.map_join(result, &safe_to_string/1)
+      assert html == "Hello"
     end
   end
-
-  defp safe_to_string(str) when is_binary(str), do: str
 
   defp safe_to_string(safe) do
     Phoenix.HTML.safe_to_string(safe)
