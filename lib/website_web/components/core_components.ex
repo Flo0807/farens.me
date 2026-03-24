@@ -633,7 +633,7 @@ defmodule WebsiteWeb.CoreComponents do
   attr :id, :string, default: nil
   attr :tags, :list, required: true
   attr :search_tag, :string, default: nil
-  attr :select_event, :string
+  attr :select_event, :string, default: "select-tag"
 
   def blog_tags(assigns) do
     ~H"""
