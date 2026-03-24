@@ -139,6 +139,21 @@ const SearchModal = {
     })
   },
 
+  updated () {
+    const results = this.el.querySelectorAll('[role="option"]')
+    const count = results.length
+
+    if (count === 0) {
+      this.selectedIndex = 0
+    } else if (this.selectedIndex >= count) {
+      this.selectedIndex = count - 1
+    }
+
+    if (count > 0) {
+      this.updateSelection(results)
+    }
+  },
+
   closeModal () {
     this.el.removeEventListener('keydown', this.handleModalKeydown)
     this.isOpen = false
