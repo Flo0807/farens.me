@@ -99,7 +99,9 @@ defmodule Website.Blog.SearchTest do
 
     test "title and tag matches have nil snippet" do
       results = Search.search("Hello World")
-      title_results = Enum.filter(results, &(&1.match_field == :title))
+      title_results = Enum.filter(results, &(&1.match_field in [:title, :tags]))
+
+      assert title_results != []
 
       for result <- title_results do
         assert is_nil(result.snippet)
