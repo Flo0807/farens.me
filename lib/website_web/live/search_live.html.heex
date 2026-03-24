@@ -25,7 +25,7 @@
         "flex flex-col overflow-hidden"
       ]}>
         <%!-- Search input --%>
-        <form phx-change="search" phx-submit="search" phx-target={@myself}>
+        <form phx-change="search" phx-target={@myself} onsubmit="return false">
           <div class="border-base-content/10 flex items-center gap-3 border-b px-4 py-3">
             <.icon name="hero-magnifying-glass" class="text-base-content/50 size-5 shrink-0" />
             <input
