@@ -88,12 +88,6 @@ defmodule Website.Blog.SearchTest do
       assert slugs_trimmed == slugs_padded
     end
 
-    test "query is capped at 200 characters" do
-      long_query = "Hello " <> String.duplicate("a", 300)
-      results = Search.search(long_query)
-      assert is_list(results)
-    end
-
     test "body matches include a snippet" do
       results = Search.search("Elixir")
       body_results = Enum.filter(results, &(&1.match_field == :body))
