@@ -38,7 +38,7 @@
               autofocus
               role="combobox"
               aria-label="Search articles"
-              aria-expanded={to_string(@results != [])}
+              aria-expanded={to_string(@open)}
               aria-controls="search-results"
               aria-activedescendant={if @results != [], do: "search-result-#{@selected_index}"}
               phx-debounce="300"
