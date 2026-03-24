@@ -2,6 +2,7 @@ export default {
   mounted () {
     this.handleClick = (e) => {
       e.preventDefault()
+      clearTimeout(this.timeout)
 
       const { value } = this.el.dataset
       const originalText = this.el.innerText
@@ -10,11 +11,9 @@ export default {
 
       navigator.clipboard.writeText(value).then(() => {
         this.el.innerText = notice
-        clearTimeout(this.timeout)
         this.timeout = setTimeout(() => { this.el.innerText = originalText }, 2000)
       }).catch(() => {
         this.el.innerText = 'Failed to copy'
-        clearTimeout(this.timeout)
         this.timeout = setTimeout(() => { this.el.innerText = originalText }, 2000)
       })
     }

@@ -102,6 +102,7 @@ defmodule WebsiteWeb.CoreComponents do
   Renders the navbar.
   """
   attr :current_url, :string, required: true
+  attr :show_search, :boolean, default: true
 
   def navbar(assigns) do
     ~H"""
@@ -140,12 +141,16 @@ defmodule WebsiteWeb.CoreComponents do
           <.icon name="hero-bars-3" class="size-4" />
         </button>
 
-        <.theme_switch />
+        <div class="flex items-center gap-2">
+          <.search_button :if={@show_search} />
+          <.theme_switch />
+        </div>
       </div>
     </nav>
     """
   end
 
+  @doc false
   def avatar(assigns) do
     ~H"""
     <.link
@@ -167,6 +172,30 @@ defmodule WebsiteWeb.CoreComponents do
         />
       </div>
     </.link>
+    """
+  end
+
+  @doc """
+  Renders the search button.
+  """
+  def search_button(assigns) do
+    ~H"""
+    <button
+      onclick="window.dispatchEvent(new CustomEvent('open-search'))"
+      aria-label="Search articles"
+      class={[
+        "btn font-normal",
+        "hover:bg-base-content/5",
+        "transition-colors duration-200",
+        "border-base-content/5 border"
+      ]}
+    >
+      <.icon name="hero-magnifying-glass" class="size-4" />
+      <span class="hidden md:inline">Search...</span>
+      <kbd class="bg-base-300/80 font-mono border-base-content/10 hidden rounded border px-1.5 py-0.5 text-xs md:inline">
+        ⌘K
+      </kbd>
+    </button>
     """
   end
 
@@ -326,7 +355,7 @@ defmodule WebsiteWeb.CoreComponents do
           />
         </div>
       </div>
-      <form method="dialog" class="modal-backdrop bg-black/50 backdrop-blur-sm">
+      <form method="dialog" class="modal-backdrop bg-base-content/50 backdrop-blur-sm">
         <button aria-label="Close navigation">{gettext("close")}</button>
       </form>
     </dialog>
@@ -517,8 +546,11 @@ defmodule WebsiteWeb.CoreComponents do
   attr :tags, :list, default: []
   attr :date, :any, required: true
   attr :read_minutes, :integer, required: true
+  attr :heading_level, :atom, default: :h2
 
   def blog_preview_card(assigns) do
+    assigns = assign(assigns, :heading_tag, to_string(assigns.heading_level))
+
     ~H"""
     <.link id={@id} navigate={@link}>
       <article class={[
@@ -540,18 +572,21 @@ defmodule WebsiteWeb.CoreComponents do
             <time datetime={@date}>
               {Calendar.strftime(@date, "%b %d, %Y")}
             </time>
-            <span class="bg-base-content/20 h-1 w-1 rounded-full" />
+            <span class="bg-base-content/20 h-1 w-1 rounded-full" aria-hidden="true" />
             <span>{@read_minutes} min read</span>
           </div>
 
-          <h2 class={[
-            "mt-4 text-lg font-semibold leading-snug",
-            "text-base-content",
-            "transition-colors duration-200",
-            "group-hover:text-primary"
-          ]}>
+          <.dynamic_tag
+            tag_name={@heading_tag}
+            class={[
+              "mt-4 text-lg font-semibold leading-snug",
+              "text-base-content",
+              "transition-colors duration-200",
+              "group-hover:text-primary"
+            ]}
+          >
             {@title}
-          </h2>
+          </.dynamic_tag>
 
           <div :if={@tags != []} class="mt-3 flex flex-wrap gap-2">
             <span

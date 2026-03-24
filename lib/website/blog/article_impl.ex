@@ -4,7 +4,7 @@ defimpl SEO.OpenGraph.Build, for: Website.Blog.Article do
   def build(article, _conn) do
     og_img =
       SEO.OpenGraph.Image.build(%{
-        url: "https://og-image.farens.me/image?text=#{article.title}",
+        url: "https://og-image.farens.me/image?text=#{URI.encode(article.title)}",
         alt: article.title
       })
 
@@ -39,7 +39,7 @@ defimpl SEO.Twitter.Build, for: Website.Blog.Article do
     SEO.Twitter.build(
       description: article.description,
       title: article.title,
-      image: "https://og-image.farens.me/image?text=#{article.title}"
+      image: "https://og-image.farens.me/image?text=#{URI.encode(article.title)}"
     )
   end
 end
