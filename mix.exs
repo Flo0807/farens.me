@@ -11,7 +11,8 @@ defmodule Website.MixProject do
       aliases: aliases(),
       deps: deps(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
-      listeners: [Phoenix.CodeReloader]
+      listeners: [Phoenix.CodeReloader],
+      usage_rules: usage_rules()
     ]
   end
 
@@ -79,6 +80,18 @@ defmodule Website.MixProject do
       {:tidewave, "== 0.5.6", only: :dev},
       {:igniter, "== 0.7.7", only: [:dev, :test]},
       {:usage_rules, "== 1.2.5", only: [:dev]}
+    ]
+  end
+
+  defp usage_rules do
+    [
+      file: "usage_rules.md",
+      usage_rules: [
+        {:igniter, link: :markdown},
+        {:mdex, link: :markdown},
+        :usage_rules,
+        :phoenix
+      ]
     ]
   end
 
