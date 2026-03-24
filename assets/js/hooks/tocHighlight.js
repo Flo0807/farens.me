@@ -8,11 +8,38 @@ export default {
 
     this.observer = new IntersectionObserver(
       (entries) => {
+        let bestEntry = null
+
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const anchor = entry.target.querySelector('.anchor[id]')
-            if (anchor) this.activate(anchor.id)
+          if (!entry.isIntersecting) continue
+
+          if (!bestEntry) {
+            bestEntry = entry
+            continue
           }
+
+          const currentTop = entry.boundingClientRect.top
+          const bestTop = bestEntry.boundingClientRect.top
+          const currentIsAbove = currentTop < 0
+          const bestIsAbove = bestTop < 0
+
+          if (bestIsAbove && !currentIsAbove) {
+            // Prefer entries that are at or below the top of the viewport
+            bestEntry = entry
+          } else if (currentIsAbove === bestIsAbove) {
+            if (currentIsAbove) {
+              // Both above viewport: choose the one closest to the top (greater top)
+              if (currentTop > bestTop) bestEntry = entry
+            } else {
+              // Both in/under viewport: choose the one closest to the top (smaller top)
+              if (currentTop < bestTop) bestEntry = entry
+            }
+          }
+        }
+
+        if (bestEntry) {
+          const anchor = bestEntry.target.querySelector('.anchor[id]')
+          if (anchor) this.activate(anchor.id)
         }
       },
       { rootMargin: '0px 0px -70% 0px', threshold: 0 }
