@@ -78,7 +78,7 @@ defmodule Website.MixProject do
       {:credo, "== 1.7.18", only: [:dev, :test], runtime: false},
       {:lazy_html, "== 0.1.11", only: :test},
       {:tidewave, "== 0.5.6", only: :dev},
-      {:igniter, "== 0.7.7", only: [:dev, :test]},
+      {:igniter, "== 0.7.9", only: [:dev, :test]},
       {:usage_rules, "== 1.2.5", only: [:dev]}
     ]
   end
