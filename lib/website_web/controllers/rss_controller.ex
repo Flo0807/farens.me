@@ -3,7 +3,6 @@ defmodule WebsiteWeb.RssController do
   The RSS feed controller.
   """
   use WebsiteWeb, :controller
-  use WebsiteWeb, :verified_routes
 
   alias Atomex.{Feed, Entry}
   alias Website.Blog
