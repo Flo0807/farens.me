@@ -63,7 +63,7 @@ defmodule Website.MixProject do
 
       # Utilities
       {:gettext, "== 1.0.2"},
-      {:jason, "== 1.4.4"},
+      {:jason, "== 1.4.5"},
       {:dns_cluster, "== 0.2.0"},
       {:floki, "== 0.38.1"},
 
