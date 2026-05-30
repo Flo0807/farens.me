@@ -44,7 +44,7 @@ defmodule Website.MixProject do
       {:phoenix_seo, "== 0.2.1"},
       {:atomex, "== 0.5.1"},
       {:mdex, "== 0.12.2"},
-      {:yaml_elixir, "== 2.12.1"},
+      {:yaml_elixir, "== 2.12.2"},
       {:nimble_publisher, "== 1.1.1"},
 
       # Monitoring and Telemetry
