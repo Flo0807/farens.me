@@ -72,7 +72,7 @@ defmodule Website.MixProject do
       {:phoenix_test_playwright, "== 0.14.0", only: :test, runtime: false},
       {:a11y_audit, "== 0.3.4", only: :test},
       {:esbuild, "== 0.10.0", runtime: Mix.env() == :dev},
-      {:tailwind, "== 0.4.1", runtime: Mix.env() == :dev},
+      {:tailwind, "== 0.5.1", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "== 1.6.2", only: :dev},
       {:tailwind_formatter, "== 0.4.2", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.18", only: [:dev, :test], runtime: false},
