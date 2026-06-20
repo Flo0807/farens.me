@@ -65,7 +65,7 @@ defmodule Website.MixProject do
       {:gettext, "== 1.0.2"},
       {:jason, "== 1.4.5"},
       {:dns_cluster, "== 0.2.0"},
-      {:floki, "== 0.38.3"},
+      {:floki, "== 0.38.4"},
 
       # Dev and Test
       {:phoenix_test, "== 0.11.1", only: :test, runtime: false},
