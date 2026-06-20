@@ -4,6 +4,13 @@ defmodule Website.MarkdownConverter do
   """
 
   def convert(_path, body, _attrs, _opts) do
-    MDEx.to_html!(body, extension: [header_id_prefix: "", autolink: true], parse: [smart: true])
+    MDEx.to_html!(body,
+      extension: [header_id_prefix: "", autolink: true],
+      parse: [smart: true],
+      syntax_highlight: [
+        engine: :lumis,
+        opts: [formatter: {:html_inline, theme: "tokyonight_storm"}]
+      ]
+    )
   end
 end
