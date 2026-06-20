@@ -69,7 +69,7 @@ defmodule Website.MixProject do
 
       # Dev and Test
       {:phoenix_test, "== 0.11.1", only: :test, runtime: false},
-      {:phoenix_test_playwright, "== 0.14.0", only: :test, runtime: false},
+      {:phoenix_test_playwright, "== 0.15.0", only: :test, runtime: false},
       {:a11y_audit, "== 0.4.1", only: :test},
       {:esbuild, "== 0.10.0", runtime: Mix.env() == :dev},
       {:tailwind, "== 0.5.1", runtime: Mix.env() == :dev},
