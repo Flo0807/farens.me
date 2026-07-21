@@ -77,7 +77,7 @@ defmodule Website.MixProject do
       {:phoenix_live_reload, "== 1.6.2", only: :dev},
       {:tailwind_formatter, "== 0.4.3", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.19", only: [:dev, :test], runtime: false},
-      {:lazy_html, "== 0.1.11", only: :test},
+      {:lazy_html, "== 0.1.12", only: :test},
       {:tidewave, "== 0.6.1", only: :dev},
       {:igniter, "== 0.8.2", only: [:dev, :test]},
       {:usage_rules, "== 1.2.6", only: [:dev]}
