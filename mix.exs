@@ -46,7 +46,7 @@ defmodule Website.MixProject do
       {:mdex, "== 0.13.5"},
       {:lumis, "== 0.6.3"},
       {:yaml_elixir, "== 2.12.2"},
-      {:nimble_publisher, "== 2.0.0"},
+      {:nimble_publisher, "== 2.1.0"},
 
       # Monitoring and Telemetry
       {:phoenix_live_dashboard, "== 0.8.7"},
