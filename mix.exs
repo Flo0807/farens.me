@@ -74,7 +74,7 @@ defmodule Website.MixProject do
       {:a11y_audit, "== 0.4.1", only: :test},
       {:esbuild, "== 0.10.0", runtime: Mix.env() == :dev},
       {:tailwind, "== 0.5.1", runtime: Mix.env() == :dev},
-      {:phoenix_live_reload, "== 1.6.2", only: :dev},
+      {:phoenix_live_reload, "== 1.7.0", only: :dev},
       {:tailwind_formatter, "== 0.4.3", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.19", only: [:dev, :test], runtime: false},
       {:lazy_html, "== 0.1.12", only: :test},
