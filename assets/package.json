@@ -10,7 +10,7 @@
     "phoenix_live_view": "../deps/phoenix_live_view"
   },
   "devDependencies": {
-    "daisyui": "5.7.14",
+    "daisyui": "5.7.16",
     "playwright": "1.62.1",
     "standard": "17.1.2"
   }
