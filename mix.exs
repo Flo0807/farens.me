@@ -49,7 +49,7 @@ defmodule Website.MixProject do
       {:nimble_publisher, "== 2.1.0"},
 
       # Monitoring and Telemetry
-      {:phoenix_live_dashboard, "== 0.8.7"},
+      {:phoenix_live_dashboard, "== 0.9.0"},
       {:telemetry_metrics, "== 1.1.0"},
       {:telemetry_poller, "== 1.3.0"},
 
