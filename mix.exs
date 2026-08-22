@@ -5,12 +5,12 @@ defmodule Website.MixProject do
     [
       app: :website,
       version: "0.0.0",
-      elixir: "~> 1.16",
+      elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      compilers: [:phoenix_live_view] ++ Mix.compilers(),
+      compilers: [:seo_jsonld, :phoenix_live_view] ++ Mix.compilers(),
       listeners: [Phoenix.CodeReloader],
       usage_rules: usage_rules()
     ]
@@ -41,7 +41,7 @@ defmodule Website.MixProject do
       {:bandit, "== 1.12.5"},
 
       # SEO & Content
-      {:phoenix_seo, "== 0.2.1"},
+      {:phoenix_seo, "== 0.3.1"},
       {:atomex, "== 0.5.1"},
       {:mdex, "== 0.13.5"},
       {:lumis, "== 0.7.0"},
