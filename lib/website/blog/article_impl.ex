@@ -55,13 +55,30 @@ defimpl SEO.Unfurl.Build, for: Website.Blog.Article do
   end
 end
 
-defimpl SEO.Breadcrumb.Build, for: Website.Blog.Article do
+defimpl SEO.JSONLD.Build, for: Website.Blog.Article do
   use WebsiteWeb, :verified_routes
 
-  def build(article, _conn) do
-    SEO.Breadcrumb.List.build([
-      %{name: "Blog", item: url(~p"/blog")},
-      %{name: article.title, item: url(~p"/blog/#{article.slug}")}
-    ])
+  def build(article, conn) do
+    article_url = url(conn, ~p"/blog/#{article.slug}")
+
+    [
+      SEO.JSONLD.BlogPosting.build(%{
+        headline: article.title,
+        description: article.description,
+        date_published: article.date,
+        author:
+          SEO.JSONLD.Person.build(%{
+            name: "Florian Arens",
+            url: url(conn, ~p"/about")
+          }),
+        image: "https://og-image.farens.me/image?text=#{URI.encode(article.title)}",
+        keywords: article.tags,
+        main_entity_of_page: article_url
+      }),
+      SEO.JSONLD.Breadcrumbs.build([
+        %{name: "Blog", item: url(conn, ~p"/blog")},
+        %{name: article.title, item: article_url}
+      ])
+    ]
   end
 end

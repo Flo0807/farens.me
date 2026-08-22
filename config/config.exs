@@ -51,6 +51,10 @@ config :logger, :default_formatter,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Generate the structured-data types used by blog articles.
+config :phoenix_seo,
+  json_ld_types: [SEO.JSONLD.BlogPosting, SEO.JSONLD.BreadcrumbList]
+
 # Enable Lumis as the syntax highlighter for MDEx code blocks
 config :mdex_native, syntax_highlighter: :lumis
 
