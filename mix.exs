@@ -50,7 +50,7 @@ defmodule Website.MixProject do
 
       # Monitoring and Telemetry
       {:phoenix_live_dashboard, "== 0.9.0"},
-      {:telemetry_metrics, "== 1.1.0"},
+      {:telemetry_metrics, "== 1.2.0"},
       {:telemetry_poller, "== 1.3.0"},
 
       # UI
