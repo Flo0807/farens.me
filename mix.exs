@@ -44,7 +44,7 @@ defmodule Website.MixProject do
       {:phoenix_seo, "== 0.3.1"},
       {:atomex, "== 0.5.1"},
       {:mdex, "== 0.13.5"},
-      {:lumis, "== 0.7.0"},
+      {:lumis, "== 0.8.0"},
       {:yaml_elixir, "== 2.12.2"},
       {:nimble_publisher, "== 2.1.0"},
 
