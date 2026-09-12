@@ -10,30 +10,30 @@
   default: true;
   color-scheme: light;
 
-  /* Warm paper surfaces and quiet, high-contrast ink. */
-  --color-base-100: oklch(98% 0.015 90);
-  --color-base-200: oklch(95.5% 0.02 90);
-  --color-base-300: oklch(90.5% 0.03 88);
-  --color-base-content: oklch(27% 0.025 70);
+  /* Cool gray surfaces and quiet, high-contrast ink. */
+  --color-base-100: oklch(98% 0.002 255);
+  --color-base-200: oklch(95.5% 0.003 255);
+  --color-base-300: oklch(90.5% 0.005 255);
+  --color-base-content: oklch(27% 0.008 255);
 
-  /* Muted evergreen, clay, and slate accents. */
-  --color-primary: oklch(45% 0.1 165);
-  --color-primary-content: oklch(98% 0.01 90);
+  /* Restrained blue primary, with clay and slate supporting accents. */
+  --color-primary: oklch(45% 0.14 255);
+  --color-primary-content: oklch(98% 0.002 255);
   --color-secondary: oklch(49% 0.1 45);
-  --color-secondary-content: oklch(98% 0.01 90);
+  --color-secondary-content: oklch(98% 0.002 255);
   --color-accent: oklch(43% 0.08 245);
-  --color-accent-content: oklch(98% 0.01 90);
+  --color-accent-content: oklch(98% 0.002 255);
 
-  --color-neutral: oklch(31% 0.03 70);
-  --color-neutral-content: oklch(98% 0.01 90);
+  --color-neutral: oklch(31% 0.008 255);
+  --color-neutral-content: oklch(98% 0.002 255);
   --color-info: oklch(55% 0.12 245);
-  --color-info-content: oklch(98% 0.01 90);
+  --color-info-content: oklch(98% 0.002 255);
   --color-success: oklch(50% 0.1 160);
-  --color-success-content: oklch(98% 0.01 90);
+  --color-success-content: oklch(98% 0.002 255);
   --color-warning: oklch(74% 0.15 80);
-  --color-warning-content: oklch(27% 0.025 70);
+  --color-warning-content: oklch(27% 0.008 255);
   --color-error: oklch(56% 0.16 25);
-  --color-error-content: oklch(98% 0.01 90);
+  --color-error-content: oklch(98% 0.002 255);
 }
 
 @plugin "daisyui/theme" {
@@ -48,7 +48,7 @@
   --color-base-content: oklch(92% 0.006 85);
 
   /* The same accents are lifted for dark-surface contrast. */
-  --color-primary: oklch(72% 0.11 165);
+  --color-primary: oklch(72% 0.11 255);
   --color-primary-content: oklch(22% 0.004 70);
   --color-secondary: oklch(75% 0.1 55);
   --color-secondary-content: oklch(22% 0.004 70);
