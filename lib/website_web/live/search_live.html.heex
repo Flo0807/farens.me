@@ -47,7 +47,7 @@
                 aria-expanded={to_string(@open)}
                 aria-controls="search-results"
                 aria-activedescendant={if @results != [], do: "search-result-#{@selected_index}"}
-                phx-debounce="300"
+                phx-throttle="300"
                 phx-target={@myself}
                 class={[
                   "min-w-0 grow border-none bg-transparent",
