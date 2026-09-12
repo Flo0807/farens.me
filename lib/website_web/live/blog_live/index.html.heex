@@ -1,17 +1,6 @@
 <Layouts.app current_url={@current_url}>
   <div>
-    <aside class="absolute top-0 right-0 bottom-16 hidden w-64 lg:block">
-      <div class="sticky top-24">
-        <.blog_tags
-          id="desktop-tag-list"
-          tags={@all_tags}
-          search_tag={@search_tag}
-          select_event="select-tag"
-        />
-      </div>
-    </aside>
-
-    <header class="lg:w-2/3">
+    <header>
       <div class="flex items-baseline justify-between gap-4">
         <h1 id="blog-heading" class="text-base-content text-3xl font-semibold tracking-tight md:text-4xl">
           Writing
@@ -19,7 +8,7 @@
 
         <button
           onclick="document.getElementById('rss-modal').showModal()"
-          class="btn btn-ghost btn-sm"
+          class="btn btn-ghost btn-sm min-h-11 inline-flex items-center gap-2"
         >
           <.icon name="hero-rss" class="size-4" /> Subscribe
         </button>
@@ -30,16 +19,16 @@
       </p>
     </header>
 
-    <section class="mt-8 lg:hidden" aria-label="Filter articles">
+    <section class="mt-8" aria-label="Filter articles">
       <.blog_tags
-        id="mobile-tag-list"
+        id="tag-list"
         tags={@all_tags}
         search_tag={@search_tag}
         select_event="select-tag"
       />
     </section>
 
-    <div id="articles" class="mt-8 divide-y divide-base-content/10 lg:w-2/3" phx-update="stream">
+    <div id="articles" class="mt-8 divide-y divide-base-content/10" phx-update="stream">
       <div id="articles-empty" class="hidden py-12 text-center only:block">
         <p class="text-base-content/70 text-lg font-medium">No articles found</p>
         <p class="text-base-content/70 mt-1 text-sm">Try selecting a different tag</p>

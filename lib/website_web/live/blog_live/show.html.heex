@@ -2,7 +2,7 @@
   <div class="mx-auto max-w-3xl">
     <.link
       navigate={~p"/blog"}
-      class="text-base-content/70 text-sm underline underline-offset-4"
+      class="text-base-content/70 min-h-11 inline-flex items-center text-sm underline underline-offset-4"
     >
       ← Back to articles
     </.link>
@@ -56,7 +56,7 @@
           <.link
             :for={tag <- @article.tags}
             navigate={~p"/blog/tag/#{tag}"}
-            class="text-base-content/70 text-sm underline underline-offset-4"
+            class="text-base-content/70 min-h-11 inline-flex items-center text-sm underline underline-offset-4"
           >
             {tag}
           </.link>
@@ -70,9 +70,9 @@
           </h2>
           <.link
             navigate={~p"/blog"}
-            class="text-primary text-sm underline underline-offset-4"
+            class="text-primary min-h-11 inline-flex items-center text-sm underline underline-offset-4"
           >
-            View all
+            View all articles
           </.link>
         </div>
 

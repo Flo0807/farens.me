@@ -6,8 +6,15 @@
       </h1>
     </header>
 
-    <div class="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start lg:gap-16">
-      <div class="max-w-2xl space-y-5 leading-relaxed">
+    <div class="mt-8 max-w-2xl">
+      <img
+        loading="eager"
+        class="mb-8 size-40 rounded-lg object-cover"
+        src="/images/me.jpg"
+        alt="Portrait of Florian"
+      />
+
+      <div class="space-y-5 leading-relaxed">
         <p class="text-base-content/70">
           I’m a Lead Engineer at
           <.link
@@ -33,20 +40,11 @@
         <p class="pt-2">
           <.link
             navigate={~p"/projects"}
-            class="text-primary font-medium underline underline-offset-4"
+            class="text-primary min-h-11 inline-flex items-center font-medium underline underline-offset-4"
           >
             View my projects
           </.link>
         </p>
-      </div>
-
-      <div class="mx-auto w-full max-w-xs lg:mx-0 lg:max-w-none">
-        <img
-          loading="eager"
-          class="aspect-square w-full rounded-lg object-cover"
-          src="/images/me.jpg"
-          alt="Portrait of Florian"
-        />
       </div>
     </div>
   </article>
