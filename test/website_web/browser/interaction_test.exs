@@ -46,4 +46,12 @@ defmodule WebsiteWeb.InteractionTest do
     |> visit("/blog")
     |> assert_has("html[data-theme=dark]")
   end
+
+  @tag browser_context_opts: [viewport: %{width: 1440, height: 900}]
+  test "desktop table of contents highlights the section reached by a link", %{conn: conn} do
+    conn
+    |> visit("/blog/how-to-get-user-ip-addresses-in-phoenix-liveview")
+    |> click_link("#desktop-toc a", "The more reliable way")
+    |> assert_has("#desktop-toc a[aria-current=location][href='#the-more-reliable-way']")
+  end
 end

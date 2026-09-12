@@ -419,6 +419,7 @@ defmodule WebsiteWeb.CoreComponents do
   @doc """
   Renders a table of contents from a list of headings.
   """
+  attr :id, :string, default: "toc"
   attr :headings, :list, required: true
   attr :class, :string, default: nil
   attr :is_root, :boolean, default: true
@@ -428,7 +429,7 @@ defmodule WebsiteWeb.CoreComponents do
     ~H"""
     <nav
       :if={@is_root}
-      id="toc"
+      id={@id}
       phx-hook="TocHighlight"
       aria-label="Table of contents"
       class={["group", "**:data-toc-active:text-primary **:data-toc-active:border-primary/50", @class]}
@@ -441,7 +442,6 @@ defmodule WebsiteWeb.CoreComponents do
             class={[
               "text-base-content/70 min-h-11 flex items-center py-1.5 text-sm",
               "hover:text-primary",
-              "",
               "border-l-2 border-transparent pl-3",
               "hover:border-primary/50"
             ]}

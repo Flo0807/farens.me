@@ -1,5 +1,13 @@
 <Layouts.app current_url={@current_url}>
-  <div class="mx-auto max-w-3xl">
+  <div class="relative mx-auto max-w-3xl">
+    <aside
+      :if={@article.heading_links != []}
+      class="absolute inset-y-0 right-full mr-10 hidden w-52 xl:block"
+    >
+      <div class="max-h-[calc(100dvh-4rem)] sticky top-8 overflow-y-auto overscroll-contain">
+        <.toc id="desktop-toc" headings={@article.heading_links} />
+      </div>
+    </aside>
     <.link
       navigate={~p"/blog"}
       class="text-base-content/70 min-h-11 inline-flex items-center text-sm underline underline-offset-4"
@@ -43,7 +51,7 @@
       <details
         :if={@article.heading_links != []}
         id="article-contents"
-        class="mt-6 py-2"
+        class="mt-6 py-2 xl:hidden"
       >
         <summary class="min-h-11 cursor-pointer content-center text-sm font-medium">
           On this page
