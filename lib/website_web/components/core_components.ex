@@ -434,13 +434,13 @@ defmodule WebsiteWeb.CoreComponents do
       aria-label="Table of contents"
       class={["group", "**:data-toc-active:text-primary **:data-toc-active:border-primary/50", @class]}
     >
-      <.section_label :if={@show_label} class="mb-4">On this page</.section_label>
-      <ul class="space-y-1">
+      <.section_label :if={@show_label} class="mb-2">On this page</.section_label>
+      <ul class="space-y-0.5">
         <li :for={%{label: label, href: href, childs: childs} <- @headings}>
           <.link
             href={href}
             class={[
-              "text-base-content/70 min-h-11 flex items-center py-1.5 text-sm",
+              "text-base-content/70 min-h-11 flex items-center py-1 text-sm xl:min-h-9",
               "hover:text-primary",
               "border-l-2 border-transparent pl-3",
               "hover:border-primary/50"
@@ -448,11 +448,11 @@ defmodule WebsiteWeb.CoreComponents do
           >
             {label}
           </.link>
-          <ul :if={childs != []} class="ml-3 space-y-1">
+          <ul :if={childs != []} class="ml-3 space-y-0.5">
             <li :for={%{label: child_label, href: child_href} <- childs}>
               <.link
                 href={child_href}
-                class="text-base-content/70 min-h-11 flex items-center py-1 pl-3 text-sm hover:text-primary"
+                class="text-base-content/70 min-h-11 flex items-center py-1 pl-3 text-sm hover:text-primary xl:min-h-9"
               >
                 {child_label}
               </.link>
@@ -461,11 +461,11 @@ defmodule WebsiteWeb.CoreComponents do
         </li>
       </ul>
     </nav>
-    <ul :if={!@is_root} class="ml-3 space-y-1">
+    <ul :if={!@is_root} class="ml-3 space-y-0.5">
       <li :for={%{label: label, href: href, childs: childs} <- @headings}>
         <.link
           href={href}
-          class="text-base-content/70 min-h-11 flex items-center py-1 pl-3 text-sm hover:text-primary"
+          class="text-base-content/70 min-h-11 flex items-center py-1 pl-3 text-sm hover:text-primary xl:min-h-9"
         >
           {label}
         </.link>
