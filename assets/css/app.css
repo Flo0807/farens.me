@@ -105,6 +105,11 @@ html :focus-visible {
   outline-offset: 3px;
 }
 
+/* Composite inputs draw their focus ring around the icon and field together. */
+html .input input:focus-visible {
+  outline: none;
+}
+
 /* Keep daisyUI controls, menus, and dialogs calm; loading indicators keep their own motion. */
 .btn,
 .btn:active,

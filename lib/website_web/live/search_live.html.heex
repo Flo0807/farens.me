@@ -31,37 +31,41 @@
           onsubmit="return false"
         >
           <div class="border-base-content/10 flex items-center gap-3 border-b px-4 py-3">
-            <.icon name="hero-magnifying-glass" class="text-base-content/70 size-5 shrink-0" />
-            <label for="search-input" class="sr-only">Search articles</label>
-            <input
-              id="search-input"
-              type="text"
-              name="query"
-              value={@query}
-              placeholder="Search articles..."
-              autocomplete="off"
-              autofocus
-              role="combobox"
-              aria-label="Search articles"
-              aria-expanded={to_string(@open)}
-              aria-controls="search-results"
-              aria-activedescendant={if @results != [], do: "search-result-#{@selected_index}"}
-              phx-debounce="300"
-              phx-target={@myself}
-              class={[
-                "min-w-0 flex-1 border-none bg-transparent outline-none",
-                "text-base-content placeholder-base-content/70",
-                "text-base"
-              ]}
-            />
+            <label for="search-input" class="input input-primary min-h-11 min-w-0 flex-1 gap-2">
+              <.icon name="hero-magnifying-glass" class="text-base-content/70 size-5 shrink-0" />
+              <span class="sr-only">Search articles</span>
+              <input
+                id="search-input"
+                type="text"
+                name="query"
+                value={@query}
+                placeholder="Search articles..."
+                autocomplete="off"
+                autofocus
+                role="combobox"
+                aria-label="Search articles"
+                aria-expanded={to_string(@open)}
+                aria-controls="search-results"
+                aria-activedescendant={if @results != [], do: "search-result-#{@selected_index}"}
+                phx-debounce="300"
+                phx-target={@myself}
+                class={[
+                  "min-w-0 grow border-none bg-transparent",
+                  "text-base-content placeholder-base-content/70",
+                  "text-base"
+                ]}
+              />
+            </label>
             <button
               type="button"
               phx-click="close"
               phx-target={@myself}
-              class="min-h-11 min-w-11 text-sm"
+              class="btn btn-circle btn-ghost min-h-11 min-w-11 shrink-0"
               id="close-search"
               aria-label="Close search"
-            >Close</button>
+            >
+              <.icon name="hero-x-mark" class="size-5" />
+            </button>
           </div>
         </form>
 
