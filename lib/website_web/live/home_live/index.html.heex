@@ -1,5 +1,5 @@
-<Layouts.app current_url={@current_url}>
-  <section aria-labelledby="home-heading" class="max-w-3xl pb-10 md:pb-14">
+<Layouts.app current_url={@current_url} main_class="pt-6 pb-4 md:pt-8 md:pb-6">
+  <section aria-labelledby="home-heading" class="max-w-3xl">
     <h1
       id="home-heading"
       class="text-base-content text-3xl font-semibold tracking-tight md:text-4xl"
@@ -7,19 +7,19 @@
       Hi, I’m Florian.
     </h1>
 
-    <p class="text-base-content/70 mt-5 max-w-2xl text-lg leading-relaxed">
+    <p class="text-base-content/70 mt-3 max-w-2xl text-lg leading-relaxed">
       I’m a software engineer focused on using AI to improve development workflows without losing
       quality. I build open source projects, explore new technologies, and share what I learn.
     </p>
 
-    <nav aria-label="Contact" class="mt-6">
+    <nav aria-label="Contact" class="mt-3">
       <.contact_links class="flex flex-wrap gap-x-4 gap-y-2 text-sm" />
     </nav>
   </section>
 
   <section
     aria-labelledby="latest-articles-heading"
-    class="pt-10 md:pt-12"
+    class="mt-8 md:mt-10"
   >
     <div class="flex items-baseline justify-between gap-4">
       <h2
@@ -36,7 +36,7 @@
       </.link>
     </div>
 
-    <.grid class="mt-5">
+    <.grid class="[&>article]:py-2 mt-2">
       <.blog_preview_card
         :for={article <- @articles}
         link={~p"/blog/#{article.slug}"}
@@ -52,7 +52,7 @@
 
   <section
     aria-labelledby="selected-projects-heading"
-    class="mt-12 pt-10 md:mt-16 md:pt-12"
+    class="mt-8 md:mt-10"
   >
     <div class="flex items-baseline justify-between gap-4">
       <h2
@@ -69,7 +69,7 @@
       </.link>
     </div>
 
-    <.grid class="mt-5">
+    <.grid class="[&>article]:py-3 mt-2">
       <.project_card
         :for={project <- @projects}
         title={project.title}

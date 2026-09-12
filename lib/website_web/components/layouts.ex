@@ -14,6 +14,7 @@ defmodule WebsiteWeb.Layouts do
 
   """
   attr :current_url, :string, required: true
+  attr :main_class, :string, default: "pt-8 pb-4 md:pt-12 md:pb-6 lg:pt-16 lg:pb-8"
 
   slot :inner_block, required: true
 
@@ -30,11 +31,7 @@ defmodule WebsiteWeb.Layouts do
       </header>
       <main
         id="main-content"
-        class={[
-          "relative mx-auto w-full max-w-3xl px-6",
-          "pt-8 pb-4 md:pt-12 md:pb-6 lg:pt-16 lg:pb-8",
-          "flex-1"
-        ]}
+        class={["relative mx-auto w-full max-w-3xl px-6", @main_class, "flex-1"]}
       >
         {render_slot(@inner_block)}
       </main>
