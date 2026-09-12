@@ -59,6 +59,8 @@ const SearchModal = {
         return
       }
 
+      if (e.target.id !== 'search-input') return
+
       if (e.key === 'ArrowDown' && count > 0) {
         e.preventDefault()
         this.selectedIndex = Math.min(this.selectedIndex + 1, count - 1)

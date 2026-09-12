@@ -7,6 +7,7 @@ export default {
       const theme = THEMES.has(requestedTheme) ? requestedTheme : 'dark'
 
       document.documentElement.setAttribute('data-theme', theme)
+      document.documentElement.dataset.themePreference = theme
       this.syncThemeButtons(theme)
 
       try {
@@ -16,11 +17,18 @@ export default {
       }
     }
 
+    this.handleSystemThemeChange = () => this.syncThemeButtons(document.documentElement.dataset.theme)
+    window.addEventListener('theme-changed', this.handleSystemThemeChange)
     this.el.addEventListener('change-theme', this.handleThemeChange)
     this.syncThemeButtons(document.documentElement.dataset.theme)
   },
 
+  updated () {
+    this.syncThemeButtons(document.documentElement.dataset.theme)
+  },
+
   destroyed () {
+    window.removeEventListener('theme-changed', this.handleSystemThemeChange)
     this.el.removeEventListener('change-theme', this.handleThemeChange)
   },
 

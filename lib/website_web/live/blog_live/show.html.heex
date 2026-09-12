@@ -40,9 +40,16 @@
         </div>
       </header>
 
-      <aside class="border-base-content/10 mt-8 border-y py-6">
-        <.toc headings={@article.heading_links} />
-      </aside>
+      <details
+        :if={@article.heading_links != []}
+        id="article-contents"
+        class="border-base-content/15 mt-6 border-y py-2"
+      >
+        <summary class="min-h-11 cursor-pointer content-center text-sm font-medium">
+          On this page
+        </summary>
+        <.toc headings={@article.heading_links} show_label={false} class="pb-4" />
+      </details>
 
       <div class="prose-article prose prose-base prose-neutral mt-10 max-w-none dark:prose-invert">
         {raw(@article.body)}

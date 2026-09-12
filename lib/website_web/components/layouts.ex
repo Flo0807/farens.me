@@ -20,16 +20,22 @@ defmodule WebsiteWeb.Layouts do
   def app(assigns) do
     ~H"""
     <div class="flex min-h-screen flex-col">
-      <.mobile_navigation current_url={@current_url} />
       <.live_component module={WebsiteWeb.SearchLive} id="global-search" />
+      <a
+        href="#main-content"
+        class="sr-only focus:bg-base-100 focus:not-sr-only focus:absolute focus:z-50 focus:p-4"
+      >Skip to content</a>
       <header>
         <.navbar current_url={@current_url} />
       </header>
-      <main class={[
-        "relative mx-auto w-full max-w-6xl px-4",
-        "pt-8 pb-4 md:pt-12 md:pb-6 lg:pt-16 lg:pb-8",
-        "flex-1"
-      ]}>
+      <main
+        id="main-content"
+        class={[
+          "relative mx-auto w-full max-w-3xl px-6",
+          "pt-8 pb-4 md:pt-12 md:pb-6 lg:pt-16 lg:pb-8",
+          "flex-1"
+        ]}
+      >
         {render_slot(@inner_block)}
       </main>
       <.footer current_url={@current_url} />

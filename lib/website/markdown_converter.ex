@@ -9,7 +9,7 @@ defmodule Website.MarkdownConverter do
       parse: [smart: true],
       syntax_highlight: [
         engine: :lumis,
-        opts: [formatter: {:html_inline, theme: "tokyonight_storm"}]
+        opts: [formatter: {:html_inline, theme: "github_dark"}]
       ]
     )
   end

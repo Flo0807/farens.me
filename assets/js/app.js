@@ -34,13 +34,12 @@ const liveSocket = new LiveSocket('/live', Socket, {
 
 // Show a theme-aware progress bar on live navigation and form submits.
 topbar.config({
-  barColors: { 0: '#4d8c7d' },
   shadowBlur: 0,
   shadowColor: 'transparent'
 })
 
 const themePrimary = () =>
-  window.getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#4d8c7d'
+  window.getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || window.getComputedStyle(document.documentElement).color
 
 window.addEventListener('phx:page-loading-start', _info => {
   topbar.config({ barColors: { 0: themePrimary() } })
