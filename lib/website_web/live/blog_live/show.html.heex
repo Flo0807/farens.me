@@ -78,7 +78,7 @@
         </div>
       </section>
 
-      <section class="mt-12" aria-labelledby="more-articles-heading">
+      <section class="mt-8" aria-labelledby="more-articles-heading">
         <div class="flex items-baseline justify-between gap-4">
           <h2 id="more-articles-heading" class="text-base-content text-xl font-semibold">
             More from the blog
@@ -91,7 +91,7 @@
           </.link>
         </div>
 
-        <.grid class="mt-6">
+        <.grid class="[&>article]:py-2 mt-2">
           <.blog_preview_card
             :for={article <- @recommended_articles}
             id={"recommended-article-#{article.id}"}
