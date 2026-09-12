@@ -9,7 +9,7 @@ defmodule WebsiteWeb.AboutLive.Index do
       |> assign(:og_image_text, "About")
       |> assign(
         :meta_description,
-        "Learn about Florian Arens, a software developer and team lead passionate about Elixir, Phoenix, and functional programming."
+        "Meet Florian Arens, Lead Engineer at naymspace. I build web applications with Elixir and Phoenix LiveView and help teams use AI to make everyday work easier."
       )
 
     {:ok, socket}

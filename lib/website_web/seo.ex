@@ -9,7 +9,7 @@ defmodule WebsiteWeb.SEO do
     open_graph: &__MODULE__.open_graph_config/1,
     twitter: &__MODULE__.twitter_config/1
 
-  @default_description "Personal website and blog of Florian Arens. Software Engineer passionate about leveraging AI to accelerate software development."
+  @default_description "Florian Arens, Lead Engineer at naymspace. I build software, put AI to practical use, and share what I learn through blog posts and my own open source projects."
 
   @doc """
   Configures the Twitter card.
