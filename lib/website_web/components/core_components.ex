@@ -252,7 +252,7 @@ defmodule WebsiteWeb.CoreComponents do
   def footer(assigns) do
     ~H"""
     <footer class={["mx-auto mt-16 w-full max-w-3xl px-6 pb-8", @class]}>
-      <div class="border-base-content/15 text-base-content/70 flex flex-col gap-2 border-t pt-5 text-sm sm:flex-row sm:items-center sm:justify-between">
+      <div class="text-base-content/70 flex flex-col gap-2 pt-5 text-sm sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; {Date.utc_today().year} Florian Arens</p>
         <nav class="flex flex-wrap gap-x-5" aria-label="Legal">
           <.link
@@ -334,7 +334,7 @@ defmodule WebsiteWeb.CoreComponents do
 
   def grid(assigns) do
     ~H"""
-    <div class={["divide-base-content/15 divide-y", @class]}>
+    <div class={@class}>
       {render_slot(@inner_block)}
     </div>
     """
