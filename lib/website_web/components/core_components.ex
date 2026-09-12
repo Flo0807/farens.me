@@ -185,7 +185,7 @@ defmodule WebsiteWeb.CoreComponents do
       <ul class="dropdown-content menu border-base-content/15 bg-base-100 z-50 w-36 rounded-md border p-1">
         <li :for={%{label: label, theme: theme, icon: icon} <- @themes}>
           <button
-            class="min-h-11 gap-2 rounded-sm"
+            class="min-h-11 content-center gap-2 rounded-sm"
             data-theme-value={theme}
             phx-click={
               JS.dispatch("change-theme", detail: %{theme: theme})
