@@ -1,4 +1,3 @@
-/* global localStorage */
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
 // import "./user_socket.js"
@@ -27,18 +26,26 @@ import { hooks as colocatedHooks } from 'phoenix-colocated/website'
 import topbar from 'topbar'
 import * as Hooks from './hooks'
 
-// Set the theme on page load
-document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark')
-
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute('content')
 const liveSocket = new LiveSocket('/live', Socket, {
   params: { _csrf_token: csrfToken },
   hooks: { ...Hooks, ...colocatedHooks }
 })
 
-// Show progress bar on live navigation and form submits
-topbar.config({ barColors: { 0: '#29d' }, shadowColor: 'rgba(0, 0, 0, .3)' })
-window.addEventListener('phx:page-loading-start', _info => topbar.show(500))
+// Show a theme-aware progress bar on live navigation and form submits.
+topbar.config({
+  barColors: { 0: '#4d8c7d' },
+  shadowBlur: 0,
+  shadowColor: 'transparent'
+})
+
+const themePrimary = () =>
+  window.getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#4d8c7d'
+
+window.addEventListener('phx:page-loading-start', _info => {
+  topbar.config({ barColors: { 0: themePrimary() } })
+  topbar.show(500)
+})
 window.addEventListener('phx:page-loading-stop', _info => topbar.hide())
 
 // connect if there are any LiveViews on the page
