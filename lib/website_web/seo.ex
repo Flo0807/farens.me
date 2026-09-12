@@ -21,7 +21,7 @@ defmodule WebsiteWeb.SEO do
       title: conn.assigns.page_title,
       card: :summary_large_image,
       image:
-        "https://og-image.farens.me/image?text=#{URI.encode(conn.assigns[:og_image_text] || "")}",
+        "https://og-image.farens.me/image?v=2&text=#{URI.encode(conn.assigns[:og_image_text] || "")}",
       description: conn.assigns[:meta_description] || @default_description
     )
   end
@@ -35,7 +35,7 @@ defmodule WebsiteWeb.SEO do
       description: conn.assigns[:meta_description] || @default_description,
       locale: "en_US",
       image:
-        "https://og-image.farens.me/image?text=#{URI.encode(conn.assigns[:og_image_text] || "")}",
+        "https://og-image.farens.me/image?v=2&text=#{URI.encode(conn.assigns[:og_image_text] || "")}",
       url: conn.assigns.current_url
     )
   end

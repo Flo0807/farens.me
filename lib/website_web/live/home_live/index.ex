@@ -14,7 +14,7 @@ defmodule WebsiteWeb.HomeLive.Index do
       |> assign(:articles, articles)
       |> assign(:projects, projects)
       |> assign(:page_title, "Florian Arens - Lead Engineer")
-      |> assign(:og_image_text, "Florian Arens")
+      |> assign(:og_image_text, "Building software. Putting AI to practical use.")
       |> assign(
         :meta_description,
         "Florian Arens, Lead Engineer at naymspace. I build software, put AI to practical use, and share what I learn through blog posts and my own open source projects."
