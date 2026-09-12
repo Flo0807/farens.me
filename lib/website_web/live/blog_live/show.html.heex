@@ -1,55 +1,35 @@
 <Layouts.app current_url={@current_url}>
-  <div class="relative mx-auto max-w-2xl">
-    <aside class="absolute top-0 right-full bottom-0 mr-14 hidden w-44 xl:block">
-      <div class="sticky top-20">
-        <.toc headings={@article.heading_links} />
-      </div>
-    </aside>
+  <div class="mx-auto max-w-3xl">
+    <.link
+      navigate={~p"/blog"}
+      class="text-base-content/70 text-sm underline underline-offset-4"
+    >
+      ← Back to articles
+    </.link>
 
     <article>
-      <.link
-        navigate={~p"/blog"}
-        class={[
-          "inline-flex items-center gap-2",
-          "text-base-content/70 text-sm",
-          "hover:text-primary",
-          "transition-colors duration-200",
-          "group"
-        ]}
-      >
-        <.icon
-          name="hero-arrow-left"
-          class="size-4 transition-[translate] duration-200 group-hover:-translate-x-1"
-        />
-        <span>Back to articles</span>
-      </.link>
-
       <header class="mt-8">
-        <h1 class="text-base-content text-3xl font-bold leading-tight tracking-tight md:text-4xl">
+        <h1 class="text-base-content text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
           {@article.title}
         </h1>
 
-        <div class="text-base-content/70 mt-6 flex flex-wrap items-center gap-4 text-sm">
-          <div class="flex items-center gap-2">
-            <.icon name="hero-calendar" class="size-4" />
-            <time datetime={@article.date}>
-              {Calendar.strftime(@article.date, "%b %d, %Y")}
-            </time>
-          </div>
+        <div class="text-base-content/70 mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+          <time datetime={@article.date}>
+            {Calendar.strftime(@article.date, "%b %d, %Y")}
+          </time>
 
-          <span class="bg-base-content/20 h-1 w-1 rounded-full" aria-hidden="true" />
+          <span aria-hidden="true">·</span>
 
           <span>{@article.read_minutes} min read</span>
 
-          <span class="bg-base-content/20 h-1 w-1 rounded-full" aria-hidden="true" />
+          <span aria-hidden="true">·</span>
 
-          <div class="flex items-center gap-2">
-            <span class="relative flex h-2 w-2" aria-hidden="true">
-              <span class="bg-success absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-              <span class="bg-success relative inline-flex h-2 w-2 rounded-full"></span>
+          <span class="inline-flex items-center gap-2">
+            <span class="bg-success relative flex h-2 w-2 rounded-full" aria-hidden="true">
+              <span class="bg-success absolute inline-flex h-full w-full rounded-full opacity-75 motion-safe:animate-ping"></span>
             </span>
             <span>{@live_reading} reading now</span>
-          </div>
+          </span>
 
           <div class="flex-1" />
 
@@ -60,45 +40,43 @@
         </div>
       </header>
 
+      <aside class="border-base-content/10 mt-8 border-y py-6">
+        <.toc headings={@article.heading_links} />
+      </aside>
+
       <div class="prose-article prose prose-base prose-neutral mt-10 max-w-none dark:prose-invert">
         {raw(@article.body)}
       </div>
 
-      <div :if={@article.tags != []} class="mt-12">
-        <.section_label class="mb-4">Tagged with</.section_label>
-        <div class="flex flex-wrap gap-2">
+      <section :if={@article.tags != []} class="mt-12" aria-labelledby="article-tags-heading">
+        <h2 id="article-tags-heading" class="text-base-content text-sm font-semibold">
+          Tags
+        </h2>
+        <div class="mt-3 flex flex-wrap gap-x-4 gap-y-2">
           <.link
             :for={tag <- @article.tags}
             navigate={~p"/blog/tag/#{tag}"}
-            class={[
-              "inline-flex items-center px-3 py-1.5",
-              "rounded-full text-sm font-medium",
-              "bg-base-200/50 text-base-content/70",
-              "border-base-content/5 border",
-              "hover:bg-primary/10 hover:text-primary hover:border-primary/20",
-              "transition-colors duration-200"
-            ]}
+            class="text-base-content/70 text-sm underline underline-offset-4"
           >
             {tag}
           </.link>
         </div>
-      </div>
+      </section>
 
-      <section class="mt-12">
-        <div class="mb-6 flex items-end justify-between">
-          <div>
-            <.section_label class="mb-2">Continue reading</.section_label>
-            <h2 class="text-base-content text-xl font-bold">You might also like</h2>
-          </div>
+      <section class="mt-12" aria-labelledby="more-articles-heading">
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="more-articles-heading" class="text-base-content text-xl font-semibold">
+            More from the blog
+          </h2>
           <.link
             navigate={~p"/blog"}
-            class="text-base-content/70 text-sm transition-colors duration-150 hover:text-primary"
+            class="text-primary text-sm underline underline-offset-4"
           >
-            View all articles
+            View all
           </.link>
         </div>
 
-        <div class="grid gap-4 md:grid-cols-2">
+        <.grid class="mt-6">
           <.blog_preview_card
             :for={article <- @recommended_articles}
             id={"recommended-article-#{article.id}"}
@@ -109,8 +87,9 @@
             tags={article.tags}
             read_minutes={article.read_minutes}
             heading_level={:h3}
+            compact
           />
-        </div>
+        </.grid>
       </section>
     </article>
   </div>

@@ -1,77 +1,52 @@
 <Layouts.app current_url={@current_url}>
-  <article class="relative">
-    <header>
-      <.page_intro label="About" title="I'm Florian." />
+  <article>
+    <header class="max-w-2xl">
+      <h1 class="text-base-content text-3xl font-semibold tracking-tight md:text-4xl">
+        About me
+      </h1>
     </header>
 
-    <div class="mt-10 flex flex-col gap-12 lg:flex-row lg:gap-16">
-      <div class="flex-1 space-y-6">
-        <p class="text-base-content/70 leading-relaxed">
-          I work as a Lead Engineer at <.link
+    <div class="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start lg:gap-16">
+      <div class="max-w-2xl space-y-5 leading-relaxed">
+        <p class="text-base-content/70">
+          I’m a Lead Engineer at
+          <.link
             href="https://naymspace.de/"
             target="_blank"
             rel="noopener noreferrer"
-            class="underline"
+            class="text-base-content underline underline-offset-4"
           >naymspace</.link>,
-          where I am technically responsible for multiple projects. Driven by an entrepreneurial mindset,
-          I am passionate about leveraging AI to accelerate software development workflows, always with a focus on quality.
+          where I’m technically responsible for several projects. I care about building useful
+          software and using AI to make development workflows faster without losing quality.
         </p>
 
-        <p class="text-base-content/70 leading-relaxed">
-          I have a background in Applied Computer Science (B.Sc. & M.Sc.) and acquired my skills by
-          working on a variety of projects. I successfully completed numerous projects, both as part of
-          a team and independently. I have also participated in several research projects and gained professional
-          working experience as a Software Developer and Lead Engineer.
+        <p class="text-base-content/70">
+          I studied Applied Computer Science (B.Sc. and M.Sc.) and have worked as a software
+          developer and lead engineer across team, independent, and research projects.
         </p>
 
-        <p class="text-base-content/70 leading-relaxed">
-          Outside of work, I'm passionate about software development as well.
-          I build open source projects, explore new technologies, and enjoy attending conferences and meetups.
+        <p class="text-base-content/70">
+          In my spare time I build open source projects, explore new technologies, and attend
+          conferences and meetups. Cycling and functional strength training keep me balanced.
         </p>
 
-        <p class="text-base-content/70 leading-relaxed">
-          I find my balance in sport, which I do in a variety of ways. From cycling to
-          functional strength training, I'm always looking for new challenges. This ambition
-          is also reflected in my work and studies.
-        </p>
-
-        <div class="pt-4">
+        <p class="pt-2">
           <.link
             navigate={~p"/projects"}
-            class={[
-              "inline-flex items-center gap-2",
-              "text-primary font-medium",
-              "hover:gap-3",
-              "transition-[color,gap] duration-200",
-              "motion-reduce:transition-none"
-            ]}
+            class="text-primary font-medium underline underline-offset-4"
           >
-            View my projects <.icon name="hero-arrow-right" class="size-4" />
+            View my projects
           </.link>
-        </div>
+        </p>
       </div>
 
-      <div class="mx-auto w-64 md:w-72 lg:mx-0 lg:w-80 lg:flex-shrink-0">
-        <div class={[
-          "group relative",
-          "lg:rotate-2 lg:hover:-rotate-1",
-          "transition-[rotate] duration-500"
-        ]}>
-          <div class="from-primary/20 to-secondary/20 bg-linear-to-br absolute inset-0 rounded-2xl opacity-50 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
-
-          <img
-            loading="eager"
-            class={[
-              "relative",
-              "aspect-square w-full object-cover",
-              "rounded-2xl",
-              "shadow-base-content/10 shadow-2xl",
-              "ring-base-content/5 ring-1"
-            ]}
-            src="/images/me.jpg"
-            alt="Portrait of Florian"
-          />
-        </div>
+      <div class="mx-auto w-full max-w-xs lg:mx-0 lg:max-w-none">
+        <img
+          loading="eager"
+          class="aspect-square w-full rounded-lg object-cover"
+          src="/images/me.jpg"
+          alt="Portrait of Florian"
+        />
       </div>
     </div>
   </article>
