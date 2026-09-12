@@ -16,10 +16,10 @@
   --color-base-300: oklch(90.5% 0.005 255);
   --color-base-content: oklch(27% 0.008 255);
 
-  /* Restrained blue primary, with clay and slate supporting accents. */
+  /* Restrained blue primary with cool slate supporting accents. */
   --color-primary: oklch(45% 0.14 255);
   --color-primary-content: oklch(98% 0.002 255);
-  --color-secondary: oklch(49% 0.1 45);
+  --color-secondary: oklch(49% 0.04 255);
   --color-secondary-content: oklch(98% 0.002 255);
   --color-accent: oklch(43% 0.08 245);
   --color-accent-content: oklch(98% 0.002 255);
@@ -42,29 +42,29 @@
   color-scheme: dark;
 
   /* Charcoal surfaces keep long reading sessions comfortable. */
-  --color-base-100: oklch(22% 0.004 70);
-  --color-base-200: oklch(26% 0.004 70);
-  --color-base-300: oklch(31% 0.004 70);
-  --color-base-content: oklch(92% 0.006 85);
+  --color-base-100: oklch(22% 0.004 255);
+  --color-base-200: oklch(26% 0.004 255);
+  --color-base-300: oklch(31% 0.004 255);
+  --color-base-content: oklch(92% 0.006 255);
 
   /* The same accents are lifted for dark-surface contrast. */
   --color-primary: oklch(72% 0.11 255);
-  --color-primary-content: oklch(22% 0.004 70);
-  --color-secondary: oklch(75% 0.1 55);
-  --color-secondary-content: oklch(22% 0.004 70);
+  --color-primary-content: oklch(22% 0.004 255);
+  --color-secondary: oklch(75% 0.04 255);
+  --color-secondary-content: oklch(22% 0.004 255);
   --color-accent: oklch(75% 0.08 245);
-  --color-accent-content: oklch(22% 0.004 70);
+  --color-accent-content: oklch(22% 0.004 255);
 
-  --color-neutral: oklch(37% 0.03 70);
-  --color-neutral-content: oklch(92% 0.006 85);
+  --color-neutral: oklch(37% 0.008 255);
+  --color-neutral-content: oklch(92% 0.006 255);
   --color-info: oklch(74% 0.1 245);
-  --color-info-content: oklch(22% 0.004 70);
+  --color-info-content: oklch(22% 0.004 255);
   --color-success: oklch(73% 0.1 160);
-  --color-success-content: oklch(22% 0.004 70);
+  --color-success-content: oklch(22% 0.004 255);
   --color-warning: oklch(80% 0.15 80);
-  --color-warning-content: oklch(22% 0.004 70);
+  --color-warning-content: oklch(22% 0.004 255);
   --color-error: oklch(72% 0.15 25);
-  --color-error-content: oklch(22% 0.004 70);
+  --color-error-content: oklch(22% 0.004 255);
 }
 
 @plugin "../vendor/heroicons";
