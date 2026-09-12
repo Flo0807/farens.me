@@ -1,12 +1,15 @@
 <Layouts.app current_url={@current_url}>
-  <article class="relative">
-    <header>
-      <.page_intro title="Things I've built" label="Portfolio">
-        I've been involved in many projects and have already built some myself. Mostly these were university projects or side projects I built in my free time. These are the ones that I'm most proud of.
-      </.page_intro>
+  <article>
+    <header class="max-w-2xl">
+      <h1 class="text-base-content text-3xl font-semibold tracking-tight md:text-4xl">
+        Things I’ve built
+      </h1>
+      <p class="text-base-content/70 mt-5 leading-relaxed">
+        A selection of university, open source, and side projects I’ve enjoyed building.
+      </p>
     </header>
 
-    <.grid>
+    <.grid class="mt-8">
       <.project_card
         :for={project <- @projects}
         title={project.title}

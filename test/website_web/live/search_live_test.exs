@@ -35,7 +35,7 @@ defmodule WebsiteWeb.SearchLiveTest do
       |> assert_has("#search-overlay")
       |> unwrap(fn view ->
         view
-        |> Phoenix.LiveViewTest.element("#search-container [phx-click=\"close\"]")
+        |> Phoenix.LiveViewTest.element("#close-search")
         |> Phoenix.LiveViewTest.render_click()
       end)
       |> refute_has("#search-overlay")
@@ -56,7 +56,7 @@ defmodule WebsiteWeb.SearchLiveTest do
       end)
       |> unwrap(fn view ->
         view
-        |> Phoenix.LiveViewTest.element("#search-container [phx-click=\"close\"]")
+        |> Phoenix.LiveViewTest.element("#close-search")
         |> Phoenix.LiveViewTest.render_click()
       end)
       |> refute_has("#search-overlay")

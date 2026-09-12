@@ -1,77 +1,61 @@
 <Layouts.app current_url={@current_url}>
-  <article class="relative">
-    <header>
-      <.page_intro label="About" title="I'm Florian." />
+  <article>
+    <header class="max-w-2xl">
+      <h1 class="text-base-content text-3xl font-semibold tracking-tight md:text-4xl">
+        About me
+      </h1>
     </header>
 
-    <div class="mt-10 flex flex-col gap-12 lg:flex-row lg:gap-16">
-      <div class="flex-1 space-y-6">
-        <p class="text-base-content/70 leading-relaxed">
-          I work as a Lead Engineer at <.link
+    <div class="mt-8 max-w-2xl">
+      <img
+        loading="eager"
+        class="size-40 mb-8 rounded-lg object-cover"
+        src="/images/me.jpg"
+        alt="Portrait of Florian"
+      />
+
+      <div class="space-y-5 leading-relaxed">
+        <p class="text-base-content/70">
+          I’m a Lead Engineer at <.link
             href="https://naymspace.de/"
             target="_blank"
             rel="noopener noreferrer"
-            class="underline"
+            class="text-base-content underline underline-offset-4"
           >naymspace</.link>,
-          where I am technically responsible for multiple projects. Driven by an entrepreneurial mindset,
-          I am passionate about leveraging AI to accelerate software development workflows, always with a focus on quality.
+          where I take technical responsibility for internal and client projects, from the first
+          idea to implementation. I work closely with clients and build software that fits their
+          day-to-day needs.
         </p>
 
-        <p class="text-base-content/70 leading-relaxed">
-          I have a background in Applied Computer Science (B.Sc. & M.Sc.) and acquired my skills by
-          working on a variety of projects. I successfully completed numerous projects, both as part of
-          a team and independently. I have also participated in several research projects and gained professional
-          working experience as a Software Developer and Lead Engineer.
+        <p class="text-base-content/70">
+          A big part of my work is evaluating AI tools and improving how we use them in development.
+          I care about more than what a tool can do: it should make the team’s work easier and be
+          worth the time and money we put into it.
         </p>
 
-        <p class="text-base-content/70 leading-relaxed">
-          Outside of work, I'm passionate about software development as well.
-          I build open source projects, explore new technologies, and enjoy attending conferences and meetups.
+        <p class="text-base-content/70">
+          My main tools are Elixir, Phoenix LiveView, and PostgreSQL. I also contribute to <.link
+            href="https://backpex.live/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-base-content underline underline-offset-4"
+          >Backpex</.link>,
+          an open source admin panel for Phoenix LiveView used in internal and client projects.
+          I share my experience through this blog and my own open source projects.
         </p>
 
-        <p class="text-base-content/70 leading-relaxed">
-          I find my balance in sport, which I do in a variety of ways. From cycling to
-          functional strength training, I'm always looking for new challenges. This ambition
-          is also reflected in my work and studies.
+        <p class="text-base-content/70">
+          Away from the keyboard, you’ll find me strength training, playing badminton, or cooking.
         </p>
 
-        <div class="pt-4">
+        <p class="pt-2">
           <.link
             navigate={~p"/projects"}
-            class={[
-              "inline-flex items-center gap-2",
-              "text-primary font-medium",
-              "hover:gap-3",
-              "transition-[color,gap] duration-200",
-              "motion-reduce:transition-none"
-            ]}
+            class="text-primary min-h-11 inline-flex items-center font-medium underline underline-offset-4"
           >
-            View my projects <.icon name="hero-arrow-right" class="size-4" />
+            View my projects
           </.link>
-        </div>
-      </div>
-
-      <div class="mx-auto w-64 md:w-72 lg:mx-0 lg:w-80 lg:flex-shrink-0">
-        <div class={[
-          "group relative",
-          "lg:rotate-2 lg:hover:-rotate-1",
-          "transition-[rotate] duration-500"
-        ]}>
-          <div class="from-primary/20 to-secondary/20 bg-linear-to-br absolute inset-0 rounded-2xl opacity-50 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
-
-          <img
-            loading="eager"
-            class={[
-              "relative",
-              "aspect-square w-full object-cover",
-              "rounded-2xl",
-              "shadow-base-content/10 shadow-2xl",
-              "ring-base-content/5 ring-1"
-            ]}
-            src="/images/me.jpg"
-            alt="Portrait of Florian"
-          />
-        </div>
+        </p>
       </div>
     </div>
   </article>
