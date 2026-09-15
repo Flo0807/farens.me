@@ -1,56 +1,38 @@
 <Layouts.app current_url={@current_url}>
-  <div class="relative">
-    <aside class="absolute top-0 right-0 bottom-16 hidden w-64 lg:block">
-      <div class="sticky top-24">
-        <.blog_tags
-          id="desktop-tag-list"
-          tags={@all_tags}
-          search_tag={@search_tag}
-          select_event="select-tag"
-        />
-      </div>
-    </aside>
-
-    <header class="lg:w-2/3">
-      <div class="flex items-center justify-between">
-        <div>
-          <.section_label class="mb-2">Blog</.section_label>
-          <h1 class="text-base-content text-3xl font-bold md:text-4xl">
-            My Thoughts
-          </h1>
-        </div>
+  <div>
+    <header>
+      <div class="flex items-baseline justify-between gap-4">
+        <h1
+          id="blog-heading"
+          class="text-base-content text-3xl font-semibold tracking-tight md:text-4xl"
+        >
+          Writing
+        </h1>
 
         <button
           onclick="document.getElementById('rss-modal').showModal()"
-          class="btn btn-primary btn-outline btn-sm"
+          class="btn btn-ghost btn-sm min-h-11 inline-flex items-center gap-2"
         >
           <.icon name="hero-rss" class="size-4" /> Subscribe
         </button>
       </div>
 
-      <p class="text-base-content/70 mt-6 max-w-xl leading-relaxed">
-        I write about software engineering, functional programming, and whatever sparks my curiosity.
-        Documenting my learning journey one article at a time.
+      <p class="text-base-content/70 mt-5 max-w-xl leading-relaxed">
+        Notes on software engineering, functional programming, and the things I’m learning.
       </p>
     </header>
 
-    <section class="mt-8 lg:hidden">
+    <section class="mt-8" aria-label="Filter articles">
       <.blog_tags
-        id="mobile-tag-list"
+        id="tag-list"
         tags={@all_tags}
         search_tag={@search_tag}
         select_event="select-tag"
       />
     </section>
 
-    <div id="articles" class="mt-10 flex flex-col gap-5 lg:w-2/3" phx-update="stream">
-      <div
-        id="articles-empty"
-        class="hidden flex-col items-center justify-center py-16 text-center only:flex"
-      >
-        <div class="bg-base-200 mb-4 flex h-16 w-16 items-center justify-center rounded-full">
-          <.icon name="hero-document-magnifying-glass" class="size-8 text-base-content/70" />
-        </div>
+    <div id="articles" class="mt-8" phx-update="stream">
+      <div id="articles-empty" class="hidden py-12 text-center only:block">
         <p class="text-base-content/70 text-lg font-medium">No articles found</p>
         <p class="text-base-content/70 mt-1 text-sm">Try selecting a different tag</p>
       </div>

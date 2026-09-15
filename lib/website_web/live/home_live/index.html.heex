@@ -1,86 +1,43 @@
-<Layouts.app current_url={@current_url}>
-  <section class="pb-6 md:pb-8">
-    <h1 class="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-      <span class="text-base-content">Hey, I'm</span>
-      <span class={["from-primary to-secondary bg-linear-to-r", "bg-clip-text text-transparent"]}>
-        Florian!
-      </span>
+<Layouts.app current_url={@current_url} main_class="pt-6 pb-4 md:pt-8 md:pb-6">
+  <section aria-labelledby="home-heading" class="max-w-3xl">
+    <h1
+      id="home-heading"
+      class="text-base-content text-3xl font-semibold tracking-tight md:text-4xl"
+    >
+      Hi, I’m Florian.
     </h1>
 
-    <p class="text-base-content/70 mt-6 max-w-2xl text-base leading-relaxed md:text-lg">
-      Software Engineer passionate about leveraging AI to accelerate software development workflows,
-      always with a focus on quality. I build open source projects, explore new
-      technologies, and enjoy sharing what I learn.
+    <p class="text-base-content/70 mt-3 max-w-2xl text-lg leading-relaxed">
+      I’m a Lead Engineer at naymspace, building software and helping teams put AI to practical use.
+      I care about solutions that make everyday work easier and are worth the investment.
+      Here I share my projects and what I learn.
     </p>
 
-    <div class="mt-8 flex flex-wrap gap-4">
-      <.link
-        navigate={~p"/blog"}
-        class={[
-          "inline-flex items-center gap-2 px-4 py-2 text-sm",
-          "bg-primary text-primary-content",
-          "rounded-lg font-medium",
-          "shadow-primary/25 shadow-lg",
-          "hover:shadow-primary/30 hover:shadow-xl hover:brightness-110",
-          "transition-[scale,box-shadow,filter] duration-200",
-          "active:scale-[0.98]"
-        ]}
-      >
-        Read my blog <.icon name="hero-arrow-right" class="size-4" />
-      </.link>
-
-      <.link
-        navigate={~p"/about"}
-        class={[
-          "inline-flex items-center gap-2 px-4 py-2 text-sm",
-          "bg-base-200 text-base-content",
-          "rounded-lg font-medium",
-          "border-base-content/5 border",
-          "hover:bg-base-300 hover:border-base-content/10",
-          "transition-colors duration-200",
-          "active:scale-[0.98]"
-        ]}
-      >
-        About me
-      </.link>
-    </div>
-
-    <div class="mt-12 md:mt-14">
-      <.section_label class="mb-4">Connect with me</.section_label>
-      <.contact_links
-        class="flex gap-3"
-        icon_class={[
-          "size-10 p-2.5",
-          "rounded-xl",
-          "bg-base-200/50 border border-base-content/5",
-          "text-base-content/70 fill-current",
-          "hover:bg-base-200 hover:text-primary hover:border-primary/20",
-          "transition-colors duration-200"
-        ]}
-      />
-    </div>
+    <nav aria-label="Contact" class="mt-3">
+      <.contact_links class="flex flex-wrap gap-x-4 gap-y-2 text-sm" />
+    </nav>
   </section>
 
-  <section class="pt-4 md:pt-6">
-    <div class="mb-8 flex items-end justify-between">
-      <div>
-        <.section_label class="mb-2">From the blog</.section_label>
-        <h2 class="text-base-content text-2xl font-bold md:text-3xl">Latest Articles</h2>
-      </div>
+  <section
+    aria-labelledby="latest-articles-heading"
+    class="mt-8 md:mt-10"
+  >
+    <div class="flex items-baseline justify-between gap-4">
+      <h2
+        id="latest-articles-heading"
+        class="text-base-content text-xl font-semibold md:text-2xl"
+      >
+        Latest articles
+      </h2>
       <.link
         navigate={~p"/blog"}
-        class={[
-          "hidden items-center gap-2 sm:inline-flex",
-          "text-base-content/70 text-sm font-medium",
-          "hover:text-primary",
-          "transition-colors duration-200"
-        ]}
+        class="text-primary min-h-11 inline-flex items-center text-sm underline underline-offset-4"
       >
-        View all articles <.icon name="hero-arrow-right" class="size-4" />
+        View all articles
       </.link>
     </div>
 
-    <.grid>
+    <.grid class="[&>article]:py-2 mt-2">
       <.blog_preview_card
         :for={article <- @articles}
         link={~p"/blog/#{article.slug}"}
@@ -89,21 +46,39 @@
         description={article.description}
         read_minutes={article.read_minutes}
         heading_level={:h3}
+        compact
       />
     </.grid>
+  </section>
 
-    <.link
-      navigate={~p"/blog"}
-      class={[
-        "mt-8 flex items-center justify-center gap-2 sm:hidden",
-        "text-primary text-sm font-medium",
-        "rounded-xl px-4 py-3",
-        "bg-primary/5 border-primary/10 border",
-        "active:scale-[0.98]",
-        "transition-colors duration-200"
-      ]}
-    >
-      View all articles <.icon name="hero-arrow-right" class="size-4" />
-    </.link>
+  <section
+    aria-labelledby="selected-projects-heading"
+    class="mt-8 md:mt-10"
+  >
+    <div class="flex items-baseline justify-between gap-4">
+      <h2
+        id="selected-projects-heading"
+        class="text-base-content text-xl font-semibold md:text-2xl"
+      >
+        Selected projects
+      </h2>
+      <.link
+        navigate={~p"/projects"}
+        class="text-primary min-h-11 inline-flex items-center text-sm underline underline-offset-4"
+      >
+        View all projects
+      </.link>
+    </div>
+
+    <.grid class="[&>article]:py-3 mt-2">
+      <.project_card
+        :for={project <- @projects}
+        title={project.title}
+        description={project.description}
+        link={project.link}
+        link_label={project.link_label}
+        heading_level={:h3}
+      />
+    </.grid>
   </section>
 </Layouts.app>
