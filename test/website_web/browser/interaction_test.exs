@@ -4,6 +4,19 @@ defmodule WebsiteWeb.InteractionTest do
   @moduletag :playwright
   @moduletag browser_context_opts: [viewport: %{width: 390, height: 844}]
 
+  test "search uses the complete query after rapid typing stops", %{conn: conn} do
+    conn
+    |> visit("/")
+    |> click_button("Search articles")
+    |> type("#search-input", "Blog", delay: 0)
+    |> assert_has("#search-results [role=option]")
+    |> fill_in("Search articles", with: "")
+    |> assert_has("#search-results", text: "Start typing to search articles...")
+    |> type("#search-input", "zzzznonexistent", delay: 0)
+    |> assert_has("#search-results", text: "No articles found for")
+    |> assert_has("#search-results p span", text: "zzzznonexistent", exact: true)
+  end
+
   test "search can be closed with the keyboard after results arrive", %{conn: conn} do
     conn
     |> visit("/")
