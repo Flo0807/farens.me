@@ -10,13 +10,13 @@ defmodule WebsiteWeb.A11yTest do
     "/about",
     "/blog",
     "/blog/tag/elixir",
-    # "/blog/hello-world",
+    "/blog/hello-world",
     "/projects",
     "/legal-notice",
     "/privacy-policy"
   ]
 
-  @themes ["light", "dark", "night", "sunset", "dracula"]
+  @themes ["light", "dark"]
 
   @moduletag :playwright
 

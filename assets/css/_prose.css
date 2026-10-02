@@ -1,11 +1,18 @@
 .prose-article {
+  overflow-wrap: anywhere;
+
   /* Headings */
   @apply prose-headings:font-semibold prose-headings:tracking-tight;
 
   /* Links */
-  @apply prose-a:text-primary prose-a:no-underline;
+  @apply prose-a:text-primary prose-a:underline;
+  & :where(a) {
+    text-decoration-color: color-mix(in oklab, var(--color-primary) 55%, transparent);
+    text-underline-offset: 0.15em;
+  }
+
   & :where(a:hover) {
-    @apply underline;
+    text-decoration-color: var(--color-primary);
   }
 
   /* Inline code */
@@ -13,9 +20,13 @@
 
   /* Code blocks */
   @apply prose-pre:border-base-content/5 prose-pre:border;
+  & :where(pre) {
+    overflow-x: auto;
+    overflow-wrap: normal;
+  }
 
   /* Images */
-  @apply prose-img:rounded-xl prose-img:shadow-lg;
+  @apply prose-img:rounded-lg;
 
   /* Reset inline code styles inside pre blocks */
   & pre code {

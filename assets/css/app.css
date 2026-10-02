@@ -2,31 +2,69 @@
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui" {
-  themes:
-    light,
-    dark --default --prefersdark,
-    night,
-    sunset,
-    dracula;
+  themes: light --default, dark --prefersdark;
 }
 
 @plugin "daisyui/theme" {
   name: "light";
-  --color-secondary: oklch(68.011% 0.158 276.934);
-  --color-primary: oklch(0.488 0.243 264.376);
-  --color-primary-content: oklch(97% 0.014 264.376);
+  default: true;
+  color-scheme: light;
+
+  /* Cool gray surfaces and quiet, high-contrast ink. */
+  --color-base-100: oklch(98% 0.002 255);
+  --color-base-200: oklch(95.5% 0.003 255);
+  --color-base-300: oklch(90.5% 0.005 255);
+  --color-base-content: oklch(27% 0.008 255);
+
+  /* Restrained blue primary with cool slate supporting accents. */
+  --color-primary: oklch(45% 0.14 255);
+  --color-primary-content: oklch(98% 0.002 255);
+  --color-secondary: oklch(49% 0.04 255);
+  --color-secondary-content: oklch(98% 0.002 255);
+  --color-accent: oklch(43% 0.08 245);
+  --color-accent-content: oklch(98% 0.002 255);
+
+  --color-neutral: oklch(31% 0.008 255);
+  --color-neutral-content: oklch(98% 0.002 255);
+  --color-info: oklch(55% 0.12 245);
+  --color-info-content: oklch(98% 0.002 255);
+  --color-success: oklch(50% 0.1 160);
+  --color-success-content: oklch(98% 0.002 255);
+  --color-warning: oklch(74% 0.15 80);
+  --color-warning-content: oklch(27% 0.008 255);
+  --color-error: oklch(56% 0.16 25);
+  --color-error-content: oklch(98% 0.002 255);
 }
 
 @plugin "daisyui/theme" {
   name: "dark";
-  --color-primary: oklch(68.5% 0.169 237.323);
-  --color-primary-content: oklch(15% 0.034 237.323);
-  --color-secondary: oklch(68.011% 0.158 276.934);
-}
+  prefersdark: true;
+  color-scheme: dark;
 
-@plugin "daisyui/theme" {
-  name: "night";
-  --color-base-content: oklch(97.807% 0.029 256.847);
+  /* Charcoal surfaces keep long reading sessions comfortable. */
+  --color-base-100: oklch(22% 0.004 255);
+  --color-base-200: oklch(26% 0.004 255);
+  --color-base-300: oklch(31% 0.004 255);
+  --color-base-content: oklch(92% 0.006 255);
+
+  /* The same accents are lifted for dark-surface contrast. */
+  --color-primary: oklch(72% 0.11 255);
+  --color-primary-content: oklch(22% 0.004 255);
+  --color-secondary: oklch(75% 0.04 255);
+  --color-secondary-content: oklch(22% 0.004 255);
+  --color-accent: oklch(75% 0.08 245);
+  --color-accent-content: oklch(22% 0.004 255);
+
+  --color-neutral: oklch(37% 0.008 255);
+  --color-neutral-content: oklch(92% 0.006 255);
+  --color-info: oklch(74% 0.1 245);
+  --color-info-content: oklch(22% 0.004 255);
+  --color-success: oklch(73% 0.1 160);
+  --color-success-content: oklch(22% 0.004 255);
+  --color-warning: oklch(80% 0.15 80);
+  --color-warning-content: oklch(22% 0.004 255);
+  --color-error: oklch(72% 0.15 25);
+  --color-error-content: oklch(22% 0.004 255);
 }
 
 @plugin "../vendor/heroicons";
@@ -46,19 +84,60 @@
     "Monaco", "Liberation Mono", "DejaVu Sans Mono", "Courier New", "monospace";
 }
 
-/* Smooth font rendering */
+/* Keep the type crisp against both neutral surfaces. */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Respect reduced motion preferences */
+/* Use the active semantic theme for native controls and browser UI. */
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Make keyboard focus visible without changing pointer focus styling. */
+html :focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Composite inputs draw their focus ring around the icon and field together. */
+html .input input:focus-visible {
+  outline: none;
+}
+
+/* Keep daisyUI controls, menus, and dialogs calm; loading indicators keep their own motion. */
+.btn,
+.btn:active,
+.dropdown-content,
+.menu,
+.menu :where(li > *:not(ul, menu, details, .menu-title, .btn)),
+.menu :where(li > details > summary),
+.menu :where(li > details > summary)::after,
+.menu :where(li > .menu-dropdown-toggle)::after,
+.menu details::details-content,
+.modal,
+.modal-box,
+.modal-backdrop,
+.modal::backdrop {
+  animation: none;
+  transition: none;
+}
+
+.btn:active,
+.dropdown-content,
+.modal-box {
+  translate: none;
+  scale: 1;
+}
+
+/* Respect reduced motion for the active-reader status indicator only. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .animate-ping {
+    animation: none !important;
   }
 }
