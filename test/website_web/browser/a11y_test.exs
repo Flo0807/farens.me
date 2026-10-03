@@ -37,7 +37,14 @@ defmodule WebsiteWeb.A11yTest do
   defp set_theme(session, theme) do
     Frame.evaluate(
       session.frame_id,
-      expression: "document.documentElement.setAttribute('data-theme','#{theme}')",
+      expression: """
+      async () => {
+        document.documentElement.setAttribute('data-theme', '#{theme}');
+        // Flush styles so theme transitions are included before auditing final colors.
+        getComputedStyle(document.documentElement).color;
+        await Promise.all(document.getAnimations().map(animation => animation.finished.catch(() => {})));
+      }
+      """,
       timeout: @timeout
     )
 
