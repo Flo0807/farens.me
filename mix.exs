@@ -47,7 +47,7 @@ defmodule Website.MixProject do
       {:lumis, "== 0.10.0"},
       {:lumis_wasm_elixir, "== 0.26.4"},
       {:lumis_wasm_comment, "== 0.26.2"},
-      {:lumis_wasm_bundle_web, "== 0.1.0"},
+      {:lumis_wasm_bundle_web, "== 0.1.2"},
       {:lumis_wasm_yaml, "== 0.26.2"},
       {:lumis_wasm_bash, "== 0.26.5"},
       {:yaml_elixir, "== 2.12.2"},
