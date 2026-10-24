@@ -14,12 +14,13 @@ ARG UBUNTU_VERSION=resolute-20261006
 ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-${UBUNTU_VERSION}
 ARG RUNNER_IMAGE=ubuntu:${UBUNTU_VERSION}
 
+FROM oven/bun:1.4.4 AS bun
+
 FROM ${BUILDER_IMAGE} AS builder
 
 # install build dependencies
-RUN apt-get update && apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs git build-essential
+RUN apt-get update && apt-get install -y ca-certificates git build-essential
+COPY --from=bun /usr/local/bin/bun /usr/local/bin/bun
 RUN apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
@@ -51,7 +52,7 @@ COPY lib lib
 
 COPY assets assets
 
-RUN npm install --prefix ./assets
+RUN cd assets && bun install --frozen-lockfile
 
 # Compile the release
 RUN mix compile

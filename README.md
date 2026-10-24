@@ -26,10 +26,18 @@ This is the source code for my personal website and blog. It is built using the 
 
 ## Development
 
+Install the versions of Elixir, Erlang, Bun, and Node.js listed in `.tool-versions`
+(for example, with `mise install`). Bun manages JavaScript dependencies and scripts;
+Node.js is required by the PhoenixTest.Playwright test driver.
+
 To start your Phoenix server:
 
 * Run `mix setup` to install and setup dependencies
 * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+
+JavaScript dependencies are installed from `assets/bun.lock` by `mix setup`
+and `mix assets.setup`. To add a dependency, run `bun add <package>` from `assets/`.
+Run JavaScript linting with `cd assets && bun run --bun lint:standard`.
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
