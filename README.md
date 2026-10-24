@@ -37,6 +37,8 @@ To start your Phoenix server:
 
 JavaScript dependencies are installed from `assets/bun.lock` by `mix setup`
 and `mix assets.setup`. To add a dependency, run `bun add <package>` from `assets/`.
+`assets/bunfig.toml` requires newly resolved npm package versions to be at least
+three days old; packages already in the lockfile are unaffected.
 Run JavaScript linting with `cd assets && bun run --bun lint:standard`.
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
