@@ -1,0 +1,3 @@
+[install]
+# Require new package resolutions to be at least three days old.
+minimumReleaseAge = 259200

@@ -1,13 +1,14 @@
 {
+  "packageManager": "bun@1.4.4",
   "scripts": {
     "lint:standard": "standard",
     "format:standard": "standard --fix"
   },
   "dependencies": {
     "topbar": "^3.0.0",
-    "phoenix": "../deps/phoenix",
-    "phoenix_html": "../deps/phoenix_html",
-    "phoenix_live_view": "../deps/phoenix_live_view"
+    "phoenix": "link:../deps/phoenix",
+    "phoenix_html": "link:../deps/phoenix_html",
+    "phoenix_live_view": "link:../deps/phoenix_live_view"
   },
   "devDependencies": {
     "daisyui": "5.7.50",

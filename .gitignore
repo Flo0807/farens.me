@@ -28,8 +28,7 @@ website-*.tar
 # Ignore digested assets cache.
 /priv/static/cache_manifest.json
 
-# In case you use Node.js/npm, you want to ignore these.
-npm-debug.log
+# JavaScript dependencies installed by Bun.
 /assets/node_modules/
 
 .DS_Store
