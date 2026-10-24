@@ -23,11 +23,6 @@ jobs:
           version-file: .tool-versions
           version-type: strict
 
-      # PhoenixTest.Playwright launches its driver with Node.js.
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 24
-
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version-file: assets/package.json
@@ -76,7 +71,7 @@ jobs:
         run: mix credo
 
       - name: Run Tests
-        run: mix test --warnings-as-errors
+        run: bun run --bun mix test --warnings-as-errors
 
       - name: Cache Playwright browsers
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -87,11 +82,11 @@ jobs:
 
       - name: Install chromium browser
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: bun run playwright install chromium --with-deps --only-shell
+        run: bun run --bun playwright install chromium --with-deps --only-shell
         working-directory: ./assets
 
       - name: Run Playwright Tests
-        run: mix test --warnings-as-errors --only playwright || if [[ $? = 2 ]]; then PLAYWRIGHT_TRACE=true mix test --only playwright --max-cases 1 --failed; else false; fi
+        run: bun run --bun mix test --warnings-as-errors --only playwright || if [[ $? = 2 ]]; then PLAYWRIGHT_TRACE=true bun run --bun mix test --only playwright --max-cases 1 --failed; else false; fi
 
       - name: Upload Playwright traces
         if: failure()

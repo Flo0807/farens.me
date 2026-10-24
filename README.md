@@ -26,9 +26,9 @@ This is the source code for my personal website and blog. It is built using the 
 
 ## Development
 
-Install the versions of Elixir, Erlang, Bun, and Node.js listed in `.tool-versions`
+Install the versions of Elixir, Erlang, and Bun listed in `.tool-versions`
 (for example, with `mise install`). Bun manages JavaScript dependencies and scripts;
-Node.js is required by the PhoenixTest.Playwright test driver.
+Bun also runs the PhoenixTest.Playwright JavaScript driver.
 
 To start your Phoenix server:
 
@@ -40,6 +40,32 @@ and `mix assets.setup`. To add a dependency, run `bun add <package>` from `asset
 Run JavaScript linting with `cd assets && bun run --bun lint:standard`.
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+### Tests and checks
+
+Run Mix checks through Bun so Playwright's `node` shebang resolves to Bun:
+
+```sh
+bun run --bun mix precommit
+bun run --bun mix test --warnings-as-errors
+```
+
+Install Chromium and run browser tests:
+
+```sh
+(cd assets && bun run --bun playwright install chromium --with-deps --only-shell)
+bun run --bun mix test --warnings-as-errors --only playwright
+```
+
+To retry failed browser tests with tracing:
+
+```sh
+PLAYWRIGHT_TRACE=true bun run --bun mix test --only playwright --max-cases 1 --failed
+```
+
+The `--bun` flag supplies a temporary `node` shim for child processes; a separate
+Node.js installation is not required. Use this prefix for tests and `mix precommit`,
+which starts the Playwright supervisor even when browser tests are excluded.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
