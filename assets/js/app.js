@@ -10,7 +10,7 @@
 //
 //     import "../vendor/some-package.js"
 //
-// Alternatively, you can `npm install some-package --prefix assets` and import
+// Alternatively, you can `cd assets && bun add some-package` and import
 // them using a path starting with the package name:
 //
 //     import "some-package"
