@@ -78,14 +78,14 @@ defmodule Website.MixProject do
       {:phoenix_test_playwright, "== 0.19.0", only: :test, runtime: false},
       {:a11y_audit, "== 0.5.0", only: :test},
       {:esbuild, "== 0.10.1", runtime: Mix.env() == :dev},
-      {:tailwind, "== 0.5.1", runtime: Mix.env() == :dev},
+      {:tailwind, "== 0.5.2", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "== 1.7.0", only: :dev},
       {:tailwind_formatter, "== 0.4.3", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.19", only: [:dev, :test], runtime: false},
       {:lazy_html, "== 0.1.13", only: :test},
       {:tidewave, "== 0.9.1", only: :dev},
-      {:igniter, "== 0.8.4", only: [:dev, :test]},
-      {:usage_rules, "== 1.2.8", only: [:dev]}
+      {:igniter, "== 0.8.5", only: [:dev, :test]},
+      {:usage_rules, "== 1.3.0", only: [:dev]}
     ]
   end
 
