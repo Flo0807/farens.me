@@ -83,7 +83,7 @@ defmodule Website.MixProject do
       {:tailwind_formatter, "== 0.4.3", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.19", only: [:dev, :test], runtime: false},
       {:lazy_html, "== 0.1.13", only: :test},
-      {:tidewave, "== 0.9.1", only: :dev},
+      {:tidewave, "== 0.9.2", only: :dev},
       {:igniter, "== 0.8.5", only: [:dev, :test]},
       {:usage_rules, "== 1.3.0", only: [:dev]}
     ]
