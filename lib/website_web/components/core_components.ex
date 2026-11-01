@@ -182,7 +182,7 @@ defmodule WebsiteWeb.CoreComponents do
     ~H"""
     <button
       onclick="window.dispatchEvent(new CustomEvent('open-search'))"
-      aria-label="Search articles"
+      aria-keyshortcuts="Meta+K Control+K"
       class={[
         "btn font-normal",
         "hover:bg-base-content/5",
@@ -191,6 +191,7 @@ defmodule WebsiteWeb.CoreComponents do
       ]}
     >
       <.icon name="hero-magnifying-glass" class="size-4" />
+      <span class="sr-only md:hidden">Search articles</span>
       <span class="hidden md:inline">Search...</span>
       <kbd class="bg-base-300/80 font-mono border-base-content/10 hidden rounded border px-1.5 py-0.5 text-xs md:inline">
         ⌘K
