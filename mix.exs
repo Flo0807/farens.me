@@ -44,7 +44,7 @@ defmodule Website.MixProject do
       {:phoenix_seo, "== 0.3.2"},
       {:atomex, "== 0.5.1"},
       {:mdex, "== 0.14.6"},
-      {:lumis, "== 0.10.7"},
+      {:lumis, "== 0.10.8"},
       {:lumis_wasm_elixir, "== 0.26.8"},
       {:lumis_wasm_comment, "== 0.26.2"},
       {:lumis_wasm_bundle_web, "== 0.1.2"},
