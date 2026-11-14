@@ -41,7 +41,7 @@ defmodule Website.MixProject do
       {:bandit, "== 1.14.1"},
 
       # SEO & Content
-      {:phoenix_seo, "== 0.3.2"},
+      {:phoenix_seo, "== 0.3.3"},
       {:atomex, "== 0.5.1"},
       {:mdex, "== 0.14.6"},
       {:lumis, "== 0.10.9"},
