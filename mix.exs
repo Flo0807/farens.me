@@ -43,7 +43,7 @@ defmodule Website.MixProject do
       # SEO & Content
       {:phoenix_seo, "== 0.3.3"},
       {:atomex, "== 0.5.1"},
-      {:mdex, "== 0.14.6"},
+      {:mdex, "== 0.14.7"},
       {:lumis, "== 0.10.9"},
       {:lumis_wasm_elixir, "== 0.26.10"},
       {:lumis_wasm_comment, "== 0.26.2"},
