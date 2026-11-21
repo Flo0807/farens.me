@@ -69,7 +69,8 @@ The `--bun` flag supplies a temporary `node` shim for child processes; a separat
 Node.js installation is not required. Use this prefix for tests and `mix precommit`,
 which starts the Playwright supervisor even when browser tests are excluded.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Production deployments use GitHub Actions, GHCR, and Coolify. See the
+[deployment guide](docs/deployment.md) for setup, required secrets, and rollbacks.
 
 ## Learn more about Phoenix
 
