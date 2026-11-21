@@ -137,18 +137,21 @@ jobs:
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
   deploy:
     if: github.ref == 'refs/heads/main'
-    name: Deploy app
+    name: Request Coolify deployment
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - name: Trigger deployment
+      - name: Queue deployment of the published image
+        env:
+          COOLIFY_WEBHOOK: ${{ secrets.COOLIFY_WEBHOOK }}
+          COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
         run: |
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST ${{ secrets.WEBHOOK_URL }} \
-            -H "Content-Type: application/json" \
-            -H "X-Signature: ${{ secrets.WEBHOOK_SECRET }}" \
-            -d '{}')
-          if [ "$RESPONSE" -ne "200" ]
-          then
-            echo "Deployment failed with status ${RESPONSE}"
-            exit 1
-          fi
+          : "${COOLIFY_WEBHOOK:?Configure the Coolify deploy webhook secret}"
+          : "${COOLIFY_TOKEN:?Configure the Coolify API token secret}"
+          curl --fail --silent --show-error --output /dev/null \
+            --connect-timeout 15 --max-time 60 --request POST \
+            --header "Authorization: Bearer ${COOLIFY_TOKEN}" \
+            "${COOLIFY_WEBHOOK}"
+          echo "Coolify accepted the request; check the deployment and health in Coolify."
