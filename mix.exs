@@ -37,7 +37,7 @@ defmodule Website.MixProject do
       # Core
       {:phoenix, "== 1.8.17"},
       {:phoenix_html, "== 4.4.0"},
-      {:phoenix_live_view, "== 1.2.14"},
+      {:phoenix_live_view, "== 1.2.15"},
       {:bandit, "== 1.15.0"},
 
       # SEO & Content
