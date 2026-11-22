@@ -40,7 +40,7 @@ WebSocket connection and that HTTPS works for both domains.
 ## GitHub configuration
 
 1. Enable API access in Coolify Settings → Advanced.
-2. Create a Coolify API token with **Deploy** permission and an appropriate expiry.
+2. Create a Coolify API token with **Deploy** and **Read** permissions scoped to the website resource.
 3. Copy the website resource's authenticated **Deploy webhook URL**.
 4. Add these repository Actions secrets:
    - `COOLIFY_WEBHOOK`: the complete HTTPS deploy webhook URL.
@@ -55,10 +55,11 @@ Authorization header, with no redirects or automatic mutation retries.
 
 ## Verification and rollbacks
 
-The CI deploy step confirms that Coolify accepted the request; it does not wait
-for the asynchronous deployment to become healthy. Check Coolify's deployment
-log and resource health, then confirm `https://farens.me` and its WebSocket
-connection in a browser. Configure Uptime Kuma to monitor the public URL.
+The deploy job tracks the UUID returned by Coolify and polls its status every
+ten seconds. A failed or cancelled deployment fails the job. The deployment
+step times out after ten minutes. Once Coolify reports `finished`, the job
+checks the public homepage over HTTPS and requires HTTP 200. The Actions log
+includes the deployment UUID for troubleshooting in Coolify.
 
 `:main` is a mutable image tag. Before a release, retain the currently deployed
 image digest. To roll back, set `WEBSITE_IMAGE` to
