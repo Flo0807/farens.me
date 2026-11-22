@@ -137,21 +137,44 @@ jobs:
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
   deploy:
     if: github.ref == 'refs/heads/main'
-    name: Request Coolify deployment
+    name: Deploy and verify website
+    timeout-minutes: 12
     needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - name: Queue deployment of the published image
+      - name: Deploy and wait for Coolify
+        timeout-minutes: 10
         env:
           COOLIFY_WEBHOOK: ${{ secrets.COOLIFY_WEBHOOK }}
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
         run: |
+          set -euo pipefail
           : "${COOLIFY_WEBHOOK:?Configure the Coolify deploy webhook secret}"
           : "${COOLIFY_TOKEN:?Configure the Coolify API token secret}"
-          curl --fail --silent --show-error --output /dev/null \
-            --connect-timeout 15 --max-time 60 --request POST \
-            --header "Authorization: Bearer ${COOLIFY_TOKEN}" \
-            "${COOLIFY_WEBHOOK}"
-          echo "Coolify accepted the request; check the deployment and health in Coolify."
+          api=(curl --proto '=https' --fail --silent --show-error --connect-timeout 10 --max-time 30
+               --header "Authorization: Bearer ${COOLIFY_TOKEN}")
+          deployment_id=$("${api[@]}" --request POST "$COOLIFY_WEBHOOK" |
+            jq -er '.deployments | select(length == 1) | .[0].deployment_uuid | strings | select(test("^[A-Za-z0-9_-]+$"))')
+          api_base=${COOLIFY_WEBHOOK%/deploy\?*}
+          echo "Monitoring Coolify deployment $deployment_id"
+          while true; do
+            status=$("${api[@]}" --retry 2 "$api_base/deployments/$deployment_id" | jq -er '.status | strings')
+            echo "Coolify deployment $deployment_id: $status"
+            case "$status" in
+              finished) break ;;
+              queued|in_progress) sleep 10 ;;
+              *) exit 1 ;;
+            esac
+          done
+
+      - name: Verify production homepage
+        run: |
+          for attempt in {1..6}; do
+            status=$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+              --connect-timeout 5 --max-time 10 https://farens.me/) && [[ "$status" == 200 ]] && exit 0
+            echo "Homepage check $attempt/6 returned HTTP $status"
+            if [[ "$attempt" != 6 ]]; then sleep 5; fi
+          done
+          exit 1
