@@ -9,6 +9,9 @@ env:
 
 jobs:
   test:
+    concurrency:
+      group: ${{ github.workflow }}-test-${{ github.ref }}
+      cancel-in-progress: true
     name: Test app
     runs-on: ubuntu-latest
     env:
@@ -96,6 +99,9 @@ jobs:
           path: tmp/
           retention-days: 7
   build:
+    concurrency:
+      group: ${{ github.workflow }}-build-${{ github.ref }}
+      cancel-in-progress: true
     name: Build and push image to ghcr
     needs: test
     runs-on: ubuntu-latest
@@ -136,6 +142,9 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
   deploy:
+    concurrency:
+      group: production-deploy
+      cancel-in-progress: false
     if: github.ref == 'refs/heads/main'
     name: Deploy and verify website
     timeout-minutes: 12
