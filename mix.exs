@@ -43,7 +43,7 @@ defmodule Website.MixProject do
       # SEO & Content
       {:phoenix_seo, "== 0.3.3"},
       {:atomex, "== 0.5.1"},
-      {:mdex, "== 0.14.7"},
+      {:mdex, "== 0.14.9"},
       {:lumis, "== 0.10.11"},
       {:lumis_wasm_elixir, "== 0.26.10"},
       {:lumis_wasm_comment, "== 0.26.2"},
@@ -84,7 +84,7 @@ defmodule Website.MixProject do
       {:credo, "== 1.7.19", only: [:dev, :test], runtime: false},
       {:lazy_html, "== 0.1.16", only: :test},
       {:tidewave, "== 0.9.2", only: :dev},
-      {:igniter, "== 0.8.5", only: [:dev, :test]},
+      {:igniter, "== 0.8.6", only: [:dev, :test]},
       {:usage_rules, "== 1.3.1", only: [:dev]}
     ]
   end
