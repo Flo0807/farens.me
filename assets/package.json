@@ -5,10 +5,7 @@
     "format:standard": "standard --fix"
   },
   "dependencies": {
-    "topbar": "^3.0.0",
-    "phoenix": "link:../deps/phoenix",
-    "phoenix_html": "link:../deps/phoenix_html",
-    "phoenix_live_view": "link:../deps/phoenix_live_view"
+    "topbar": "^3.0.0"
   },
   "devDependencies": {
     "daisyui": "5.7.50",
