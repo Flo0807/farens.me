@@ -4,9 +4,6 @@
   "workspaces": {
     "": {
       "dependencies": {
-        "phoenix": "link:../deps/phoenix",
-        "phoenix_html": "link:../deps/phoenix_html",
-        "phoenix_live_view": "link:../deps/phoenix_live_view",
         "topbar": "^3.0.0",
       },
       "devDependencies": {
@@ -392,12 +389,6 @@
     "path-key": ["path-key@3.1.1", "", {}, "sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q=="],
 
     "path-parse": ["path-parse@1.0.7", "", {}, "sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw=="],
-
-    "phoenix": ["phoenix@link:../deps/phoenix", {}],
-
-    "phoenix_html": ["phoenix_html@link:../deps/phoenix_html", {}],
-
-    "phoenix_live_view": ["phoenix_live_view@link:../deps/phoenix_live_view", {}],
 
     "pify": ["pify@4.0.1", "", {}, "sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g=="],
 
